@@ -57,6 +57,7 @@
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="0"
 				CompileAs="1"
+				ForcedIncludeFiles="windows.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -126,6 +127,7 @@
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="0"
 				CompileAs="1"
+				ForcedIncludeFiles="windows.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
