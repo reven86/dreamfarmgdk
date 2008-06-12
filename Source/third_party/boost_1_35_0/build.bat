@@ -1,1 +1,1 @@
-bjam.exe --toolset=%1 runtime-link=static,shared link=static threading=multi variant=release %2
+bjam.exe --toolset=%1 runtime-link=%2 link=static threading=multi variant=release %3
