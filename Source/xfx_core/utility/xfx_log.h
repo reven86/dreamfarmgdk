@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "xfx_string.h"
+
 /*!	\file xfx_log.h 
  *	\brief %Logging.
  */

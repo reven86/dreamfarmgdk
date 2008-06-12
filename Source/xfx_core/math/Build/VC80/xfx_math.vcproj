@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xfx_utility"
-	ProjectGUID="{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}"
+	Name="xfx_math"
+	ProjectGUID="{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}"
 	RootNamespace="xfx_main"
 	Keyword="Win32Proj"
 	>
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="0"
 				OpenMP="true"
@@ -172,7 +172,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -240,7 +240,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				OpenMP="true"
@@ -306,7 +306,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;__XFX_DISABLE_PROFILER__"
 				RuntimeLibrary="0"
 				OpenMP="true"
@@ -372,7 +372,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../../third_party/boost_1_35_0/"
+				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;__XFX_DISABLE_PROFILER__"
 				RuntimeLibrary="2"
 				OpenMP="true"
@@ -472,31 +472,79 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_log.cpp"
+			RelativePath="..\..\xfx_aabbtree.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_log.h"
+			RelativePath="..\..\xfx_aabbtree.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_profiler.cpp"
+			RelativePath="..\..\xfx_euler.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_profiler.h"
+			RelativePath="..\..\xfx_euler.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_singleton.h"
+			RelativePath="..\..\xfx_mat3.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_string.h"
+			RelativePath="..\..\xfx_mat3.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_utility.h"
+			RelativePath="..\..\xfx_mat4.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_mat4.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_math.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_math.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_mathstat.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_primitives.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_primitives.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec2.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec2.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec3.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec3.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec4.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vec4.h"
 			>
 		</File>
 	</Files>

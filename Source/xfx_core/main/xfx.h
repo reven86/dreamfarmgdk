@@ -92,4 +92,6 @@
 //#include <boost/mpl/min_max.hpp>
 
 // Other XFX libraries
-#include "utility/xfx_utility.h"
+#include "utility/xfx_string.h"
+#include "utility/xfx_singleton.h"
+#include "utility/xfx_log.h"

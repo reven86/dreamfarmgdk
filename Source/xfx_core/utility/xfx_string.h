@@ -6,6 +6,7 @@
 
 #pragma once
 
+#define NOMINMAX
 #include <windows.h>
 
 /*!	\file xfx_string.h 

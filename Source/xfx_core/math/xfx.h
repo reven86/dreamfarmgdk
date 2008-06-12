@@ -44,10 +44,10 @@
 //#include <list>
 //#include <numeric>
 //#include <algorithm>
-//#include <vector>
+#include <vector>
 //#include <deque>
 //#include <memory>
-#include <string>
+//#include <string>
 //#include <stack>
 //#include <iterator>
 //#include <functional>
@@ -56,18 +56,19 @@
 //#include <iostream>
 //#include <fstream>
 //#include <hash_map>
+#include <limits>
 
 // Boost
 #include <boost/array.hpp>
 #include <boost/scoped_ptr.hpp>
 //#include <boost/weak_ptr.hpp>
-#include <boost/shared_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
 #include <boost/scoped_array.hpp>
 #include <boost/noncopyable.hpp>
 //#include <boost/any.hpp>
 //#include <boost/cast.hpp>
 //#include <boost/static_assert.hpp>
-//#include <boost/bind.hpp>
+#include <boost/bind.hpp>
 //#include <boost/mem_fn.hpp>
 //#include <boost/shared_container_iterator.hpp>
 //#include <boost/function_output_iterator.hpp>
@@ -83,10 +84,14 @@
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
 //#include <boost/thread.hpp>
-//#include <boost/foreach.hpp>
+#include <boost/foreach.hpp>
 
 
 // Boost.MPL
 //#include <boost/mpl/vector.hpp>
 //#include <boost/mpl/vector_c.hpp>
 //#include <boost/mpl/min_max.hpp>
+
+// XFX
+#include "utility/xfx_singleton.h"
+#include "utility/xfx_profiler.h"

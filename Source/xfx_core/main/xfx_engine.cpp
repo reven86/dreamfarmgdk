@@ -42,8 +42,6 @@ bool Engine::Initialize( HWND hwnd )
 	RECT rect;
 	GetClientRect( mRenderWnd, &rect );
 
-	//Viewport::Instance( ).Init( rect.right - rect.left, rect.bottom - rect.top );
-
 	HRESULT hr;
 
 	//mEngineLogPtr.reset( new class Log( g_logfile->Value( ) ) );

@@ -6,6 +6,9 @@
 
 #pragma once
 
+#include "xfx_singleton.h"
+#include "xfx_string.h"
+
 /*!	\file xfx_profiler.h 
  *	\brief Simple lightweight easy-to-use profiler.
  */
@@ -115,7 +118,7 @@ public:
 	 *	\param[in]		fnt			Font object.
 	 *	\param[in]		white_shd	White shader.
 	 */
-	//void					DrawPerformanceInfo							( const class Font& fnt, const boost::shared_ptr< const class Shader >& white_shd ) const;
+	void					DrawPerformanceInfo							( const class Font& fnt, const boost::shared_ptr< const class Shader >& white_shd ) const;
 
 	/*! \brief Pause or resume external profiler ( Intel VTune or AMD Catalyst )
 	 *

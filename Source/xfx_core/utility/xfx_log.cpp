@@ -6,6 +6,7 @@
 
 #include "xfx.h"
 #include "xfx_log.h"
+#include "xfx_profiler.h"
 #include <time.h>
 #include <sys/timeb.h>
 
