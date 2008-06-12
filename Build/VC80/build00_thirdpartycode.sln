@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lualib", "..\..\Source\thir
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lauxlib", "..\..\Source\third_party\lua-5.0.2\src\lib\lauxlib.vcproj", "{C7820211-84FA-443F-A182-E1D234EC4C71}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\Source\third_party\boost_1_35_0\VC80\boost\boost.vcproj", "{0307DF48-2750-43C5-8439-6A5391F3998E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release DLL|Win32 = Release DLL|Win32
@@ -25,6 +27,10 @@ Global
 		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release DLL|Win32.Build.0 = Release DLL|Win32
 		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.ActiveCfg = Release|Win32
 		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.Build.0 = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.ActiveCfg = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
