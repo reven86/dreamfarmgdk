@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpeg-6b", "..\..\Source\third_party\jpeg-6b\vc80\jpeg-6b\jpeg-6b.vcproj", "{A161B734-2B36-4046-A33F-679A5E5A849F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lualib", "..\..\Source\third_party\lua-5.0.2\src\core\lualib.vcproj", "{12894CCF-DA69-438E-9E5E-F55C80D68BFE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lauxlib", "..\..\Source\third_party\lua-5.0.2\src\lib\lauxlib.vcproj", "{C7820211-84FA-443F-A182-E1D234EC4C71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release DLL|Win32 = Release DLL|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release|Win32.ActiveCfg = Release|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release|Win32.Build.0 = Release|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release|Win32.ActiveCfg = Release|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release|Win32.Build.0 = Release|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.ActiveCfg = Release|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
