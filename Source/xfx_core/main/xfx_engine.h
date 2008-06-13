@@ -36,11 +36,6 @@ class Engine : public Singleton< Engine >
 	static const String						msVersion;
 
 	boost::scoped_ptr< class Log >			mEngineLogPtr;
-
-	HWND									mRenderWnd;
-	LONG									mRenderWndStyle;
-	LONG									mRenderWndExStyle;
-
 	boost::shared_ptr< class Console >		mConsoleControlPtr;
 
 protected:
@@ -55,11 +50,9 @@ public:
 	 *	- gather CPU information
 	 *	- initialize input system (calls Input::Init)
 	 *
-	 *	\param[in] hwnd		Window handle
-	 *
 	 *	\return Returns \b true if engine has been initialized sucessfully.
 	 */
-	bool									Initialize					( HWND hwnd );
+	bool									Init						( );
 
 	/*!	\brief %Engine deinitialization.
 	 *
@@ -67,26 +60,23 @@ public:
 	 *
 	 *	\return Always return \b true.
 	 */
-	bool									Free						( );
+	bool									Shutdown					( );
 
 	const String&							Version						( ) const { return msVersion; };
-	const HWND&								RenderWnd					( ) const { return mRenderWnd; };
-	const LONG&								RenderWndStyle				( ) const { return mRenderWndStyle; };
-	const LONG&								RenderWndExStyle			( ) const { return mRenderWndExStyle; };
 
 	/*! \brief Write message to common log file.
 	 *
 	 *	\param[in]	type	Message type.
 	 *	\param[in]	msg		Message.
 	 */
-	//void									Log							( const Log::EMessageType& type, const String& msg );
+	void									Log							( const Log::EMessageType& type, const String& msg );
 
 	/*! \brief Prints message to console.
 	 *
 	 *	\param[in]	type	Message type.
 	 *	\param[in]	str		Message.
 	 */
-	//void									PrintToConsole				( const Log::EMessageType& type, const WString& str );
+	void									PrintToConsole				( const Log::EMessageType& type, const WString& str );
 
 	/*! \brief Sets console control.
 	 *
@@ -105,12 +95,6 @@ public:
 	/*! \brief Get console 'visible' flag.
 	 */
 	bool									IsConsoleActive				( ) const;
-
-	/*!	\brief Message handling method.
-	 *
-	 *	Handles interface messages and redirects them to current UIInterface.
-	 */
-	LRESULT									ProcessMessage				( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 };
 
 

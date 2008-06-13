@@ -125,6 +125,20 @@ public:
 
 
 
+/*! \struct EulerLerpFn xfx_utils.h "utility/xfx_utils.h"
+ *	\brief Euler lerp functor. Performs slerp.
+ *	\ingroup UtilityGroup
+ *
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+struct EulerLerpFn
+{
+	Euler lerp( const Euler& a, const Euler& b, const float& t ) { return Euler::Slerp( a, b, t ); };
+};
+
+
+
 _XFX_END
 
 

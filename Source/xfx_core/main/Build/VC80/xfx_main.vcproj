@@ -478,6 +478,26 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_application.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_application.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_cmd.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_cmd.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_console.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_engine.cpp"
 			>
 			<FileConfiguration
@@ -504,6 +524,50 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_engine.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_errorcodes.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_fs.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_fs.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_input.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_input.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_main_cvars.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_main_cvars.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_pack.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_pack.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_timer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_timer.h"
 			>
 		</File>
 	</Files>

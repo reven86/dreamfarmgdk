@@ -144,7 +144,7 @@ inline void skip_whitespaces( const _String& str, typename _String::size_type& p
 template< class _String >
 void skip_comments( const _String& str, typename _String::size_type& pos, const char * delimiters = " \n\t\r" )
 {
-	while( true )
+	for( ; ; )
 	{
 		skip_whitespaces( str, pos, delimiters );
 

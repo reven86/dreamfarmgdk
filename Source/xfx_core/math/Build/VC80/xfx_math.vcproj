@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilityd.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -129,7 +129,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilityr.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathr.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -195,7 +195,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilitydd.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathdd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -261,7 +261,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilityrd.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathrd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -327,7 +327,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilitys.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_maths.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -393,7 +393,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_utilitysd.lib"
+				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathsd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

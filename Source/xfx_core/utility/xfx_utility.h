@@ -18,3 +18,4 @@
 #include "xfx_string.h"
 #include "xfx_log.h"
 #include "xfx_profiler.h"
+#include "xfx_utils.h"

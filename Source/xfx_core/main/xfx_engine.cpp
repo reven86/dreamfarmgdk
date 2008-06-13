@@ -6,6 +6,9 @@
 
 #include "xfx.h"
 #include "xfx_engine.h"
+#include "xfx_main_cvars.h"
+#include "xfx_console.h"
+#include "xfx_input.h"
 
 _XFX_BEGIN
 
@@ -35,20 +38,12 @@ Engine::~Engine( )
 {
 }
 
-bool Engine::Initialize( HWND hwnd )
+bool Engine::Init( )
 {
-	mRenderWnd = hwnd;
-
-	RECT rect;
-	GetClientRect( mRenderWnd, &rect );
-
-	HRESULT hr;
-
-	//mEngineLogPtr.reset( new class Log( g_logfile->Value( ) ) );
+	mEngineLogPtr.reset( new class Log( g_logfile->Value( ) ) );
 
 	gMess( "Initializing xfx:" );
 	gMess( "...engine version: %s", msVersion.c_str( ) );
-	gMess( "...window handle: 0x%X", mRenderWnd );
 
 	//Getting OS information
 	OSVERSIONINFO osinfo;
@@ -92,10 +87,9 @@ bool Engine::Initialize( HWND hwnd )
 	gMess( "...family: %u", cpu_family );
 	gMess( "...model: %u", cpu_model );
 
-	/*
-	if( !Input::Instance( ).Init( ) )
+	HRESULT hr;
+	if( FAILED( hr = Input::Instance( ).Init( ) ) )
 		return false;
-		*/
 
 #pragma message ( "FIXME: fix this" )
 	/*
@@ -108,13 +102,10 @@ bool Engine::Initialize( HWND hwnd )
 	gMess( "Initialization xfx was successfully completed!" );
 	gMess( "" );
 
-	mRenderWndStyle		= GetWindowLong( mRenderWnd, GWL_STYLE );
-	mRenderWndExStyle	= GetWindowLong( mRenderWnd, GWL_EXSTYLE );
-
 	return true;
 }
 
-bool Engine::Free( )
+bool Engine::Shutdown( )
 {
 	//Caches::Instance( ).FlushAll( );
 
@@ -125,7 +116,7 @@ bool Engine::Free( )
 #endif
 	*/
 
-	//Input::Instance( ).Free( );
+	Input::Instance( ).Shutdown( );
 
 	gMess( "" );
 	gMess( "Shutting down xfx." );
@@ -135,85 +126,6 @@ bool Engine::Free( )
 	return true;
 }
 
-LRESULT Engine::ProcessMessage( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
-{
-	/*
-	switch( msg )
-	{
-		case WM_PAINT:
-			{
-				//Viewport::Instance ().Render ();
-			}
-			break;
-
-		case WM_MOUSEMOVE:
-		case WM_LBUTTONDOWN:
-		case WM_LBUTTONUP:
-		case WM_LBUTTONDBLCLK:
-		case WM_RBUTTONDOWN:
-		case WM_RBUTTONUP:
-		case WM_RBUTTONDBLCLK:
-		case WM_MBUTTONDOWN:
-		case WM_MBUTTONUP:
-		case WM_MBUTTONDBLCLK:
-		case WM_MOUSEWHEEL:
-			if( gGetApplication( ).pInterface( ) )
-			{
-#pragma message ( "FIXME: use aux func" )
-				ViewportType viewport;
-				Render::Instance( ).GetViewport( viewport );
-
-				float x = static_cast< float >( LOWORD( lParam ) ) / viewport.Width * Viewport::Instance( ).Width( );
-				float y = static_cast< float >( HIWORD( lParam ) ) / viewport.Height * Viewport::Instance( ).Height( );
-
-				gGetApplication( ).pInterface( )->ProcessMouse( x, y, msg, wParam );
-			}
-			break;
-
-		case WM_SIZE:
-			{
-				RECT wndrect;
-				GetClientRect( hWnd, &wndrect );
-
-				Render::Instance( ).ResetDevice( wndrect.right, wndrect.bottom );
-			}
-			break;
-
-		case WM_KEYDOWN:
-			if( gGetApplication( ).pInterface( ) )
-			{
-				BYTE key_state[ 256 ];
-
-				if( GetKeyboardState( key_state ) )
-				{
-					wchar_t unicode_char;
-					if( ToUnicode(
-						static_cast< UINT >( wParam ),
-						( static_cast< UINT >( lParam ) >> 0x10 ) & 0xff,
-						key_state,
-						&unicode_char,
-						1,
-						0 ) > 0
-						)
-					{
-						unsigned console_key = Input::Instance( ).GetKeyForCommand( "console_toggle" );
-
-						if( !IsConsoleActive( ) || console_key == Input::MAX_KEYS || !Input::Instance( ).TestKey( console_key ) )
-							gGetApplication( ).pInterface( )->ProcessKey( static_cast< wchar_t >( unicode_char ) );
-					}
-				}
-			}
-			break;
-
-		default:
-			return DefWindowProc (hWnd, msg, wParam, lParam);
-	}
-	*/
-
-	return 0;
-}
-
-/*
 void Engine::PrintToConsole( const Log::EMessageType& type, const WString& str )
 {
 	if( mConsoleControlPtr )
@@ -221,13 +133,12 @@ void Engine::PrintToConsole( const Log::EMessageType& type, const WString& str )
 		mConsoleControlPtr->Print( type, str );
 	}
 }
-*/
 
 void Engine::ToggleConsole( )
 {
 	if( mConsoleControlPtr )
 	{
-		//mConsoleControlPtr->Toggle( );
+		mConsoleControlPtr->Toggle( );
 	}
 }
 
@@ -235,13 +146,12 @@ bool Engine::IsConsoleActive( ) const
 {
 	if( mConsoleControlPtr )
 	{
-		//return mConsoleControlPtr->IsVisible( );
+		return mConsoleControlPtr->IsVisible( );
 	}
 
 	return false;
 }
 
-/*
 void Engine::Log( const Log::EMessageType& type, const String& msg )
 {
 	if( type > g_log_level->AsInt( ) )
@@ -253,7 +163,6 @@ void Engine::Log( const Log::EMessageType& type, const String& msg )
 	// duplicate in console
 	PrintToConsole( type, fromMBCS( msg ) );
 }
-*/
 
 
 

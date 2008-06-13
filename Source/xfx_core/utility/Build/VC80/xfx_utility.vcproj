@@ -499,6 +499,10 @@
 			RelativePath="..\..\xfx_utility.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\xfx_utils.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
