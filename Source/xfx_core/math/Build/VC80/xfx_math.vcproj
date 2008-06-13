@@ -20,6 +20,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\debug.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -39,18 +40,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -63,7 +53,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -86,6 +75,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\release.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -106,17 +96,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="0"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -129,7 +109,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathr.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -152,6 +131,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\debug dll.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -171,18 +151,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -195,7 +164,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathdd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -218,6 +186,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\release dll.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -238,17 +207,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="2"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -261,7 +220,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathrd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -284,6 +242,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\shipping.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -304,17 +263,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;__XFX_DISABLE_PROFILER__"
-				RuntimeLibrary="0"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -327,7 +276,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_maths.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -350,6 +298,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\shipping dll.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -370,17 +319,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="../../../; ../../../../third_party/boost_1_35_0/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;__XFX_DISABLE_PROFILER__"
-				RuntimeLibrary="2"
-				OpenMP="true"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="xfx.h"
-				WarningLevel="4"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -393,7 +332,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\xfx_mathsd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xfx_utility"
-	ProjectGUID="{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}"
+	Name="xfx_renderer"
+	ProjectGUID="{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}"
 	RootNamespace="xfx_main"
 	Keyword="Win32Proj"
 	>
@@ -353,94 +353,6 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\..\xfx.cpp"
-			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Debug DLL|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release DLL|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Shipping|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Shipping DLL|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="1"
-				/>
-			</FileConfiguration>
-		</File>
-		<File
-			RelativePath="..\..\xfx.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_log.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_log.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_profiler.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_profiler.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_singleton.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_string.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_utility.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_utils.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
