@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_main", "..\..\Source\xfx_core\main\Build\VC80\xfx_main.vcproj", "{321CD26B-793E-44AA-87CE-987ABF22238C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_utility", "..\..\Source\xfx_core\utility\Build\VC80\xfx_utility.vcproj", "{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_math", "..\..\Source\xfx_core\math\Build\VC80\xfx_math.vcproj", "{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_renderer", "..\..\Source\xfx_core\renderer\Build\VC80\xfx_renderer.vcproj", "{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug DLL|Win32 = Debug DLL|Win32
+		Debug|Win32 = Debug|Win32
+		Release DLL|Win32 = Release DLL|Win32
+		Release|Win32 = Release|Win32
+		Shipping DLL|Win32 = Shipping DLL|Win32
+		Shipping|Win32 = Shipping|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Debug DLL|Win32.ActiveCfg = Debug DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Debug DLL|Win32.Build.0 = Debug DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Debug|Win32.Build.0 = Debug|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Release|Win32.ActiveCfg = Release|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Release|Win32.Build.0 = Release|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Shipping DLL|Win32.ActiveCfg = Shipping DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Shipping|Win32.ActiveCfg = Shipping|Win32
+		{321CD26B-793E-44AA-87CE-987ABF22238C}.Shipping|Win32.Build.0 = Shipping|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Debug DLL|Win32.ActiveCfg = Debug DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Debug DLL|Win32.Build.0 = Debug DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Debug|Win32.Build.0 = Debug|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Release|Win32.ActiveCfg = Release|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Release|Win32.Build.0 = Release|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Shipping DLL|Win32.ActiveCfg = Shipping DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Shipping|Win32.ActiveCfg = Shipping|Win32
+		{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}.Shipping|Win32.Build.0 = Shipping|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Debug DLL|Win32.ActiveCfg = Debug DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Debug DLL|Win32.Build.0 = Debug DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Debug|Win32.ActiveCfg = Debug|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Debug|Win32.Build.0 = Debug|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Release|Win32.ActiveCfg = Release|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Release|Win32.Build.0 = Release|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Shipping DLL|Win32.ActiveCfg = Shipping DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Shipping|Win32.ActiveCfg = Shipping|Win32
+		{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}.Shipping|Win32.Build.0 = Shipping|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Debug DLL|Win32.ActiveCfg = Debug DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Debug DLL|Win32.Build.0 = Debug DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Debug|Win32.Build.0 = Debug|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Release|Win32.ActiveCfg = Release|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Release|Win32.Build.0 = Release|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Shipping DLL|Win32.ActiveCfg = Shipping DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Shipping|Win32.ActiveCfg = Shipping|Win32
+		{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}.Shipping|Win32.Build.0 = Shipping|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

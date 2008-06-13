@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="release"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		Optimization="3"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="true"
+	/>
+	<Tool
+		Name="VCLibrarianTool"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)r.lib"
+	/>
+</VisualStudioPropertySheet>
