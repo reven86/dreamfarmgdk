@@ -19,6 +19,7 @@
 #pragma warning (disable:4996)	//stdext::hash_map
 #pragma warning (disable:4267)	//convert warning
 #pragma warning (disable:4512)	//cannot generate assignment operator
+#pragma warning (disable:4201)	//nameless struct/union
 
 
 #ifndef MAKEFOURCC
@@ -45,7 +46,7 @@
 // STL
 //#include <map>
 //#include <list>
-//#include <numeric>
+#include <numeric>
 //#include <algorithm>
 #include <vector>
 //#include <deque>
@@ -105,6 +106,7 @@
 #include "utility\xfx_script.h"
 #include "utility\xfx_log.h"
 #include "utility\xfx_argb.h"
+#include "math\xfx_aabbtree.h"
 #include "math\xfx_math.h"
 #include "math\xfx_vec2.h"
 #include "math\xfx_vec3.h"

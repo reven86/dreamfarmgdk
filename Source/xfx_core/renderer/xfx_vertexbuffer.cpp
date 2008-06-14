@@ -48,7 +48,7 @@ HRESULT VertexBuffer::Create (const unsigned& vertexsize, const unsigned& numver
 		usage = D3DUSAGE_DYNAMIC;
 		pool = D3DPOOL_DEFAULT;
 
-		mInvalidateConnection = Renderer::Instance ().InvalidateCallbacks ().connect (boost::bind (&VertexBuffer::InvalidateCallback, this, _1));
+		mInvalidateConnection = Renderer::Instance( ).AddInvalidateCallback( boost::bind( &VertexBuffer::InvalidateCallback, this, _1 ) );
 	}
 	else
 	{

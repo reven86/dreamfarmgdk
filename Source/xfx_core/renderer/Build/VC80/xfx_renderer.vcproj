@@ -382,6 +382,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_aabbtree_renderer_impl.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_application_renderer_impl.cpp"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_drawtools.cpp"
 			>
 		</File>
@@ -403,6 +411,10 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_indexbuffer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_profiler_renderer_impl.cpp"
 			>
 		</File>
 		<File

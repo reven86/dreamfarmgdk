@@ -46,7 +46,7 @@ HRESULT IndexBuffer::Create (const bool& is32bit, const unsigned& numindices, co
 		usage = D3DUSAGE_DYNAMIC;
 		pool = D3DPOOL_DEFAULT;
 
-		mInvalidateConnection = Renderer::Instance ().InvalidateCallbacks ().connect (boost::bind (&IndexBuffer::InvalidateCallback, this, _1));
+		mInvalidateConnection = Renderer::Instance( ).AddInvalidateCallback( boost::bind( &IndexBuffer::InvalidateCallback, this, _1 ) );
 	}
 	else
 	{
@@ -70,15 +70,15 @@ HRESULT IndexBuffer::Create (const bool& is32bit, const unsigned& numindices, co
 	return hr;
 }
 
-void IndexBuffer::Destroy ()
+void IndexBuffer::Destroy( )
 {
-	if (!mpIB)
+	if( !mpIB )
 		return;
 
-	if (mIsDynamic)
-		mInvalidateConnection.disconnect ();
+	if( mIsDynamic )
+		mInvalidateConnection.disconnect( );
 
-	InvalidateCallback (true);
+	InvalidateCallback( true );
 }
 
 void * IndexBuffer::Lock (const unsigned& offset, const unsigned& count, const bool& discard_if_dynamic)
@@ -118,9 +118,9 @@ void IndexBuffer::SetIndices () const
 	}
 }
 
-void IndexBuffer::InvalidateCallback (bool invalidate)
+void IndexBuffer::InvalidateCallback( bool invalidate )
 {
-	if (invalidate)
+	if( invalidate )
 	{
 		mpIB.reset ();
 		return;

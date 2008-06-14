@@ -24,6 +24,14 @@ _XFX_BEGIN
 // Application methods
 //
 
+Application::Application( ) :
+	mSavedWindowStyle( 0 ),
+	mSavedWindowExStyle( 0 ),
+	mWnd( 0 ),
+	mhInstance( 0 )
+{
+}
+
 HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WString& wndclass, const WString& caption )
 {
 	mhInstance			= inst;
@@ -53,13 +61,6 @@ HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WS
 
 	return Engine::Instance( ).Init( ) ? S_OK : XFXERR_UNKNOWN;
 }
-
-/*
-HRESULT Application::InitRenderer( )
-{
-	return Render::Instance( ).CreateDevice( );
-}
-*/
 
 /*
 HRESULT Application::InitAudio( )

@@ -242,19 +242,3 @@ inline Math::Math ()
 
 
 _XFX_END
-
-
-
-
-#pragma message ( "FIXME:" )
-/*
-#include "xfx_vec2.h"
-#include "xfx_vec3.h"
-#include "xfx_vec4.h"
-#include "xfx_mat3.h"
-#include "xfx_mat4.h"
-#include "xfx_euler.h"
-#include "xfx_primitives.h"
-#include "xfx_aabbtree.h"
-#include "xfx_mathstat.h"
-*/

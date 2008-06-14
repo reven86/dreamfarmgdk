@@ -200,7 +200,8 @@ void DrawTools::FlushLines ()
 
 		Renderer::Instance( ).ApplyTexture( boost::shared_ptr< const ITexture >( ) );
 
-		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &Mat4( 1 ) ) );
+		Mat4 id( 1 );
+		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
 
 		Renderer::Instance( ).FVF( FVF_LINEVERTEX );
 		Renderer::Instance( ).pD3DDevice( )->DrawPrimitiveUP( D3DPT_LINELIST, static_cast< UINT >( mLinesCount >> 1 ), mLines.get( ), sizeof( LineVertex ) );
@@ -626,7 +627,8 @@ void DrawTools::FlushTrisAndSprites( )
 		if( bl.data< void >( ) )
 			memcpy( bl.data< void >( ), mTris.get( ), sizeof( TriVertex ) * mTrisCount );
 
-		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &Mat4( 1 ) ) );
+		Mat4 id( 1 );
+		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
 	}
 
 	if( mSpritesVertsCount != 0 )

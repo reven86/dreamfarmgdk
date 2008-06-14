@@ -272,12 +272,11 @@ private:
 	boost::recursive_try_mutex				mDeviceMutex;
 #endif
 
-public:
-	//! Invalidate callbacks.
-	typedef boost::signal1< void, bool >	InvalidateCallbacksType;
+	//! Fullscreen change events.
+	boost::signal3< void, bool, unsigned, unsigned > mFullscreenChangeEvents;
 
-private:
-	InvalidateCallbacksType					mInvalidateCallbacks;
+	//! Invalidate callbacks.
+	boost::signal1< void, bool >			mInvalidateCallbacks;
 
 protected:
 	Renderer														( );
@@ -407,12 +406,6 @@ public:
 	//! %Render primitive.
 	void								RenderPrimitive				( const boost::shared_ptr< const Shader >& shd, const class ShaderConsts& consts, const boost::function0< void >& render_fn );
 
-	//! Get/Set invalidate callbacks.
-	InvalidateCallbacksType&			InvalidateCallbacks			( ) { return mInvalidateCallbacks; };
-
-	//! Get invalidate callbacks.
-	const InvalidateCallbacksType&		InvalidateCallbacks			( ) const { return mInvalidateCallbacks; };
-
 	/*! \brief Set fullscreen mode.
 	 *
 	 *	\param[in]	isfullscreen	Is fullscreen mode.
@@ -436,6 +429,22 @@ public:
 
 	//! Reset device with specific width and height.
 	HRESULT								ResetDevice					( unsigned width, unsigned height );
+
+	//! @}
+
+	//
+	//! \name Callbacks, events, subscribers
+	//
+
+	//! @{
+
+	//! Add invalidate callbacks.
+	template< class _CallbackType >
+	boost::signals::connection			AddInvalidateCallback		( const _CallbackType& callback ) { return mInvalidateCallbacks.connect( callback ); };
+
+	//! Add fullscreen change callback.
+	template< class _CallbackType >
+	boost::signals::connection			AddFullscreenChangeCallback	( const _CallbackType& callback ) { return mFullscreenChangeEvents.connect( callback ); };
 
 	//! @}
 

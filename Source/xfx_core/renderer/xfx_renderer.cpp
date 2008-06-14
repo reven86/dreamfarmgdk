@@ -663,8 +663,8 @@ HRESULT Renderer::CreateDevice ()
 		return XFXERR_UNKNOWN;
 	}
 
-	IDirect3D8 * pd3d;
-	if( !( pd3d = pDirect3DCreate8( D3D_SDK_VERSION ) ) )
+	IDirect3D8 * pd3d = pDirect3DCreate8( D3D_SDK_VERSION );
+	if( !pd3d )
 	{
 		gCError( "Creating D3D object failed!" );
 		return XFXERR_UNKNOWN;
@@ -675,16 +675,16 @@ HRESULT Renderer::CreateDevice ()
 	HMODULE d3d9lib = LoadLibraryA( "d3d9.dll" );
 
 	IDirect3D9 * (WINAPI * pDirect3DCreate9) (UINT) = (IDirect3D9 * (WINAPI *) (UINT)) GetProcAddress (d3d9lib, "Direct3DCreate9");
-	if (!pDirect3DCreate9)
+	if( !pDirect3DCreate9 )
 	{
-		gCError ("Incorrect d3d9.dll! Please reinstall DirectX!");
+		gCError( "Incorrect d3d9.dll! Please reinstall DirectX!" );
 		return XFXERR_UNKNOWN;
 	}
 
-	IDirect3D9 * pd3d;
-	if (!(pd3d = pDirect3DCreate9 (D3D_SDK_VERSION)))
+	IDirect3D9 * pd3d = pDirect3DCreate9( D3D_SDK_VERSION );
+	if( !pd3d )
 	{
-		gCError ("Creating D3D object failed!");
+		gCError( "Creating D3D object failed!" );
 		return XFXERR_UNKNOWN;
 	}
 
@@ -952,13 +952,13 @@ HRESULT Renderer::ResetDevice ()
 
 	XFX_PLACE_DEVICE_LOCK;
 
-	mInvalidateCallbacks (true);
+	mInvalidateCallbacks( true );
 
 	HRESULT hr = mpD3DDevice->Reset (&mD3DPP);
 	if (FAILED (hr))
 		return hr;
 
-	mInvalidateCallbacks (false);
+	mInvalidateCallbacks( false );
 
 	SetTransform( D3DTS_WORLD, w );
 	SetTransform( D3DTS_VIEW, v );
@@ -1213,14 +1213,9 @@ HRESULT Renderer::Fullscreen (bool isfullscreen, unsigned width, unsigned height
 			else
 				mD3DPP.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 
-			HWND hRenderWnd = gGetApplication( ).hWnd( );
-
 			if (!isfullscreen)
 			{
 				mD3DPP.FullScreen_RefreshRateInHz = 0;
-
-				SetWindowLong	( hRenderWnd, GWL_STYLE, Engine::Instance( ).RenderWndStyle( ) );
-				SetWindowLong	( hRenderWnd, GWL_EXSTYLE, Engine::Instance( ).RenderWndExStyle( ) );
 
 #if( __XFX_DIRECTX_VER__ < 9 )
 				mD3DPP.FullScreen_PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
@@ -1228,14 +1223,12 @@ HRESULT Renderer::Fullscreen (bool isfullscreen, unsigned width, unsigned height
 			}
 			else
 			{
-				SetWindowLong	( hRenderWnd, GWL_STYLE, WS_VISIBLE );
-
 #if( __XFX_DIRECTX_VER__ < 9 )
 				mD3DPP.FullScreen_PresentationInterval = ( mD3DCaps.PresentationIntervals & D3DPRESENT_INTERVAL_IMMEDIATE ) ? D3DPRESENT_INTERVAL_IMMEDIATE : D3DPRESENT_INTERVAL_DEFAULT;
 #endif
 			}
 
-			SetWindowPos	(hRenderWnd, isfullscreen ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, width, height, SWP_SHOWWINDOW);
+			mFullscreenChangeEvents( isfullscreen, width, height );
 
 			gMess( 
 				"Setting videomode: %s, %dx%d@%d, 0x%X", 

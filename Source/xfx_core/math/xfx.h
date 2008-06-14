@@ -16,6 +16,7 @@
 #pragma warning (disable:4800)	//identifier was truncated to '255' characters...
 #pragma warning (disable:4996)	//stdext::hash_map
 #pragma warning (disable:4267)	//convert warning
+#pragma warning (disable:4201)	//nameless struct/union
 
 
 #ifndef MAKEFOURCC

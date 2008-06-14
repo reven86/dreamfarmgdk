@@ -49,8 +49,21 @@ protected:
 	//! Application timer.
 	Timer						mTimer;
 
+	//
+	// Next members are used only in Renderer library.
+	//
+
+	//! Fullscreen change event connection.
+	boost::signals::connection	mFullscreenChangeConnection;
+
+	//! Saved window style.
+	LONG						mSavedWindowStyle;
+
+	//! Saved window ex style.
+	LONG						mSavedWindowExStyle;
+
 protected:
-	Application														( ) : mWnd( 0 ), mhInstance( 0 ) { };
+	Application														( );
 	virtual ~Application											( ) { };
 
 public:
@@ -125,7 +138,10 @@ public:
 	const Timer&					GetTimer						( ) const { return mTimer; };
 
 private:
-	static LRESULT CALLBACK			sWndProc						(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK			sWndProc						( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
+
+protected:
+	virtual void					OnFullscreenChange				( bool isfullscreen, unsigned width, unsigned height );
 };
 
 

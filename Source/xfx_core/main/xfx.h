@@ -79,7 +79,7 @@
 //#include <boost/pool/pool_alloc.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/function.hpp>
-//#include <boost/signals.hpp>
+#include <boost/signals.hpp>
 #include <boost/algorithm/string.hpp>
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
@@ -100,3 +100,4 @@
 #include "utility/xfx_utils.h"
 #include "utility/xfx_profiler.h"
 #include "utility/xfx_script.h"
+#include "utility/xfx_cache.h"

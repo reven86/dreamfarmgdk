@@ -108,7 +108,7 @@ bool Engine::Init( )
 
 bool Engine::Shutdown( )
 {
-	//Caches::Instance( ).FlushAll( );
+	Caches::Instance( ).FlushAll( );
 
 #pragma message ( "FIXME: fix this" )
 	/*
@@ -121,8 +121,6 @@ bool Engine::Shutdown( )
 
 	gMess( "" );
 	gMess( "Shutting down xfx." );
-
-	//Render::Instance( ).Free( );
 
 	return true;
 }

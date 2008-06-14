@@ -21,25 +21,6 @@ _XFX_BEGIN
 
 Primitives::AABB	AABBTree::msEmptyAABB;
 
-/*
-void AABBTree::RecursiveDebugDraw( const Mat4& matr, Node * node, int level ) const
-{
-	if (node)
-	{
-		if (level == r_debug_aabbtree->AsInt ())
-		{
-			Render::Instance ().DrawTools ().PushDrawBox (node->box, node->IsLeaf () ? 0xffffff00 : 0xff00ff00, matr);
-		}
-
-		if (!node->IsLeaf ())
-		{
-			RecursiveDebugDraw (matr, node->negative.get (), level + 1);
-			RecursiveDebugDraw (matr, node->positive.get (), level + 1);
-		}
-	}
-}
-*/
-
 bool AABBTree::IsPositiveTriangle( const Primitives::Triangle& t, const Primitives::AABB& b, int indofmaxboxdim ) const
 {
 	float c0 = t.vertices[0][indofmaxboxdim];

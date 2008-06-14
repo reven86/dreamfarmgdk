@@ -223,7 +223,7 @@ HRESULT Effect::LoadMemory( const void *pmemory, unsigned long filelen )
 		*it = eff->GetParameterBySemantic (NULL, GetSemanticName (sem++));
 #endif
 
-	mInvalidateConnection = Renderer::Instance ().InvalidateCallbacks ().connect (boost::bind (&Effect::InvalidateCallback, this, _1));
+	mInvalidateConnection = Renderer::Instance( ).AddInvalidateCallback( boost::bind( &Effect::InvalidateCallback, this, _1 ) );
 	return S_OK;
 }
 
