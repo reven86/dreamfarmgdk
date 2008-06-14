@@ -1219,19 +1219,19 @@ HRESULT Renderer::Fullscreen (bool isfullscreen, unsigned width, unsigned height
 			{
 				mD3DPP.FullScreen_RefreshRateInHz = 0;
 
-				SetWindowLong	(hRenderWnd, GWL_STYLE, Engine::Instance ().RenderWndStyle ());
-				SetWindowLong	(hRenderWnd, GWL_EXSTYLE, Engine::Instance ().RenderWndExStyle ());
+				SetWindowLong	( hRenderWnd, GWL_STYLE, Engine::Instance( ).RenderWndStyle( ) );
+				SetWindowLong	( hRenderWnd, GWL_EXSTYLE, Engine::Instance( ).RenderWndExStyle( ) );
 
-#if (__XFX_DIRECTX_VER__ < 9)
+#if( __XFX_DIRECTX_VER__ < 9 )
 				mD3DPP.FullScreen_PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
 #endif
 			}
 			else
 			{
-				SetWindowLong	(hRenderWnd, GWL_STYLE, WS_VISIBLE);
+				SetWindowLong	( hRenderWnd, GWL_STYLE, WS_VISIBLE );
 
-#if (__XFX_DIRECTX_VER__ < 9)
-				mD3DPP.FullScreen_PresentationInterval = (mD3DCaps.PresentationIntervals & D3DPRESENT_INTERVAL_IMMEDIATE) ? D3DPRESENT_INTERVAL_IMMEDIATE : D3DPRESENT_INTERVAL_DEFAULT;
+#if( __XFX_DIRECTX_VER__ < 9 )
+				mD3DPP.FullScreen_PresentationInterval = ( mD3DCaps.PresentationIntervals & D3DPRESENT_INTERVAL_IMMEDIATE ) ? D3DPRESENT_INTERVAL_IMMEDIATE : D3DPRESENT_INTERVAL_DEFAULT;
 #endif
 			}
 
