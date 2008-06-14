@@ -55,7 +55,7 @@
 //#include <set>
 //#include <iostream>
 //#include <fstream>
-//#include <hash_map>
+#include <hash_map>
 
 // Boost
 #include <boost/array.hpp>
@@ -77,16 +77,22 @@
 //#include <boost/utility.hpp>
 //#include <boost/pool/pool_alloc.hpp>
 //#include <boost/functional/hash.hpp>
-//#include <boost/function.hpp>
+#include <boost/function.hpp>
 //#include <boost/signals.hpp>
 //#include <boost/algorithm/string.hpp>
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
 //#include <boost/thread.hpp>
 //#include <boost/foreach.hpp>
+#include <boost/cstdint.hpp>
+#include <boost/type_traits.hpp>
 
 
 // Boost.MPL
 //#include <boost/mpl/vector.hpp>
 //#include <boost/mpl/vector_c.hpp>
 //#include <boost/mpl/min_max.hpp>
+
+
+// XFX
+#include "main\xfx_errorcodes.h"

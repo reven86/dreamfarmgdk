@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "xfx_errorcodes.h"
+
 /*!	\file xfx_fs.h 
  *	\brief File system.
  */
@@ -70,6 +72,67 @@ protected:
 	String&							rFilename					( ) { return mFilename; };
 };
 
+
+
+
+
+/*! \class ScriptResource xfx_script.h "utility/xfx_script.h"
+ *	\brief %Resource that can be loaded from text script file.
+ *	\ingroup FSGroup
+ *
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+/*! \defgroup ScriptResourceGroup Scripted resources index.
+ *	
+ *	List of supported scipted resources.
+ */
+
+class ScriptResource : public Script< String >, public Resource
+{
+#ifdef __XFX_USE_BOOST_SERIALIZATION__
+
+	friend class boost::serialization::access;
+
+	//
+	//! Serialization
+	//
+
+	template< class _Archive >
+	void serialize( _Archive & ar, const unsigned int version )
+	{
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP( Resource );
+	};
+
+#endif
+
+public:
+	//! Constructs a resource with specified name.
+	ScriptResource												( const char * name ) : Resource( name ), Script( ) { };
+
+	//! Destructor.
+	virtual ~ScriptResource										( ) { };
+
+	//! Load script from memory.
+	virtual HRESULT					LoadMemory					( const void * pmemory, unsigned long filelen )
+	{
+		const char * cmem = reinterpret_cast< const char * >( pmemory );
+
+		// skip UTF-8
+		if( filelen >= 3 &&
+			*reinterpret_cast< const unsigned char * >( cmem + 0 ) == 0xef &&
+			*reinterpret_cast< const unsigned char * >( cmem + 1 ) == 0xbb &&
+			*reinterpret_cast< const unsigned char * >( cmem + 2 ) == 0xbf )
+		{
+			cmem += 3;
+			filelen -= 3;
+		}
+
+		String file( cmem, filelen );
+
+		return Parse( file );
+	};
+};
 
 
 

@@ -9,6 +9,7 @@
 #include "xfx_engine.h"
 #include "xfx_input.h"
 #include "xfx_main_cvars.h"
+#include "xfx_cmd.h"
 #include <direct.h>
 
 _XFX_BEGIN

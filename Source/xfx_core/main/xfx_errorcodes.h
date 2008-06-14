@@ -29,7 +29,7 @@ typedef long HRESULT;
 #define MAKE_XFXHRESULT( code )  MAKE_HRESULT( 1, _FAC_XFX, code )
 
 /*!	\brief Error codes definition.
- *	\ingroup EngineGroup
+ *	\ingroup MainGroup
  */
 enum _XFXERR {
     XFXERR_INVALIDCALL				= MAKE_XFXHRESULT(1),		//!< Invalid call. One of parameters is wrong.

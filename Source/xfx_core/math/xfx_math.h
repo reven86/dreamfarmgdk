@@ -80,6 +80,30 @@ public:
 
 
 
+//! Parse Math::Angle variable (converts from degree to Math::Angle).
+template< class _String >
+HRESULT	ParseAngleVariable ( Math::Angle& var, typename _String::size_type& pos, const _String& str )
+{
+	skip_comments( str, pos );
+	float fvar;
+	Script::ParseVariable< float >( fvar, pos, str );
+
+	var = static_cast< Math::Angle >( math_deg2angle( fvar ) );
+	return S_OK;
+};
+
+//! Parse Math::BigAngle variable (converts from degree to Math::BigAngle).
+template< class _String >
+HRESULT ParseBigAngleVariable ( Math::BigAngle& var, typename _String::size_type& pos, const _String& str )
+{
+	skip_comments( str, pos );
+	float fvar;
+	Script::ParseVariable< float >( fvar, pos, str );
+
+	var = math_deg2angle( fvar );
+	return S_OK;
+};
+
 
 
 //

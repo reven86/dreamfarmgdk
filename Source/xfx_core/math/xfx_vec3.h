@@ -113,6 +113,19 @@ public:
 
 
 
+//! Parse Vec3 variable.
+template< class _String >
+HRESULT ParseVariable( Vec3& var, typename _String::size_type& pos, const _String& str )
+{
+	skip_comments( str, pos );
+	Script::ParseVariable< float >( var.x, pos, str );
+	Script::ParseVariable< float >( var.y, pos, str );
+	Script::ParseVariable< float >( var.z, pos, str );
+	return S_OK;
+};
+
+
+
 _XFX_END
 
 #ifdef __XFX_USE_BOOST_SERIALIZATION__

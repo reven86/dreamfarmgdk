@@ -13,46 +13,13 @@
 
 
 
+
+
+
+
 _XFX_BEGIN
-
-/*! \class Var xfx_main_cvars.h "engine/xfx_main_cvars.h"
- *	\brief Variable class.
- *	\ingroup EngineGroup
- *	
- *	%Variable have value as String, default value as String and holds float and int representation.
- *
- *	\author Andrew "RevEn" Karpushin
- */
-
-class Var
-{
-	String					mValue;
-	String					mDefault;
-	float					mAsFloat;
-	int						mAsInt;
-
-public:
-	Var						( const String& def = "" ) : mDefault( def) { Change( mDefault ); };
-	~Var					( ) { };
-
-	const String& Default	( ) const { return mDefault; };
-	const String& Value		( ) const { return mValue; };
-	const float& AsFloat	( ) const { return mAsFloat; };
-	const int& AsInt		( ) const { return mAsInt; };
-
-	void Change				( const String& val ) { mValue = val; mAsInt = GetInt( val ); mAsFloat = GetFloat( val ); };
-	void Reset				( ) { Change( mDefault ); };
-
-protected:
-	float GetFloat			( const String& val ) const { return static_cast< float >( atof( val.c_str( ) ) ); };
-	int GetInt				( const String& val ) const { char * ch; return static_cast< int >( strtoul( val.c_str( ), &ch, 0 ) ); };
-};
-
+class Var;
 _XFX_END
-
-
-
-
 
 #define DECLARE_VAR(x) \
 	extern xfx::Var * x

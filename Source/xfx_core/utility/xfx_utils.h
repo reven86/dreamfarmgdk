@@ -30,10 +30,11 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
-struct IUnknownDeleter : public std::unary_function< interface IUnknown *, void >
+struct IUnknownDeleter : public std::unary_function< IUnknown *, void >
 {
 	void operator ( )			( IUnknown * u ) { _ASSERTE( u ); if( u ) u->Release( ); };
 };
+
 
 
 

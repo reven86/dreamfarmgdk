@@ -19,3 +19,7 @@
 #include "xfx_log.h"
 #include "xfx_profiler.h"
 #include "xfx_utils.h"
+#include "xfx_argb.h"
+#include "xfx_cache.h"
+#include "xfx_script.h"
+#include "xfx_envelope.h"

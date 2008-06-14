@@ -1,0 +1,145 @@
+//  File xfx_transformable.h                                                  |
+//                                                                            |
+//  Created by: Andrew "RevEn" Karpushin                                      |
+//                                                                            |
+//----------------------------------------------------------------------------+
+
+#pragma once
+
+#include "xfx_vec2.h"
+#include "xfx_vec3.h"
+#include "xfx_euler.h"
+#include "xfx_mat3.h"
+#include "xfx_mat4.h"
+
+/*!	\file xfx_transformable.h 
+ *	\brief %Transformable classes.
+ */
+
+_XFX_BEGIN
+
+
+
+
+
+/*! \class Transformable3D xfx_transformable.h "utility/xfx_transformable.h"
+ *	\brief %Transformable base class for transforms in 3D space.
+ *	\ingroup MathGroup
+ *
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+class Transformable3D
+{
+#ifdef __XFX_USE_BOOST_SERIALIZATION__
+	friend class boost::serialization::access;
+#endif
+
+	Vec3							mPosition;
+	Euler							mRotation;
+	Vec3							mScale;
+	Mat4							mTransformation;
+
+#ifdef __XFX_USE_BOOST_SERIALIZATION__
+
+	//
+	//! Serialization
+	//
+
+	template< class _Archive >
+	void serialize( _Archive & ar, const unsigned int version )
+	{
+		ar & BOOST_SERIALIZATION_NVP( mPosition );
+		ar & BOOST_SERIALIZATION_NVP( mRotation );
+		ar & BOOST_SERIALIZATION_NVP( mScale );
+		ar & BOOST_SERIALIZATION_NVP( mTransformation );
+	};
+
+#endif
+
+public:
+	//! Constructs base transformable object with identity transformation matrix.
+	Transformable3D												( ) : mTransformation( 1 ), mPosition( 0 ), mRotation( 0 ), mScale( 1 ) { };
+	virtual ~Transformable3D									( ) { };
+
+	//Compiler-generated copy constructor and assignment operator are fine
+
+	//! Get position.
+	const Vec3&						Position					( ) const { return mPosition; };
+
+	//! Get rotation.
+	const Euler&					Rotation					( ) const { return mRotation; };
+
+	//! Get scale.
+	const Vec3&						Scale						( ) const { return mScale; };
+
+	//! Get transformation matrix.
+	const Mat4&						Transformation				( ) const { return mTransformation; };
+
+	//! Set position.
+	void							Position					( const Vec3& pos );
+
+	//! Set rotation.
+	void							Rotation					( const Euler& rot );
+
+	//! Set scale.
+	void							Scale						( const Vec3& scale );
+
+	//! Reset all transform: position, rotation and scale.
+	void							ResetTransform				( const Vec3& pos, const Euler& rot, const Vec3& scale );
+};
+
+
+
+
+
+/*! \class Transformable2D xfx_transformable.h "utility/xfx_transformable.h"
+ *	\brief %Transformable base class for transforms in 2D space.
+ *	\ingroup UtilityGroup
+ *
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+class Transformable2D
+{
+	Vec2							mPosition;
+	Math::BigAngle					mRotation;
+	Vec2							mScale;
+	Mat3							mTransformation;
+
+public:
+	//! Constructs base transformable object with identity transformation matrix.
+	Transformable2D												( ) : mTransformation( 1 ), mPosition( 0 ), mRotation( 0 ), mScale( 1 ) { };
+	virtual ~Transformable2D									( ) { };
+
+	//Compiler-generated copy constructor and assignment operator are fine
+
+	//! Get position.
+	const Vec2&						Position					( ) const { return mPosition; };
+
+	//! Get rotation.
+	const Math::BigAngle&			Rotation					( ) const { return mRotation; };
+
+	//! Get scale.
+	const Vec2&						Scale						( ) const { return mScale; };
+
+	//! Get transformation matrix.
+	const Mat3&						Transformation				( ) const { return mTransformation; };
+
+	//! Set position.
+	void							Position					( const Vec2& pos );
+
+	//! Set rotation.
+	void							Rotation					( const Math::BigAngle& rot );
+
+	//! Set scale.
+	void							Scale						( const Vec2& scale );
+
+	//! Reset all transform: position, rotation and scale.
+	void							ResetTransform				( const Vec2& pos, const Math::BigAngle& rot, const Vec2& scale );
+};
+
+
+
+
+_XFX_END

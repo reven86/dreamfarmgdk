@@ -410,6 +410,18 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_argb.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_cache.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_envelope.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_log.cpp"
 			>
 		</File>
@@ -423,6 +435,14 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_profiler.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_script.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_script.h"
 			>
 		</File>
 		<File

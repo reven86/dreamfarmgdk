@@ -462,6 +462,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_transformable.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_transformable.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_vec2.cpp"
 			>
 		</File>

@@ -139,6 +139,20 @@ struct EulerLerpFn
 
 
 
+//! Parse Euler variable.
+template< class _String >
+HRESULT ParseVariable( Euler& var, typename _String::size_type& pos, const _String& str )
+{
+	skip_comments( str, pos );
+	Script::ParseBigAngleVariable( var.yaw, pos, str );
+	Script::ParseBigAngleVariable( var.pitch, pos, str );
+	Script::ParseBigAngleVariable( var.roll, pos, str );
+
+	return S_OK;
+};
+
+
+
 _XFX_END
 
 

@@ -23,7 +23,7 @@ _XFX_BEGIN
 
 /*! \class Input xfx_input.h "engine/xfx_input.h"
  *	\brief %Input class.
- *	\ingroup EngineGroup
+ *	\ingroup MainGroup
  *	
  *	%Input system, base on DirectInput. Works width keyboard and mouse.
  *

@@ -99,3 +99,4 @@
 #include "utility/xfx_log.h"
 #include "utility/xfx_utils.h"
 #include "utility/xfx_profiler.h"
+#include "utility/xfx_script.h"

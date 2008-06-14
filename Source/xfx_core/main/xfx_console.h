@@ -17,7 +17,7 @@ _XFX_BEGIN
 
 /*!	\class Console xfx_console.h "ui/xfx_console.h"
  *	\brief Base console class
- *	\ingroup EngineGroup
+ *	\ingroup MainGroup
  *
  *	Console is a user defined control that
  *	accept messages and executes user commands through command processor.

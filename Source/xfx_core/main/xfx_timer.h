@@ -18,7 +18,7 @@ _XFX_BEGIN
 
 /*! \class Timer xfx_timer.h "engine/xfx_timer.h"
  *	\brief %Timer class.
- *	\ingroup EngineGroup
+ *	\ingroup MainGroup
  *	
  *	Provides next time methods:
  *	- Get current time.

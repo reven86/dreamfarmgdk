@@ -214,13 +214,13 @@ HRESULT Input::Init( )
 
 	if (SUCCEEDED (res))
 	{
-		mpInput.reset (dev, IUnknownDeleter ());
+		mpInput.reset( dev, IUnknownDeleter( ) );
 
-		gMess ("...creating DirectInput object: OK");
+		gMess( "...creating DirectInput object: OK" );
 
 		//Creating keyboard device
 		IDirectInputDevice8 * k_dev;
-		res = mpInput->CreateDevice (GUID_SysKeyboard, &k_dev, NULL);
+		res = mpInput->CreateDevice( GUID_SysKeyboard, &k_dev, NULL );
 
 		if( SUCCEEDED( res ) )
 		{
@@ -236,9 +236,9 @@ HRESULT Input::Init( )
 			IDirectInputDevice8 * m_dev;
 			res = mpInput->CreateDevice (GUID_SysMouse, &m_dev, NULL);
 
-			if (SUCCEEDED (res))
+			if( SUCCEEDED( res ) )
 			{
-				mpMouse.reset (m_dev, IUnknownDeleter ());
+				mpMouse.reset( m_dev, IUnknownDeleter( ) );
 
 				gMess ("...creating mouse input device: OK");
 

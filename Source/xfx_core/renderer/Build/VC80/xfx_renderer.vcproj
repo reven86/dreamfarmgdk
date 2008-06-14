@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -53,6 +54,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6br.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -97,6 +99,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -109,6 +112,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6br.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -152,6 +156,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -164,6 +169,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6brd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -208,6 +214,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -220,6 +227,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6brd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -264,6 +272,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -276,6 +285,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6br.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -320,6 +330,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -332,6 +343,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="..\..\..\..\..\GDK\Lib\jpeg-6brd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -353,6 +365,102 @@
 	<References>
 	</References>
 	<Files>
+		<File
+			RelativePath="..\..\xfx.cpp"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					UsePrecompiledHeader="1"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="..\..\xfx.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_drawtools.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_drawtools.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_font.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_font.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_indexbuffer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_indexbuffer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_renderer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_renderer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_renderer_cvars.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_renderer_cvars.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_shader.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_shader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_texture.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_texture.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vertexbuffer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_vertexbuffer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_viewer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_viewer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_viewport.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_viewport.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -12,10 +12,13 @@
 
 
 
+#define NOMINMAX
+
 #pragma warning (disable:4786)	//identifier was truncated to '255' characters...
 #pragma warning (disable:4800)	//identifier was truncated to '255' characters...
 #pragma warning (disable:4996)	//stdext::hash_map
 #pragma warning (disable:4267)	//convert warning
+#pragma warning (disable:4512)	//cannot generate assignment operator
 
 
 #ifndef MAKEFOURCC
@@ -55,7 +58,7 @@
 //#include <set>
 //#include <iostream>
 //#include <fstream>
-//#include <hash_map>
+#include <hash_map>
 #include <limits>
 
 // Boost
@@ -66,7 +69,7 @@
 #include <boost/scoped_array.hpp>
 #include <boost/noncopyable.hpp>
 //#include <boost/any.hpp>
-//#include <boost/cast.hpp>
+#include <boost/cast.hpp>
 //#include <boost/static_assert.hpp>
 #include <boost/bind.hpp>
 //#include <boost/mem_fn.hpp>
@@ -77,14 +80,15 @@
 //#include <boost/iterator/indirect_iterator.hpp>
 //#include <boost/utility.hpp>
 //#include <boost/pool/pool_alloc.hpp>
-//#include <boost/functional/hash.hpp>
+#include <boost/functional/hash.hpp>
 //#include <boost/function.hpp>
-//#include <boost/signals.hpp>
-//#include <boost/algorithm/string.hpp>
-//#include <boost/tuple/tuple.hpp>
+#include <boost/signals.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
-//#include <boost/thread.hpp>
+#include <boost/thread/recursive_mutex.hpp>
 #include <boost/foreach.hpp>
+#include <boost/cstdint.hpp>
 #include <boost/type_traits.hpp>
 
 
@@ -94,5 +98,25 @@
 //#include <boost/mpl/min_max.hpp>
 
 // XFX
-#include "utility/xfx_singleton.h"
-#include "utility/xfx_profiler.h"
+#include "utility\xfx_singleton.h"
+#include "utility\xfx_profiler.h"
+#include "utility\xfx_utils.h"
+#include "utility\xfx_cache.h"
+#include "utility\xfx_script.h"
+#include "utility\xfx_log.h"
+#include "utility\xfx_argb.h"
+#include "math\xfx_math.h"
+#include "math\xfx_vec2.h"
+#include "math\xfx_vec3.h"
+#include "math\xfx_vec4.h"
+#include "math\xfx_euler.h"
+#include "math\xfx_primitives.h"
+#include "math\xfx_math.h"
+#include "math\xfx_transformable.h"
+#include "main\xfx_fs.h"
+#include "main\xfx_application.h"
+#include "main\xfx_cmd.h"
+
+// D3D
+#include <d3d8.h>
+#include <d3dx8.h>

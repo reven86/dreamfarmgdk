@@ -22,7 +22,7 @@ _XFX_BEGIN
 
 /*! \class Application xfx_application.h "engine/xfx_application.h"
  *	\brief Defines a base class for application.
- *	\ingroup EngineGroup
+ *	\ingroup MainGroup
  *	
  *	%Application facade class that handles windows messages and makes common initialization 
  *	tasks such as InitEngine, InitRender, InitAudio
