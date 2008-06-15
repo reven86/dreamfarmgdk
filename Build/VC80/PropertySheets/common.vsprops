@@ -6,7 +6,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_35_0/"
+		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_35_0/;&quot;../../../../third_party/jpeg-6b/&quot;"
 		StringPooling="true"
 		OpenMP="true"
 		UsePrecompiledHeader="2"
