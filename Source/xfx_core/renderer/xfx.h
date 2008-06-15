@@ -98,6 +98,12 @@
 //#include <boost/mpl/vector_c.hpp>
 //#include <boost/mpl/min_max.hpp>
 
+// forward definition to use serialization
+namespace boost { namespace serialization {
+	class access;
+} };
+
+
 // XFX
 #include "utility\xfx_singleton.h"
 #include "utility\xfx_profiler.h"

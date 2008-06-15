@@ -29,18 +29,15 @@ _XFX_BEGIN
 
 class Mat3
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		for( int i = 0; i < 3; i++ )
-			for( int j = 0; j < 3; j++ )
-				ar & boost::serialization::make_nvp( "x", x[ i ][ j ] );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	union
@@ -135,9 +132,3 @@ public:
 
 
 _XFX_END
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-BOOST_CLASS_IMPLEMENTATION( xfx::Mat3, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::Mat3, boost::serialization::track_never )
-#endif __XFX_USE_BOOST_SERIALIZATION__
-

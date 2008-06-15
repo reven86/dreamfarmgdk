@@ -27,19 +27,15 @@ _XFX_BEGIN
 
 class Vec4
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
-	template<class _Archive>
-	void serialize (_Archive& ar, const unsigned int version)
-	{
-		ar & BOOST_SERIALIZATION_NVP( x );
-		ar & BOOST_SERIALIZATION_NVP( y );
-		ar & BOOST_SERIALIZATION_NVP( z );
-		ar & BOOST_SERIALIZATION_NVP( w );
-	};
-#endif
+	//
+
+	// Method is implemented in Serialization library.
+	template< class _Archive >
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	float x, y, z, w;
@@ -114,8 +110,3 @@ public:
 
 
 _XFX_END
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-BOOST_CLASS_IMPLEMENTATION( xfx::Vec4, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::Vec4, boost::serialization::track_never )
-#endif

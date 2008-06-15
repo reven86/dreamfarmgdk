@@ -32,17 +32,15 @@ class Ray
 	Vec3		mOrigin;
 	Vec3		mDirection;		//not neccessary normalized
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mOrigin );
-		ar & BOOST_SERIALIZATION_NVP( mDirection );
-	};
-#endif 
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	//! Constructs a ray with origin (0.0, 0.0, 0.0) and direction (0.0, 0.0, 1.0).
@@ -112,17 +110,15 @@ class Sphere : public Primitive
 	Vec3		mPosition;
 	float		mRadius;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mPosition );
-		ar & BOOST_SERIALIZATION_NVP( mRadius );
-	};
-#endif 
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	//! Constructs identity sphere.
@@ -163,17 +159,15 @@ public:
 
 struct Triangle : public Primitive
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		for( int i = 0; i < 3; i++ )
-			ar & boost::serialization::make_nvp( "vertex", vertices[ i ] );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 	//! Triangle vertices array.
 	Vec3		vertices[3];
@@ -213,17 +207,15 @@ class AABB : public Primitive
 	Vec3		mMin;
 	Vec3		mMax;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mMin );
-		ar & BOOST_SERIALIZATION_NVP( mMax );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	//! Constructs empty AABB.
@@ -314,19 +306,15 @@ class OBB : public Primitive
 	Vec3		mE2;
 	Vec3		mE3;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mLocation );
-		ar & BOOST_SERIALIZATION_NVP( mE1 );
-		ar & BOOST_SERIALIZATION_NVP( mE2 );
-		ar & BOOST_SERIALIZATION_NVP( mE3 );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	//! Constructs empty OBB.
@@ -406,19 +394,15 @@ class Plane : public Primitive
 	float		mC;
 	float		mD;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mA );
-		ar & BOOST_SERIALIZATION_NVP( mB );
-		ar & BOOST_SERIALIZATION_NVP( mC );
-		ar & BOOST_SERIALIZATION_NVP( mD );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	//! Constructs uninitialized plane.

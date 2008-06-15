@@ -57,9 +57,7 @@ _XFX_BEGIN
 template< class T, class _KT = boost::uint8_t, class _LerpFn = SimpleLerpFn< T > >
 class Envelope
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
-#endif
 
 	typedef std::pair< _KT, T >		KeyType;
 	typedef std::vector< KeyType/*, boost::pool_allocator<KeyType> */> KeysType;
@@ -67,19 +65,13 @@ class Envelope
 	KeysType						mKeys;
 	T								mEmptyKey;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-
 	//
 	//! Serialization
 	//
 
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive & ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mKeys );
-	}
-
-#endif
+	void serialize( _Archive & ar, const unsigned int version );
 
 public:
 	//! Constructs an empty envelope.

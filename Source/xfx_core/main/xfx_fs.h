@@ -32,21 +32,15 @@ class Resource
 	String							mName;
 	String							mFilename;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
-#endif
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	//
 	//! Serialization
 	//
 
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive & ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mFilename );
-	};
-#endif
+	void serialize( _Archive & ar, const unsigned int version );
 
 public:
 	//! Constructs an empty resource by name.
@@ -90,21 +84,15 @@ protected:
 
 class ScriptResource : public Script< String >, public Resource
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-
 	friend class boost::serialization::access;
 
 	//
 	//! Serialization
 	//
 
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive & ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP( Resource );
-	};
-
-#endif
+	void serialize( _Archive & ar, const unsigned int version );
 
 public:
 	//! Constructs a resource with specified name.

@@ -94,5 +94,12 @@
 //#include <boost/mpl/min_max.hpp>
 
 
+// forward definition to use serialization
+namespace boost { namespace serialization {
+	class access;
+} };
+
+
+
 // XFX
 #include "main\xfx_errorcodes.h"

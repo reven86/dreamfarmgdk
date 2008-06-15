@@ -27,17 +27,15 @@ _XFX_BEGIN
 
 class Vec2
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( x );
-		ar & BOOST_SERIALIZATION_NVP( y );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	float x, y;
@@ -121,8 +119,3 @@ HRESULT ParseVariable( Vec2& var, typename _String::size_type& pos, const _Strin
 
 
 _XFX_END
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-BOOST_CLASS_IMPLEMENTATION( xfx::Vec2, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::Vec2, boost::serialization::track_never )
-#endif

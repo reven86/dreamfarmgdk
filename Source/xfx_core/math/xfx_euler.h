@@ -28,18 +28,15 @@ _XFX_BEGIN
 
 class Euler
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( yaw );
-		ar & BOOST_SERIALIZATION_NVP( pitch );
-		ar & BOOST_SERIALIZATION_NVP( roll );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	Math::BigAngle		yaw;		//!< Angle for y axis - 3
@@ -154,10 +151,3 @@ HRESULT ParseVariable( Euler& var, typename _String::size_type& pos, const _Stri
 
 
 _XFX_END
-
-
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-BOOST_CLASS_IMPLEMENTATION( xfx::Euler, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::Euler, boost::serialization::track_never )
-#endif

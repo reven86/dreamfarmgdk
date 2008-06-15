@@ -280,9 +280,7 @@ private:
 
 class ShaderConsts
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend boost::serialization::access;
-#endif
 
 	stdext::hash_map< String, boost::shared_ptr< const ITexture >, HashCompare< String > >		mTextures;
 	stdext::hash_map< String, float, HashCompare< String > >									mFloats;

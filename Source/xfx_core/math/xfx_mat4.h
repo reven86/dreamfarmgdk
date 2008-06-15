@@ -30,18 +30,15 @@ class Euler;
 
 class Mat4
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
 
+	//
 	//! Serialization.
+	//
+
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive& ar, const unsigned int version )
-	{
-		for( int i = 0; i < 4; i++ )
-			for( int j = 0; j < 4; j++ )
-				ar & boost::serialization::make_nvp( "x", x[ i ][ j ] );
-	};
-#endif
+	void serialize( _Archive& ar, const unsigned int version );
 
 public:
 	union
@@ -74,18 +71,6 @@ public:
 	Mat4															( const Vec3& pos, const Euler& orientation, const Vec3& scale );
 
 	Mat4&							operator *=						(const Mat4& A);
-
-	//! D3DMATRIX * type cast.
-	//operator						D3DMATRIX *						() {return reinterpret_cast<D3DMATRIX *> (&x);};
-
-	//! const D3DMATRIX * type cast.
-	//operator						const D3DMATRIX *				() const {return reinterpret_cast<const D3DMATRIX *> (&x);};
-
-	//! D3DXMATRIX * type cast.
-	//operator						D3DXMATRIX *					() {return reinterpret_cast<D3DXMATRIX *> (&x);};
-
-	//! const D3DXMATRIX * type cast.
-	//operator						const D3DXMATRIX *				() const {return reinterpret_cast<const D3DXMATRIX *> (&x);};
 
 	friend Mat4						operator *						(const Mat4& A, const Mat4& B);
 
@@ -163,8 +148,3 @@ public:
 
 
 _XFX_END
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-BOOST_CLASS_IMPLEMENTATION( xfx::Mat4, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::Mat4, boost::serialization::track_never )
-#endif

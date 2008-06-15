@@ -31,31 +31,20 @@ _XFX_BEGIN
 
 class Transformable3D
 {
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
 	friend class boost::serialization::access;
-#endif
 
 	Vec3							mPosition;
 	Euler							mRotation;
 	Vec3							mScale;
 	Mat4							mTransformation;
 
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-
 	//
 	//! Serialization
 	//
 
+	// Method is implemented in Serialization library.
 	template< class _Archive >
-	void serialize( _Archive & ar, const unsigned int version )
-	{
-		ar & BOOST_SERIALIZATION_NVP( mPosition );
-		ar & BOOST_SERIALIZATION_NVP( mRotation );
-		ar & BOOST_SERIALIZATION_NVP( mScale );
-		ar & BOOST_SERIALIZATION_NVP( mTransformation );
-	};
-
-#endif
+	void serialize( _Archive & ar, const unsigned int version );
 
 public:
 	//! Constructs base transformable object with identity transformation matrix.
@@ -102,10 +91,20 @@ public:
 
 class Transformable2D
 {
+	friend class boost::serialization::access;
+
 	Vec2							mPosition;
 	Math::BigAngle					mRotation;
 	Vec2							mScale;
 	Mat3							mTransformation;
+
+	//
+	//! Serialization
+	//
+
+	// Method is implemented in Serialization library.
+	template< class _Archive >
+	void serialize( _Archive & ar, const unsigned int version );
 
 public:
 	//! Constructs base transformable object with identity transformation matrix.

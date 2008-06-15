@@ -147,29 +147,3 @@ inline ARGB operator *		( const ARGB& u, const float& t )
 
 
 _XFX_END
-
-#ifdef __XFX_USE_BOOST_SERIALIZATION__
-
-namespace boost
-{
-namespace serialization
-{
-
-//
-//! ARGB Serialization
-//
-
-template< class _Archive >
-void serialize( _Archive & ar, xfx::ARGB & t, const unsigned int version )
-{
-	ar & BOOST_SERIALIZATION_NVP( t.dword );
-};
-
-
-}
-}
-
-BOOST_CLASS_IMPLEMENTATION( xfx::ARGB, boost::serialization::object_serializable );
-BOOST_CLASS_TRACKING( xfx::ARGB, boost::serialization::track_never )
-
-#endif
