@@ -28,9 +28,9 @@ class VertexBuffer : boost::noncopyable
 	friend class BufferLocker< VertexBuffer >;
 
 #if( __XFX_DIRECTX_VER__ < 9 )
-	boost::shared_ptr< IDirect3DVertexBuffer8 >		mpVB;
+	boost::shared_ptr< struct IDirect3DVertexBuffer8 >		mpVB;
 #else
-	boost::shared_ptr< IDirect3DVertexBuffer9 >		mpVB;
+	boost::shared_ptr< struct IDirect3DVertexBuffer9 >		mpVB;
 #endif
 
 	bool						mIsDynamic;

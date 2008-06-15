@@ -28,9 +28,9 @@ class IndexBuffer : boost::noncopyable
 	friend class BufferLocker< IndexBuffer >;
 
 #if (__XFX_DIRECTX_VER__ < 9)
-	boost::shared_ptr< IDirect3DIndexBuffer8 >		mpIB;
+	boost::shared_ptr< struct IDirect3DIndexBuffer8 >		mpIB;
 #else
-	boost::shared_ptr< IDirect3DIndexBuffer9 >		mpIB;
+	boost::shared_ptr< struct IDirect3DIndexBuffer9 >		mpIB;
 #endif
 
 	bool						mIsDynamic;

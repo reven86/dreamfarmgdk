@@ -40,7 +40,7 @@ class Effect : public Resource
 		ES_TOTAL
 	};
 
-	boost::shared_ptr< ID3DXEffect >					mDXEffectPtr;
+	boost::shared_ptr< struct ID3DXEffect >				mDXEffectPtr;
 
 #if( __XFX_DIRECTX_VER__ < 9 )
 	String												mValidTechnique;

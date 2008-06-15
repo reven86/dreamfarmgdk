@@ -27,4 +27,35 @@ const float Math::real_inv_pi	= 0.318309886f;
 
 
 
+
+//
+// Functions
+//
+
+//! Parse Math::Angle variable (converts from degree to Math::Angle).
+HRESULT	ParseAngleVariable ( Math::Angle& var, String::size_type& pos, const String& str )
+{
+	float fvar;
+	skip_comments( str, pos );
+	fvar = static_cast< float >( atof( next_token( str, pos ).c_str( ) ) );
+
+	var = static_cast< Math::Angle >( math_deg2angle( fvar ) );
+	return S_OK;
+};
+
+//! Parse Math::BigAngle variable (converts from degree to Math::BigAngle).
+HRESULT ParseBigAngleVariable ( Math::BigAngle& var, String::size_type& pos, const String& str )
+{
+	float fvar;
+	skip_comments( str, pos );
+	fvar = static_cast< float >( atof( next_token( str, pos ).c_str( ) ) );
+
+	var = math_deg2angle( fvar );
+	return S_OK;
+};
+
+
+
+
+
 _XFX_END

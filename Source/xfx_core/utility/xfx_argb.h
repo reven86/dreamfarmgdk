@@ -146,4 +146,18 @@ inline ARGB operator *		( const ARGB& u, const float& t )
 
 
 
+/*!	\brief Simple lerp functor for ARGB.
+ *	\ingroup UtilityGroup
+ *
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+template< >
+struct SimpleLerpFn< ARGB >
+{
+	ARGB lerp ( const ARGB& a, const ARGB& b, const float& t ) { return ARGB::Interpolate( a, b, t ); };
+};
+
+
+
 _XFX_END

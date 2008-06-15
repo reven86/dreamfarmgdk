@@ -430,6 +430,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_renderer_ext_serialization_impl.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_renderer_serialization_impl.h"
 			>
 		</File>

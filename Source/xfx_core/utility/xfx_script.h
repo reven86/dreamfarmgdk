@@ -82,7 +82,7 @@ public:
 
 	//! Parse custom type variable.
 	template< class _Type >
-	static HRESULT				ParseVariable			( _Type& var, typename _String::size_type& pos, const _String& str )
+	static HRESULT				ParseVariable			( _Type&, typename _String::size_type&, const _String& )
 	{
 		_ASSERTE( !"invalid type passed to specialize ParseVariable" );
 		return XFXERR_INVALIDCALL;

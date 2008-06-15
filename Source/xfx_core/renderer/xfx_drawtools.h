@@ -34,8 +34,8 @@ class DrawTools
 		Vec3	pos;
 		ARGB	color;
 
-		LineVertex		() {};
-		LineVertex		(const Vec3& v, const ARGB& c) : pos (v), color (c) {};
+		LineVertex		( ) { };
+		LineVertex		( const Vec3& v, const ARGB& c ) : pos( v ), color( c ) { };
 	};
 
 public:
@@ -47,8 +47,8 @@ public:
 		float	tu;				//!< %Texture coordinate u.
 		float	tv;				//!< %Texture coordinate v.
 
-		TriVertex		() {};
-		TriVertex		(const Vec3& ver, const ARGB& c, const float& u, const float& v) : pos (ver), color (c), tu (u), tv (v) {};
+		TriVertex		( ) { };
+		TriVertex		( const Vec3& ver, const ARGB& c, const float& u, const float& v ) : pos( ver ), color( c ), tu( u ), tv( v ) { };
 	};
 
 private:
