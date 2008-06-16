@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_serialization", "..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_renderer_ext", "..\..\Source\xfx_core\renderer_ext\Build\VC80\xfx_renderer_ext.vcproj", "{0842E2FA-0EE3-4822-850F-C8EC58FAAE4A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xfx_lua", "..\..\Source\xfx_core\lua\Build\VC80\xfx_lua.vcproj", "{918A7402-657F-47DB-8588-4A47CD8ADC02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug DLL|Win32 = Debug DLL|Win32
@@ -95,6 +97,18 @@ Global
 		{0842E2FA-0EE3-4822-850F-C8EC58FAAE4A}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
 		{0842E2FA-0EE3-4822-850F-C8EC58FAAE4A}.Shipping|Win32.ActiveCfg = Shipping|Win32
 		{0842E2FA-0EE3-4822-850F-C8EC58FAAE4A}.Shipping|Win32.Build.0 = Shipping|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Debug DLL|Win32.ActiveCfg = Debug DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Debug DLL|Win32.Build.0 = Debug DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Debug|Win32.Build.0 = Debug|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Release|Win32.ActiveCfg = Release|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Release|Win32.Build.0 = Release|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Shipping DLL|Win32.ActiveCfg = Shipping DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Shipping DLL|Win32.Build.0 = Shipping DLL|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Shipping|Win32.ActiveCfg = Shipping|Win32
+		{918A7402-657F-47DB-8588-4A47CD8ADC02}.Shipping|Win32.Build.0 = Shipping|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
