@@ -210,7 +210,7 @@ namespace luabind { namespace detail
 		R(T::*)(BOOST_PP_ENUM_PARAMS(N, A)) const
 	  , lua_State* L
 	  , WrappedClass*
-	  , Policies const* policies)
+	  , Policies const* )
 	{
 		typedef constructor<
 			BOOST_DEDUCED_TYPENAME most_derived<T,WrappedClass>::type const&

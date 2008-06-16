@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xfx_main"
-	ProjectGUID="{321CD26B-793E-44AA-87CE-987ABF22238C}"
+	Name="xfx_lua"
+	ProjectGUID="{918A7402-657F-47DB-8588-4A47CD8ADC02}"
 	RootNamespace="xfx_main"
 	Keyword="Win32Proj"
 	>
@@ -40,9 +40,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -98,9 +97,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -155,9 +153,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -213,9 +210,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -271,9 +267,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -329,9 +324,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include/&quot;;../../../../third_party/luabind/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -422,83 +416,19 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_application.cpp"
+			RelativePath="..\..\xfx_lua_sm.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_application.h"
+			RelativePath="..\..\xfx_lua_sm.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_cmd.cpp"
+			RelativePath="..\..\xfx_luascript.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_cmd.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_console.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_engine.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_engine.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_errorcodes.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_fs.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_fs.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_input.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_input.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_main_cvars.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_main_cvars.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_messagesbook.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_messagesbook.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_pack.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_pack.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_timer.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_timer.h"
+			RelativePath="..\..\xfx_luascript.h"
 			>
 		</File>
 	</Files>
