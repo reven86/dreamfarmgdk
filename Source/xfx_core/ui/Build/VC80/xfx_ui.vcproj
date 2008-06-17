@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xfx_serialization"
-	ProjectGUID="{C37D534E-8710-4485-98B5-7FC1328CB221}"
+	Name="xfx_ui"
+	ProjectGUID="{7DDA6F42-777B-4F2C-9342-F60E23BC1D04}"
 	RootNamespace="xfx_main"
 	Keyword="Win32Proj"
 	>
@@ -41,7 +41,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -54,7 +53,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +97,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -112,7 +109,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -156,7 +152,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -169,7 +164,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -214,7 +208,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -227,7 +220,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -272,7 +264,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -285,7 +276,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -330,7 +320,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -343,7 +332,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -422,27 +410,187 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_main_serialization_impl.h"
+			RelativePath="..\..\xfx_interface.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_math_serialization_impl.h"
+			RelativePath="..\..\xfx_interface.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_renderer_ext_serialization_impl.h"
+			RelativePath="..\..\xfx_uicomposite.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_renderer_serialization_impl.h"
+			RelativePath="..\..\xfx_uicomposite.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_ui_serialization_impl.h"
+			RelativePath="..\..\xfx_uiconsole.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_utility_serialization_impl.h"
+			RelativePath="..\..\xfx_uiconsole.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uidummy.cpp"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Debug DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uidummy.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiedit.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiedit.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uifocusable.cpp"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Debug DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping DLL|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uifocusable.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uilabel.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uilabel.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiobject.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiobject.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiprogress.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiprogress.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiscroll.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uiscroll.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uisprite.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_uisprite.h"
 			>
 		</File>
 	</Files>

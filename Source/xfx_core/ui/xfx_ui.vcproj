@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xfx_serialization"
-	ProjectGUID="{C37D534E-8710-4485-98B5-7FC1328CB221}"
+	Name="xfx_utility"
+	ProjectGUID="{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}"
 	RootNamespace="xfx_main"
 	Keyword="Win32Proj"
 	>
@@ -41,7 +41,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -54,7 +53,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +97,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -112,7 +109,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -156,7 +152,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -169,7 +164,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -214,7 +208,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -227,7 +220,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -272,7 +264,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -285,7 +276,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -330,7 +320,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -343,7 +332,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -422,27 +410,55 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_main_serialization_impl.h"
+			RelativePath="..\..\xfx_argb.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_math_serialization_impl.h"
+			RelativePath="..\..\xfx_cache.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_renderer_ext_serialization_impl.h"
+			RelativePath="..\..\xfx_envelope.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_renderer_serialization_impl.h"
+			RelativePath="..\..\xfx_log.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_ui_serialization_impl.h"
+			RelativePath="..\..\xfx_log.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_utility_serialization_impl.h"
+			RelativePath="..\..\xfx_profiler.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_profiler.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_script.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_script.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_singleton.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_string.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_utility.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_utils.h"
 			>
 		</File>
 	</Files>

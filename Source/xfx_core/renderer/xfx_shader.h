@@ -53,7 +53,7 @@ class Effect : public Resource
 #endif
 
 	boost::signals::connection							mInvalidateConnection;
-	static Cache<Effect>								msCache;
+	static Cache< Effect >								msCache;
 
 public:
 	Effect																	( );
