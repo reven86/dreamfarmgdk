@@ -83,30 +83,17 @@ private:
 	{
 		unsigned short	chunk_count : 15;
 		bool			buffer_type : 1;		// true for tri, false for sprite
+
+		DrawChunkInfo	( ) { };
+		DrawChunkInfo	( const unsigned short& c, const bool& b ) : chunk_count( c ), buffer_type( b ) { };
 	};
 
-#pragma message ( "FIXME: implement fixed-size dynamicly allocated container" )
-
-	boost::scoped_array< LineVertex >					mLines;
-	boost::scoped_array< TriVertex >					mTris;
-	boost::scoped_array< TriBuffer >					mTrisBuffer;
-	boost::scoped_array< SpriteVertex >					mSpritesVerts;
-	boost::scoped_array< SpriteBuffer >					mSpritesBuffer;
-	boost::scoped_array< DrawChunkInfo >				mDrawChunks;
-
-	int													mLinesCount;
-	int													mTrisCount;
-	int													mTrisBufferCount;
-	int													mSpritesVertsCount;
-	int													mSpritesBufferCount;
-	int													mDrawChunksCount;
-
-	int													mLinesCapacity;
-	int													mTrisCapacity;
-	int													mTrisBufferCapacity;
-	int													mSpritesVertsCapacity;
-	int													mSpritesBufferCapacity;
-	int													mDrawChunksCapacity;
+	boost::circular_buffer< LineVertex >				mLines;
+	boost::circular_buffer< TriVertex >					mTris;
+	boost::circular_buffer< TriBuffer >					mTrisBuffer;
+	boost::circular_buffer< SpriteVertex >				mSpritesVerts;
+	boost::circular_buffer< SpriteBuffer >				mSpritesBuffer;
+	boost::circular_buffer< DrawChunkInfo >				mDrawChunks;
 
 	VertexBuffer							mTrisVB;
 	VertexBuffer							mSpritesVB;

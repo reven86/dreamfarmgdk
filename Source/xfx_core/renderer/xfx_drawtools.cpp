@@ -33,31 +33,17 @@ DrawTools::~DrawTools( )
 
 void DrawTools::Init( )
 {
-	mLines.reset( new LineVertex[ r_maxlines->AsInt( ) ] );
-	mTris.reset( new TriVertex[ r_maxtris->AsInt( ) * 4 ] );
-	mTrisBuffer.reset( new TriBuffer[ r_maxtris->AsInt( ) ] );
-	mSpritesVerts.reset( new SpriteVertex[ r_maxsprites->AsInt( ) * 4 ] );
-	mSpritesBuffer.reset( new SpriteBuffer[ r_maxsprites->AsInt( ) ] );
-	mDrawChunks.reset( new DrawChunkInfo[ r_maxsprites->AsInt( ) + r_maxtris->AsInt( ) ] );
+	mLines.set_capacity( r_maxlines->AsInt( ) );
+	mTris.set_capacity( r_maxtris->AsInt( ) * 4 );
+	mTrisBuffer.set_capacity( r_maxtris->AsInt( ) );
+	mSpritesVerts.set_capacity( r_maxsprites->AsInt( ) * 4 );
+	mSpritesBuffer.set_capacity( r_maxsprites->AsInt( ) );
+	mDrawChunks.set_capacity( r_maxsprites->AsInt( ) + r_maxtris->AsInt( ) );
 
-	mLinesCount = 0;
-	mTrisCount = 0;
-	mTrisBufferCount = 0;
-	mSpritesVertsCount = 0;
-	mSpritesBufferCount = 0;
-	mDrawChunksCount = 0;
+	mTrisVB.Create( sizeof( TriVertex ), r_maxtris->AsInt( ) * 6, FVF_TRIVERTEX, true );
+	mSpritesVB.Create( sizeof( SpriteVertex ), r_maxsprites->AsInt( ) * 4, FVF_SPRITEVERTEX, true );
 
-	mLinesCapacity = r_maxlines->AsInt( );
-	mTrisCapacity = r_maxtris->AsInt( ) * 4;
-	mTrisBufferCapacity = r_maxtris->AsInt( );
-	mSpritesVertsCapacity = r_maxsprites->AsInt( ) * 4;
-	mSpritesBufferCapacity = r_maxsprites->AsInt( );
-	mDrawChunksCapacity = r_maxsprites->AsInt( ) + r_maxtris->AsInt( );
-
-	mTrisVB.Create (sizeof (TriVertex), r_maxtris->AsInt( ) * 6, FVF_TRIVERTEX, true);
-	mSpritesVB.Create (sizeof (SpriteVertex), r_maxsprites->AsInt( ) * 4, FVF_SPRITEVERTEX, true);
-
-	mSpritesIB.Create (false, r_maxsprites->AsInt( )* 6, false);
+	mSpritesIB.Create( false, r_maxsprites->AsInt( )* 6, false );
 
 	//create indices for sprites
 	{
@@ -93,16 +79,12 @@ void DrawTools::PushDrawLine( const Vec3& v0, const Vec3& v1, const ARGB& color 
 	PushDrawLine( v0, v1, color, color );
 }
 
-void DrawTools::PushDrawLine (const Vec3& v0, const Vec3& v1, const ARGB& color0, const ARGB& color1)
+void DrawTools::PushDrawLine( const Vec3& v0, const Vec3& v1, const ARGB& color0, const ARGB& color1 )
 {
 	PROFILE( __FUNCTION__, "Render" );
 
-#pragma message ( "FIXME: allocate buffer" )
-	if( mLinesCount >= mLinesCapacity - 2 )
-		return;
-
-	mLines[ mLinesCount ++ ] = LineVertex( v0, color0 );
-	mLines[ mLinesCount ++ ] = LineVertex( v1, color1 );
+	mLines.push_back( LineVertex( v0, color0 ) );
+	mLines.push_back( LineVertex( v1, color1 ) );
 }
 
 void DrawTools::PushDrawAxises (const Mat4& m, const float& len)
@@ -186,7 +168,7 @@ void DrawTools::FlushLines ()
 {
 	PROFILE( __FUNCTION__, "Render" );
 
-	if( mLinesCount > 0 )
+	if( !mLines.empty( ) )
 	{
 		DWORD blend		= Renderer::Instance( ).State( Renderer::SM_ALPHABLENDENABLE );
 		DWORD srcblend	= Renderer::Instance( ).State( Renderer::SM_SRCBLEND );
@@ -203,17 +185,21 @@ void DrawTools::FlushLines ()
 		Mat4 id( 1 );
 		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
 
+		boost::circular_buffer< LineVertex >::array_range ar1 = mLines.array_one( );
+		boost::circular_buffer< LineVertex >::array_range ar2 = mLines.array_two( );
+
 		Renderer::Instance( ).FVF( FVF_LINEVERTEX );
-		Renderer::Instance( ).pD3DDevice( )->DrawPrimitiveUP( D3DPT_LINELIST, static_cast< UINT >( mLinesCount >> 1 ), mLines.get( ), sizeof( LineVertex ) );
+		Renderer::Instance( ).pD3DDevice( )->DrawPrimitiveUP( D3DPT_LINELIST, static_cast< UINT >( ar1.second >> 1 ), ar1.first, sizeof( LineVertex ) );
+		Renderer::Instance( ).pD3DDevice( )->DrawPrimitiveUP( D3DPT_LINELIST, static_cast< UINT >( ar2.second >> 1 ), ar2.first, sizeof( LineVertex ) );
 
 		Renderer::Instance( ).State( Renderer::SM_ALPHABLENDENABLE, blend );
 		Renderer::Instance( ).State( Renderer::SM_SRCBLEND, srcblend );
 		Renderer::Instance( ).State( Renderer::SM_DESTBLEND, destblend );
 		Renderer::Instance( ).State( Renderer::SM_LIGHTING, light );
 
-		Renderer::Instance( ).FrameStatistics( ).num_lines += static_cast< unsigned >( mLinesCount >> 1 );
+		Renderer::Instance( ).FrameStatistics( ).num_lines += static_cast< unsigned >( mLines.size( ) >> 1 );
 
-		mLinesCount = 0;
+		mLines.clear( );
 	}
 }
 
@@ -221,51 +207,40 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 {
 	PROFILE( __FUNCTION__, "Render" );
 
-	if( numtris * 3 + mTrisCount > mTrisCapacity )
-	{
-#pragma message ("FIXME: reallocate buffer")
-		numtris = static_cast< int >( ( mTrisCapacity - mTrisCount ) / 3 );
-		return;
-	}
-
 	if (numtris <= 0)
 		return;
 
-	const Shader * tri_ptr = mTrisBufferCount == 0 ? NULL : ( mTrisBuffer.get( ) + mTrisBufferCount - 1 )->shader.get( );
+	const Shader * tri_ptr = mTrisBuffer.empty( ) ? NULL : mTrisBuffer.back( ).shader.get( );
 
-	const ShaderConsts * shd_consts_ptr = mTrisBufferCount == 0 ? NULL : ( mTrisBuffer.get( ) + mTrisBufferCount - 1 )->shader_consts.get( );
+	const ShaderConsts * shd_consts_ptr = mTrisBuffer.empty( ) ? NULL : mTrisBuffer.back( ).shader_consts.get( );
 
-	if( ( mDrawChunksCount == 0 || mDrawChunks[ mDrawChunksCount - 1 ].buffer_type ) && 
+	if( ( mDrawChunks.empty( ) || mDrawChunks.back( ).buffer_type ) && 
 		shader && tri_ptr && *shader == *tri_ptr && shd_consts_ptr == shader_consts.get( ) )
 	{
-		( mTrisBuffer.get( ) + mTrisBufferCount - 1 )->count += numtris;
+		mTrisBuffer.back( ).count += numtris;
 	}
 	else
 	{
-		if( mDrawChunksCount == 0 )
+		if( mDrawChunks.empty( ) )
 		{
-			mDrawChunks[ mDrawChunksCount ].chunk_count		= 1;
-			mDrawChunks[ mDrawChunksCount ].buffer_type		= true;
-			mDrawChunksCount++;
+			mDrawChunks.push_back( DrawChunkInfo( 1, true ) );
 		}
 		else
 		{
-			if( mDrawChunks[ mDrawChunksCount - 1 ].buffer_type )
+			if( mDrawChunks.back( ).buffer_type )
 			{
-				mDrawChunks[ mDrawChunksCount - 1 ].chunk_count++;
+				mDrawChunks.back( ).chunk_count++;
 			}
 			else
 			{
-				mDrawChunks[ mDrawChunksCount ].chunk_count	= 1;
-				mDrawChunks[ mDrawChunksCount ].buffer_type	= true;
-				mDrawChunksCount++;
+				mDrawChunks.push_back( DrawChunkInfo( 1, true ) );
 			}
 		}
 
-		mTrisBuffer[ mTrisBufferCount ++ ] = TriBuffer( shader, shader_consts, static_cast< int >( mTrisCount ), numtris );
+		mTrisBuffer.push_back( TriBuffer( shader, shader_consts, static_cast< int >( mTris.size( ) ), numtris ) );
 	}
 
-	std::copy( vertices, vertices + 3 * numtris, mTris.get( ) + mTrisCount );
+	std::copy( vertices, vertices + 3 * numtris, std::back_inserter( mTris ) );
 
 	if( shader )
 	{
@@ -294,9 +269,8 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 				for( int i = 0; i < numtris * 3; i++ )
 				{
-					float& nu1 = ( mTris.get( ) + mTrisCount + i )->tu;
-					float& nv1 = ( mTris.get( ) + mTrisCount + i )->tv;
-
+					float& nu1 = ( *( mTris.end( ) - 1 - i ) ).tu;
+					float& nv1 = ( *( mTris.end( ) - 1 - i ) ).tv;
 					nu1 *= au1 - au0;
 					nv1 *= av1 - av0;
 
@@ -311,8 +285,8 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 				for( int i = 0; i < numtris * 3; i++ )
 				{
-					float& nu1 = ( mTris.get( ) + mTrisCount + i )->tu;
-					float& nv1 = ( mTris.get( ) + mTrisCount + i )->tv;
+					float& nu1 = ( *( mTris.end( ) - 1 - i ) ).tu;
+					float& nv1 = ( *( mTris.end( ) - 1 - i ) ).tv;
 
 					float u1 = nu1;
 					float v1 = nv1;
@@ -323,8 +297,6 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 			}
 		}
 	}
-
-	mTrisCount += 3 * numtris;
 }
 
 void DrawTools::PushDraw2DSprite(
@@ -336,58 +308,51 @@ void DrawTools::PushDraw2DSprite(
 {
 	PROFILE( __FUNCTION__, "Render" );
 
-#pragma message ("FIXME: reallocate buffer")
-	if( mSpritesVertsCount + 4 >= mSpritesVertsCapacity )
-	{
-		return;
-	}
-
 	float dx = scalex * 0.5f;
 	float dy = scaley * 0.5f;
 
-	const Shader * spr_ptr = mSpritesBufferCount == 0 ? NULL : ( mSpritesBuffer.get( ) + mSpritesBufferCount - 1 )->shader.get( );
-	const ShaderConsts * shd_consts_ptr = mSpritesBufferCount == 0 ? NULL : ( mSpritesBuffer.get( ) + mSpritesBufferCount - 1 )->shader_consts.get( );
+	const Shader * spr_ptr = mSpritesBuffer.empty( ) ? NULL : mSpritesBuffer.back( ).shader.get( );
+	const ShaderConsts * shd_consts_ptr = mSpritesBuffer.empty( ) ? NULL : mSpritesBuffer.back( ).shader_consts.get( );
 
-	if( ( mDrawChunksCount == 0 || !mDrawChunks[ mDrawChunksCount - 1 ].buffer_type ) &&
+	if( ( mDrawChunks.empty( ) || !mDrawChunks.back( ).buffer_type ) &&
 		shader && spr_ptr && *shader == *spr_ptr && shd_consts_ptr == shader_consts.get( ) )
 	{
-		( mSpritesBuffer.get( ) + mSpritesBufferCount - 1 )->count++;
+		mSpritesBuffer.back( ).count++;
 	}
 	else
 	{
-		if( mDrawChunksCount == 0 )
+		if( mDrawChunks.empty( ) )
 		{
-			mDrawChunks[ mDrawChunksCount ].chunk_count		= 1;
-			mDrawChunks[ mDrawChunksCount ].buffer_type		= false;
-			mDrawChunksCount++;
+			mDrawChunks.push_back( DrawChunkInfo( 1, false ) );
 		}
 		else
 		{
-			if( !mDrawChunks[ mDrawChunksCount - 1 ].buffer_type )
+			if( !mDrawChunks.back( ).buffer_type )
 			{
-				mDrawChunks[ mDrawChunksCount - 1 ].chunk_count++;
+				mDrawChunks.back( ).chunk_count++;
 			}
 			else
 			{
-				mDrawChunks[ mDrawChunksCount ].chunk_count	= 1;
-				mDrawChunks[ mDrawChunksCount ].buffer_type	= false;
-				mDrawChunksCount++;
+				mDrawChunks.push_back( DrawChunkInfo( 1, false ) );
 			}
 		}
 
-		mSpritesBuffer[ mSpritesBufferCount ].shader		= shader;
-		mSpritesBuffer[ mSpritesBufferCount ].shader_consts	= shader_consts;
-		mSpritesBuffer[ mSpritesBufferCount ].offset		= static_cast< int >( mSpritesVertsCount );
-		mSpritesBuffer[ mSpritesBufferCount ].count			= 1;
-		++mSpritesBufferCount;
+		mSpritesBuffer.push_back( SpriteBuffer( shader, shader_consts, static_cast< int >( mSpritesBuffer.size( ) ), 1 ) );
 	}
 
 	SpriteVertex * vtx[4];
 
-	vtx[ 0 ] = &mSpritesVerts[ mSpritesVertsCount++ ];
-	vtx[ 1 ] = &mSpritesVerts[ mSpritesVertsCount++ ];
-	vtx[ 2 ] = &mSpritesVerts[ mSpritesVertsCount++ ];
-	vtx[ 3 ] = &mSpritesVerts[ mSpritesVertsCount++ ];
+	mSpritesVerts.push_back( );
+	vtx[ 0 ] = &mSpritesVerts.back( );
+
+	mSpritesVerts.push_back( );
+	vtx[ 1 ] = &mSpritesVerts.back( );
+
+	mSpritesVerts.push_back( );
+	vtx[ 2 ] = &mSpritesVerts.back( );
+
+	mSpritesVerts.push_back( );
+	vtx[ 3 ] = &mSpritesVerts.back( );
 
 	vtx[ 0 ]->z = vtx[ 1 ]->z = vtx[ 2 ]->z = vtx[ 3 ]->z = z;
 	vtx[ 0 ]->color = vtx[ 1 ]->color = vtx[ 2 ]->color = vtx[ 3 ]->color = color;
@@ -620,23 +585,33 @@ void DrawTools::FlushTrisAndSprites( )
 {
 	PROFILE( __FUNCTION__, "Render" );
 
-	if( mTrisCount != 0 )
+	if( !mTris.empty( ) )
 	{
-		BufferLocker< VertexBuffer > bl( mTrisVB, 0, static_cast< unsigned >( mTrisCount ) );
+		BufferLocker< VertexBuffer > bl( mTrisVB, 0, static_cast< unsigned >( mTris.size( ) ) );
 
 		if( bl.data< void >( ) )
-			memcpy( bl.data< void >( ), mTris.get( ), sizeof( TriVertex ) * mTrisCount );
+		{
+			boost::circular_buffer< TriVertex >::array_range ar1 = mTris.array_one( );
+			boost::circular_buffer< TriVertex >::array_range ar2 = mTris.array_two( );
+			memcpy( bl.data< void >( ), ar1.first, sizeof( TriVertex ) * ar1.second );
+			memcpy( bl.data< char >( ) + sizeof( TriVertex ) * ar1.second, ar2.first, sizeof( TriVertex ) * ar2.second );
+		}
 
 		Mat4 id( 1 );
 		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
 	}
 
-	if( mSpritesVertsCount != 0 )
+	if( !mSpritesVerts.empty( ) )
 	{
-		BufferLocker< VertexBuffer > bl( mSpritesVB, 0, static_cast< unsigned >( mSpritesVertsCount ) );
+		BufferLocker< VertexBuffer > bl( mSpritesVB, 0, static_cast< unsigned >( mSpritesVerts.size( ) ) );
 
 		if( bl.data< void >( ) )
-			memcpy( bl.data< void >( ), mSpritesVerts.get( ), sizeof( SpriteVertex ) * mSpritesVertsCount );
+		{
+			boost::circular_buffer< SpriteVertex >::array_range ar1 = mSpritesVerts.array_one( );
+			boost::circular_buffer< SpriteVertex >::array_range ar2 = mSpritesVerts.array_two( );
+			memcpy( bl.data< void >( ), ar1.first, sizeof( SpriteVertex ) * ar1.second );
+			memcpy( bl.data< char >( ) + sizeof( SpriteVertex ) * ar1.second, ar2.first, sizeof( SpriteVertex ) * ar2.second );
+		}
 
 		mSpritesIB.SetIndices ();
 	}
@@ -677,7 +652,7 @@ void DrawTools::FlushTrisAndSprites( )
 	sprite_render_fn srfn;
 	tri_render_fn trfn;
 
-	for( int i = 0; i < mDrawChunksCount; i++ )
+	for( int i = 0, max_i = mDrawChunks.size( ); i < max_i; i++ )
 	{
 		if( mDrawChunks[ i ].buffer_type )
 		{
@@ -723,11 +698,11 @@ void DrawTools::FlushTrisAndSprites( )
 		}
 	}
 
-	mDrawChunksCount = 0;
-	mTrisCount = 0;
-	mTrisBufferCount = 0;
-	mSpritesVertsCount = 0;
-	mSpritesBufferCount = 0;
+	mDrawChunks.clear( );
+	mTris.clear( );
+	mTrisBuffer.clear( );
+	mSpritesVerts.clear( );
+	mSpritesBuffer.clear( );
 }
 
 

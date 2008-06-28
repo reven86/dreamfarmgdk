@@ -92,14 +92,6 @@ bool Engine::Init( )
 	if( FAILED( hr = Input::Instance( ).Init( ) ) )
 		return false;
 
-#pragma message ( "FIXME: fix this" )
-	/*
-#ifdef __XFX_USE_LUA_LUABIND__
-	if( FAILED( hr = LuaScript::Instance( ).Open( ) ) )
-		return hr;
-#endif
-		*/
-
 	gMess( "Initialization xfx was successfully completed!" );
 	gMess( "" );
 
@@ -109,13 +101,6 @@ bool Engine::Init( )
 bool Engine::Shutdown( )
 {
 	Caches::Instance( ).FlushAll( );
-
-#pragma message ( "FIXME: fix this" )
-	/*
-#ifdef __XFX_USE_LUA_LUABIND__
-	LuaScript::Instance( ).Close( );
-#endif
-	*/
 
 	Input::Instance( ).Shutdown( );
 

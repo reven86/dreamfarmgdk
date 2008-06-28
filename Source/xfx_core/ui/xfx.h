@@ -90,6 +90,7 @@
 #include <boost/foreach.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/type_traits.hpp>
+#include <boost/circular_buffer.hpp>
 
 
 // Boost.MPL
