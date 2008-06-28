@@ -105,7 +105,6 @@ void UIEdit::ProcessKey( wchar_t key )
 			{
 				String event_str ( boost::str( StringFormat( "OnTextEntered_%s" ) % Name( ) ) );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 				if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 				{
 					try
@@ -124,7 +123,6 @@ void UIEdit::ProcessKey( wchar_t key )
 						gError( "Call to lua function %s failed, reason: unknown", event_str.c_str( ) );
 					}
 				}
-#endif
 			}
 			return;
 
@@ -168,7 +166,6 @@ void UIEdit::ProcessKey( wchar_t key )
 	{
 		String event_str ( boost::str( StringFormat( "OnTextChanged_%s" ) % Name( ) ) );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 		if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 		{
 			try
@@ -187,7 +184,6 @@ void UIEdit::ProcessKey( wchar_t key )
 				gError( "Call to lua function %s failed, reason: unknown", event_str.c_str( ) );
 			}
 		}
-#endif
 	}
 
 	PrepareText( );
@@ -324,7 +320,6 @@ HRESULT UIEdit::ParseYScale( String::size_type& pos, const String& str )
 
 void UIEdit::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIEdit, UIObject >( "UIEdit" )
@@ -357,7 +352,6 @@ void UIEdit::LuaRegister( lua_State * L )
 				( void ( UIEdit::* ) ( DWORD ) ) &UIEdit::MaxChars
 				)
 	];
-#endif
 }
 
 

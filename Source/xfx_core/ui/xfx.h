@@ -105,6 +105,25 @@ namespace boost { namespace serialization {
 
 
 
+
+// LUA
+extern "C"
+{
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+}
+
+
+// LuaBind
+#include <luabind/luabind.hpp>
+#include <luabind/discard_result_policy.hpp>
+#include <luabind/out_value_policy.hpp>
+#include <luabind/raw_policy.hpp>
+
+
+
+
 // D3D
 #include <d3d8.h>
 #include <d3dx8.h>
@@ -133,3 +152,4 @@ namespace boost { namespace serialization {
 #include "math\xfx_transformable.h"
 #include "main\xfx_errorcodes.h"
 #include "main\xfx_fs.h"
+#include "lua\xfx_luascript.h"

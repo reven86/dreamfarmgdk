@@ -216,7 +216,6 @@ HRESULT UIComposite::ParseChild( String::size_type& pos, const String& str )
 
 void UIComposite::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIComposite, UIObject >( "UIComposite" )
@@ -225,7 +224,6 @@ void UIComposite::LuaRegister( lua_State * L )
 				( void ( UIComposite::* ) ( const Vec2& ) ) &UIComposite::ChildrenScale
 				)
 	];
-#endif
 }
 
 

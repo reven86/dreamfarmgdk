@@ -327,7 +327,6 @@ HRESULT UIStandardConsole::AfterParsing( )
 	mPromptEdit.Name( boost::str( StringFormat( "%s_prompt_edit" ) % Name( ) ) );
 
 	// register lua text entered event
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( LuaScript::Instance( ).GetLuaVM( ) )
 	[
 		luabind::def(
@@ -336,7 +335,6 @@ HRESULT UIStandardConsole::AfterParsing( )
 			luabind::discard_result
 			)
 	];
-#endif
 
 	return UIObject::AfterParsing( );
 }

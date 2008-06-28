@@ -65,7 +65,7 @@ namespace luabind { namespace detail
 		get_caller() {}
 		get_caller(const Policies& p): Policies(p) {}
 
-		int operator()(lua_State* L, int pointer_offset, F f)
+		int operator()(lua_State* L, int , F f)
 		{
 			// parameters on the lua stack:
 			// 1. object_rep
@@ -93,7 +93,7 @@ namespace luabind { namespace detail
 	template<class T, class F, class Policies>
 	struct set_caller : Policies
 	{
-		int operator()(lua_State* L, int pointer_offset, F f)
+		int operator()(lua_State* L, int , F f)
 		{
 			// parameters on the lua stack:
 			// 1. object_rep

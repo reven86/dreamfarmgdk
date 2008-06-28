@@ -69,7 +69,7 @@ void UISprite::Update( DWORD )
 
 HRESULT UISprite::PrepareParsing ()
 {
-	mShaders.swap( std::vector< boost::shared_ptr< const class Shader > >( ) );
+	std::vector< boost::shared_ptr< const class Shader > >( ).swap( mShaders );
 	mCurrentShaderIndex = 0;
 	mRoll = 0;
 
@@ -96,7 +96,6 @@ HRESULT UISprite::ParseShader( String::size_type& pos, const String& str )
 
 void UISprite::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UISprite, UIObject >( "UISprite" )
@@ -115,7 +114,6 @@ void UISprite::LuaRegister( lua_State * L )
 				&UISprite::SetRollAngle
 				)
 	];
-#endif
 }
 
 

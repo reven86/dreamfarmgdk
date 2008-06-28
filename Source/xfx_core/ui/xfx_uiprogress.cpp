@@ -98,7 +98,6 @@ HRESULT UIProgress::ParseShader( String::size_type& pos, const String& str )
 
 void UIProgress::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIProgress, UIObject >( "UIProgress" )
@@ -115,7 +114,6 @@ void UIProgress::LuaRegister( lua_State * L )
 				&UIProgress::SetVertical
 				)
 	];
-#endif
 }
 
 

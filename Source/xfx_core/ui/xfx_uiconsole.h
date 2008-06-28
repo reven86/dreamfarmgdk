@@ -207,9 +207,7 @@ protected:
 	HRESULT						ParseFont						( String::size_type& pos, const String& str );
 
 	//! Get lua object for this class.
-#ifdef __XFX_USE_LUA_LUABIND__
 	virtual luabind::object		GetLuaObject					( ) { return luabind::object( LuaScript::Instance( ).GetLuaVM( ), this ); };
-#endif
 };
 
 

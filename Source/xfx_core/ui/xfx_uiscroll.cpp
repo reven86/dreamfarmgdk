@@ -70,7 +70,6 @@ void UIScroll::SetScrollPosition( float pos )
 	{
 		String event_str ( boost::str( StringFormat( "OnChangeScrollPos_%s" ) % Name( ) ) );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 		if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 		{
 			try
@@ -89,7 +88,6 @@ void UIScroll::SetScrollPosition( float pos )
 				gError( "Call to lua function %s failed, reason: unknown", event_str.c_str( ) );
 			}
 		}
-#endif
 	}
 }
 
@@ -194,7 +192,6 @@ HRESULT UIScroll::ParseShader( const EShaderType& type, String::size_type& pos, 
 
 void UIScroll::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIScroll, UIObject >( "UIScroll" )
@@ -210,14 +207,13 @@ void UIScroll::LuaRegister( lua_State * L )
 			.def( "set_shader", &UIScroll::SetScrollShader )
 	];
 
-	luabind::object& uiscroll		= luabind::globals( L );
+	luabind::object uiscroll		= luabind::globals( L );
 	uiscroll						= uiscroll[ "UIScroll" ];
 	uiscroll[ "EST_FIRST_ARROW" ]	= EST_FIRST_ARROW;
 	uiscroll[ "EST_SECOND_ARROW" ]	= EST_SECOND_ARROW;
 	uiscroll[ "EST_FILL" ]			= EST_FILL;
 	uiscroll[ "EST_SCROLL" ]		= EST_SCROLL;
 	uiscroll[ "EST_MAX_SHADERS" ]	= EST_MAX_SHADERS;
-#endif
 }
 
 

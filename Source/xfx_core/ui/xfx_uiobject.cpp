@@ -193,7 +193,7 @@ void UIObject::OnViewportUpdate ()
 	}
 }
 
-void UIObject::ProcessKey( wchar_t )
+void UIObject::ProcessKey( wchar_t key )
 {
 	if( !IsNamed( ) )
 		return;
@@ -202,7 +202,6 @@ void UIObject::ProcessKey( wchar_t )
 	
 	event_str += Name( );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 	if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 	{
 		try
@@ -222,7 +221,6 @@ void UIObject::ProcessKey( wchar_t )
 			gError( "Call to lua function %s failed, reason: unknown", event_str.c_str( ) );
 		}
 	}
-#endif
 }
 
 bool UIObject::ProcessMouse (float x, float y, UINT mousemsg, WPARAM )
@@ -247,7 +245,6 @@ bool UIObject::ProcessMouse (float x, float y, UINT mousemsg, WPARAM )
 		{
 			String event_str ( boost::str( StringFormat( "%s_%s" ) % event_name % Name( ) ) );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 			if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 			{
 				try
@@ -268,7 +265,6 @@ bool UIObject::ProcessMouse (float x, float y, UINT mousemsg, WPARAM )
 
 				return true;
 			}
-#endif
 		}
 
 		return false;
@@ -330,7 +326,6 @@ bool UIObject::ProcessMouse (float x, float y, UINT mousemsg, WPARAM )
 		{
 			String event_str ( boost::str( StringFormat( "%s_%s" ) % event_name % Name( ) ) );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 			if( SUCCEEDED( LuaScript::Instance( ).IsFunction( event_str.c_str( ) ) ) )
 			{
 				try
@@ -351,7 +346,6 @@ bool UIObject::ProcessMouse (float x, float y, UINT mousemsg, WPARAM )
 	
 				return true;
 			}
-#endif
 		}
 
 		return false;
@@ -489,7 +483,6 @@ HRESULT UIObject::ParseActive (String::size_type& pos, const String& str)
 
 void UIObject::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIObject >( "UIObject" )
@@ -533,7 +526,6 @@ void UIObject::LuaRegister( lua_State * L )
 				&UIObject::pRepository
 				)
 	];
-#endif
 }
 
 

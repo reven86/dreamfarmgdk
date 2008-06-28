@@ -227,7 +227,6 @@ void UIInterface::LuaRegister( lua_State * L )
 	UIComposite::LuaRegister( L );
 	UIHScroll::LuaRegister( L );
 
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIInterface >( "UIInterface" )
@@ -236,7 +235,6 @@ void UIInterface::LuaRegister( lua_State * L )
 				&UIInterface::Lua_SetFocusObject
 				)
 	];
-#endif
 }
 
 
@@ -333,13 +331,11 @@ HRESULT UIRepository::TryParseObject (String::size_type& pos, const String& str)
 
 void UIRepository::LuaRegister( lua_State * L )
 {
-#ifdef __XFX_USE_LUA_LUABIND__
 	luabind::module( L )
 	[
 		luabind::class_< UIRepository >( "UIRepository" )
 			.def( "get_control", &UIRepository::Lua_FindUIObject )
 	];
-#endif
 }
 
 
