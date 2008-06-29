@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="xfx_utility"
 	ProjectGUID="{CFD27ACF-3F08-4410-AC4A-D1F690C86A15}"
 	RootNamespace="xfx_main"
@@ -454,7 +454,7 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_utility.h"
+			RelativePath="..\..\xfx_utility_include.h"
 			>
 		</File>
 		<File

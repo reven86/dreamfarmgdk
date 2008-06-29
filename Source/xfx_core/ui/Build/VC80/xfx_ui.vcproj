@@ -424,6 +424,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_ui_include.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_uicomposite.cpp"
 			>
 		</File>

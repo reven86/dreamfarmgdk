@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="xfx_renderer_ext"
 	ProjectGUID="{0842E2FA-0EE3-4822-850F-C8EC58FAAE4A}"
 	RootNamespace="xfx_main"
@@ -435,6 +435,10 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_particlesystem.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_renderer_ext_include.h"
 			>
 		</File>
 	</Files>
