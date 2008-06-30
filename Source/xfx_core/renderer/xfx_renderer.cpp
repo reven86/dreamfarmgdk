@@ -650,7 +650,7 @@ Renderer::~Renderer ()
 {
 }
 
-HRESULT Renderer::CreateDevice ()
+HRESULT Renderer::CreateDevice( )
 {
 	//Creating device
 #if (__XFX_DIRECTX_VER__ < 9)
@@ -716,13 +716,13 @@ HRESULT Renderer::CreateDevice ()
 #else
 	D3DADAPTER_IDENTIFIER9 adident;
 #endif
-	mpD3D->GetAdapterIdentifier (D3DADAPTER_DEFAULT, 0, &adident);
+	mpD3D->GetAdapterIdentifier( D3DADAPTER_DEFAULT, 0, &adident );
 
-	gMess ("");
-	gMess ("Adapter information:");
-	gMess ("...driver: %s", adident.Driver);
-	gMess ("...description: %s", adident.Description);
-	gMess ("...driver version: %d.%d.%d.%d", HIWORD (adident.DriverVersion.HighPart), LOWORD (adident.DriverVersion.HighPart), HIWORD (adident.DriverVersion.LowPart), LOWORD (adident.DriverVersion.LowPart));
+	gMess( "" );
+	gMess( "Adapter information:" );
+	gMess( "...driver: %s", adident.Driver );
+	gMess( "...description: %s", adident.Description );
+	gMess( "...driver version: %d.%d.%d.%d", HIWORD( adident.DriverVersion.HighPart ), LOWORD( adident.DriverVersion.HighPart ), HIWORD( adident.DriverVersion.LowPart ), LOWORD( adident.DriverVersion.LowPart ) );
 
 	//Getting memory status
 	MEMORYSTATUS ms;
