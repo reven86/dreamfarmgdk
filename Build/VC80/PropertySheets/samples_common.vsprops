@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="samples_common"
+	OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="../../../source/xfx_core/;../../../source/third_party/boost_1_35_0/;&quot;../../../source/third_party/jpeg-6b/&quot;;&quot;../../../source/third_party/lua-5.0.2/&quot;;../../../source/third_party/luabind"
+		StringPooling="true"
+		OpenMP="true"
+		UsePrecompiledHeader="2"
+		PrecompiledHeaderThrough="pch.h"
+		WarningLevel="4"
+		Detect64BitPortabilityProblems="true"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).exe"
+		AdditionalLibraryDirectories="..\..\..\GDK\Lib"
+	/>
+</VisualStudioPropertySheet>
