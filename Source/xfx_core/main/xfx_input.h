@@ -10,6 +10,9 @@
 
 #include <dinput.h>
 
+#pragma comment ( lib, "dxguid.lib" )
+#pragma comment ( lib, "dinput8.lib" )
+
 /*!	\file xfx_input.h 
  *	\brief %Input system, based on DirectInput.
  */

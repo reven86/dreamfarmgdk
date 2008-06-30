@@ -49,19 +49,6 @@ protected:
 	//! Application timer.
 	Timer						mTimer;
 
-	//
-	// Next members are used only in Renderer library.
-	//
-
-	//! Fullscreen change event connection.
-	boost::signals::connection	mFullscreenChangeConnection;
-
-	//! Saved window style.
-	LONG						mSavedWindowStyle;
-
-	//! Saved window ex style.
-	LONG						mSavedWindowExStyle;
-
 protected:
 	Application														( );
 	virtual ~Application											( ) { };
@@ -84,23 +71,6 @@ public:
 	 *	\return Returns S_OK if engine has been initialized sucessfully.
 	 */
 	virtual HRESULT					InitEngine						( HINSTANCE inst, const String& cmdline, const WString& wndclass, const WString& caption );
-
-	/*! \brief Render initialization.
-	 *	
-	 *	Simply calls Render::CreateDevice.
-	 *
-	 *	\return Returns S_OK if device has been created sucessfully.
-	 */
-	virtual HRESULT					InitRenderer					( );
-
-	/*! \brief Audio initialization.
-	 *	
-	 *	\note Not implemented yet.
-	 *	\todo Implement audio initialization.
-	 *
-	 *	\return Returns S_OK anyway.
-	 */
-	virtual HRESULT					InitAudio						( );
 
 	/*! \brief Deinitialization.
 	 *	
@@ -139,9 +109,6 @@ public:
 
 private:
 	static LRESULT CALLBACK			sWndProc						( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
-
-protected:
-	virtual void					OnFullscreenChange				( bool isfullscreen, unsigned width, unsigned height );
 };
 
 

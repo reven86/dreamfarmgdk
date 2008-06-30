@@ -25,8 +25,6 @@ _XFX_BEGIN
 //
 
 Application::Application( ) :
-	mSavedWindowStyle( 0 ),
-	mSavedWindowExStyle( 0 ),
 	mWnd( 0 ),
 	mhInstance( 0 )
 {

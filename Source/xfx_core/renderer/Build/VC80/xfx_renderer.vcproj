@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="8.00"
 	Name="xfx_renderer"
 	ProjectGUID="{E2D1DFC7-CFAF-48FA-BEB3-41E74C8A4DE0}"
 	RootNamespace="xfx_main"
@@ -383,10 +383,6 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_aabbtree_renderer_impl.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_application_renderer_impl.cpp"
 			>
 		</File>
 		<File

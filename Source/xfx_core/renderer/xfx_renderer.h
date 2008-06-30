@@ -278,6 +278,12 @@ private:
 	//! Invalidate callbacks.
 	boost::signal1< void, bool >			mInvalidateCallbacks;
 
+	//! Saved window style.
+	LONG									mSavedWindowStyle;
+
+	//! Saved window ex style.
+	LONG									mSavedWindowExStyle;
+
 protected:
 	Renderer														( );
 	~Renderer														( );
@@ -479,6 +485,9 @@ private:
 
 	//! Print out caps warnings.
 	void								TestDeviceCaps				( ) const;
+
+	//! Full screen change event.
+	void								OnFullscreenChange			( bool isfullscreen, unsigned width, unsigned height );
 };
 
 

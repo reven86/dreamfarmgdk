@@ -9,6 +9,7 @@
 #include "xfx_texture.h"
 #include "xfx_shader.h"
 #include "xfx_renderer_cvars.h"
+#include "xfx_viewport.h"
 
 extern "C"
 {
@@ -642,7 +643,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 
 Renderer::Renderer() :
 	mCurrentFVF( D3DFVF_XYZ ),
-	mClearFlags( D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER )
+	mClearFlags( D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ),
+	mSavedWindowStyle( 0 ),
+	mSavedWindowExStyle( 0 )
 {
 }
 
@@ -745,6 +748,14 @@ HRESULT Renderer::CreateDevice( )
 	State	( SM_LIGHTING, false );
 
 	mDrawTools.Init( );
+
+	mSavedWindowStyle	= GetWindowLong( gGetApplication( ).hWnd( ), GWL_STYLE );
+	mSavedWindowExStyle	= GetWindowLong( gGetApplication( ).hWnd( ), GWL_EXSTYLE );
+
+	RECT rect;
+	GetClientRect( gGetApplication( ).hWnd( ), &rect );
+
+	Viewport::Instance( ).Init( rect.right - rect.left, rect.bottom - rect.top );
 
 	return S_OK;
 }
@@ -1228,6 +1239,7 @@ HRESULT Renderer::Fullscreen (bool isfullscreen, unsigned width, unsigned height
 #endif
 			}
 
+			OnFullscreenChange( isfullscreen, width, height );
 			mFullscreenChangeEvents( isfullscreen, width, height );
 
 			gMess( 
@@ -1470,6 +1482,24 @@ void Renderer::DrawFrameStatistics( const Font& fnt, const boost::shared_ptr< co
 		text
 		);
 }
+
+void Renderer::OnFullscreenChange( bool isfullscreen, unsigned width, unsigned height )
+{
+	HWND wnd = gGetApplication( ).hWnd( );
+
+	if( !isfullscreen )
+	{
+		SetWindowLong ( wnd, GWL_STYLE, mSavedWindowStyle );
+		SetWindowLong ( wnd, GWL_EXSTYLE, mSavedWindowExStyle );
+	}
+	else
+	{
+		SetWindowLong ( wnd, GWL_STYLE, WS_VISIBLE );
+	}
+
+	SetWindowPos ( wnd, isfullscreen ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, width, height, SWP_SHOWWINDOW );
+}
+
 
 
 
