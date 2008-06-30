@@ -37,6 +37,29 @@
 
 
 
+// Windows Header Files:
+#include <windows.h>
+
+// C RunTime Header Files
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+
+
 //
 // XFX headers
 //
+
+#include "main\xfx_main_include.h"
+
+
+//
+// Linker options
+//
+
+#ifdef _DEBUG
+#pragma comment ( lib, "xfx_maind.lib" )
+#else
+#pragma comment ( lib, "xfx_mainr.lib" )
+#endif
