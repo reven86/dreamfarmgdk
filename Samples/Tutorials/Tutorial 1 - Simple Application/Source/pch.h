@@ -48,9 +48,18 @@
 
 
 //
+// Boost
+//
+
+#include <boost/signals.hpp>
+
+
+
+//
 // XFX headers
 //
 
+#include "utility\xfx_utility_include.h"
 #include "main\xfx_main_include.h"
 
 
@@ -59,7 +68,9 @@
 //
 
 #ifdef _DEBUG
+#pragma comment ( lib, "xfx_utilityd.lib" )
 #pragma comment ( lib, "xfx_maind.lib" )
 #else
+#pragma comment ( lib, "xfx_utilityr.lib" )
 #pragma comment ( lib, "xfx_mainr.lib" )
 #endif
