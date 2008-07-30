@@ -21,4 +21,3 @@ xfx::Application& xfx::gGetApplication( )
 //
 // Application
 //
-

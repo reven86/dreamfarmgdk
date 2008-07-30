@@ -97,9 +97,6 @@ public:
 	//! Retrieves an interface pointer.
 	virtual class UIInterface *		pInterface						( ) { return NULL; };
 
-	//! Windows message handler.
-	virtual LRESULT CALLBACK		WndProc							( HWND hWnd, UINT msp, WPARAM wParam, LPARAM lParam );
-
 	const HWND&						hWnd							( ) const { return mWnd; };
 	const HINSTANCE&				hInstance						( ) const { return mhInstance; };
 	const String&					CommandLine						( ) const { return mCommandLine; };
@@ -109,6 +106,10 @@ public:
 
 private:
 	static LRESULT CALLBACK			sWndProc						( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
+
+protected:
+	//! Windows message handler.
+	virtual LRESULT CALLBACK		WndProc							( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 };
 
 

@@ -45,7 +45,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WS
 	wc.hInstance		= mhInstance;
 	wc.hIcon			= LoadIcon( NULL, IDI_APPLICATION );
 	wc.hCursor			= LoadCursor( NULL, IDC_ARROW );
-	wc.hbrBackground	= HBRUSH( RGB( 0, 0, 0 ) );
+	wc.hbrBackground	= HBRUSH( COLOR_BACKGROUND );
 	wc.lpszMenuName		= NULL;
 	wc.lpszClassName	= mWndClass.c_str( );
 	
@@ -53,9 +53,6 @@ HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WS
 
     mWnd = CreateWindow( mWndClass.c_str( ), caption.c_str( ), WS_OVERLAPPEDWINDOW | WS_VISIBLE,
       CW_USEDEFAULT, CW_USEDEFAULT, 640, 480, NULL, NULL, mhInstance, NULL );
-
-	static char dir[ 2500 ];
-	_getcwd( dir, 2500 );
 
 	return Engine::Instance( ).Init( ) ? S_OK : XFXERR_UNKNOWN;
 }
@@ -120,12 +117,6 @@ LRESULT CALLBACK Application::WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARA
 {
 	switch (msg)
 	{
-	case WM_PAINT:
-		{
-			//Viewport::Instance ().Render ();
-		}
-		break;
-
 	case WM_MOUSEMOVE:
 	case WM_LBUTTONDOWN:
 	case WM_LBUTTONUP:
