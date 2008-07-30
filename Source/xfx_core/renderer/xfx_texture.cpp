@@ -26,7 +26,8 @@ HRESULT sFindTexture (const String& in, String& out)
 	const char ** ext = sExtensions;
 
 	String::size_type dot_pos = in.find_last_of ('.');
-	if ((dot_pos < in.size ()) && (dot_pos > in.find_last_of ('\\')))
+	String::size_type slash_pos = in.find_last_of ('\\');
+	if( dot_pos < in.size( ) && ( slash_pos == String::npos || dot_pos > slash_pos ) )
 	{
 		out = in;
 		return S_OK;

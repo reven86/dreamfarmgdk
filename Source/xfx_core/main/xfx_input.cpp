@@ -249,7 +249,7 @@ HRESULT Input::Init( )
 				hd.diph.dwSize			= sizeof (hd);
 				hd.dwData				= 256;
 
-				mpMouse->SetCooperativeLevel	( gGetApplication( ).hWnd( ), DISCL_EXCLUSIVE | DISCL_FOREGROUND );
+				mpMouse->SetCooperativeLevel	( gGetApplication( ).hWnd( ), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
 				mpMouse->SetDataFormat			( &c_dfDIMouse );
 				mpMouse->SetProperty			( DIPROP_BUFFERSIZE, &hd.diph );
 				mpMouse->Acquire				( );

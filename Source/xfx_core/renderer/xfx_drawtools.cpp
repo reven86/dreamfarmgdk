@@ -23,7 +23,13 @@ _XFX_BEGIN
 // Draw tools
 //
 
-DrawTools::DrawTools( )
+DrawTools::DrawTools( ) :
+	mLines( 0 ),
+	mTris( 0 ),
+	mTrisBuffer( 0 ),
+	mSpritesVerts( 0 ),
+	mSpritesBuffer( 0 ),
+	mDrawChunks( 0 )
 {
 }
 

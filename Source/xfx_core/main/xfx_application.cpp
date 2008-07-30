@@ -91,11 +91,6 @@ void Application::MainLoop( )
 			Audio::Instance( ).Update( mTimer.MSPF100( ) );
 			*/
 
-			/*
-			if( hWnd( ) )
-				Viewport::Instance( ).Render( );
-				*/
-
 			{
 				PROFILE( "xfx::Application::MessageLoop", "General" );
 				if( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
