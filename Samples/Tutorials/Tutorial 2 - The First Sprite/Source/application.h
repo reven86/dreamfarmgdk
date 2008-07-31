@@ -27,8 +27,8 @@ class Application : public xfx::Singleton< Application >, public xfx::Applicatio
 	 */
 	boost::shared_ptr< const xfx::Shader >			mSpriteShader;
 
-	//! User-defined constants such as current frame used together with shader.
-	boost::shared_ptr< xfx::ShaderConsts >			mSpriteShaderConsts;
+	//! User-defined parameters such as current frame used together with shader.
+	boost::shared_ptr< xfx::ShaderParams >			mShaderParamsConsts;
 
 	/*! \brief Timer used in scene update method.
 	 */

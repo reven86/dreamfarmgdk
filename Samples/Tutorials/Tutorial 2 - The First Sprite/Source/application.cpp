@@ -47,7 +47,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	// one has already been loaded
 	mSpriteShader = xfx::Shader::Cache( ).Register( "dfg_sheep.shader" );
 
-	mSpriteShaderConsts.reset( new xfx::ShaderConsts( ) );
+	mShaderParamsConsts.reset( new xfx::ShaderParams( ) );
 
 	return res;
 }
@@ -74,7 +74,7 @@ void Application::Update( )
 	float seconds = 0.0001f * mTimer.MicroSeconds100( );
 
 	// Set time for DiffuseTex texture map in shader.
-	mSpriteShaderConsts->SetValue( "xfx_DiffuseTex_time", seconds );
+	mShaderParamsConsts->SetValue( "xfx_DiffuseTex_time", seconds );
 
 	// prepare scene to rendering
 	// this function do all preparation for begin and end scene rendering and
@@ -86,6 +86,6 @@ void Application::Render( ) const
 {
 	// render sprite
 	xfx::Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
-		256, 256, 128, 128, 0, 0xffffffff, mSpriteShader, mSpriteShaderConsts
+		256, 256, 128, 128, 0, 0xffffffff, mSpriteShader, mShaderParamsConsts
 		);
 }
