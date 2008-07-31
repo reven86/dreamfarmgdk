@@ -6,11 +6,11 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		Optimization="0"
+		Optimization="3"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="false"
 		MinimalRebuild="true"
-		BasicRuntimeChecks="3"
-		RuntimeLibrary="1"
-		DebugInformationFormat="3"
+		RuntimeLibrary="0"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
