@@ -209,7 +209,7 @@ void DrawTools::FlushLines ()
 	}
 }
 
-void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boost::shared_ptr<const class Shader>& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts )
+void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boost::shared_ptr<const class Shader>& shader, const boost::shared_ptr< const ShaderParams >& shader_consts )
 {
 	PROFILE( __FUNCTION__, "Render" );
 
@@ -218,7 +218,7 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 	const Shader * tri_ptr = mTrisBuffer.empty( ) ? NULL : mTrisBuffer.back( ).shader.get( );
 
-	const ShaderConsts * shd_consts_ptr = mTrisBuffer.empty( ) ? NULL : mTrisBuffer.back( ).shader_consts.get( );
+	const ShaderParams * shd_consts_ptr = mTrisBuffer.empty( ) ? NULL : mTrisBuffer.back( ).shader_params.get( );
 
 	if( ( mDrawChunks.empty( ) || mDrawChunks.back( ).buffer_type ) && 
 		shader && tri_ptr && *shader == *tri_ptr && shd_consts_ptr == shader_consts.get( ) )
@@ -307,7 +307,7 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 void DrawTools::PushDraw2DSprite(
 	const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color,
-	const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts,
+	const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params,
 	const float& u1, const float& v1, const float& u2, const float& v2, const float& z, const float& rhw,
 	const bool& fixed_size
 	)
@@ -318,10 +318,10 @@ void DrawTools::PushDraw2DSprite(
 	float dy = scaley * 0.5f;
 
 	const Shader * spr_ptr = mSpritesBuffer.empty( ) ? NULL : mSpritesBuffer.back( ).shader.get( );
-	const ShaderConsts * shd_consts_ptr = mSpritesBuffer.empty( ) ? NULL : mSpritesBuffer.back( ).shader_consts.get( );
+	const ShaderParams * shd_params_ptr = mSpritesBuffer.empty( ) ? NULL : mSpritesBuffer.back( ).shader_params.get( );
 
 	if( ( mDrawChunks.empty( ) || !mDrawChunks.back( ).buffer_type ) &&
-		shader && spr_ptr && *shader == *spr_ptr && shd_consts_ptr == shader_consts.get( ) )
+		shader && spr_ptr && *shader == *spr_ptr && shd_params_ptr == shader_params.get( ) )
 	{
 		mSpritesBuffer.back( ).count++;
 	}
@@ -343,7 +343,7 @@ void DrawTools::PushDraw2DSprite(
 			}
 		}
 
-		mSpritesBuffer.push_back( SpriteBuffer( shader, shader_consts, static_cast< int >( mSpritesBuffer.size( ) ), 1 ) );
+		mSpritesBuffer.push_back( SpriteBuffer( shader, shader_params, static_cast< int >( mSpritesBuffer.size( ) ), 1 ) );
 	}
 
 	SpriteVertex * vtx[4];
@@ -381,8 +381,8 @@ void DrawTools::PushDraw2DSprite(
 				float time = 0;
 				int frame = 0;
 
-				if ( tex_info->frame_count > 0 && shader_consts && 
-					 shader_consts->GetValue( boost::str( StringFormat( "xfx_%s_time" ) % tex_info->stage_name.c_str( ) ), time )
+				if ( tex_info->frame_count > 0 && shader_params && 
+					 shader_params->GetValue( boost::str( StringFormat( "xfx_%s_time" ) % tex_info->stage_name.c_str( ) ), time )
 					 )
 				{
 					frame = static_cast< int >( time * tex_info->fps ) % tex_info->frame_count;
@@ -480,7 +480,7 @@ void DrawTools::PushDraw2DSprite(
 
 void DrawTools::PushDraw3DSprite( 
 	const Vec3& position, const float& scale, const Math::BigAngle& roll, const ARGB& color,
-	const boost::shared_ptr< const class Shader >& shader,	const boost::shared_ptr< const ShaderConsts >& shader_consts,
+	const boost::shared_ptr< const class Shader >& shader,	const boost::shared_ptr< const ShaderParams >& shader_consts,
 	const float& u1, const float& v1, const float& u2, const float& v2
 	)
 {
@@ -489,7 +489,7 @@ void DrawTools::PushDraw3DSprite(
 
 void DrawTools::PushDraw3DSprite(
 	const Vec3& position, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color,
-	const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts,
+	const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_consts,
 	const float& u1, const float& v1, const float& u2, const float& v2
 	)
 {
@@ -524,7 +524,7 @@ void DrawTools::PushDraw3DSprite(
 
 void DrawTools::PushDraw2DText(
 	const Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale,
-	const WString& text, const ARGB& color, const boost::shared_ptr< const ShaderConsts >& shader_consts, 
+	const WString& text, const ARGB& color, const boost::shared_ptr< const ShaderParams >& shader_consts, 
 	const float& z, const float& rhw
 	)
 {
@@ -537,7 +537,7 @@ void DrawTools::PushDraw2DText(
 		float											y;
 		ARGB											color;
 		const boost::shared_ptr< const Shader >&			shader_ptr;
-		const boost::shared_ptr< const ShaderConsts >&	shader_consts;
+		const boost::shared_ptr< const ShaderParams >&	shader_consts;
 		const float&									z;
 		const float&									rhw;
 		const float&									xscale;
@@ -546,7 +546,7 @@ void DrawTools::PushDraw2DText(
 		visitor								(
 			DrawTools * _o, const float& _x, const float& _y, const float& xs, 
 			const float& ys, const ARGB& _color,
-			const boost::shared_ptr< const Shader >& _shd, const boost::shared_ptr< const ShaderConsts >& _consts,
+			const boost::shared_ptr< const Shader >& _shd, const boost::shared_ptr< const ShaderParams >& _consts,
 			const float& _z, const float& _rhw
 			) : obj( _o ), x( _x ), y( _y ), xscale( xs ), yscale( ys ), color( _color ), shader_ptr( _shd ), shader_consts( _consts ), z( _z ), rhw( _rhw ) { };
 
@@ -563,7 +563,7 @@ void DrawTools::PushDraw2DText(
 
 void DrawTools::PushDraw3DText(
 	const Font& fnt, const Vec3& position, const float& xscale, const float& yscale,
-	const WString& text, const ARGB& color, const boost::shared_ptr< const ShaderConsts >& shader_consts )
+	const WString& text, const ARGB& color, const boost::shared_ptr< const ShaderParams >& shader_consts )
 {
 	float sx, sy, sz;
 	float rhw;
@@ -625,7 +625,7 @@ void DrawTools::FlushTrisAndSprites( )
 	int sprites_buffer_index = 0;
 	int tris_buffer_index = 0;
 
-	ShaderConsts def_consts;
+	ShaderParams def_consts;
 
 	struct tri_render_fn
 	{
@@ -671,7 +671,7 @@ void DrawTools::FlushTrisAndSprites( )
 
 				Renderer::Instance( ).RenderPrimitive(
 					mTrisBuffer[ tris_buffer_index + j ].shader,
-					mTrisBuffer[ tris_buffer_index + j ].shader_consts ? *mTrisBuffer[ tris_buffer_index + j ].shader_consts : def_consts,
+					mTrisBuffer[ tris_buffer_index + j ].shader_params ? *mTrisBuffer[ tris_buffer_index + j ].shader_params : def_consts,
 					trfn
 					);
 
@@ -693,7 +693,7 @@ void DrawTools::FlushTrisAndSprites( )
 
 				Renderer::Instance( ).RenderPrimitive(
 					mSpritesBuffer[ sprites_buffer_index + j ].shader,
-					mSpritesBuffer[ sprites_buffer_index + j ].shader_consts ? *mSpritesBuffer[ sprites_buffer_index + j ].shader_consts : def_consts,
+					mSpritesBuffer[ sprites_buffer_index + j ].shader_params ? *mSpritesBuffer[ sprites_buffer_index + j ].shader_params : def_consts,
 					srfn
 					);
 

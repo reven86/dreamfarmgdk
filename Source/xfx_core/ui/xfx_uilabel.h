@@ -97,7 +97,7 @@ private:
 	};
 
 	boost::shared_ptr< const class Font >			mFontPtr;
-	boost::shared_ptr< const class ShaderConsts >	mShaderConstsPtr;
+	boost::shared_ptr< const class ShaderParams >	mShaderParamsPtr;
 
 	WString										mCurText;
 	std::vector< SpriteInfo >					mCachedTris;
@@ -129,10 +129,10 @@ public:
 	void								FontPtr							( const boost::shared_ptr< const Font >& fnt ) { mFontPtr = fnt; mIsTrisCached = false; CacheTris( );};
 
 	//! Get shader consts for font shader.
-	const boost::shared_ptr< const ShaderConsts >& ShaderConstsPtr		( ) const { return mShaderConstsPtr; };
+	const boost::shared_ptr< const ShaderParams >& ShaderParamsPtr		( ) const { return mShaderParamsPtr; };
 
 	//! Set shader consts for font shader.
-	void								ShaderConstsPtr					( const boost::shared_ptr< const ShaderConsts >& consts ) { mShaderConstsPtr = consts; };
+	void								ShaderParamsPtr					( const boost::shared_ptr< const ShaderParams >& consts ) { mShaderParamsPtr = consts; };
 
 	using UIObject::X;
 	using UIObject::Y;

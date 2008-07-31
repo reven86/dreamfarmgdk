@@ -22,7 +22,7 @@ _XFX_BEGIN
 
 UIProgress::UIProgress( ) :
 	mShaderPtr( ),
-	mShaderConstsPtr( ),
+	mShaderParamsPtr( ),
 	mProgressValue( 1.0f ),
 	mIsVertical( false )
 {
@@ -60,7 +60,7 @@ void UIProgress::Render( const ARGB& color, const xfx::Vec2& ofs, const xfx::Vec
 		Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
 			( X( ) * scale.x + iw + ofs.x ) * kw, ( ih - new_y * scale.y - ofs.x ) * kh, 
 			Width( ) * scale.x * 2.0f * kw, new_height * scale.y * 2.0f * kh,
-			0, newcolor, mShaderPtr, mShaderConstsPtr, 0.0f, 1.0f - mProgressValue, 1.0f, 1.0f );
+			0, newcolor, mShaderPtr, mShaderParamsPtr, 0.0f, 1.0f - mProgressValue, 1.0f, 1.0f );
 	}
 	else
 	{
@@ -70,7 +70,7 @@ void UIProgress::Render( const ARGB& color, const xfx::Vec2& ofs, const xfx::Vec
 		Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
 			( new_x * scale.x + iw + ofs.x ) * kw, ( ih - Y( ) * scale.y - ofs.x ) * kh, 
 			new_width * scale.x * 2.0f * kw, Height( ) * scale.y * 2.0f * kh,
-			0, newcolor, mShaderPtr, mShaderConstsPtr, 0.0f, 0.0f, mProgressValue, 1.0f );
+			0, newcolor, mShaderPtr, mShaderParamsPtr, 0.0f, 0.0f, mProgressValue, 1.0f );
 	}
 }
 

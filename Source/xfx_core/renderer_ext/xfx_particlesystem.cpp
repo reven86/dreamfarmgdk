@@ -319,7 +319,7 @@ void ParticleSystem::Render( const ARGB& modulator ) const
 	float scale_kw = GetScaler( ) * kw;
 	float scale_kh = GetScaler( ) * kh;
 
-	boost::shared_ptr< const xfx::ShaderConsts > def_shader_consts;
+	boost::shared_ptr< const xfx::ShaderParams > def_shader_consts;
 
 	ParticlesType::const_iterator pit = mParticles.begin( );
 	for( SystemsType::const_iterator it = mSystems->begin( ); it != mSystems->end( ); it++ )

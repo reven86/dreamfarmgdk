@@ -73,7 +73,7 @@ void Mesh::Render( const MeshState& state ) const
 
 	Renderer::Instance( ).RenderPrimitive(
 		state.ShaderPtr( ),
-		state.ShaderConsts( ),
+		state.ShaderParams( ),
 #if( __XFX_DIRECTX_VER__ < 9 )
 		boost::bind( &Renderer::DrawIndexedPrimitive, boost::ref( Renderer::Instance( ) ), D3DPT_TRIANGLELIST, 0, mTotalVertices, 0, mTotalFaces )
 #else
@@ -256,7 +256,7 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 //
 
 MeshState::MeshState( ) :
-	mShaderConstsPtr( new class ShaderConsts( ) )
+	mShaderParamsPtr( new class ShaderParams( ) )
 {
 }
 

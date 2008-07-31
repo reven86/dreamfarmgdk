@@ -119,7 +119,7 @@ private:
  *	\ingroup RenderGroup
  *
  *	%Shader class provides information about how object will look.
- *	Holds an Effect pointer and texture maps. Used together with ShaderConsts.
+ *	Holds an Effect pointer and texture maps. Used together with ShaderParams.
  *
  *	%Shader file syntax can be found here: \ref shader_script.
  *
@@ -245,7 +245,7 @@ public:
 	 *	\param[in]	consts		Shader constants (defined by user).
 	 *	\param[in]	render_fn	%Render functor.
 	 */
-	void									RenderEffect			( const class ShaderConsts& consts, const boost::function0< void >& render_fn ) const;
+	void									RenderEffect			( const class ShaderParams& consts, const boost::function0< void >& render_fn ) const;
 
 private:
 	virtual HRESULT							PrepareParsing			( );
@@ -264,7 +264,7 @@ private:
 
 
 
-/*! \class ShaderConsts xfx_shader.h "render/xfx_shader.h"
+/*! \class ShaderParams xfx_shader.h "render/xfx_shader.h"
  *	\brief %Shader constants class.
  *	\ingroup RenderGroup
  *
@@ -278,7 +278,7 @@ private:
  *	\author Andrew "RevEn" Karpushin
  */
 
-class ShaderConsts
+class ShaderParams
 {
 	friend boost::serialization::access;
 
@@ -308,10 +308,10 @@ class ShaderConsts
 
 public:
 	//! Constructs empty shader constants container.
-	ShaderConsts										( ) { };
+	ShaderParams										( ) { };
 
 	//! Destructor.
-	~ShaderConsts										( ) { };
+	~ShaderParams										( ) { };
 
 	//! Set a custom value by name.
 	template<class T>
@@ -379,7 +379,7 @@ private:
 //
 
 template< class _Container >
-bool ShaderConsts::GetValueCommon( const String& str, typename _Container::mapped_type& tex, const _Container& cont ) const
+bool ShaderParams::GetValueCommon( const String& str, typename _Container::mapped_type& tex, const _Container& cont ) const
 {
 	_Container::const_iterator it = cont.find( str );
 

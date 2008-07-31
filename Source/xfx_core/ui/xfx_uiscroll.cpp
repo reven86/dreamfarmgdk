@@ -287,7 +287,7 @@ void UIHScroll::Render( const ARGB& color, const xfx::Vec2& ofs, const xfx::Vec2
 	float scrollw	= height * mShaders[ EST_SCROLL ].get< 1 >( ).x / mShaders[ EST_SCROLL ].get< 1 >( ).y;
 	float scrollx	= arrow1x + 0.5f * arrow1w + scrollw * 0.5f + ( fillw - scrollw ) * mScrollPos;
 
-	boost::shared_ptr< ShaderConsts > empty_consts;
+	boost::shared_ptr< ShaderParams > empty_consts;
 
 	// render fill sprite
 	Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(

@@ -22,7 +22,7 @@ _XFX_BEGIN
 //UISprite
 UISprite::UISprite( ) :
 	mShaders( ),
-	mShaderConstsPtr( ),
+	mShaderParamsPtr( ),
 	mCurrentShaderIndex( 0 ),
 	mRoll( 0 )
 {
@@ -60,7 +60,7 @@ void UISprite::Render( const ARGB& color, const xfx::Vec2& ofs, const xfx::Vec2&
 	Renderer::Instance ().DrawTools ().PushDraw2DSprite(
 		( X( ) * scale.x + iw + ofs.x ) * kw, ( ih - Y( ) * scale.y - ofs.y ) * kh,
 		Width( ) * scale.x * 2.0f * kw, Height( ) * scale.y * 2.0f * kh,
-		mRoll, newcolor, mShaders[ mCurrentShaderIndex ], mShaderConstsPtr, 0.0f, 0.0f, 1.0f, 1.0f );
+		mRoll, newcolor, mShaders[ mCurrentShaderIndex ], mShaderParamsPtr, 0.0f, 0.0f, 1.0f, 1.0f );
 }
 
 void UISprite::Update( DWORD )

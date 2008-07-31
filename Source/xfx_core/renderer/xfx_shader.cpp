@@ -303,7 +303,7 @@ void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr
 	}
 }
 
-void Shader::RenderEffect( const ShaderConsts& consts, const boost::function0< void >& render_fn ) const
+void Shader::RenderEffect( const ShaderParams& consts, const boost::function0< void >& render_fn ) const
 {
 	if( mEffectPtr )
 	{
@@ -560,10 +560,10 @@ HRESULT Shader::ParseSaveRS( String::size_type& pos, const String& str )
 
 
 //
-// ShaderConsts
+// ShaderParams
 //
 
-void ShaderConsts::ApplyValues( const Effect& eff ) const
+void ShaderParams::ApplyValues( const Effect& eff ) const
 {
 	if( !eff.DXEffectPtr( ) )
 		return;

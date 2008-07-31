@@ -65,12 +65,12 @@ private:
 	struct TriBuffer
 	{
 		boost::shared_ptr< const class Shader >			shader;
-		boost::shared_ptr< const class ShaderConsts >	shader_consts;
+		boost::shared_ptr< const class ShaderParams >	shader_params;
 		int												offset;		//vertices offset
 		int												count;		//tris count
 
 		TriBuffer		( ) { };
-		TriBuffer		( const boost::shared_ptr< const Shader >& shd, const boost::shared_ptr< const ShaderConsts >& consts, const int& ofs, const int& c ) : shader( shd ), shader_consts( consts ), offset( ofs ), count( c ) { };
+		TriBuffer		( const boost::shared_ptr< const Shader >& shd, const boost::shared_ptr< const ShaderParams >& consts, const int& ofs, const int& c ) : shader( shd ), shader_params( consts ), offset( ofs ), count( c ) { };
 	};
 
 	typedef TriBuffer SpriteBuffer;			//it's same
@@ -174,9 +174,9 @@ public:
 	 *	\param[in]	numtris			Number of triangle.
 	 *	\param[in]	vertices		TriVertex array.
 	 *	\param[in]	shader			Shader.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-define parameters.
 	 */
-	void								PushDrawTris				( int numtris, const TriVertex * vertices, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ) );
+	void								PushDrawTris				( int numtris, const TriVertex * vertices, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ) );
 
 	/*! \brief Draw a 2D sprite.
 	 *
@@ -187,7 +187,7 @@ public:
 	 *	\param[in]	roll			Roll.
 	 *	\param[in]	color			Color.
 	 *	\param[in]	shader			Shader.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 *	\param[in]	u1				First texture coordinate u.
 	 *	\param[in]	v1				First texture coordinate v.
 	 *	\param[in]	u2				Second texture coordinate u.
@@ -196,7 +196,7 @@ public:
 	 *	\param[in]	rhw				Output RHW.
 	 *	\param[in]	fixed_size		If roll is present, rotate sprite in fixed size, used in ParticleSystem.
 	 */
-	void								PushDraw2DSprite			( const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f, const float& z = 0.0f, const float& rhw = 1.0f, const bool& fixed_size = false );	
+	void								PushDraw2DSprite			( const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f, const float& z = 0.0f, const float& rhw = 1.0f, const bool& fixed_size = false );	
 
 	/*! \brief Draw a 3D sprite.
 	 *
@@ -205,13 +205,13 @@ public:
 	 *	\param[in]	roll			Roll.
 	 *	\param[in]	color			Color.
 	 *	\param[in]	shader			Shader.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 *	\param[in]	u1				First texture coordinate u.
 	 *	\param[in]	v1				First texture coordinate v.
 	 *	\param[in]	u2				Second texture coordinate u.
 	 *	\param[in]	v2				Second texture coordinate v.
 	 */
-	void								PushDraw3DSprite			( const Vec3& position, const float& scale, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f );
+	void								PushDraw3DSprite			( const Vec3& position, const float& scale, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f );
 
 	/*! \brief Draw a 3D sprite.
 	 *
@@ -221,13 +221,13 @@ public:
 	 *	\param[in]	roll			Roll.
 	 *	\param[in]	color			Color.
 	 *	\param[in]	shader			Shader.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 *	\param[in]	u1				First texture coordinate u.
 	 *	\param[in]	v1				First texture coordinate v.
 	 *	\param[in]	u2				Second texture coordinate u.
 	 *	\param[in]	v2				Second texture coordinate v.
 	 */
-	void								PushDraw3DSprite			( const Vec3& position, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f);
+	void								PushDraw3DSprite			( const Vec3& position, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f);
 
 	//! @}
 
@@ -243,11 +243,11 @@ public:
 	 *	\param[in]	yscale			Y scale.
 	 *	\param[in]	text			Text.
 	 *	\param[in]	color			Color.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 *	\param[in]	z				Output z coordinate.
 	 *	\param[in]	rhw				Output RHW.
 	 */
-	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ), const float& z = 0.0f, const float& rhw = 1.0f );
+	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& z = 0.0f, const float& rhw = 1.0f );
 
 	/*! \brief Draw a 2D text in 3D space.
 	 *
@@ -257,9 +257,9 @@ public:
 	 *	\param[in]	yscale			Y scale.
 	 *	\param[in]	text			Text.
 	 *	\param[in]	color			Color.
-	 *	\param[in]	shader_consts	Shader constants.
+	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 */
-	void								PushDraw3DText				( const class Font& fnt, const Vec3& pos, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderConsts >& shader_consts = boost::shared_ptr< const ShaderConsts >( ) );
+	void								PushDraw3DText				( const class Font& fnt, const Vec3& pos, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ) );
 
 	//! @}
 

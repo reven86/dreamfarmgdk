@@ -26,7 +26,7 @@ UILabel::UILabel( ) :
 	mLy( 0.0f ),
 	mIsTrisCached( false ),
 	mIsRealSize( false ),
-	mShaderConstsPtr( ),
+	mShaderParamsPtr( ),
 	mMaxWidth( -1 ),
 	mXScale( 1.0f ),
 	mYScale( 1.0f ),
@@ -168,7 +168,7 @@ void UILabel::Render( const ARGB& color, const xfx::Vec2& ofs, const xfx::Vec2& 
 			( ih - ( ( *it ).y * mYScale + mLy ) * scale.y - ofs.y ) * kh, 
 			( *it ).w * mXScale * scale.x * kw, 
 			( *it ).h * mYScale * scale.y * kh,
-			0, newcolor, mFontPtr->ShaderPtr( ), mShaderConstsPtr, ( *it ).u1, ( *it ).v1, ( *it ).u2, ( *it ).v2
+			0, newcolor, mFontPtr->ShaderPtr( ), mShaderParamsPtr, ( *it ).u1, ( *it ).v1, ( *it ).u2, ( *it ).v2
 			);
 	}
 }

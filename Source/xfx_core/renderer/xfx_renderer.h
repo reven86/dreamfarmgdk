@@ -410,7 +410,7 @@ public:
 	const boost::shared_ptr< const ITexture >& ActiveTexture		( unsigned stage = 0 ) const { _ASSERTE( stage < MAX_TEXTURE_STAGES ); return mActiveTexturesPtr[ stage ]; };
 
 	//! %Render primitive.
-	void								RenderPrimitive				( const boost::shared_ptr< const Shader >& shd, const class ShaderConsts& consts, const boost::function0< void >& render_fn );
+	void								RenderPrimitive				( const boost::shared_ptr< const Shader >& shd, const class ShaderParams& consts, const boost::function0< void >& render_fn );
 
 	/*! \brief Set fullscreen mode.
 	 *

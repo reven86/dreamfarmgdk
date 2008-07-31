@@ -136,7 +136,7 @@ class MeshState : public Transformable3D
 	//
 
 	boost::shared_ptr< const class Shader >					mShaderPtr;
-	boost::scoped_ptr< class ShaderConsts >					mShaderConstsPtr;
+	boost::scoped_ptr< class ShaderParams >					mShaderParamsPtr;
 
 
 	//
@@ -184,10 +184,10 @@ public:
 	const boost::shared_ptr< const Shader >&	ShaderPtr					( ) const { return mShaderPtr; };
 
 	//! Get/Set ShaderConsts.
-	class ShaderConsts&							ShaderConsts				( ) { return *mShaderConstsPtr; };
+	class ShaderParams&							ShaderParams				( ) { return *mShaderParamsPtr; };
 
 	//! Get ShaderConsts.
-	const class ShaderConsts&					ShaderConsts				( ) const { return *mShaderConstsPtr; };
+	const class ShaderParams&					ShaderParams				( ) const { return *mShaderParamsPtr; };
 
 	//! %Render Mesh with current state.
 	void										Render						( ) const

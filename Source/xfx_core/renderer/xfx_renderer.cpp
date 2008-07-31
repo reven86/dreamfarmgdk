@@ -925,7 +925,7 @@ void Renderer::FVF (const int& fvf)
 	}
 }
 
-void Renderer::RenderPrimitive( const boost::shared_ptr< const Shader> & shd, const class ShaderConsts& consts, const boost::function0< void >& render_fn )
+void Renderer::RenderPrimitive( const boost::shared_ptr< const Shader> & shd, const class ShaderParams& consts, const boost::function0< void >& render_fn )
 {
 	if( shd )
 	{

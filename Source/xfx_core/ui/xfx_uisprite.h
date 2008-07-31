@@ -61,7 +61,7 @@ class UISprite : public UIObject
 	friend class boost::serialization::access;
 
 	std::vector< boost::shared_ptr< const class Shader > >		mShaders;
-	boost::shared_ptr< const class ShaderConsts >				mShaderConstsPtr;
+	boost::shared_ptr< const class ShaderParams >				mShaderParamsPtr;
 	
 	xfx::Math::Angle											mRoll;
 
@@ -103,11 +103,11 @@ public:
 	//! Get shader.
 	const boost::shared_ptr< const Shader >& ShaderPtr					( unsigned ind ) const { _ASSERTE( ind >= 0 && ind < ShadersCount( ) ); return mShaders[ ind ]; };
 
-	//! Set shader consts for sprite shader.
-	void									ShaderConstsPtr				( const boost::shared_ptr< const ShaderConsts >& shd_const ) { mShaderConstsPtr = shd_const; };
+	//! Set shader parameters for sprite shader.
+	void									ShaderParamsPtr				( const boost::shared_ptr< const ShaderParams >& shd_const ) { mShaderParamsPtr = shd_const; };
 
-	//! Get shader consts for sprite shader.
-	const boost::shared_ptr< const ShaderConsts >& ShaderConstsPtr		( ) const { return mShaderConstsPtr; };
+	//! Get shader parameters for sprite shader.
+	const boost::shared_ptr< const ShaderParams >& ShaderParamsPtr		( ) const { return mShaderParamsPtr; };
 
 	/*! \brief %Render control.
 	 *
