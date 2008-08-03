@@ -63,14 +63,3 @@
 #include "main\xfx_main_include.h"
 
 
-//
-// Linker options
-//
-
-#ifdef _DEBUG
-#pragma comment ( lib, "xfx_utilityd.lib" )
-#pragma comment ( lib, "xfx_maind.lib" )
-#else
-#pragma comment ( lib, "xfx_utilityr.lib" )
-#pragma comment ( lib, "xfx_mainr.lib" )
-#endif
