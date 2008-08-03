@@ -18,25 +18,25 @@ CEGUI_IRR_SDK_VERSION = 14
 
 --- Lua version
 --- 50 is 5.0.x series.  51 is 5.1 (and above?)
-CEGUI_LUA_VER = 51
+CEGUI_LUA_VER = 50
 
 -------------
 -- Renderers
 -- this controls which renderer modules are built
-OPENGL_RENDERER = true
+OPENGL_RENDERER = false
 DIRECTX81_RENDERER = false
-DIRECTX9_RENDERER = true
+DIRECTX9_RENDERER = false
 DIRECTX10_RENDERER = false
 IRRLICHT_RENDERER = false
 
 ----------------
 -- Image Codecs
 -- this controls which image codecs are built
-TGA_IMAGE_CODEC = true
-SILLY_IMAGE_CODEC = true
-DEVIL_IMAGE_CODEC = true
-FREEIMAGE_IMAGE_CODEC = true
-CORONA_IMAGE_CODEC = true
+TGA_IMAGE_CODEC = false
+SILLY_IMAGE_CODEC = false
+DEVIL_IMAGE_CODEC = false
+FREEIMAGE_IMAGE_CODEC = false
+CORONA_IMAGE_CODEC = false
 
 -- this setting selects the default image codec module
 -- can be either "tga", "silly", "devil", "freeimage" or "corona"
@@ -86,9 +86,9 @@ TOLUA_STATIC = false
 -- Samples
 -- remember you have to edit CEGUISamplesConfig.h as well this just controls
 -- dependencies etc. if the renderer is disabled this has no effect
-SAMPLES_GL = true
+SAMPLES_GL = false
 SAMPLES_DX81 = false
-SAMPLES_DX9 = true
+SAMPLES_DX9 = false
 SAMPLES_DX10 = false
 SAMPLES_IRRLICHT = false
 
