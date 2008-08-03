@@ -7,10 +7,10 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		PreprocessorDefinitions="__XFX_DISABLE_PROFILER__"
+		PreprocessorDefinitions="__XFX_DISABLE_PROFILER__;__XFX_SHIPPING__"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)s.lib"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_shipping.lib"
 	/>
 </VisualStudioPropertySheet>

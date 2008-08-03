@@ -9,9 +9,10 @@
 		Optimization="3"
 		FavorSizeOrSpeed="1"
 		WholeProgramOptimization="true"
+		RuntimeLibrary="2"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)r.lib"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_release.lib"
 	/>
 </VisualStudioPropertySheet>
