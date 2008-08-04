@@ -19,6 +19,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\Source\third_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUILua", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\ScriptingModules\CEGUILua\LuaScriptModule\CEGUILua.vcproj", "{151BFE0D-75C1-6D44-901C-DBEFB5F02912}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIExpatParser", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\XMLParserModules\expatParser\CEGUIExpatParser.vcproj", "{7CCE75E7-E870-B441-AD41-640DAA37F982}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expatw_static", "..\..\Source\third_party\expat-2.0.1\lib\expatw_static.vcproj", "{63431774-EDD4-4B7A-92A3-9410F591B89A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUItolua++", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\ScriptingModules\CEGUILua\tolua++\tolua++.vcproj", "{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIFalagardWRBase", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\WindowRendererSets\Falagard\CEGUIFalagardWRBase.vcproj", "{F026B9DB-DE7F-514B-B89B-481A7E00C935}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +69,22 @@ Global
 		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Debug|Win32.Build.0 = Release|Win32
 		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Release|Win32.ActiveCfg = Release|Win32
 		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Release|Win32.Build.0 = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Debug|Win32.ActiveCfg = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Debug|Win32.Build.0 = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Release|Win32.ActiveCfg = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Release|Win32.Build.0 = Release|Win32
+		{63431774-EDD4-4B7A-92A3-9410F591B89A}.Debug|Win32.ActiveCfg = Release|Win32
+		{63431774-EDD4-4B7A-92A3-9410F591B89A}.Debug|Win32.Build.0 = Release|Win32
+		{63431774-EDD4-4B7A-92A3-9410F591B89A}.Release|Win32.ActiveCfg = Release|Win32
+		{63431774-EDD4-4B7A-92A3-9410F591B89A}.Release|Win32.Build.0 = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Debug|Win32.ActiveCfg = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Debug|Win32.Build.0 = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Release|Win32.ActiveCfg = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Release|Win32.Build.0 = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Debug|Win32.ActiveCfg = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Debug|Win32.Build.0 = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.ActiveCfg = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
