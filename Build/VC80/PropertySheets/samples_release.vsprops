@@ -10,7 +10,7 @@
 		FavorSizeOrSpeed="1"
 		WholeProgramOptimization="false"
 		MinimalRebuild="true"
-		RuntimeLibrary="0"
+		RuntimeLibrary="2"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
