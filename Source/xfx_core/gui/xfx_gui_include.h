@@ -38,5 +38,10 @@
 
 #pragma comment ( lib, "ceguibase_release.lib" )
 #pragma comment ( lib, "ceguilua_release.lib" )
+#pragma comment ( lib, "ceguiexpatparser_release.lib" )
+#pragma comment ( lib, "ceguifalagardwrbase_release.lib" )
 #pragma comment ( lib, "pcre_release.lib" )
 #pragma comment ( lib, "freetype237_release.lib" )
+#pragma comment ( lib, "expatw_release.lib" )
+#pragma comment ( lib, "tolua++_release.lib" )
+#pragma comment ( lib, "winmm.lib" )
