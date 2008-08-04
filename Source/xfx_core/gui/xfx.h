@@ -126,6 +126,7 @@ extern "C"
 
 // CEGUI
 #include <cegui.h>
+#include <ceguilua.h>
 
 
 

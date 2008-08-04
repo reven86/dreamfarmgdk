@@ -23,7 +23,7 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
-class CEGUIRenderer : public CEGUI::Renderer
+class CEGUIRenderer : public CEGUI::Renderer, boost::noncopyable
 {
 	struct QuadElem
 	{

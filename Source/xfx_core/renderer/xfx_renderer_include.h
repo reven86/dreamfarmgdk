@@ -28,26 +28,21 @@
 
 
 
-// include libraries
-#ifdef _DLL
-#pragma comment ( lib, "jpeg-6brd.lib" )
+//
+// Linker options
+//
 
 #ifdef _DEBUG
-#pragma comment ( lib, "xfx_mathdd.lib" )
+#pragma comment ( lib, "xfx_renderer_debug.lib" )
 #else
-#pragma comment ( lib, "xfx_mathrd.lib" )
+#if ( defined __XFX_SHIPPING__ )
+#pragma comment ( lib, "xfx_renderer_shipping.lib" )
+#else
+#pragma comment ( lib, "xfx_renderer_release.lib" )
+#endif
 #endif
 
-#else
-#pragma comment ( lib, "jpeg-6br.lib" )
-
-#ifdef _DEBUG
-#pragma comment ( lib, "xfx_mathd.lib" )
-#else
-#pragma comment ( lib, "xfx_mathr.lib" )
-#endif
-
-#endif
+#pragma comment ( lib, "jpeg-6b_release.lib" )
 
 #if( __XFX_DIRECTX_VER__ < 9 )
 #pragma comment ( lib, "d3dx8.lib" )

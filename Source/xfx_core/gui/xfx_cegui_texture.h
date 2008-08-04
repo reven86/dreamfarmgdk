@@ -48,7 +48,7 @@ public:
 	const boost::shared_ptr< const Shader >& GetShaderPtr			( ) const { return mShaderPtr; };
 
 	//! Return shader params (non-const version).
-	boost::shared_ptr< ShaderParams >&	GetShaderParamsPtr			( ) { return mShaderParamsPtr; };
+	boost::shared_ptr< ShaderParams >	GetShaderParamsPtr			( ) { return mShaderParamsPtr; };
 
 	//! Return shader params (const version).
 	const boost::shared_ptr< ShaderParams >& GetShaderParamsPtr		( ) const { return mShaderParamsPtr; };

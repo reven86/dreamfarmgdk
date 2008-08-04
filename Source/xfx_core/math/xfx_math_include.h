@@ -26,3 +26,23 @@
 #include "xfx_vec2.h"
 #include "xfx_vec3.h"
 #include "xfx_vec4.h"
+
+
+
+//
+// Linker options
+//
+
+#ifdef _DEBUG
+
+#pragma comment ( lib, "xfx_math_debug.lib" )
+
+#else
+
+#if ( defined __XFX_SHIPPING__ )
+#pragma comment ( lib, "xfx_math_shipping.lib" )
+#else
+#pragma comment ( lib, "xfx_math_release.lib" )
+#endif
+
+#endif

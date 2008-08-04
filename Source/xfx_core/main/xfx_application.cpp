@@ -112,31 +112,6 @@ LRESULT CALLBACK Application::WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARA
 {
 	switch (msg)
 	{
-	case WM_MOUSEMOVE:
-	case WM_LBUTTONDOWN:
-	case WM_LBUTTONUP:
-	case WM_LBUTTONDBLCLK:
-	case WM_RBUTTONDOWN:
-	case WM_RBUTTONUP:
-	case WM_RBUTTONDBLCLK:
-	case WM_MBUTTONDOWN:
-	case WM_MBUTTONUP:
-	case WM_MBUTTONDBLCLK:
-	case 0x020A://WM_MOUSEWHEEL:
-		/*
-		if( gGetApplication( ).pInterface( ) )
-		{
-			ViewportType viewport;
-			Render::Instance ().GetViewport (viewport);
-
-			float x = ((float) LOWORD (lParam) / viewport.Width - 0.5f) * Viewport::Instance ().Width ();
-			float y = (0.5f - (float) HIWORD (lParam) / viewport.Height) * Viewport::Instance ().Height ();
-
-			gGetApplication ().pInterface ()->ProcessMouse (x, y, msg, wParam);
-		}
-		*/
-		break;
-
 	case WM_SIZE:
 		/*
 		{
@@ -144,34 +119,6 @@ LRESULT CALLBACK Application::WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARA
 			GetClientRect( hWnd, &wndrect );
 
 			Render::Instance( ).ResetDevice( wndrect.right, wndrect.bottom );
-		}
-		*/
-		break;
-
-	case WM_KEYDOWN:
-		/*
-		if( gGetApplication( ).pInterface( ) )
-		{
-			BYTE key_state[ 256 ];
-
-			if( GetKeyboardState( key_state ) )
-			{
-				wchar_t unicode_char;
-				if( ToUnicode(
-					static_cast< UINT >( wParam ),
-					( static_cast< UINT >( lParam ) >> 0x10 ) & 0xff,
-					key_state,
-					&unicode_char,
-					1,
-					0 ) > 0
-					)
-				{
-					unsigned console_key = Input::Instance( ).GetKeyForCommand( "console_toggle" );
-
-					if( !IsConsoleActive( ) || console_key == Input::MAX_KEYS || !Input::Instance( ).TestKey( console_key ) )
-						gGetApplication( ).pInterface( )->ProcessKey( static_cast< wchar_t >( unicode_char ) );
-				}
-			}
 		}
 		*/
 		break;

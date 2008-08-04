@@ -22,3 +22,15 @@
 #include "xfx_renderer_serialization_impl.h"
 #include "xfx_ui_serialization_impl.h"
 #include "xfx_utility_serialization_impl.h"
+
+
+
+#if ( defined _DEBUG )
+#pragma comment ( lib, "xfx_serialization_debug.lib" )
+#else 
+#if ( defined __XFX_SHIPPING__ )
+#pragma comment ( lib, "xfx_serialization_shipping.lib" )
+#else
+#pragma comment ( lib, "xfx_serialization_release.lib" )
+#endif
+#endif
