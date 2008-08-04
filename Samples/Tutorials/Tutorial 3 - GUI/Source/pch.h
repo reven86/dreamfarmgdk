@@ -60,6 +60,7 @@
 
 #include "utility\xfx_utility_include.h"
 #include "main\xfx_main_include.h"
+#include "math\xfx_math_include.h"
 #include "renderer\xfx_renderer_include.h"
 #include "lua\xfx_lua_include.h"
 #include "gui\xfx_gui_include.h"
