@@ -23,6 +23,7 @@ CEGUIRenderer::CEGUIRenderer( ) :
 	mEnableQueueing( true )
 {
 	mQuadArray.reserve( 256 );
+	d_identifierString = "XFX::CEGUIRenderer - renderer to CEGUI for Dream Farm GDK";
 }
 
 CEGUIRenderer::~CEGUIRenderer( )
@@ -139,7 +140,10 @@ CEGUI::Texture * CEGUIRenderer::createTexture(float size)
 
 void CEGUIRenderer::destroyTexture(CEGUI::Texture *texture)
 {
-	mTextures.erase( std::remove( mTextures.begin( ), mTextures.end( ), texture ) );
+	std::vector< CEGUITexture * >::iterator e = std::find( mTextures.begin( ), mTextures.end( ), texture );
+
+	if( e != mTextures.end( ) )
+		mTextures.erase( e );
 
 	CEGUITexture * tex = static_cast< CEGUITexture * >( texture );
 
@@ -188,14 +192,14 @@ CEGUI::uint CEGUIRenderer::getMaxTextureSize() const
 
 CEGUI::uint CEGUIRenderer::getHorzScreenDPI() const
 {
-	_ASSERTE( !"CEGUIRenderer::getHorzScreenDPI not implemented." );
-	return 300;
+	//_ASSERTE( !"CEGUIRenderer::getHorzScreenDPI not implemented." );
+	return 96;
 }
 
 CEGUI::uint CEGUIRenderer::getVertScreenDPI() const
 {
-	_ASSERTE( !"CEGUIRenderer::getVertScreenDPI not implemented." );
-	return 300;
+	//_ASSERTE( !"CEGUIRenderer::getVertScreenDPI not implemented." );
+	return 96;
 }
 
 

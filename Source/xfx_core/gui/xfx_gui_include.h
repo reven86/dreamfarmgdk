@@ -23,25 +23,19 @@
 
 
 
+//
+// Linker options
+//
 
-// include libraries
-#ifdef _DEBUG
-#pragma comment ( lib, "xfx_gui_debug.lib" )
-#else
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_gui_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_gui_release.lib" )
-#endif
+#pragma comment ( lib, "xfx_gui" LIB_SUFFIX )
 
-#endif
+#pragma comment ( lib, "ceguibase" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "ceguilua" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "ceguiexpatparser" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "ceguifalagardwrbase" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "pcre" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "freetype237" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "expat" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "tolua++" LIB_3RD_SUFFIX )
 
-#pragma comment ( lib, "ceguibase_release.lib" )
-#pragma comment ( lib, "ceguilua_release.lib" )
-#pragma comment ( lib, "ceguiexpatparser_release.lib" )
-#pragma comment ( lib, "ceguifalagardwrbase_release.lib" )
-#pragma comment ( lib, "pcre_release.lib" )
-#pragma comment ( lib, "freetype237_release.lib" )
-#pragma comment ( lib, "expatw_release.lib" )
-#pragma comment ( lib, "tolua++_release.lib" )
 #pragma comment ( lib, "winmm.lib" )

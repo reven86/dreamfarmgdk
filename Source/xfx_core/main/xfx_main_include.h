@@ -33,16 +33,5 @@
 // Linker options
 //
 
-#ifdef _DEBUG
+#pragma comment ( lib, "xfx_main" LIB_SUFFIX )
 
-#pragma comment ( lib, "xfx_main_debug.lib" )
-
-#else
-
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_main_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_main_release.lib" )
-#endif
-
-#endif

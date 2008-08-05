@@ -11,26 +11,8 @@
  */
 
 
+#include "../shared.h"
 
-#define NOMINMAX
-
-
-#pragma warning (disable:4786)	//identifier was truncated to '255' characters...
-#pragma warning (disable:4800)	//identifier was truncated to '255' characters...
-#pragma warning (disable:4996)	//stdext::hash_map
-#pragma warning (disable:4267)	//convert warning
-#pragma warning (disable:4512)	//cannot generate assignment operator
-
-
-#ifndef MAKEFOURCC
-    #define MAKEFOURCC(ch0, ch1, ch2, ch3)                              \
-                ((DWORD)(BYTE)(ch0) | ((DWORD)(BYTE)(ch1) << 8) |       \
-                ((DWORD)(BYTE)(ch2) << 16) | ((DWORD)(BYTE)(ch3) << 24 ))
-#endif /* defined (MAKEFOURCC) */
-
-//Namespace
-#define _XFX_BEGIN namespace xfx {
-#define _XFX_END }
 
 
 
@@ -134,9 +116,6 @@ extern "C"
 #include <d3d8.h>
 #include <d3dx8.h>
 
-
-
-#pragma warning (disable:4201)	//nameless struct/union
 
 
 // XFX

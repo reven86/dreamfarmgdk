@@ -32,17 +32,10 @@
 // Linker options
 //
 
-#ifdef _DEBUG
-#pragma comment ( lib, "xfx_renderer_debug.lib" )
-#else
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_renderer_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_renderer_release.lib" )
-#endif
-#endif
+#pragma comment ( lib, "xfx_renderer" LIB_SUFFIX )
 
-#pragma comment ( lib, "jpeg-6b_release.lib" )
+#pragma comment ( lib, "jpeg-6b" LIB_3RD_SUFFIX )
+
 
 #if( __XFX_DIRECTX_VER__ < 9 )
 #pragma comment ( lib, "d3dx8.lib" )

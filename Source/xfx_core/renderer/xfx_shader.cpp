@@ -273,6 +273,19 @@ Shader::~Shader( )
 {
 }
 
+void Shader::RemoveTextureMap( const String& name )
+{
+}
+
+int Shader::AddTextureMap( const TextureInfo& tex_info )
+{
+	return -1;
+}
+
+void Shader::SetEffectPtr( const boost::shared_ptr< const Effect >& eff )
+{
+}
+
 void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr ) const
 {
 	for( TextureMapsType::const_iterator it = mTextureMaps.begin( );

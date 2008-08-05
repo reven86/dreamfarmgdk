@@ -29,12 +29,9 @@
 
 
 
-#if ( defined _DEBUG )
-#pragma comment ( lib, "xfx_utility_debug.lib" )
-#else 
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_utility_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_utility_release.lib" )
-#endif
-#endif
+//
+// Linker options
+//
+
+#pragma comment ( lib, "xfx_utility" LIB_SUFFIX )
+

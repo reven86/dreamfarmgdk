@@ -22,16 +22,13 @@
 
 
 
-#if ( defined _DEBUG )
-#pragma comment ( lib, "xfx_lua_debug.lib" )
-#else 
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_lua_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_lua_release.lib" )
-#endif
-#endif
+//
+// Linker options
+//
 
-#pragma comment ( lib, "lualib_release.lib" )
-#pragma comment ( lib, "luabind_release.lib" )
-#pragma comment ( lib, "lauxlib_release.lib" )
+#pragma comment ( lib, "xfx_lua" LIB_SUFFIX )
+
+
+#pragma comment ( lib, "lualib" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "luabind" LIB_3RD_SUFFIX )
+#pragma comment ( lib, "lauxlib" LIB_3RD_SUFFIX )

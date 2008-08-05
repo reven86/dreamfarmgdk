@@ -21,12 +21,9 @@
 
 
 
-#if ( defined _DEBUG )
-#pragma comment ( lib, "xfx_renderer_ext_debug.lib" )
-#else 
-#if ( defined __XFX_SHIPPING__ )
-#pragma comment ( lib, "xfx_renderer_ext_shipping.lib" )
-#else
-#pragma comment ( lib, "xfx_renderer_ext_release.lib" )
-#endif
-#endif
+//
+// Linker options
+//
+
+#pragma comment ( lib, "xfx_renderer_ext" LIB_SUFFIX )
+

@@ -26,3 +26,13 @@
 #include "xfx_uiprogress.h"
 #include "xfx_uiscroll.h"
 #include "xfx_uisprite.h"
+
+
+
+
+//
+// Linker options
+//
+
+#pragma comment ( lib, "xfx_ui" LIB_SUFFIX )
+

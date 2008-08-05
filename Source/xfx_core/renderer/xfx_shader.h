@@ -239,8 +239,32 @@ public:
 	 */
 	const TextureInfo *						GetTextureInfoOnStage	( const int& stage ) const { _ASSERTE( stage >= 0 && stage < 8 ); return mTextureStages[ stage ]; };
 
-	/*! \brief %Render f
-	unction.
+	/*! \brief Remove texture map from shader.
+	 *
+	 *	\param[in]	name		Stage name.
+	 */
+	void									RemoveTextureMap		( const String& name );
+
+	/*! \brief Add new texture map to shader.
+	 *
+	 *	\param[in]	tex_info	Texture map info.
+	 *
+	 *	\return New stage number if texture is used in current effect or -1.
+	 */
+	int										AddTextureMap			( const TextureInfo& tex_info );
+
+	//! Get effect pointer (const version).
+	const boost::shared_ptr< const Effect>&	GetEffectPtr			( ) const { return mEffectPtr; };
+
+	/*! Set effect for shader.
+	 *
+	 *	\param[in]	eff			New effect.
+	 *
+	 *	\note Textures stage numbers can be changed, according to new effect.
+	 */
+	void									SetEffectPtr			( const boost::shared_ptr< const Effect >& eff );
+
+	/*! \brief %Render function.
 	 *
 	 *	\param[in]	consts		Shader constants (defined by user).
 	 *	\param[in]	render_fn	%Render functor.
