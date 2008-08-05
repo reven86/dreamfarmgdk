@@ -82,6 +82,73 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="../../../../../../../../GDK/Lib"
+			IntermediateDirectory="obj/Debug"
+			ConfigurationType="4"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="3"
+				OmitFramePointers="true"
+				AdditionalIncludeDirectories="../../../../../include;../../../../../dependencies/include;../../../../../ScriptingModules/CEGUILua/LuaScriptModule/include;&quot;../../../../../ScriptingModules/CEGUILua/LuaScriptModule/../tolua++&quot;;&quot;../../../../../../lua-5.0.2/include&quot;"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUILUA_EXPORTS;CEGUI_STATIC;TOLUA_STATIC"
+				StringPooling="true"
+				RuntimeLibrary="3"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUILUA_EXPORTS;CEGUI_STATIC;TOLUA_STATIC"
+				AdditionalIncludeDirectories="../../../../../include;../../../../../dependencies/include;../../../../../ScriptingModules/CEGUILua/LuaScriptModule/include;../../../../../ScriptingModules/CEGUILua/LuaScriptModule/../tolua++"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/CEGUILua_debug.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
