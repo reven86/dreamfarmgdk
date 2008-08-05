@@ -40,14 +40,52 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	// note: the path should be end up with '\' 
 	xfx::FileSystem::Instance( ).AddSearchPath( "data\\" );
 
+	// init lua script system
+	xfx::LuaScript::Instance( ).Open( );
+
 	mGUI.reset( new xfx::GUI( ) );
+
+	if( !mGUI )
+		return XFXERR_OUTOFMEMORY;
+
+	mGUI->Init( );
+
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "schemes", "schemes/" );
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "imagesets", "imagesets/" );
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "fonts", "fonts/" );
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "layouts", "layouts/" );
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "looknfeel", "looknfeel/" );
+	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "lua_scripts", "lua_scripts/" );
+
+	CEGUI::Imageset::setDefaultResourceGroup("imagesets");
+	CEGUI::Font::setDefaultResourceGroup("fonts");
+	CEGUI::Scheme::setDefaultResourceGroup("schemes");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeel");
+	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
+
+	CEGUI::SchemeManager::getSingleton().loadScheme( "TaharezLook.scheme" );
+
+	if(! CEGUI::FontManager::getSingleton().isFontPresent( "Commonwealth-10" ) )
+		CEGUI::FontManager::getSingleton().createFont( "Commonwealth-10.font" );
+
+	CEGUI::System::getSingleton().setDefaultMouseCursor( "TaharezLook", "MouseArrow" );
+
+	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout( "editordefault.layout" );
+	CEGUI::System::getSingleton().setGUISheet( myRoot );
 
 	return res;
 }
 
 void Application::Shutdown( )
 {
+	if( mGUI )
+		mGUI->Shutdown( );
+
 	mGUI.reset( );
+
+	// destroy lua state
+	xfx::LuaScript::Instance( ).Close( );
 
 	// shutdown renderer
 	xfx::Renderer::Instance( ).Shutdown( );
