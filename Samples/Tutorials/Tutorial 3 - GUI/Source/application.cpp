@@ -43,6 +43,9 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	// init lua script system
 	xfx::LuaScript::Instance( ).Open( );
 
+	// register default shader that will be used if another one won't provided
+	xfx::Renderer::Instance( ).SetDefaultShader( xfx::Shader::Cache( ).Register( "default.shader" ) );
+
 	mGUI.reset( new xfx::GUI( ) );
 
 	if( !mGUI )
@@ -122,6 +125,30 @@ void Application::Render( ) const
 
 LRESULT CALLBACK Application::WndProc( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam )
 {
+	switch( msg )
+	{
+	case WM_SIZE:
+		{
+			RECT wndrect;
+			GetClientRect( hwnd, &wndrect );
+
+			xfx::Renderer::Instance( ).ResetDevice( wndrect.right, wndrect.bottom );
+			xfx::Viewport::Instance( ).Init( wndrect.right, wndrect.bottom );
+
+			if( mGUI )
+			{
+				CEGUI::Window * wnd = CEGUI::System::getSingleton().getGUISheet( );
+				if( wnd )
+					wnd->setArea( CEGUI::UDim( 0.0f, 0.0f ), CEGUI::UDim( 0.0f, 0.0f ), CEGUI::UDim( 1.0f, 0.0f ), CEGUI::UDim( 1.0f, 0.0f ) );
+			}
+		}
+		break;
+
+	case WM_PAINT:
+		xfx::Viewport::Instance( ).Render( );
+		return TRUE;
+	}
+
 	if( mGUI )
 		mGUI->ProcessWndMessage( hwnd, msg, wparam, lparam );
 
