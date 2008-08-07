@@ -40,8 +40,8 @@ void CEGUIRenderer::addQuad(const CEGUI::Rect &dest_rect, float z, const CEGUI::
 	el.z = z;
 	el.tex = static_cast< const CEGUITexture * >( tex );
 	el.u0 = texture_rect.d_left;
-	el.v0 = texture_rect.d_right;
-	el.u1 = texture_rect.d_top;
+	el.v0 = texture_rect.d_top;
+	el.u1 = texture_rect.d_right;
 	el.v1 = texture_rect.d_bottom;
 	el.c = colours.d_top_left.getARGB( );
 

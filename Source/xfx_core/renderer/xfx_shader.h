@@ -24,7 +24,7 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
-class Effect : public Resource
+class Effect : public Resource, boost::noncopyable
 {
 	enum SemanticType
 	{
@@ -159,7 +159,7 @@ shader
  *	@}
  */
 
-class Shader : public ScriptResource
+class Shader : public ScriptResource, boost::noncopyable
 {
 	//
 	// Temporary loading data
@@ -219,7 +219,11 @@ public:
 	//! Destuctor.
 	virtual ~Shader													( );
 
-	//Compiler-generated copy constructor and assignment operator are fine
+	//! Copy constructor.
+	Shader															( const Shader& shd );
+
+	//! Assignment operator.
+	Shader&									operator =				( const Shader& shd );
 
 	//! Equality operator.
 	bool									operator ==				( const Shader& shd ) const { return mID == shd.mID; };
@@ -282,6 +286,8 @@ private:
 	HRESULT									ParseSaveRS				( String::size_type& pos, const String& str );
 
 	void									SetEffectTextures		( const boost::shared_ptr< const Effect >& eff_ptr ) const;
+	void									FindTextureStagesNum	( );
+	void									CopyShader				( const Shader& from );
 };
 
 

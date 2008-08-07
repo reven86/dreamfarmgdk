@@ -273,17 +273,152 @@ Shader::~Shader( )
 {
 }
 
+Shader::Shader( const Shader& shd ) : ScriptResource( "Shader" ), mID( msID++ )
+{
+	CopyShader( shd );
+}
+
+Shader& Shader::operator = ( const Shader& shd )
+{
+	CopyShader( shd );
+	return *this;
+}
+
+void Shader::CopyShader( const Shader& shd )
+{
+	mNamedTextureMaps = shd.mNamedTextureMaps;
+	mEffectPtr = shd.mEffectPtr;
+	mTextureMaps = shd.mTextureMaps;
+	mFlags = shd.mFlags;
+
+	FindTextureStagesNum( );
+}
+
 void Shader::RemoveTextureMap( const String& name )
 {
+	mNamedTextureMaps.erase( name );
+
+	TextureMapsType::iterator tex_it = 
+		std::find_if( 
+			mTextureMaps.begin( ),
+			mTextureMaps.end( ),
+			boost::bind( std::equal_to< String >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( name ) )
+			);
+
+	if( tex_it != mTextureMaps.end( ) )
+		mTextureMaps.erase( tex_it );
+
+	FindTextureStagesNum( );
 }
 
 int Shader::AddTextureMap( const TextureInfo& tex_info )
 {
-	return -1;
+	mNamedTextureMaps[ tex_info.stage_name ] = tex_info.texture;
+
+	TextureMapsType::iterator tex_it = 
+		std::find_if( 
+			mTextureMaps.begin( ),
+			mTextureMaps.end( ),
+			boost::bind( std::equal_to< String >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( tex_info.stage_name ) )
+			);
+
+	if( tex_it == mTextureMaps.end( ) )
+	{
+		mTextureMaps.push_back( boost::make_tuple( tex_info.stage_name, -1, tex_info ) );
+		FindTextureStagesNum( );
+
+		return mTextureMaps.back( ).get< 1 >( );
+	}
+
+	( *tex_it ).get< 2 >( ) = tex_info;
+
+	if( ( *tex_it ).get< 1 >( ) >= 0 )
+		mTextureStages[ ( *tex_it ).get< 1 >( ) ] = &( *tex_it ).get< 2 >( );
+
+	return ( *tex_it ).get< 1 >( );
 }
 
 void Shader::SetEffectPtr( const boost::shared_ptr< const Effect >& eff )
 {
+	mEffectPtr = eff;
+	FindTextureStagesNum( );
+}
+
+void Shader::FindTextureStagesNum( )
+{
+	//
+	// setup texture stages
+	//
+
+	if( mEffectPtr )
+	{
+		XFX_PLACE_DEVICE_LOCK;
+
+		SetEffectTextures( mEffectPtr );
+
+		UINT num_passes = 0;
+
+		mEffectPtr->DXEffectPtr( )->Begin( &num_passes, 0 );
+
+		for( UINT i = 0; i < num_passes; i++ )
+		{
+			DWORD fvf = 0;
+
+//#if (__XFX_DIRECTX_VER__ < 9)
+			mEffectPtr->DXEffectPtr( )->Pass( i );
+
+			// don't apply texture transform for TnL vertices
+#if (__XFX_DIRECTX_VER__ < 9)
+			if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetVertexShader( &fvf ) ) )
+#else
+			if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetFVF( &fvf ) ) )
+#endif
+				if( fvf & D3DFVF_XYZRHW )
+				{
+					mFlags &= ~ESF_USE_TEXTURE_TRANSFORM;
+				}
+//#else
+//			eff->DXEffectPtr( )->BeginPass (i);
+//#endif
+
+			//render_fn ();
+//#if (__XFX_DIRECTX_VER__ >= 9)
+//			mDXEffectPtr->EndPass ();
+//#endif
+
+			// find texture on texture stage and apply texture matrix
+			BOOST_FOREACH( TextureMapsType::value_type& tex_ptr, mTextureMaps )
+			{
+				for( int stage = 0; stage < Renderer::MAX_TEXTURE_STAGES; stage++ )
+				{
+#if( __XFX_DIRECTX_VER__ < 9 )
+					IDirect3DBaseTexture8 * stage_tex = NULL;
+#else
+					IDirect3DBaseTexture9 * stage_tex = NULL;
+#endif
+
+					if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetTexture( stage, &stage_tex ) ) )
+					{
+						if( stage_tex )
+						{
+							boost::shared_ptr< IUnknown > stage_tex_ptr( stage_tex, IUnknownDeleter( ) );
+
+							// Is this equality valid?
+							if( stage_tex == tex_ptr.get< 2 >( ).texture->D3DTex( ) )
+							{
+								tex_ptr.get< 1 >( ) = stage;
+								mTextureStages[ stage ] = &tex_ptr.get< 2 >( );
+
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		mEffectPtr->DXEffectPtr( )->End ();
+	}
 }
 
 void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr ) const
@@ -389,79 +524,7 @@ HRESULT Shader::AfterParsing ()
 #endif
 	}
 
-	//
-	// setup texture stages
-	//
-
-	if( mEffectPtr )
-	{
-		XFX_PLACE_DEVICE_LOCK;
-
-		SetEffectTextures( mEffectPtr );
-
-		UINT num_passes = 0;
-
-		mEffectPtr->DXEffectPtr( )->Begin( &num_passes, 0 );
-
-		for( UINT i = 0; i < num_passes; i++ )
-		{
-			DWORD fvf = 0;
-
-//#if (__XFX_DIRECTX_VER__ < 9)
-			mEffectPtr->DXEffectPtr( )->Pass( i );
-
-			// don't apply texture transform for TnL vertices
-#if (__XFX_DIRECTX_VER__ < 9)
-			if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetVertexShader( &fvf ) ) )
-#else
-			if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetFVF( &fvf ) ) )
-#endif
-				if( fvf & D3DFVF_XYZRHW )
-				{
-					mFlags &= ~ESF_USE_TEXTURE_TRANSFORM;
-				}
-//#else
-//			eff->DXEffectPtr( )->BeginPass (i);
-//#endif
-
-			//render_fn ();
-//#if (__XFX_DIRECTX_VER__ >= 9)
-//			mDXEffectPtr->EndPass ();
-//#endif
-
-			// find texture on texture stage and apply texture matrix
-			BOOST_FOREACH( TextureMapsType::value_type& tex_ptr, mTextureMaps )
-			{
-				for( int stage = 0; stage < Renderer::MAX_TEXTURE_STAGES; stage++ )
-				{
-#if( __XFX_DIRECTX_VER__ < 9 )
-					IDirect3DBaseTexture8 * stage_tex = NULL;
-#else
-					IDirect3DBaseTexture9 * stage_tex = NULL;
-#endif
-
-					if( SUCCEEDED( Renderer::Instance( ).pD3DDevice( )->GetTexture( stage, &stage_tex ) ) )
-					{
-						if( stage_tex )
-						{
-							boost::shared_ptr< IUnknown > stage_tex_ptr( stage_tex, IUnknownDeleter( ) );
-
-							// Is this equality valid?
-							if( stage_tex == tex_ptr.get< 2 >( ).texture->D3DTex( ) )
-							{
-								tex_ptr.get< 1 >( ) = stage;
-								mTextureStages[ stage ] = &tex_ptr.get< 2 >( );
-
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		mEffectPtr->DXEffectPtr( )->End ();
-	}
+	FindTextureStagesNum( );
 
 	mLoadingInfoPtr.reset( );
 

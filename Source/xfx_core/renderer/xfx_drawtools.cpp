@@ -343,7 +343,7 @@ void DrawTools::PushDraw2DSprite(
 			}
 		}
 
-		mSpritesBuffer.push_back( SpriteBuffer( shader, shader_params, static_cast< int >( mSpritesBuffer.size( ) ), 1 ) );
+		mSpritesBuffer.push_back( SpriteBuffer( shader, shader_params, static_cast< int >( mSpritesVerts.size( ) ), 1 ) );
 	}
 
 	SpriteVertex * vtx[4];
@@ -622,9 +622,6 @@ void DrawTools::FlushTrisAndSprites( )
 		mSpritesIB.SetIndices ();
 	}
 
-	int sprites_buffer_index = 0;
-	int tris_buffer_index = 0;
-
 	ShaderParams def_consts;
 
 	struct tri_render_fn
@@ -664,43 +661,43 @@ void DrawTools::FlushTrisAndSprites( )
 		{
 			mTrisVB.SetStream( 0 );
 
-			for( int j = 0; j < mDrawChunks[ i ].chunk_count; j++ )
+			boost::circular_buffer< TriBuffer >::iterator it = mTrisBuffer.begin( );
+
+			for( int j = 0; j < mDrawChunks[ i ].chunk_count; j++, it++ )
 			{
-				trfn.offset = mTrisBuffer[ tris_buffer_index + j ].offset;
-				trfn.p_count = mTrisBuffer[ tris_buffer_index + j ].count;
+				trfn.offset = ( *it ).offset;
+				trfn.p_count = ( *it ).count;
 
 				Renderer::Instance( ).RenderPrimitive(
-					mTrisBuffer[ tris_buffer_index + j ].shader,
-					mTrisBuffer[ tris_buffer_index + j ].shader_params ? *mTrisBuffer[ tris_buffer_index + j ].shader_params : def_consts,
+					( *it ).shader,
+					( *it ).shader_params ? *( *it ).shader_params : def_consts,
 					trfn
 					);
 
-				Renderer::Instance ().FrameStatistics ().num_usertris += mTrisBuffer[ tris_buffer_index + j ].count;
+				Renderer::Instance ().FrameStatistics ().num_usertris += ( *it ).count;
 			}
-
-			tris_buffer_index += mDrawChunks[ i ].chunk_count;
 		}
 		else
 		{
 			mSpritesVB.SetStream( 0 );
 
-			for( int j = 0; j < mDrawChunks[ i ].chunk_count; j++ )
+			boost::circular_buffer< SpriteBuffer >::iterator it = mSpritesBuffer.begin( );
+
+			for( int j = 0; j < mDrawChunks[ i ].chunk_count; j++, it++ )
 			{
-				srfn.min_index = mSpritesBuffer[ sprites_buffer_index + j ].offset;
-				srfn.num_verts = mSpritesBuffer[ sprites_buffer_index + j ].count << 2;
-				srfn.start_index = ( mSpritesBuffer[ sprites_buffer_index + j ].offset >> 1 ) * 3;
-				srfn.p_count = mSpritesBuffer[ sprites_buffer_index + j ].count << 1;
+				srfn.min_index = ( *it ).offset;
+				srfn.num_verts = ( *it ).count << 2;
+				srfn.start_index = ( ( *it ).offset >> 1 ) * 3;
+				srfn.p_count = ( *it ).count << 1;
 
 				Renderer::Instance( ).RenderPrimitive(
-					mSpritesBuffer[ sprites_buffer_index + j ].shader,
-					mSpritesBuffer[ sprites_buffer_index + j ].shader_params ? *mSpritesBuffer[ sprites_buffer_index + j ].shader_params : def_consts,
+					( *it ).shader,
+					( *it ).shader_params ? *( *it ).shader_params : def_consts,
 					srfn
 					);
 
-				Renderer::Instance ().FrameStatistics ().num_sprites += mSpritesBuffer[ sprites_buffer_index + j ].count;
+				Renderer::Instance ().FrameStatistics ().num_sprites += ( *it ).count;
 			}
-
-			sprites_buffer_index += mDrawChunks[ i ].chunk_count;
 		}
 	}
 

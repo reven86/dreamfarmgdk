@@ -45,7 +45,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WS
 	wc.hInstance		= mhInstance;
 	wc.hIcon			= LoadIcon( NULL, IDI_APPLICATION );
 	wc.hCursor			= LoadCursor( NULL, IDC_ARROW );
-	wc.hbrBackground	= HBRUSH( COLOR_BACKGROUND );
+	wc.hbrBackground	= HBRUSH( 0 );//COLOR_BACKGROUND );
 	wc.lpszMenuName		= NULL;
 	wc.lpszClassName	= mWndClass.c_str( );
 	

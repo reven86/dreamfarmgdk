@@ -284,6 +284,12 @@ private:
 	//! Saved window ex style.
 	LONG									mSavedWindowExStyle;
 
+	/*! \brief Default shader.
+	 *
+	 *	This shader is used primary as "default" for textures loaded without shader (e.g. for gui).
+	 */
+	boost::shared_ptr< const Shader >		mDefaultShader;
+
 protected:
 	Renderer														( );
 	~Renderer														( );
@@ -476,6 +482,12 @@ public:
 	const Mat4&							GetVP						( ) const { if( !mIsVPCached ) CacheVP( ); return mCachedVP; };
 
 	//! @}
+
+	//! Get default shader.
+	const boost::shared_ptr< const Shader >&	GetDefaultShader	( ) const { return mDefaultShader; };
+
+	//! Set default shader.
+	void								SetDefaultShader			( const boost::shared_ptr< const Shader >& shd ) { mDefaultShader = shd; };
 
 private:
 	HRESULT								TryToCreateD3DDevice		( );
