@@ -118,18 +118,19 @@ bool GUI::ProcessWndMessage( HWND /*hwnd*/, UINT msg, WPARAM wparam, LPARAM lpar
 
 	case WM_CHAR:
 		{
-			mSystemPtr->injectChar( wparam );
+			mSystemPtr->injectChar( static_cast< CEGUI::utf32 >( wparam ) );
 		}
 		return true;
 
 	case WM_KEYDOWN:
 		{
-			mSystemPtr->injectKeyDown( ( lparam >> 0x10 ) & 0xff );
+			mSystemPtr->injectKeyDown( static_cast< CEGUI::uint >( ( lparam >> 0x10 ) & 0xff ) );
 		}
+		return true;
 
 	case WM_KEYUP:
 		{
-			mSystemPtr->injectKeyUp( ( lparam >> 0x10 ) & 0xff );
+			mSystemPtr->injectKeyUp( static_cast< CEGUI::uint >( ( lparam >> 0x10 ) & 0xff ) );
 		}
 		return true;
 	}
