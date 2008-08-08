@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="DefaultWindow" Name="Root" >
+        <Property Name="InheritsAlpha" Value="False" />
+        <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Window Type="TaharezLook/FrameWindow" Name="TextDemo" >
+            <Property Name="Font" Value="Commonwealth-10" />
+            <Property Name="Text" Value="Welcome" />
+            <Property Name="Alpha" Value="0.75" />
+            <Property Name="TitlebarFont" Value="Commonwealth-10" />
+            <Property Name="RollUpEnabled" Value="False" />
+            <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+            <Property Name="TitlebarEnabled" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0180142,0},{0.0461307,0},{0.762307,0},{0.869912,0}}" />
+            <Window Type="TaharezLook/StaticText" Name="TextDemo/StaticText" >
+                <Property Name="Font" Value="Commonwealth-10" />
+                <Property Name="Text" Value="Some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text " />
+                <Property Name="HorzFormatting" Value="WordWrapLeftAligned" />
+                <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                <Property Name="VertFormatting" Value="TopAligned" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0302301,0},{0.0789044,0},{0.968092,0},{0.362648,0}}" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="TextDemo/Button1" >
+                <Property Name="Font" Value="Commonwealth-10" />
+                <Property Name="Text" Value="Push Me" />
+                <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0303758,0},{0.386133,0},{0.486948,0},{0.429768,0}}" />
+            </Window>
+            <Window Type="TaharezLook/Editbox" Name="TextDemo/Edit1" >
+                <Property Name="Font" Value="Commonwealth-10" />
+                <Property Name="Text" Value="Edit me" />
+                <Property Name="MaxTextLength" Value="1073741823" />
+                <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.516649,0},{0.382951,0},{0.968181,0},{0.434678,0}}" />
+            </Window>
+            <Window Type="TaharezLook/Listbox" Name="TextDemo/ListBox1" >
+                <Property Name="Font" Value="Commonwealth-10" />
+                <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.03556,0},{0.452603,0},{0.483735,0},{0.629768,0}}" />
+                <Window Type="TaharezLook/ListboxItem" Name="TextDemo/ListBox1/Item1" >
+                    <Property Name="Font" Value="Commonwealth-10" />
+                    <Property Name="Text" Value="item1" />
+                    <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.0390816,0},{0.088886,0},{0.289081,0},{0.338886,0}}" />
+                </Window>
+                <Window Type="TaharezLook/ListboxItem" Name="TextDemo/ListBox1/Item2" >
+                    <Property Name="Font" Value="Commonwealth-10" />
+                    <Property Name="Text" Value="item2" />
+                    <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.0463606,0},{0.371298,0},{0.296361,0},{0.621297,0}}" />
+                </Window>
+            </Window>
+            <Window Type="TaharezLook/ProgressBar" Name="TextDemo/ProgressBar1" >
+                <Property Name="Font" Value="Commonwealth-10" />
+                <Property Name="StepSize" Value="0.01" />
+                <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+                <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0398316,0},{0.657809,0},{0.966647,0},{0.705491,0}}" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

@@ -51,8 +51,10 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	if( !mGUI )
 		return XFXERR_OUTOFMEMORY;
 
+	// init gui system
 	mGUI->Init( );
 
+	// setup resource folders for gui system
 	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "schemes", "schemes/" );
 	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "imagesets", "imagesets/" );
 	mGUI->GetResourceProviderPtr( )->setResourceGroupDirectory( "fonts", "fonts/" );
@@ -67,15 +69,19 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
 	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 
+	// load one of default schemes
+	// for more information about gui schemes concept visit http://www.cegui.org.uk/wiki/index.php/Scheme_files
 	CEGUI::SchemeManager::getSingleton().loadScheme( "TaharezLook.scheme" );
 
-	if(! CEGUI::FontManager::getSingleton().isFontPresent( "Commonwealth-10" ) )
-		CEGUI::FontManager::getSingleton().createFont( "Commonwealth-10.font" );
-
+	// set mouse cursor
 	CEGUI::System::getSingleton().setDefaultMouseCursor( "TaharezLook", "MouseArrow" );
 
+	// load default gui layout
 	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout( "editordefault.layout" );
 	CEGUI::System::getSingleton().setGUISheet( myRoot );
+	
+	// hide mouse cursor
+	ShowCursor( false );
 
 	return res;
 }
@@ -129,6 +135,7 @@ LRESULT CALLBACK Application::WndProc( HWND hwnd, UINT msg, WPARAM wparam, LPARA
 	{
 	case WM_SIZE:
 		{
+			// resize gui and renderer back buffer
 			RECT wndrect;
 			GetClientRect( hwnd, &wndrect );
 
@@ -145,6 +152,7 @@ LRESULT CALLBACK Application::WndProc( HWND hwnd, UINT msg, WPARAM wparam, LPARA
 		break;
 
 	case WM_PAINT:
+		// redraw window
 		xfx::Viewport::Instance( ).Render( );
 		return TRUE;
 	}
