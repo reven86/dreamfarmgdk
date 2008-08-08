@@ -121,6 +121,17 @@ bool GUI::ProcessWndMessage( HWND /*hwnd*/, UINT msg, WPARAM wparam, LPARAM lpar
 			mSystemPtr->injectChar( wparam );
 		}
 		return true;
+
+	case WM_KEYDOWN:
+		{
+			mSystemPtr->injectKeyDown( ( lparam >> 0x10 ) & 0xff );
+		}
+
+	case WM_KEYUP:
+		{
+			mSystemPtr->injectKeyUp( ( lparam >> 0x10 ) & 0xff );
+		}
+		return true;
 	}
 
 	return false;
