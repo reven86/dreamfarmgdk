@@ -118,23 +118,7 @@ bool GUI::ProcessWndMessage( HWND /*hwnd*/, UINT msg, WPARAM wparam, LPARAM lpar
 
 	case WM_CHAR:
 		{
-			BYTE key_state[ 256 ];
-
-			if( GetKeyboardState( key_state ) )
-			{
-				wchar_t unicode_char;
-				if( ToUnicode(
-					static_cast< UINT >( wparam ),
-					( static_cast< UINT >( lparam ) >> 0x10 ) & 0xff,
-					key_state,
-					&unicode_char,
-					1,
-					0 ) > 0
-					)
-				{
-					mSystemPtr->injectChar( unicode_char );
-				}
-			}
+			mSystemPtr->injectChar( wparam );
 		}
 		return true;
 	}
