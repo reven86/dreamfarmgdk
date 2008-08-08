@@ -293,7 +293,7 @@ them both to 0; an emulation function will be used. */
 /* #undef SUPPORT_UCP */
 
 /* Define to enable support for the UTF-8 Unicode encoding. */
-/* #undef SUPPORT_UTF8 */
+#define SUPPORT_UTF8
 
 /* Version number of package */
 #ifndef VERSION
