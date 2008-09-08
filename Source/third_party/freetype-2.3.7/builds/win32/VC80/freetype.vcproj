@@ -54,7 +54,7 @@
 				ObjectFile=".\..\..\..\objs\release/"
 				ProgramDataBaseFileName=".\..\..\..\objs\release/"
 				WarningLevel="4"
-				DebugInformationFormat="3"
+				DebugInformationFormat="0"
 				CompileAs="0"
 			/>
 			<Tool
