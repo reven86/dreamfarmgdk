@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9,00"
 	Name="luabind"
 	ProjectGUID="{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
