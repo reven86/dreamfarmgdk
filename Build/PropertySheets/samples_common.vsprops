@@ -20,6 +20,5 @@
 		Name="VCLinkerTool"
 		OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).exe"
 		AdditionalLibraryDirectories="..\..\..\GDK\Lib"
-		IgnoreDefaultLibraryNames="libci.lib"
 	/>
 </VisualStudioPropertySheet>

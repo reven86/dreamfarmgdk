@@ -2,22 +2,18 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="samples_debug"
+	Name="samples_release"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		Optimization="0"
+		Optimization="3"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="false"
 		MinimalRebuild="true"
-		BasicRuntimeChecks="3"
-		RuntimeLibrary="3"
-		DebugInformationFormat="4"
+		RuntimeLibrary="2"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
 		OutputFile=""
-	/>
-	<Tool
-		Name="VCLinkerTool"
-		GenerateDebugInformation="true"
 	/>
 </VisualStudioPropertySheet>

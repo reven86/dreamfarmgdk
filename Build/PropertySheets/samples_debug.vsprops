@@ -2,7 +2,7 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="debug"
+	Name="samples_debug"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
@@ -10,10 +10,10 @@
 		MinimalRebuild="true"
 		BasicRuntimeChecks="3"
 		RuntimeLibrary="3"
-		DebugInformationFormat="4"
+		DebugInformationFormat="3"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_debug.lib"
+		OutputFile=""
 	/>
 </VisualStudioPropertySheet>

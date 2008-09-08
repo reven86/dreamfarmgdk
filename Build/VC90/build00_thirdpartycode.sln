@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpeg-6b", "..\..\Source\third_party\jpeg-6b\vc80\jpeg-6b\jpeg-6b.vcproj", "{A161B734-2B36-4046-A33F-679A5E5A849F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lualib", "..\..\Source\third_party\lua-5.0.2\src\core\lualib.vcproj", "{12894CCF-DA69-438E-9E5E-F55C80D68BFE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lauxlib", "..\..\Source\third_party\lua-5.0.2\src\lib\lauxlib.vcproj", "{C7820211-84FA-443F-A182-E1D234EC4C71}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\Source\third_party\boost_1_35_0\VC80\boost\boost.vcproj", "{0307DF48-2750-43C5-8439-6A5391F3998E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind", "..\..\Source\third_party\luabind\vc80\luabind\luabind.vcproj", "{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIBase", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\BaseSystem\CEGUIBase.vcproj", "{A8439D8D-A9BA-074D-AA1F-96374A613F40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\Source\third_party\freetype-2.3.7\builds\win32\visualc\freetype.vcproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\Source\third_party\pcre-7.7\build\vc80\pcre\pcre.vcproj", "{BCA08BC4-33DF-4032-ACC1-EAAC3A16D4EE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUILua", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\ScriptingModules\CEGUILua\LuaScriptModule\CEGUILua.vcproj", "{151BFE0D-75C1-6D44-901C-DBEFB5F02912}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIExpatParser", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\XMLParserModules\expatParser\CEGUIExpatParser.vcproj", "{7CCE75E7-E870-B441-AD41-640DAA37F982}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUItolua++", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\ScriptingModules\CEGUILua\tolua++\tolua++.vcproj", "{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIFalagardWRBase", "..\..\Source\third_party\cegui-0.6.1\makefiles\premake\WindowRendererSets\Falagard\CEGUIFalagardWRBase.vcproj", "{F026B9DB-DE7F-514B-B89B-481A7E00C935}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat_static", "..\..\Source\third_party\expat-2.0.1\lib\expat_static.vcproj", "{842473BB-EAE9-4642-AD09-68AD02373CB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Debug|Win32.Build.0 = Debug|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release|Win32.ActiveCfg = Release|Win32
+		{A161B734-2B36-4046-A33F-679A5E5A849F}.Release|Win32.Build.0 = Release|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Debug|Win32.Build.0 = Debug|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release|Win32.ActiveCfg = Release|Win32
+		{12894CCF-DA69-438E-9E5E-F55C80D68BFE}.Release|Win32.Build.0 = Release|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Debug|Win32.Build.0 = Debug|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.ActiveCfg = Release|Win32
+		{C7820211-84FA-443F-A182-E1D234EC4C71}.Release|Win32.Build.0 = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.Build.0 = Debug|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.ActiveCfg = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.Build.0 = Release|Win32
+		{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}.Debug|Win32.Build.0 = Debug|Win32
+		{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}.Release|Win32.ActiveCfg = Release|Win32
+		{F1F57117-99C8-4AA8-A7DA-8993D2E32CD6}.Release|Win32.Build.0 = Release|Win32
+		{A8439D8D-A9BA-074D-AA1F-96374A613F40}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A8439D8D-A9BA-074D-AA1F-96374A613F40}.Debug|Win32.Build.0 = Debug|Win32
+		{A8439D8D-A9BA-074D-AA1F-96374A613F40}.Release|Win32.ActiveCfg = Release|Win32
+		{A8439D8D-A9BA-074D-AA1F-96374A613F40}.Release|Win32.Build.0 = Release|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.Build.0 = Debug|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release|Win32.ActiveCfg = Release|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release|Win32.Build.0 = Release|Win32
+		{BCA08BC4-33DF-4032-ACC1-EAAC3A16D4EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BCA08BC4-33DF-4032-ACC1-EAAC3A16D4EE}.Debug|Win32.Build.0 = Debug|Win32
+		{BCA08BC4-33DF-4032-ACC1-EAAC3A16D4EE}.Release|Win32.ActiveCfg = Release|Win32
+		{BCA08BC4-33DF-4032-ACC1-EAAC3A16D4EE}.Release|Win32.Build.0 = Release|Win32
+		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Debug|Win32.ActiveCfg = Debug|Win32
+		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Debug|Win32.Build.0 = Debug|Win32
+		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Release|Win32.ActiveCfg = Release|Win32
+		{151BFE0D-75C1-6D44-901C-DBEFB5F02912}.Release|Win32.Build.0 = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Debug|Win32.Build.0 = Debug|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Release|Win32.ActiveCfg = Release|Win32
+		{7CCE75E7-E870-B441-AD41-640DAA37F982}.Release|Win32.Build.0 = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Debug|Win32.Build.0 = Debug|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Release|Win32.ActiveCfg = Release|Win32
+		{E56C7CB9-D9BB-DE4C-8A45-72EE605EC4E8}.Release|Win32.Build.0 = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Debug|Win32.Build.0 = Debug|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.ActiveCfg = Release|Win32
+		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.Build.0 = Release|Win32
+		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Debug|Win32.Build.0 = Debug|Win32
+		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Release|Win32.ActiveCfg = Release|Win32
+		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -2,18 +2,18 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="release"
+	Name="debug"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		Optimization="3"
-		FavorSizeOrSpeed="1"
-		WholeProgramOptimization="true"
-		RuntimeLibrary="2"
+		Optimization="0"
+		MinimalRebuild="true"
+		BasicRuntimeChecks="3"
+		RuntimeLibrary="3"
 		DebugInformationFormat="3"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_release.lib"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_debug.lib"
 	/>
 </VisualStudioPropertySheet>
