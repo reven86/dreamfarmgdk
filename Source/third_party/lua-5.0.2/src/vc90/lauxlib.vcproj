@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="lualib"
-	ProjectGUID="{12894CCF-DA69-438E-9E5E-F55C80D68BFE}"
+	Name="lauxlib"
+	ProjectGUID="{C7820211-84FA-443F-A182-E1D234EC4C71}"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -41,19 +41,19 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;LUA_OPNAMES"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				StringPooling="true"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="false"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
+				DebugInformationFormat="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\lualib_release.lib"
+				OutputFile="../../../../../GDK/Lib/lauxlib_release.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -111,15 +111,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;LUA_OPNAMES"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				StringPooling="true"
 				ExceptionHandling="0"
 				RuntimeLibrary="3"
-				EnableFunctionLevelLinking="false"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\..\..\GDK\Lib\lualib_debug.lib"
+				OutputFile="../../../../../GDK/Lib/lauxlib_debug.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -163,104 +163,36 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm"
 			>
 			<File
-				RelativePath="..\lapi.c"
+				RelativePath="lauxlib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\lcode.c"
+				RelativePath="lbaselib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\ldebug.c"
+				RelativePath="ldblib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\ldo.c"
+				RelativePath="liolib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\ldump.c"
+				RelativePath="lmathlib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\lfunc.c"
+				RelativePath="loadlib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\lgc.c"
+				RelativePath="lstrlib.c"
 				>
 			</File>
 			<File
-				RelativePath="..\llex.c"
+				RelativePath="ltablib.c"
 				>
-			</File>
-			<File
-				RelativePath="..\lmem.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lobject.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lopcodes.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lparser.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lstate.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lstring.c"
-				>
-			</File>
-			<File
-				RelativePath="..\ltable.c"
-				>
-			</File>
-			<File
-				RelativePath="..\ltests.c"
-				>
-			</File>
-			<File
-				RelativePath="..\ltm.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lundump.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lvm.c"
-				>
-			</File>
-			<File
-				RelativePath="..\lzio.c"
-				>
-			</File>
-			<File
-				RelativePath="stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -268,83 +200,11 @@
 			Filter="h;hpp;hxx;hm;inl;inc"
 			>
 			<File
-				RelativePath="..\lapi.h"
+				RelativePath="..\..\include\lauxlib.h"
 				>
 			</File>
 			<File
-				RelativePath="..\lcode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ldebug.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ldo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lfunc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lgc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\llex.h"
-				>
-			</File>
-			<File
-				RelativePath="..\llimits.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lmem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lobject.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lopcodes.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lparser.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lstate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lstring.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ltable.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ltm.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lundump.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lvm.h"
-				>
-			</File>
-			<File
-				RelativePath="..\lzio.h"
-				>
-			</File>
-			<File
-				RelativePath="stdafx.h"
+				RelativePath="..\..\include\lualib.h"
 				>
 			</File>
 		</Filter>
