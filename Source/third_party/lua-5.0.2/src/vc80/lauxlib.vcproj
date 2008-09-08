@@ -46,7 +46,7 @@
 				OmitFramePointers="true"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE"
 				StringPooling="true"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
@@ -116,7 +116,7 @@
 				OmitFramePointers="true"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE"
 				StringPooling="true"
 				ExceptionHandling="0"
 				RuntimeLibrary="3"
@@ -163,35 +163,35 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm"
 			>
 			<File
-				RelativePath="lauxlib.c"
+				RelativePath="..\lib\lauxlib.c"
 				>
 			</File>
 			<File
-				RelativePath="lbaselib.c"
+				RelativePath="..\lib\lbaselib.c"
 				>
 			</File>
 			<File
-				RelativePath="ldblib.c"
+				RelativePath="..\lib\ldblib.c"
 				>
 			</File>
 			<File
-				RelativePath="liolib.c"
+				RelativePath="..\lib\liolib.c"
 				>
 			</File>
 			<File
-				RelativePath="lmathlib.c"
+				RelativePath="..\lib\lmathlib.c"
 				>
 			</File>
 			<File
-				RelativePath="loadlib.c"
+				RelativePath="..\lib\loadlib.c"
 				>
 			</File>
 			<File
-				RelativePath="lstrlib.c"
+				RelativePath="..\lib\lstrlib.c"
 				>
 			</File>
 			<File
-				RelativePath="ltablib.c"
+				RelativePath="..\lib\ltablib.c"
 				>
 			</File>
 		</Filter>
