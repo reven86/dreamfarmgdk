@@ -66,7 +66,7 @@ void ExpatParser::parseXMLFile(XMLHandler& handler, const String& filename, cons
     CEGUI::System::getSingleton().getResourceProvider()->loadRawDataContainer(filename, rawXMLData, resourceGroup);
 
     // Parse the data (note that the last true parameter tels Expat that this is the last chunk of the document
-    if ( ! XML_Parse(parser, reinterpret_cast<const char*>(rawXMLData.getDataPtr()), rawXMLData.getSize(), true))
+    if ( ! XML_Parse(parser, reinterpret_cast<const char*>(rawXMLData.getDataPtr()), static_cast< int >( rawXMLData.getSize() ), true))
     {
         System::getSingleton().getResourceProvider()->unloadRawDataContainer(rawXMLData);
         String exception (String((const utf8*)"ExpatParser::parseXMLFile - XML Parsing error '") +

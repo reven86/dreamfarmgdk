@@ -81,8 +81,8 @@ Font::Font (const XMLAttributes& attributes) :
     d_descender (0),
     d_height (0),
     d_autoScale (attributes.getValueAsBool(FontAutoScaledAttribute, false)),
-    d_nativeHorzRes (attributes.getValueAsInteger (FontNativeHorzResAttribute, int (DefaultNativeHorzRes))),
-    d_nativeVertRes (attributes.getValueAsInteger (FontNativeVertResAttribute, int (DefaultNativeVertRes))),
+    d_nativeHorzRes (static_cast< float >( attributes.getValueAsInteger (FontNativeHorzResAttribute, int (DefaultNativeHorzRes)))),
+    d_nativeVertRes (static_cast< float >( attributes.getValueAsInteger (FontNativeVertResAttribute, int (DefaultNativeVertRes)))),
     d_maxCodepoint (0),
     d_glyphPageLoaded (0)
 {
