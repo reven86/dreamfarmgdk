@@ -88,12 +88,19 @@ private:
 		DrawChunkInfo	( const unsigned short& c, const bool& b ) : chunk_count( c ), buffer_type( b ) { };
 	};
 
-	boost::circular_buffer< LineVertex >				mLines;
-	boost::circular_buffer< TriVertex >					mTris;
-	boost::circular_buffer< TriBuffer >					mTrisBuffer;
-	boost::circular_buffer< SpriteVertex >				mSpritesVerts;
-	boost::circular_buffer< SpriteBuffer >				mSpritesBuffer;
-	boost::circular_buffer< DrawChunkInfo >				mDrawChunks;
+	std::vector< LineVertex >				mLines;
+	std::vector< TriVertex >				mTris;
+	std::vector< TriBuffer >				mTrisBuffer;
+	std::vector< SpriteVertex >				mSpritesVerts;
+	std::vector< SpriteBuffer >				mSpritesBuffer;
+	std::vector< DrawChunkInfo >			mDrawChunks;
+
+	unsigned								mLinesCount;
+	unsigned								mTrisCount;
+	unsigned								mTrisBufferCount;
+	unsigned								mSpritesVertsCount;
+	unsigned								mSpritesBufferCount;
+	unsigned								mDrawChunksCount;
 
 	VertexBuffer							mTrisVB;
 	VertexBuffer							mSpritesVB;

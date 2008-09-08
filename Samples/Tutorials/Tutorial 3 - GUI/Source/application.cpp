@@ -79,7 +79,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	// load default gui layout
 	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout( "editordefault.layout" );
 	CEGUI::System::getSingleton().setGUISheet( myRoot );
-	
+
 	// hide mouse cursor
 	ShowCursor( false );
 
@@ -114,7 +114,14 @@ void Application::Update( )
 
 	// Update GUI.
 	if( mGUI )
+	{
+		char fps[ 10 ];
+		_snprintf( fps, 10, "FPS: %d", 10000 / mTimer.MSPF100( ) );
+
+		CEGUI::System::getSingleton( ).getGUISheet( )->getChildAtIdx( 0 )->setText( fps );
+
 		mGUI->Update( mTimer.MicroSeconds100( ) );
+	}
 
 	// prepare scene to rendering
 	// this function do all preparation for begin and end scene rendering and
