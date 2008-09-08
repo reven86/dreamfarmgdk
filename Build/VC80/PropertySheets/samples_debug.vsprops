@@ -10,10 +10,14 @@
 		MinimalRebuild="true"
 		BasicRuntimeChecks="3"
 		RuntimeLibrary="3"
-		DebugInformationFormat="3"
+		DebugInformationFormat="4"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
 		OutputFile=""
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		GenerateDebugInformation="true"
 	/>
 </VisualStudioPropertySheet>

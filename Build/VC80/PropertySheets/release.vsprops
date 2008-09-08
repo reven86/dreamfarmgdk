@@ -10,6 +10,7 @@
 		FavorSizeOrSpeed="1"
 		WholeProgramOptimization="true"
 		RuntimeLibrary="2"
+		DebugInformationFormat="3"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
