@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="samples_release"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		Optimization="3"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="false"
+		MinimalRebuild="true"
+		RuntimeLibrary="2"
+	/>
+	<Tool
+		Name="VCLibrarianTool"
+		OutputFile=""
+	/>
+</VisualStudioPropertySheet>
