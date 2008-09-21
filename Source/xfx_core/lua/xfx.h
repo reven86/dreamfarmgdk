@@ -24,7 +24,9 @@
 #include <crtdbg.h>		//search for memory leaks
 
 // OpenMP
+#if _MSC_VER < 1500
 #include <omp.h>
+#endif
 
 // STL
 //#include <map>

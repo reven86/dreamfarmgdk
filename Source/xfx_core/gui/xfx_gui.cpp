@@ -148,7 +148,7 @@ void GUI::Update( DWORD mspf )
 	mSystemPtr->injectTimePulse( 0.0001f * mspf );
 }
 
-boost::shared_ptr< Font > GUI::CreateFontFromCEGUIFont( const CEGUI::Font * fnt ) const
+boost::shared_ptr< Font > GUI::CreateFontFromCEGUIFont( const CEGUI::Font& fnt ) const
 {
 	boost::shared_ptr< Font > res;
 

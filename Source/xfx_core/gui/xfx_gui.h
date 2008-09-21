@@ -91,7 +91,7 @@ public:
 	// Utility methods
 	//
 
-	boost::shared_ptr< class Font >&	CreateFontFromCEGUIFont		( const CEGUIFont * fnt ) const;
+	boost::shared_ptr< class Font >		CreateFontFromCEGUIFont		( const CEGUI::Font& fnt ) const;
 
 
 	//
