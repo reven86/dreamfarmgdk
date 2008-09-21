@@ -60,7 +60,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="libci.lib;"
+				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -135,6 +135,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
+				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
