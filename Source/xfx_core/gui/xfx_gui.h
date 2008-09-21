@@ -88,6 +88,13 @@ public:
 
 
 	//
+	// Utility methods
+	//
+
+	boost::shared_ptr< class Font >&	CreateFontFromCEGUIFont		( const CEGUIFont * fnt ) const;
+
+
+	//
 	// Misc
 	//
 

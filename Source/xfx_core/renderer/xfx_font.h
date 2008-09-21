@@ -118,15 +118,27 @@ public:
 
 	/*!	\brief %Font creation.
 	 *	
-	 *	Creates font by height, Shader and characted map.
+	 *	Creates font by height, Shader and charactes.
+	 *	FontTex in shader should be prepared as described in Font description. 
 	 *
 	 *	\param[in] height		Height of each character.
 	 *	\param[in] shd			Shader with texture on stage "FontTex".
-	 *	\param[in] charmapstr	Character map.
+	 *	\param[in] charmapstr	Characters on texture.
 	 *
-	 *	\return Returns S_OK if font has been initialized sucessfully.
+	 *	\return Returns S_OK if font has been created sucessfully.
 	 */
 	virtual HRESULT						Create								( unsigned height, const boost::shared_ptr< const Shader >& shd, const WString& charmapstr );
+
+	/*! \brief Create %Font Shader and character map
+	 *
+	 *	Creates font by shader and character map.
+	 *
+	 *	\param[in]	shd			Shader with texture on stage "FontTex".
+	 *	\param[in]	char_map	Character map.
+	 *
+	 *	\return Returns S_OK of fond has been created sucessfully.
+	 */
+	virtual HRESULT						Create								( const boost::shared_ptr< const Shader >& shd, const CharMapType& char_map );
 
 	//! Returns fonts cache.
 	static Cache< Font >&				Cache								( ) { return msCache; };

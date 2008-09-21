@@ -121,6 +121,27 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 	return XFXERR_INVALIDCALL;
 }
 
+HRESULT Font::Create( const boost::shared_ptr< const Shader >& shd, const CharMapType& char_map )
+{
+	mShaderPtr = shd;
+	mCharMap = char_map;
+	mCharMapString.clear( );
+
+	mCharHeight = 0;
+
+	BOOST_FOREACH( const CharMapType::value_type& c, char_map )
+	{
+		mCharMapString.push_back( c.first );
+
+		unsigned h = c.second.y2 - c.second.y1;
+
+		if( h > mCharHeight )
+			mCharHeight = h;
+	}
+
+	return S_OK;
+}
+
 HRESULT Font::PrepareParsing( )
 {
 	mLoadInfoPtr.reset( new LoadInfo );
