@@ -20,6 +20,9 @@ _XFX_BEGIN
 
 
 
+#pragma warning (push)
+#pragma warning (disable:4201) // nameless struct/union
+
 /*! \class Mat3 xfx_mat3.h "math/xfx_mat3.h"
  *	\brief Matrix 3x3 for 2D transformations.
  *	\ingroup MathGroup
@@ -130,5 +133,6 @@ public:
 };
 
 
+#pragma warning (pop)
 
 _XFX_END

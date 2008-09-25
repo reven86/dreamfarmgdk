@@ -21,6 +21,9 @@ _XFX_BEGIN
 
 class Euler;
 
+#pragma warning (push)
+#pragma warning (disable:4201) // nameless struct/union
+
 /*! \class Mat4 xfx_mat4.h "math/xfx_mat4.h"
  *	\brief Matrix 4x4.
  *	\ingroup MathGroup
@@ -144,6 +147,8 @@ public:
 	//! Transform normal by matrix.
 	Vec3							TransformNormal					(const Vec3& v) const;
 };
+
+#pragma warning (pop)
 
 
 

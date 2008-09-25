@@ -16,6 +16,9 @@ _XFX_BEGIN
 
 
 
+#pragma warning (push)
+#pragma warning (disable:4201) // nameless struct/union
+
 /*! \union ARGB xfx_argb.h "utility/xfx_argb.h"
  *	\brief Color class.
  *	\ingroup UtilityGroup
@@ -68,6 +71,7 @@ union ARGB
 	};
 };
 
+#pragma warning (pop)
 
 //! Parse ARGB variable.
 template< class _String >
