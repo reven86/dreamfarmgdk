@@ -753,8 +753,10 @@
 
     /* compute inflection points --                 */
     /* disabled due to no longer perceived benefits */
+	/*
     if ( 0 && get_inflections )
       af_glyph_hints_compute_inflections( hints );
+	  */
 
   Exit:
     return error;

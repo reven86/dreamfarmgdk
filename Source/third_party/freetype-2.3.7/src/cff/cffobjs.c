@@ -660,7 +660,7 @@
         cffface->bbox.yMax = ( dict->font_bbox.yMax + 0xFFFFU ) >> 16;
 
 
-        cffface->units_per_EM = dict->units_per_em;
+        cffface->units_per_EM = ( FT_Short )( dict->units_per_em );
 
         cffface->ascender  = (FT_Short)( cffface->bbox.yMax );
         cffface->descender = (FT_Short)( cffface->bbox.yMin );
