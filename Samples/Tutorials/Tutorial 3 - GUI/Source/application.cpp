@@ -115,10 +115,13 @@ void Application::Update( )
 	// Update GUI.
 	if( mGUI )
 	{
-		char fps[ 10 ];
-		_snprintf( fps, 10, "FPS: %d", 10000 / mTimer.MSPF100( ) );
+		if( mTimer.MSPF100( ) > 0 )
+		{
+			char fps[ 10 ];
+			_snprintf( fps, 10, "FPS: %d", 10000 / mTimer.MSPF100( ) );
 
-		CEGUI::System::getSingleton( ).getGUISheet( )->getChildAtIdx( 0 )->setText( fps );
+			CEGUI::System::getSingleton( ).getGUISheet( )->getChildAtIdx( 0 )->setText( fps );
+		}
 
 		mGUI->Update( mTimer.MicroSeconds100( ) );
 	}
