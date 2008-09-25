@@ -87,12 +87,6 @@ public:
 	CEGUI::LuaScriptModule *					GetScriptModulePtr( ) { return mScriptModulePtr.get( ); };
 
 
-	//
-	// Utility methods
-	//
-
-	boost::shared_ptr< class Font >		CreateFontFromCEGUIFont		( const CEGUI::Font& fnt ) const;
-
 
 	//
 	// Misc
