@@ -176,7 +176,7 @@ public:
 
 	/*! \brief Load pack from memory.
 	 *
-	 *	\note \a pmemory should be valid memory address for all operation on memory pack.
+	 *	\note \a pmemory should be valid memory address for all operations on memory pack.
 	 */
 	virtual HRESULT						LoadMemory					( const void * pmemory, unsigned long filelen );
 

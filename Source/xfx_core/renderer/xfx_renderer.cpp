@@ -653,7 +653,7 @@ Renderer::~Renderer ()
 {
 }
 
-HRESULT Renderer::CreateDevice( )
+HRESULT Renderer::CreateDevice( HWND hwnd )
 {
 	//Creating device
 #if (__XFX_DIRECTX_VER__ < 9)
@@ -699,7 +699,7 @@ HRESULT Renderer::CreateDevice( )
 	gMess ("...creating D3D object: OK");
 
 	HRESULT hr;
-	if (FAILED (hr = TryToCreateD3DDevice ()))
+	if( FAILED( hr = TryToCreateD3DDevice( hwnd ) ) )
 		return hr;
 
 #if ( __XFX_DIRECTX_VER__ >= 9 )
@@ -749,11 +749,11 @@ HRESULT Renderer::CreateDevice( )
 
 	mDrawTools.Init( );
 
-	mSavedWindowStyle	= GetWindowLong( gGetApplication( ).hWnd( ), GWL_STYLE );
-	mSavedWindowExStyle	= GetWindowLong( gGetApplication( ).hWnd( ), GWL_EXSTYLE );
+	mSavedWindowStyle	= GetWindowLong( hwnd, GWL_STYLE );
+	mSavedWindowExStyle	= GetWindowLong( hwnd, GWL_EXSTYLE );
 
 	RECT rect;
-	GetClientRect( gGetApplication( ).hWnd( ), &rect );
+	GetClientRect( hwnd, &rect );
 
 	Viewport::Instance( ).Init( rect.right - rect.left, rect.bottom - rect.top );
 
@@ -1009,7 +1009,7 @@ void Renderer::CacheVP () const
 	mCachedVP	= view * proj;
 }
 
-HRESULT Renderer::TryToCreateD3DDevice ()
+HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 {
 	HRESULT hr = XFXERR_UNKNOWN;
 
@@ -1041,7 +1041,7 @@ HRESULT Renderer::TryToCreateD3DDevice ()
 		HRESULT hr = mpD3D->CreateDevice (
 			mpD3D->GetAdapterCount () - 1,
 			D3DDEVTYPE_REF,
-			gGetApplication( ).hWnd( ),
+			hwnd,
 			D3DCREATE_HARDWARE_VERTEXPROCESSING,
 			&mD3DPP,
 			&dev );
@@ -1165,7 +1165,7 @@ HRESULT Renderer::TryToCreateD3DDevice ()
 			if( SUCCEEDED( hr = mpD3D->CreateDevice(
 				D3DADAPTER_DEFAULT,
 				( *devit ).first,
-				gGetApplication( ).hWnd( ),
+				hwnd,
 				//( *vpit ).first,
 				( *vpit ).first | D3DCREATE_MULTITHREADED,		// hack for stability
 				&mD3DPP,
@@ -1181,7 +1181,7 @@ HRESULT Renderer::TryToCreateD3DDevice ()
 					//Console::Instance ().Output (Console::MessageType::WARNING, "Device doesn't support stream offsets!\n");
 
 				RECT client_rect;
-				GetClientRect( gGetApplication( ).hWnd( ), &client_rect );
+				GetClientRect( hwnd, &client_rect );
 
 				mD3DPP.BackBufferWidth	= client_rect.right - client_rect.left;
 				mD3DPP.BackBufferHeight	= client_rect.bottom - client_rect.top;

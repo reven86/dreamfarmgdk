@@ -323,7 +323,7 @@ public:
 #endif
 
 	//! Create device.
-	HRESULT								CreateDevice				( );
+	HRESULT								CreateDevice				( HWND hwnd );
 
 	//! Destroy device and free all allocated resources.
 	void								Shutdown					( );
@@ -490,7 +490,7 @@ public:
 	void								SetDefaultShader			( const boost::shared_ptr< const Shader >& shd ) { mDefaultShader = shd; };
 
 private:
-	HRESULT								TryToCreateD3DDevice		( );
+	HRESULT								TryToCreateD3DDevice		( HWND hwnd );
 	HRESULT								ResetDevice					( );
 
 	void								CacheVP						( ) const;

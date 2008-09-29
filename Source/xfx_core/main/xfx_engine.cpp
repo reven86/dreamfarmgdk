@@ -39,7 +39,7 @@ Engine::~Engine( )
 {
 }
 
-bool Engine::Init( )
+bool Engine::Init( bool init_input )
 {
 	mEngineLogPtr.reset( new class Log( g_logfile->Value( ) ) );
 
@@ -88,9 +88,12 @@ bool Engine::Init( )
 	gMess( "...family: %u", cpu_family );
 	gMess( "...model: %u", cpu_model );
 
-	HRESULT hr;
-	if( FAILED( hr = Input::Instance( ).Init( ) ) )
-		return false;
+	if( init_input )
+	{
+		HRESULT hr;
+		if( FAILED( hr = Input::Instance( ).Init( ) ) )
+			return false;
+	}
 
 	gMess( "Initialization xfx was successfully completed!" );
 	gMess( "" );

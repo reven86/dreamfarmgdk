@@ -50,9 +50,11 @@ public:
 	 *	- gather CPU information
 	 *	- initialize input system (calls Input::Init)
 	 *
+	 *	\param[in]	init_input		Init input system (gGetApplication must provide valid instance).
+	 *
 	 *	\return Returns \b true if engine has been initialized sucessfully.
 	 */
-	bool									Init						( );
+	bool									Init						( bool init_input = true );
 
 	/*!	\brief %Engine deinitialization.
 	 *
