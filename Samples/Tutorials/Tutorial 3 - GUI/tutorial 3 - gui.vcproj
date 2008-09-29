@@ -20,7 +20,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\samples_debug.vsprops;..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
+			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\tutorials_debug.vsprops;..\..\..\Build\VC80\PropertySheets\tutorials_common.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -95,7 +95,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\samples_release.vsprops;..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
+			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\tutorials_release.vsprops;..\..\..\Build\VC80\PropertySheets\tutorials_common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>

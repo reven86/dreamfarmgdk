@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Tutorial 1 - Simple Application"
-	ProjectGUID="{0B4C6FFB-3877-49A7-8AF8-043FA208674B}"
-	RootNamespace="Tutorial1SimpleApplication"
+	Name="DFGScreensaver"
+	ProjectGUID="{6DB15BC4-C62C-42BF-8F42-B227A92B6F05}"
+	RootNamespace="Tutorial2TheFirstSprite"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -20,7 +20,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\tutorials_debug.vsprops;..\..\..\Build\VC80\PropertySheets\tutorials_common.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\..\Build\VC80\PropertySheets\samples_debug.vsprops;..\..\..\..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -40,9 +40,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
-				PrecompiledHeaderThrough="pch.h"
+				AdditionalOptions="/Zm143"
+				Optimization="0"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -56,7 +59,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).scr"
 				LinkIncremental="2"
+				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -91,7 +96,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Build\VC80\PropertySheets\tutorials_release.vsprops;..\..\..\Build\VC80\PropertySheets\tutorials_common.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\..\Build\VC80\PropertySheets\samples_release.vsprops;..\..\..\..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -114,7 +119,8 @@
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
-				PrecompiledHeaderThrough="pch.h"
+				OpenMP="false"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -130,7 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).scr"
 				LinkIncremental="1"
+				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -172,34 +180,16 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Source\application.cpp"
+				RelativePath="..\..\application.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\main.cpp"
+				RelativePath="..\..\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\pch.cpp"
+				RelativePath="..\..\pch.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-						PrecompiledHeaderThrough="pch.h"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-						PrecompiledHeaderThrough="pch.h"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -208,11 +198,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Source\application.h"
+				RelativePath="..\..\application.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\pch.h"
+				RelativePath="..\..\pch.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\resource.h"
 				>
 			</File>
 		</Filter>
@@ -221,7 +215,15 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\..\DFGScreensaver.rc"
+				>
+			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\res\data.pack"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
