@@ -2,15 +2,17 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="shipping dll"
-	InheritedPropertySheets=".\shipping.vsprops"
+	Name="release"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		RuntimeLibrary="2"
+		Optimization="3"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="true"
+		RuntimeLibrary="0"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)sd.lib"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_release_static.lib"
 	/>
 </VisualStudioPropertySheet>

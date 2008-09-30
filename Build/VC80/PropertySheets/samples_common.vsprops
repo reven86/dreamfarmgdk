@@ -10,7 +10,6 @@
 		AdditionalIncludeDirectories="../../../../../../source/xfx_core/;../../../../../../source/third_party/boost_1_35_0/;&quot;../../../../../../source/third_party/jpeg-6b/&quot;;&quot;../../../../../../source/third_party/lua-5.0.2/include&quot;;../../../../../../source/third_party/luabind;&quot;../../../../../../source/third_party/cegui-0.6.1/include&quot;;&quot;../../../../../../source/third_party/cegui-0.6.1/scriptingmodules/ceguilua/luascriptmodule/include&quot;"
 		PreprocessorDefinitions="CEGUI_STATIC"
 		StringPooling="true"
-		OpenMP="true"
 		UsePrecompiledHeader="2"
 		PrecompiledHeaderThrough="pch.h"
 		WarningLevel="4"

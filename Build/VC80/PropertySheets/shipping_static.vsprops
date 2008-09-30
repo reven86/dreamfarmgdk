@@ -2,15 +2,15 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="release dll"
+	Name="shipping"
 	InheritedPropertySheets=".\release.vsprops"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		RuntimeLibrary="2"
+		PreprocessorDefinitions="__XFX_DISABLE_PROFILER__;__XFX_SHIPPING__"
 	/>
 	<Tool
 		Name="VCLibrarianTool"
-		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)rd.lib"
+		OutputFile="..\..\..\..\..\GDK\Lib\$(ProjectName)_shipping_static.lib"
 	/>
 </VisualStudioPropertySheet>
