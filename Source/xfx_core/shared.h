@@ -17,11 +17,29 @@
 #define LIB_SUFFIX "_debug.lib"
 #define LIB_3RD_SUFFIX "_debug.lib"
 #else
+
+#ifdef _DLL
 #define LIB_3RD_SUFFIX "_release.lib"
+#else
+#define LIB_3RD_SUFFIX "_release_static.lib"
+#endif
+
 #ifdef __XFX_SHIPPING__
+
+#ifdef _DLL
 #define LIB_SUFFIX "_shipping.lib"
 #else
+#define LIB_SUFFIX "_shipping_static.lib"
+#endif
+
+#else
+
+#ifdef _DLL
 #define LIB_SUFFIX "_release.lib"
+#else
+#define LIB_SUFFIX "_release_static.lib"
+#endif
+
 #endif
 #endif
 

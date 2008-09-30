@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\Bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="..\..\..\..\..\..\Build\VC80\PropertySheets\samples_debug.vsprops;..\..\..\..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).scr"
+				OutputFile="$(OutDir)\$(ProjectName).scr"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
@@ -93,7 +93,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\Bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="..\..\..\..\..\..\Build\VC80\PropertySheets\samples_release.vsprops;..\..\..\..\..\..\Build\VC80\PropertySheets\samples_common.vsprops"
@@ -117,9 +117,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm142"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				RuntimeLibrary="2"
-				OpenMP="false"
+				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -136,8 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).scr"
+				OutputFile="$(OutDir)\$(ProjectName).scr"
 				LinkIncremental="1"
+				GenerateManifest="false"
 				IgnoreDefaultLibraryNames="libci.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -190,6 +191,22 @@
 			<File
 				RelativePath="..\..\pch.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
