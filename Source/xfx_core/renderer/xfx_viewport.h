@@ -37,37 +37,49 @@ class Viewport : public Singleton< Viewport >
 	boost::signal0< void >									mViewportUpdateSignals;
 
 protected:
-	Viewport												( );
-	virtual ~Viewport										( );
+	Viewport													( );
+	virtual ~Viewport											( );
 
 public:
 	//! Initialize viewport with width and height.
-	void						Init						( unsigned width, unsigned height );
+	void							Init						( unsigned width, unsigned height );
 
 	//! Get viewport width.
-	const unsigned&				Width						( ) const { return mWidth; };
+	const unsigned&					Width						( ) const { return mWidth; };
 
 	//! Get viewport height.
-	const unsigned&				Height						( ) const { return mHeight; };
+	const unsigned&					Height						( ) const { return mHeight; };
 
 	//! Get viewport 1.0 / width.
-	const float&				InvWidth					( ) const { return mInvWidth; };
+	const float&					InvWidth					( ) const { return mInvWidth; };
 
 	//! Get viewport 1.0 / height.
-	const float&				InvHeight					( ) const { return mInvHeight; };
+	const float&					InvHeight					( ) const { return mInvHeight; };
 
 	//! Set viewport width.
-	void						Width						( unsigned width );
+	void							Width						( unsigned width );
 
 	//! Set viewport height.
-	void						Height						( unsigned height );
+	void							Height						( unsigned height );
+
+	//! Viewport to render surface coordinate mapping.
+	boost::tuple< float, float >	MapViewportToRenderer		( float x, float y ) const
+	{
+		return boost::make_tuple( x * mInvWidth * Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mInvHeight * Renderer::Instance( ).D3DPP( ).BackBufferHeight );
+	}
+
+	//! Render surface to viewport coordinate mapping.
+	boost::tuple< float, float >	MapRendererToViewport		( float x, float y ) const
+	{
+		return boost::make_tuple( x * mWidth / Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mHeight / Renderer::Instance( ).D3DPP( ).BackBufferHeight );
+	}
 
 	//! Add viewport update signal subscriber.
 	template< class _Type >
-	boost::signals::connection	AddOnViewportUpdateSubscriber( const _Type& fn ) { return mViewportUpdateSignals.connect( fn ); };
+	boost::signals::connection		AddOnViewportUpdateSubscriber( const _Type& fn ) { return mViewportUpdateSignals.connect( fn ); };
 
 	//! %Render viewport. Calls Render::BeginFrame, Application::Render, Render::EndFrame and do some related tasks.
-	void						Render						( ) const;
+	void							Render						( ) const;
 
 	/*! \brief Project 3D coordinates to 2D screen coordinates.
 	 *
@@ -77,7 +89,7 @@ public:
 	 *	\param[out]	y	Screen Y coordinate.
 	 *	\param[in]	p	Incoming point.
 	 */
-	void						Project						( float& x, float& y, const Vec3& p ) const;
+	void							Project						( float& x, float& y, const Vec3& p ) const;
 
 	/*! \brief Unproject 2D screen coordinates to 3D coordinates.
 	 *
@@ -87,7 +99,7 @@ public:
 	 *	\param[in]	x	Screen X coordinate.
 	 *	\param[in]	y	Screen Y coordinate.
 	 */
-	void						Unproject					( class Vec3& out, float x, float y ) const;
+	void							Unproject					( class Vec3& out, float x, float y ) const;
 };
 
 
