@@ -19,7 +19,7 @@ _XFX_BEGIN
 // Viewer
 //
 
-void Viewer::SetVPMatrices( bool set_vpmatrices )
+void Viewer::SetVPMatrices( bool set_vpmatrices ) const
 {
 	Mat4 proj;
 	Mat4 view;

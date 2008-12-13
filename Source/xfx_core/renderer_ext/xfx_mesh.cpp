@@ -88,7 +88,7 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 	if( !memory )
 		return XFXERR_INVALIDCALL;
 
-	if( *( ( unsigned long * ) memory ) != MAKEFOURCC( 'M', 'O', 'D', 'L' ) )
+	if( *( ( unsigned long * ) memory ) != MAKEFOURCC( 'M', 'E', 'S', 'H' ) )
 		return XFXERR_INVALIDCALL;
 
 	char * curp = ( char * ) memory + sizeof( unsigned long );
@@ -110,7 +110,7 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 	//Loading vertex and index buffers
 	mTotalVertices = *( ( unsigned * ) curp );
 	curp += sizeof( mTotalVertices );
-	mTotalFaces = *( ( unsigned * ) curp ) / 3;
+	mTotalFaces = *( ( unsigned * ) curp );
 	curp += sizeof( mTotalFaces );
 
 	HRESULT hr = mVB.Create( vert_size, mTotalVertices, fvf, false );
@@ -158,6 +158,8 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 	//
 	// Load animations
 	//
+
+	/*
 
 	DWORD anim_count = *( ( DWORD * ) curp );
 	curp += sizeof( anim_count );
@@ -243,6 +245,8 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 
 		mScaleKeys.AddKey( static_cast< float >( time ), v );
 	}
+
+	*/
 
 	return hr;
 }

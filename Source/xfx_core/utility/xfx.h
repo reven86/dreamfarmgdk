@@ -66,7 +66,7 @@
 //#include <boost/pool/pool_alloc.hpp>
 //#include <boost/functional/hash.hpp>
 #include <boost/function.hpp>
-//#include <boost/signals.hpp>
+#include <boost/signals.hpp>
 //#include <boost/algorithm/string.hpp>
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>

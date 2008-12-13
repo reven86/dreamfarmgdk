@@ -214,7 +214,20 @@ void Primitives::OBB::Projection (float& a, float& b, const Vec3& axis) const
 // Plane
 //
 
-void Primitives::Plane::Projection (float& a, float& b, const Vec3& axis) const
+void Primitives::Plane::Transform( const Mat4& mat )
+{
+	Vec3 normal = Normal( );
+	Vec3 origin = -D( ) / normal.LenSq( ) * normal;
+
+	From( mat.TransformCoord( origin ), mat.TransformNormal( normal ) );
+}
+
+void Primitives::Plane::From( const Vec3& origin, const Vec3& normal )
+{
+	ABCD( normal.x, normal.y, normal.z, -Vec3::Dot( origin, normal ) );
+}
+
+void Primitives::Plane::Projection( float& a, float& b, const Vec3& axis ) const
 {
 	if (Vec3::Dot (axis.GetNormalized (), Normal ().GetNormalized ()) > 0.998f)
 	{

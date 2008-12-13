@@ -38,7 +38,7 @@ public:
 	typedef signed int		BigAngle;
 
 	//! PI constant.
-	static const Angle pi = 32767;
+	static const BigAngle pi = 32768;
 
 	//! 1.0 / PI.
 	static const float inv_pi;
@@ -114,15 +114,15 @@ inline float math_angle2rad( const Math::BigAngle& ang ) { return Math::inv_rad 
 //! Logarithm time arccosine.
 inline Math::Angle math_acos( float c )
 {
-	Math::Angle a = 0;
-	Math::Angle b = Math::pi;
+	Math::BigAngle a = 0;
+	Math::BigAngle b = Math::pi;
 
 	while( b - a > 1 )
 	{
-		Math::Angle m = ( a + b ) >> 1;
+		Math::BigAngle m = ( a + b ) >> 1;
 
 		if( math_cos( m ) == c )
-			return m;
+			return static_cast< Math::Angle >( m );
 
 		if( math_cos( m ) < c )
 			b = m;
@@ -130,21 +130,21 @@ inline Math::Angle math_acos( float c )
 			a = m;
 	}
 
-	return a;
+	return static_cast< Math::Angle >( a );
 }
 
 //! Logarithm time arcsine.
 inline Math::Angle math_asin( float s )
 {
-	Math::Angle a = -Math::pi / 2;
-	Math::Angle b = Math::pi / 2;
+	Math::BigAngle a = -Math::pi / 2;
+	Math::BigAngle b = Math::pi / 2;
 
 	while( b - a > 1 )
 	{
-		Math::Angle m = ( a + b ) >> 1;
+		Math::BigAngle m = ( a + b ) >> 1;
 
 		if( math_sin( m ) == s )
-			return m;
+			return static_cast< Math::Angle >( m );
 
 		if( math_sin( m ) > s )
 			b = m;
@@ -152,7 +152,7 @@ inline Math::Angle math_asin( float s )
 			a = m;
 	}
 
-	return b;
+	return static_cast< Math::Angle >( b );
 }
 
 //! Fast \f$1/\sqrt{x}\f$.

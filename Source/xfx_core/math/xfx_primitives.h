@@ -59,7 +59,7 @@ public:
 	const Vec3&					Direction				( ) const { return mDirection; };
 
 	//! Set direction.
-	void						Direction				( const Vec3& dir ) { mDirection = dir; };
+	void						Direction				( const Vec3& dir ) { mDirection = dir.GetNormalized( ); };
 
 	//! Get a point on ray with distance t.
 	Vec3						Point					( float t ) const { return mOrigin + t * mDirection; };
@@ -406,26 +406,32 @@ class Plane : public Primitive
 
 public:
 	//! Constructs uninitialized plane.
-	Plane						() {};
+	Plane														( ) { };
 
 	//! Constructs custom plane.
-	Plane						(const float& a, const float& b, const float& c, const float& d) : mA (a), mB (b), mC (c), mD (d) {};
+	Plane														( const float& a, const float& b, const float& c, const float& d ) : mA( a ), mB( b ), mC( c ), mD( d ) { };
 
 	//! Create plane from A, B, C, D values.
-	void ABCD					(const float& a, const float& b, const float& c, const float& d) {mA = a; mB = b; mC = c; mD = d;};
+	void						ABCD							( const float& a, const float& b, const float& c, const float& d ) { mA = a; mB = b; mC = c; mD = d; };
 
-	float& A					() {return mA;};
-	float& B					() {return mB;};
-	float& C					() {return mC;};
-	float& D					() {return mD;};
+	float&						A								( ) { return mA; };
+	float&						B								( ) { return mB; };
+	float&						C								( ) { return mC; };
+	float&						D								( ) { return mD; };
 
-	const float& A				() const {return mA;};
-	const float& B				() const {return mB;};
-	const float& C				() const {return mC;};
-	const float& D				() const {return mD;};
+	const float&				A								( ) const { return mA; };
+	const float&				B								( ) const { return mB; };
+	const float&				C								( ) const { return mC; };
+	const float&				D								( ) const { return mD; };
+
+	//! Construct plane from point and normal.
+	void						From							( const Vec3& origin, const Vec3& normal );
 
 	//! Return non-normalized normal.
-	Vec3 Normal					() const {return Vec3 (mA, mB, mC);};
+	Vec3						Normal							( ) const { return Vec3( mA, mB, mC ); };
+
+	//! Transform Plane by matrix.
+	void						Transform						( const Mat4& m );
 
 	/*! \brief Project primitive to axis.
 
@@ -433,7 +439,7 @@ public:
 	 *	\param[out] b	Second project point.
 	 *	\param[in] axis	Axis.
 	 */
-	virtual void Projection		(float& a, float& b, const Vec3& axis) const;
+	virtual void				Projection						( float& a, float& b, const Vec3& axis ) const;
 };
 
 

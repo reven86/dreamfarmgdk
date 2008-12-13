@@ -109,6 +109,15 @@ void Viewport::Unproject( Vec3& out, float x, float y ) const
 		Vec3( x / proj.x[ 0 ][ 0 ], y / proj.x[ 1 ][ 1 ], 1.0f ) );
 }
 
+boost::tuple< float, float > Viewport::MapViewportToRenderer( float x, float y ) const
+{
+	return boost::make_tuple( x * mInvWidth * Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mInvHeight * Renderer::Instance( ).D3DPP( ).BackBufferHeight );
+}
+
+boost::tuple< float, float > Viewport::MapRendererToViewport( float x, float y ) const
+{
+	return boost::make_tuple( x * mWidth / Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mHeight / Renderer::Instance( ).D3DPP( ).BackBufferHeight );
+}
 
 
 _XFX_END

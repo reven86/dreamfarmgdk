@@ -235,7 +235,7 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 	const Shader * tri_ptr = mTrisBufferCount == 0 ? NULL : mTrisBuffer[ mTrisBufferCount - 1 ].shader.get( );
 
-	const ShaderParams * shd_consts_ptr = mTrisBufferCount ? NULL : mTrisBuffer[ mTrisBufferCount - 1 ].shader_params.get( );
+	const ShaderParams * shd_consts_ptr = mTrisBufferCount == 0 ? NULL : mTrisBuffer[ mTrisBufferCount - 1 ].shader_params.get( );
 
 	if( ( mDrawChunksCount == 0 || mDrawChunks[ mDrawChunksCount - 1 ].buffer_type ) && 
 		shader && tri_ptr && *shader == *tri_ptr && shd_consts_ptr == shader_consts.get( ) )
@@ -623,10 +623,10 @@ void DrawTools::FlushTrisAndSprites( )
 
 	if( mTrisCount != 0 )
 	{
-		BufferLocker< VertexBuffer > bl( mTrisVB, 0, static_cast< unsigned >( mTris.size( ) ) );
+		BufferLocker< VertexBuffer > bl( mTrisVB, 0, mTrisCount );
 
 		if( bl.data< void >( ) )
-			memcpy( bl.data< void >( ), &( *mTris.begin( ) ), sizeof( TriVertex ) * mTrisCount );
+			memcpy( bl.data< void >( ), &( *mTris.begin( ) ), sizeof( TriVertex ) * mTrisCount * 3 );
 
 		Mat4 id( 1 );
 		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
@@ -634,7 +634,7 @@ void DrawTools::FlushTrisAndSprites( )
 
 	if( mSpritesVertsCount != 0 )
 	{
-		BufferLocker< VertexBuffer > bl( mSpritesVB, 0, static_cast< unsigned >( mSpritesVerts.size( ) ) );
+		BufferLocker< VertexBuffer > bl( mSpritesVB, 0, mSpritesVertsCount );
 
 		if( bl.data< void >( ) )
 			memcpy( bl.data< void >( ), &( *mSpritesVerts.begin( ) ), sizeof( SpriteVertex ) * mSpritesVertsCount );

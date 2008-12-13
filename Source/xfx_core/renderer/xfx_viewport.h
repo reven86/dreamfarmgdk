@@ -63,16 +63,10 @@ public:
 	void							Height						( unsigned height );
 
 	//! Viewport to render surface coordinate mapping.
-	boost::tuple< float, float >	MapViewportToRenderer		( float x, float y ) const
-	{
-		return boost::make_tuple( x * mInvWidth * Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mInvHeight * Renderer::Instance( ).D3DPP( ).BackBufferHeight );
-	}
+	boost::tuple< float, float >	MapViewportToRenderer		( float x, float y ) const;
 
 	//! Render surface to viewport coordinate mapping.
-	boost::tuple< float, float >	MapRendererToViewport		( float x, float y ) const
-	{
-		return boost::make_tuple( x * mWidth / Renderer::Instance( ).D3DPP( ).BackBufferWidth, y * mHeight / Renderer::Instance( ).D3DPP( ).BackBufferHeight );
-	}
+	boost::tuple< float, float >	MapRendererToViewport		( float x, float y ) const;
 
 	//! Add viewport update signal subscriber.
 	template< class _Type >

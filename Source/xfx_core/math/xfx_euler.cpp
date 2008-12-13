@@ -38,7 +38,7 @@ Euler& Euler::FromMat4 (const Mat4& m)
 {
 	//FIXME: works only for non-normalized matrix
 
-	float sy = m._12;
+	float sy = -m._32;
 
 	if (sy > 1.0f)
 		sy = 1.0f;
@@ -46,17 +46,17 @@ Euler& Euler::FromMat4 (const Mat4& m)
 		sy = -1.0f;
 
 	Math::Angle theta = math_asin( sy );
-	float cy = -math_cos( theta );
+	float cy = -math_sin( theta );
 
 	if (fabs (cy) > 0.001f)
 	{
-		yaw		= math_rad2angle( -atan2f( m._13, m._11 ) );
+		yaw		= math_rad2angle( atan2f( m._31, m._33 ) );
 		pitch	= theta;
-		roll	= math_rad2angle( -atan2f( m._32, m._22 ) );
+		roll	= math_rad2angle( atan2f( m._12, m._22 ) );
 	}
 	else
 	{
-		yaw		= math_rad2angle( -atan2f( m._31, m._33 ) );
+		yaw		= math_rad2angle( atan2f( m._31, m._33 ) );
 		pitch	= theta;
 		roll	= 0;
 	}

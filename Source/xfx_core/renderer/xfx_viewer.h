@@ -54,7 +54,7 @@ class Viewer
 		MAX_PLANES
 	};
 
-	Primitives::Plane	mFrustum[ MAX_PLANES ];
+	mutable Primitives::Plane	mFrustum[ MAX_PLANES ];
 
 public:
 	//! Constructs default viewer whose view matrix is identity.
@@ -90,7 +90,7 @@ public:
 	 *
 	 *	/param set_vpmatrices		Set prepared matrices directly by invoking Renderer::SetTransform.
 	 */
-	void								SetVPMatrices			( bool set_vpmatrices = true );
+	void								SetVPMatrices			( bool set_vpmatrices = true ) const;
 
 	//! Setups frustum from current view and proj matrices
 	void								SetupFrustum			( );
