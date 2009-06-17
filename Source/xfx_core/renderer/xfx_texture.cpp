@@ -123,6 +123,20 @@ void Texture::UpdateTransformation( )
 
 HRESULT Texture::Create (unsigned width, unsigned height, unsigned nummips, const D3DFORMAT& fmt)
 {
+	bool capped_size = false;
+
+	if( width > xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureWidth )
+	{
+		capped_size = true;
+		width = xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureWidth;
+	}
+
+	if( height > xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureHeight )
+	{
+		capped_size = true;
+		height = xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureHeight;
+	}
+
 	Free ();
 
 	unsigned i = 0, j = 0;
@@ -133,12 +147,21 @@ HRESULT Texture::Create (unsigned width, unsigned height, unsigned nummips, cons
 	for (mSurfaceHeight = 1; mSurfaceHeight < height; mSurfaceHeight <<= 1, j++)
 		;
 
-	mWidth		= width;
-	mHeight		= height;
 	mNumMips	= (nummips) ? nummips : std::max (i, j);
 
-	mKWidth		= static_cast<float> (mWidth) / mSurfaceWidth;
-	mKHeight	= static_cast<float> (mHeight) / mSurfaceHeight;
+	if( capped_size )
+	{
+		mWidth = mSurfaceWidth;
+		mHeight = mSurfaceHeight;
+		mKWidth = mKHeight = 1.0f;
+	}
+	else
+	{
+		mWidth		= width;
+		mHeight		= height;
+		mKWidth		= static_cast<float> (mWidth) / mSurfaceWidth;
+		mKHeight	= static_cast<float> (mHeight) / mSurfaceHeight;
+	}
 
 	mTextureMatrix = Mat4 (
 		mKWidth, 0.0f, 0.0f, 0.0f,
@@ -564,8 +587,10 @@ HRESULT Texture::LoadMemory (const void * p, unsigned long filelen)
 	HRESULT hr;
 #if (__XFX_DIRECTX_VER__ < 9)
 	LPDIRECT3DTEXTURE8 tex;
+	LPDIRECT3DSURFACE8 s1;
 #else
 	LPDIRECT3DTEXTURE9 tex;
+	LPDIRECT3DSURFACE9 s1;
 #endif
 	D3DXIMAGE_INFO info;
 
@@ -576,15 +601,38 @@ HRESULT Texture::LoadMemory (const void * p, unsigned long filelen)
 	XFX_PLACE_DEVICE_LOCK;
 
 #if (__XFX_DIRECTX_VER__ < 9)
-	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
 #else
-	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
 #endif
 	}
 
 	boost::shared_ptr<IUnknown> tex_lock (tex, IUnknownDeleter ());
+
+	if (FAILED (hr = tex->GetSurfaceLevel (0, &s1)))
+		return hr;
+
+	boost::shared_ptr<IUnknown> s1_lock (s1, IUnknownDeleter ());
+
+	D3DSURFACE_DESC d1;
+
+	if( FAILED( hr = s1->GetDesc( &d1 ) ) )
+		return hr;
+
+	if( info.Width > d1.Width || info.Height > d1.Height )
+	{
+		XFX_PLACE_DEVICE_LOCK;
+
+#if (__XFX_DIRECTX_VER__ < 9)
+		if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+			return hr;
+#else
+		if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+			return hr;
+#endif
+	}
 
 	CopyTexture (tex, info.Width, info.Height);
 
@@ -609,6 +657,8 @@ HRESULT Texture::CopyTexture (LPDIRECT3DTEXTURE9 tex, unsigned width, unsigned h
 		if (FAILED (hr = Create (width, height, nummips, sd.Format)))
 			return hr;
 
+		nummips = mpTex->GetLevelCount( );
+
 		for (DWORD level = 0; (level < nummips) && SUCCEEDED (hr); level++)
 		{
 #if (__XFX_DIRECTX_VER__ < 9)
@@ -627,7 +677,10 @@ HRESULT Texture::CopyTexture (LPDIRECT3DTEXTURE9 tex, unsigned width, unsigned h
 
 			boost::shared_ptr<IUnknown> s2_lock (s2, IUnknownDeleter ());
 
-			hr = D3DXLoadSurfaceFromSurface (s2, NULL, NULL, s1, NULL, NULL, D3DX_FILTER_NONE, 0);
+			if( width > mWidth || height > mHeight )
+				hr = D3DXLoadSurfaceFromSurface (s2, NULL, NULL, s1, NULL, NULL, D3DX_DEFAULT, 0);
+			else
+				hr = D3DXLoadSurfaceFromSurface (s2, NULL, NULL, s1, NULL, NULL, D3DX_FILTER_NONE, 0);
 		}
 	}
 

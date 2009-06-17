@@ -209,11 +209,58 @@ void Mat4::PerspectiveFovLH (float fov, float aspect, float znear, float zfar)
 	x[3][3] = 0.0f;
 }
 
+void Mat4::PerspectiveFovRH (float fov, float aspect, float znear, float zfar)
+{
+	float t		= 1.0f / tanf (fov * 0.5f);
+	float kz	= zfar / (zfar - znear);
+
+	x[0][0] = t / aspect;
+	x[0][1] = 0.0f;
+	x[0][2] = 0.0f;
+	x[0][3] = 0.0f;
+	x[1][0] = 0.0f;
+	x[1][1] = t;
+	x[1][2] = 0.0f;
+	x[1][3] = 0.0f;
+	x[2][0] = 0.0f;
+	x[2][1] = 0.0f;
+	x[2][2] = -kz;
+	x[2][3] = -1.0f;
+	x[3][0] = 0.0f;
+	x[3][1] = 0.0f;
+	x[3][2] = -znear * kz;
+	x[3][3] = 0.0f;
+}
+
 void Mat4::LookAtLH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
 {
 	Vec3 normdir	(dir.GetNormalized ());
 	Vec3 normvy		(vy.GetNormalized ());
 	Vec3 normvx		(Vec3::Cross (normvy, normdir));
+
+	x[0][0] = normvx.x;
+	x[0][1] = normvy.x;
+	x[0][2] = normdir.x;
+	x[0][3] = 0.0f;
+	x[1][0] = normvx.y;
+	x[1][1] = normvy.y;
+	x[1][2] = normdir.y;
+	x[1][3] = 0.0f;
+	x[2][0] = normvx.z;
+	x[2][1] = normvy.z;
+	x[2][2] = normdir.z;
+	x[2][3] = 0.0f;
+	x[3][0] = -Vec3::Dot (normvx, cam);
+	x[3][1] = -Vec3::Dot (normvy, cam);
+	x[3][2] = -Vec3::Dot (normdir, cam);
+	x[3][3] = 1.0f;
+}
+
+void Mat4::LookAtRH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
+{
+	Vec3 normdir	(-dir.GetNormalized ());
+	Vec3 normvx		(Vec3::Cross (vy, normdir).GetNormalized( ));
+	Vec3 normvy		(Vec3::Cross (normdir, normvx));
 
 	x[0][0] = normvx.x;
 	x[0][1] = normvy.x;

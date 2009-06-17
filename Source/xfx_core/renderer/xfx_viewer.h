@@ -1,4 +1,4 @@
-//  File xfx_viewer.h                                                         |
+//  File xfx_viewer->h                                                         |
 //                                                                            |
 //  Created by: Andrew "RevEn" Karpushin                                      |
 //                                                                            |
@@ -56,9 +56,12 @@ class Viewer
 
 	mutable Primitives::Plane	mFrustum[ MAX_PLANES ];
 
+	//! Use left-handed projection matrix.
+	bool				mUseLH;
+
 public:
 	//! Constructs default viewer whose view matrix is identity.
-	Viewer														( ) : mPosition( 0, 0, -1 ), mRotation( 0 ), mFOV( Math::real_pi * 0.5f ), mNear( 0.1f ), mFar( 100.0f ) { };
+	Viewer														( ) : mPosition( 0, 0, -1 ), mRotation( 0 ), mFOV( Math::real_pi * 0.5f ), mNear( 0.1f ), mFar( 100.0f ), mUseLH( true ) { };
 	~Viewer														( ) { };
 
 	//! Get viewer position.
@@ -71,6 +74,8 @@ public:
 	const float&						NearPlane				( ) const { return mNear; };
 	//! Get viewer far plane.
 	const float&						FarPlane				( ) const { return mFar; };
+	//! Get use of left-handed projection matrix.
+	const bool&							IsLH					( ) const { return mUseLH; };
 
 	//! Get/Set viewer position.
 	Vec3&								Position				( ) { return mPosition; };
@@ -82,11 +87,13 @@ public:
 	float&								NearPlane				( ) { return mNear; };
 	//! Get/Set viewer far plane.
 	float&								FarPlane				( ) { return mFar; };
+	//! Get/Set use o left-handed projection matrix.
+	bool&								IsLH					( ) { return mUseLH; };
 
 	/*! /brief Calculate and cache view and projection matrices, based on attributes.
 	 *
 	 *	Calculate and cache view and projection matrices, based on attributes.
-	 *	This should be done before DIP call in order to setup Direct3D viewer.
+	 *	This should be done before DIP call in order to setup Direct3D viewer->
 	 *
 	 *	/param set_vpmatrices		Set prepared matrices directly by invoking Renderer::SetTransform.
 	 */

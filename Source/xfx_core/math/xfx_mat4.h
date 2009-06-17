@@ -113,11 +113,17 @@ public:
 	//! Get transposed matrix.
 	Mat4							GetTransposed					() const;
 
-	//! Set perspective matrix.
+	//! Set left-handed perspective matrix.
 	void							PerspectiveFovLH				(float fov, float aspect, float znear, float zfar);
 
-	//! Set "look at" matrix.
+	//! Set right-handed perspective matrix.
+	void							PerspectiveFovRH				(float fov, float aspect, float znear, float zfar);
+
+	//! Set left-handed "look at" matrix.
 	void							LookAtLH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
+
+	//! Set right-handed "look at" matrix.
+	void							LookAtRH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
 
 	//! Inverse matrix. For affine matrices use InverseAffine.
 	void							Inverse							() {*this = GetInversed ();};

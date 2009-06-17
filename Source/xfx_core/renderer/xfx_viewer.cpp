@@ -27,12 +27,19 @@ void Viewer::SetVPMatrices( bool set_vpmatrices ) const
 	D3DVIEWPORT8 viewport;
 	Renderer::Instance( ).GetViewport( viewport );
 
-	proj.PerspectiveFovLH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
-
 	Vec3 dir, up, right;
 	Rotation( ).AngleDirections( dir, up, right );
 
-	view.LookAtLH( Position( ), dir, up );
+	if( mUseLH )
+	{
+		proj.PerspectiveFovLH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
+		view.LookAtLH( Position( ), dir, up );
+	}
+	else
+	{
+		proj.PerspectiveFovRH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
+		view.LookAtRH( Position( ), dir, up );
+	}
 
 	if( set_vpmatrices )
 	{
