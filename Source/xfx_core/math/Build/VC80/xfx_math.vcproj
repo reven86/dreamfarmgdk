@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="xfx_math"
 	ProjectGUID="{28840C83-2C8A-43F7-AC0C-3EC8FF4EC534}"
 	RootNamespace="xfx_main"
@@ -336,6 +336,14 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_primitives.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_quaternion.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_quaternion.h"
 			>
 		</File>
 		<File

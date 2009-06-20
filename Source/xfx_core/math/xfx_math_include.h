@@ -22,6 +22,7 @@
 #include "xfx_math.h"
 #include "xfx_mathstat.h"
 #include "xfx_primitives.h"
+#include "xfx_quaternion.h"
 #include "xfx_transformable.h"
 #include "xfx_vec2.h"
 #include "xfx_vec3.h"
