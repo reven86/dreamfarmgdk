@@ -79,7 +79,7 @@ HRESULT ParseVariable( ARGB& var, typename _String::size_type& pos, const _Strin
 {
 	skip_comments( str, pos );
 	unsigned fvar;
-	Script::ParseVariable< unsigned >( fvar, pos, str );
+	Script< _String >::ParseVariable< unsigned >( fvar, pos, str );
 
 	var = ARGB( fvar );
 	return S_OK;
@@ -106,10 +106,10 @@ inline bool operator >		( const ARGB& u, const ARGB& v ) { return u.dword > v.dw
 inline ARGB operator *		( const ARGB& u, const ARGB& v )
 {
 	return ARGB (
-		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.a * v.a ) >> 0x08 ),
-		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.r * v.r ) >> 0x08 ),
-		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.g * v.g ) >> 0x08 ),
-		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.b * v.b ) >> 0x08 )
+		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.a * ( v.a + 1 ) ) >> 0x08 ),
+		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.r * ( v.r + 1 ) ) >> 0x08 ),
+		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.g * ( v.g + 1 ) ) >> 0x08 ),
+		static_cast< unsigned char >( static_cast< boost::uint32_t >( u.b * ( v.b + 1 ) ) >> 0x08 )
 		);
 };
 

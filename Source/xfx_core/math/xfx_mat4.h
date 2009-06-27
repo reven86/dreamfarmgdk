@@ -84,40 +84,40 @@ public:
 	bool							IsIdentity						( ) const;
 
 	//! Set translate matrix.
-	void							Translate						(const Vec3& l);
+	void							Translate						( const Vec3& l );
 
 	//! Set scale matrix.
-	void							Scale							(const Vec3& v);
+	void							Scale							( const Vec3& v );
 
 	//! Reset matrix by position, rotation and scale.
-	void							Reset							(const Vec3& pos, const Euler& orientation, const Vec3& scale);
+	void							Reset							( const Vec3& pos, const Euler& orientation, const Vec3& scale );
 
 	//! Set rotation matrix around X axis.
-	void							RotationX						(Math::BigAngle angle);
+	void							RotationX						( Math::BigAngle angle );
 
 	//! Set rotation matrix around Y axis.
-	void							RotationY						(Math::BigAngle angle);
+	void							RotationY						( Math::BigAngle angle );
 
 	//! Set rotation matrix around Z axis.
-	void							RotationZ						(Math::BigAngle angle);
+	void							RotationZ						( Math::BigAngle angle );
 
 	//! Set rotation matrix around custom axis and sine and cosine for angle.
-	void							RotationAxis					(const Vec3& axis, float cosine, float sine);
+	void							RotationAxis					( const Vec3& axis, float cosine, float sine );
 
 	//! Set rotation matrix around custom axis.
-	void							RotationAxisByAngle				(const Vec3& axis, Math::BigAngle Angle) {RotationAxis (axis, Math::Instance ().Cos (Angle), Math::Instance ().Sin (Angle));};
+	void							RotationAxisByAngle				( const Vec3& axis, Math::BigAngle Angle ) { RotationAxis( axis, Math::Instance( ).Cos( Angle ), Math::Instance( ).Sin( Angle ) ); };
 
 	//! Transpose matrix.
-	void							Transpose						() {*this = GetTransposed ();};
+	void							Transpose						( ) { *this = GetTransposed( ); };
 
 	//! Get transposed matrix.
-	Mat4							GetTransposed					() const;
+	Mat4							GetTransposed					( ) const;
 
 	//! Set left-handed perspective matrix.
-	void							PerspectiveFovLH				(float fov, float aspect, float znear, float zfar);
+	void							PerspectiveFovLH				( float fov, float aspect, float znear, float zfar );
 
 	//! Set right-handed perspective matrix.
-	void							PerspectiveFovRH				(float fov, float aspect, float znear, float zfar);
+	void							PerspectiveFovRH				( float fov, float aspect, float znear, float zfar );
 
 	//! Set left-handed "look at" matrix.
 	void							LookAtLH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);

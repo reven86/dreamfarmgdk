@@ -198,7 +198,7 @@ void skip_comments( const _String& str, typename _String::size_type& pos, const 
 template< class _String, class _TestString >
 bool test_token( const _String& str, typename _String::size_type& pos, const _TestString& test, const char * delimiters = " \n\t\r" )
 {
-	skip_whitespaces( str, pos, delimiters );
+	skip_comments( str, pos, delimiters );
 
 	if( boost::algorithm::starts_with( boost::make_iterator_range( str.begin( ) + pos, str.end( ) ), test ) )
 	{
@@ -226,7 +226,7 @@ bool test_token( const _String& str, typename _String::size_type& pos, const _Te
 template< class _String >
 bool test_token( const _String& str, typename _String::size_type& pos, const char * test, const char * delimiters = " \n\t\r" )
 {
-	skip_whitespaces( str, pos, delimiters );
+	skip_comments( str, pos, delimiters );
 
 	if( boost::algorithm::starts_with( boost::make_iterator_range( str.begin( ) + pos, str.end( ) ), test ) )
 	{

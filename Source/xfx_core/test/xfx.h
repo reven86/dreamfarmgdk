@@ -73,11 +73,16 @@
 //#include <boost/function.hpp>
 //#include <boost/signals.hpp>
 //#include <boost/algorithm/string.hpp>
-#include <boost/tuple/tuple.hpp>
+//#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
 //#include <boost/thread.hpp>
 #include <boost/foreach.hpp>
 #include <boost/type_traits.hpp>
+
+
+// Boost.Test
+#define BOOST_TEST_MODULE "XFX Test"
+#include <boost/test/unit_test.hpp>
 
 
 // Boost.MPL
@@ -92,5 +97,10 @@ namespace boost { namespace serialization {
 
 
 // XFX
-#include "utility/xfx_singleton.h"
-#include "utility/xfx_profiler.h"
+#include "utility\xfx_utility_include.h"
+#include "main\xfx_main_include.h"
+#include "math\xfx_math_include.h"
+#include "renderer\xfx_renderer_include.h"
+#include "lua\xfx_lua_include.h"
+#include "gui\xfx_gui_include.h"
+

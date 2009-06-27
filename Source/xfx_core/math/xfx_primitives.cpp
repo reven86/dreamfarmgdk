@@ -216,22 +216,32 @@ void Primitives::OBB::Projection (float& a, float& b, const Vec3& axis) const
 
 void Primitives::Plane::Transform( const Mat4& mat )
 {
-	Vec3 normal = Normal( );
+	// get three random points on plane
+	const Vec3& normal = Normal( );
 	Vec3 origin = -D( ) / normal.LenSq( ) * normal;
+	Vec3 p1 = origin + Vec3::Cross( normal, Vec3( normal.y, normal.z, normal.x ) );
+	Vec3 p2 = origin + Vec3::Cross( normal, p1 );
 
-	From( mat.TransformCoord( origin ), mat.TransformNormal( normal ) );
+	origin = mat.TransformCoord( origin );
+	p1 = mat.TransformCoord( p1 );
+	p2 = mat.TransformCoord( p2 );
+
+	From( origin, Vec3::Cross( p1 - origin, p2 - origin ) );
 }
 
 void Primitives::Plane::From( const Vec3& origin, const Vec3& normal )
 {
-	ABCD( normal.x, normal.y, normal.z, -Vec3::Dot( origin, normal ) );
+	Vec3 unit_norm = normal.GetNormalized( );
+
+	ABCD( unit_norm.x, unit_norm.y, unit_norm.z, -Vec3::Dot( origin, unit_norm ) );
 }
 
 void Primitives::Plane::Projection( float& a, float& b, const Vec3& axis ) const
 {
 	if (Vec3::Dot (axis.GetNormalized (), Normal ().GetNormalized ()) > 0.998f)
 	{
-		a = b = 0.0f;
+		Vec3 origin = -D( ) / Normal( ).LenSq( ) * Normal( );
+		a = b = Vec3::Dot( origin, axis );
 	}
 	else
 	{
@@ -372,6 +382,9 @@ bool Primitives::TestIntersection (float& t, Vec3& normal, const Primitives::Tri
 
 	float vd = Vec3::Dot (normal, r.Direction ());
 
+	if( fabs( vd ) < 0.0001f )
+		return false;
+
 	t = Vec3::Dot (p.vertices[0] - r.Origin (), normal) / vd;
 
 	if ((t < 0.0f) || (t > max_t)) return false;
@@ -389,7 +402,7 @@ bool Primitives::TestIntersection (float& t, Vec3& normal, const Primitives::Tri
 	//float u = Vec3::Dot (loc, ku);
 	//float v = Vec3::Dot (loc, kv);
 
-	return (u > 0) && (v > 0) && (u + v < d);
+	return ( u >= 0 ) && ( v >= 0 ) && ( u + v <= d );
 }
 
 bool Primitives::TestIntersection (float& t, Vec3& normal, const Primitives::AABB& p, const Ray& r, const float& max_t)
@@ -472,7 +485,7 @@ bool Primitives::TestIntersection (float& t, Vec3& normal, const Primitives::Sph
 	float tca	= Vec3::Dot (l, r.Direction ());
 	float t2hc	= p.Radius () * p.Radius () - l2 + tca * tca;
 
-	if( t2hc <= 0.0f )
+	if( t2hc < 0.0f )
 		return false;
 
 	t2hc = math_sqrt( t2hc );

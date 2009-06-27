@@ -92,8 +92,11 @@
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/hash_map.hpp>
 
+#pragma warning( push )
+#pragma warning( disable: 4244 ) // // possible loss of data in conversion
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#pragma warning( pop )
 
 #include <boost/serialization/export.hpp>
 

@@ -84,7 +84,7 @@ Mat4& Mat4::Identity ()
 
 bool Mat4::IsIdentity( ) const
 {
-	const float eps = 0.000001f;
+	const float eps = 0.01f;
 
 	for( int i = 0; i < 4; i++ )
 		for( int j = 0; j < 4; j++ )
@@ -319,26 +319,26 @@ Mat4 Mat4::GetInversedAffine () const
 {
 	Mat4 res;
 
-	float kx = 1.0f / (Vec3 (x[0][0], x[1][0], x[2][0]).LenSq ());
-	float ky = 1.0f / (Vec3 (x[0][1], x[1][1], x[2][1]).LenSq ());
-	float kz = 1.0f / (Vec3 (x[0][2], x[1][2], x[2][2]).LenSq ());
+	float kx = 1.0f / ( Vec3( x[ 0 ][ 0 ], x[ 0 ][ 1 ], x[ 0 ][ 2 ] ).LenSq( ) );
+	float ky = 1.0f / ( Vec3( x[ 1 ][ 0 ], x[ 1 ][ 1 ], x[ 1 ][ 2 ] ).LenSq( ) );
+	float kz = 1.0f / ( Vec3( x[ 2 ][ 0 ], x[ 2 ][ 1 ], x[ 2 ][ 2 ] ).LenSq( ) );
 
-	res.x[0][0] = x[0][0] * kx;
-	res.x[1][0] = x[0][1] * ky;
-	res.x[2][0] = x[0][2] * kz;
-	res.x[0][1] = x[1][0] * kx;
-	res.x[1][1] = x[1][1] * ky;
-	res.x[2][1] = x[1][2] * kz;
-	res.x[0][2] = x[2][0] * kx;
-	res.x[1][2] = x[2][1] * ky;
-	res.x[2][2] = x[2][2] * kz;
+	res.x[ 0 ][ 0 ] = x[ 0 ][ 0 ] * kx;
+	res.x[ 1 ][ 0 ] = x[ 0 ][ 1 ] * kx;
+	res.x[ 2 ][ 0 ] = x[ 0 ][ 2 ] * kx;
+	res.x[ 0 ][ 1 ] = x[ 1 ][ 0 ] * ky;
+	res.x[ 1 ][ 1 ] = x[ 1 ][ 1 ] * ky;
+	res.x[ 2 ][ 1 ] = x[ 1 ][ 2 ] * ky;
+	res.x[ 0 ][ 2 ] = x[ 2 ][ 0 ] * kz;
+	res.x[ 1 ][ 2 ] = x[ 2 ][ 1 ] * kz;
+	res.x[ 2 ][ 2 ] = x[ 2 ][ 2 ] * kz;
 
-	res.x[0][3] = res.x[1][3] = res.x[2][3] = 0.0f;
-	res.x[3][3] = 1.0f;
+	res.x[ 0 ][ 3 ] = res.x[ 1 ][ 3 ] = res.x[ 2 ][ 3 ] = 0.0f;
+	res.x[ 3 ][ 3 ] = 1.0f;
 
-	res.x[3][0] = -(x[0][0] * x[3][0] + x[0][1] * x[3][1] + x[0][2] * x[3][2]) * kx;
-	res.x[3][1] = -(x[1][0] * x[3][0] + x[1][1] * x[3][1] + x[1][2] * x[3][2]) * ky;
-	res.x[3][2] = -(x[2][0] * x[3][0] + x[2][1] * x[3][1] + x[2][2] * x[3][2]) * kz;
+	res.x[ 3 ][ 0 ] = -( x[ 0 ][ 0 ] * x[ 3 ][ 0 ] + x[ 0 ][ 1 ] * x[ 3 ][ 1 ] + x[ 0 ][ 2 ] * x[ 3 ][ 2 ]) * kx;
+	res.x[ 3 ][ 1 ] = -( x[ 1 ][ 0 ] * x[ 3 ][ 0 ] + x[ 1 ][ 1 ] * x[ 3 ][ 1 ] + x[ 1 ][ 2 ] * x[ 3 ][ 2 ]) * ky;
+	res.x[ 3 ][ 2 ] = -( x[ 2 ][ 0 ] * x[ 3 ][ 0 ] + x[ 2 ][ 1 ] * x[ 3 ][ 1 ] + x[ 2 ][ 2 ] * x[ 3 ][ 2 ]) * kz;
 
 	return res;
 }

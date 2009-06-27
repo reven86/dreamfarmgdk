@@ -61,10 +61,10 @@ public:
 	typedef stdext::hash_map< String, Animation >	AnimationsType;
 
 private:
-	AnimationsType							mAnimations;
-	Envelope< Vec3, float >					mPosKeys;
-	Envelope< Euler, float, EulerLerpFn >	mRotKeys;
-	Envelope< Vec3, float >					mScaleKeys;
+	AnimationsType									mAnimations;
+	Envelope< Vec3, float >							mPosKeys;
+	Envelope< Quaternion, float, QuaternionLerpFn >	mRotKeys;
+	Envelope< Vec3, float >							mScaleKeys;
 
 public:
 	//! File version.
@@ -88,7 +88,7 @@ public:
 	const Envelope< Vec3, float >&			PosKeys							( ) const { return mPosKeys; };
 
 	//! Get rotation keys.
-	const Envelope< Euler, float, EulerLerpFn >& RotKeys					( ) const { return mRotKeys; };
+	const Envelope< Quaternion, float, QuaternionLerpFn >& RotKeys			( ) const { return mRotKeys; };
 
 	//! Get scale keys.
 	const Envelope< Vec3, float >&			ScaleKeys						( ) const { return mScaleKeys; };

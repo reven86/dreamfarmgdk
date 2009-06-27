@@ -35,16 +35,16 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 	if( FAILED( res ) )
 		return res;
 
-	// add search path with media content to file system
+	// add search path to media content to file system
 	// after doing this, we can refer to media content without using full path
-	// note: the path should be end up with '\' 
+	// note: the path should be ended with '\' 
 	xfx::FileSystem::Instance( ).AddSearchPath( "data\\" );
 
 	// try to register shader for sprite
 	// we use Shader::Cache( ) to cache shaders with equal filenames
 	// other way to load shader is simply call xfx::Shader::LoadFile
 	// but in this way shader will be loaded always from disk, even if
-	// one has already been loaded
+	// the copy of one has already been loaded
 	mSpriteShader = xfx::Shader::Cache( ).Register( "dfg_sheep.shader" );
 
 	mShaderParamsConsts.reset( new xfx::ShaderParams( ) );

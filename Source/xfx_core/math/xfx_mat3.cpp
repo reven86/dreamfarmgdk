@@ -91,7 +91,7 @@ Mat3& Mat3::Identity( )
 
 bool Mat3::IsIdentity( ) const
 {
-	const float eps = 0.000001f;
+	const float eps = 0.01f;
 
 	for( int i = 0; i < 3; i++ )
 		for( int j = 0; j < 3; j++ )
@@ -185,12 +185,12 @@ Mat3 Mat3::GetInversedAffine( ) const
 {
 	Mat3 res;
 
-	float kx = 1.0f / ( Vec2( x[ 0 ][ 0 ], x[ 1 ][ 0 ] ).LenSq( ) );
-	float ky = 1.0f / ( Vec2( x[ 0 ][ 1 ], x[ 1 ][ 1 ] ).LenSq( ) );
+	float kx = 1.0f / ( Vec2( x[ 0 ][ 0 ], x[ 0 ][ 1 ] ).LenSq( ) );
+	float ky = 1.0f / ( Vec2( x[ 1 ][ 0 ], x[ 1 ][ 1 ] ).LenSq( ) );
 
 	res.x[ 0 ][ 0 ] = x[ 0 ][ 0 ] * kx;
-	res.x[ 1 ][ 0 ] = x[ 0 ][ 1 ] * ky;
-	res.x[ 0 ][ 1 ] = x[ 1 ][ 0 ] * kx;
+	res.x[ 1 ][ 0 ] = x[ 0 ][ 1 ] * kx;
+	res.x[ 0 ][ 1 ] = x[ 1 ][ 0 ] * ky;
 	res.x[ 1 ][ 1 ] = x[ 1 ][ 1 ] * ky;
 
 	res.x[ 0 ][ 2 ] = res.x[ 1 ][ 2 ] = 0.0f;

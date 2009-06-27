@@ -300,7 +300,8 @@ void MeshState::Update( DWORD mspf )
 
 		f_frame = fmodf( f_frame, static_cast< float >( mAnimationState.total_frames ) ) + ( *mAnimationState.current_animation ).second.start_frame;
 
-		mAnimationState.anim_transform.Reset( mMeshPtr->PosKeys( ).Key( f_frame ), mMeshPtr->RotKeys( ).Key( f_frame ), mMeshPtr->ScaleKeys( ).Key( f_frame ) );
+#pragma message ( "FIXME: think about using Euler as base for setup rotation. Quaternions may be used instead" )
+		mAnimationState.anim_transform.Reset( mMeshPtr->PosKeys( ).Key( f_frame ), Euler( ).FromQuaternion( mMeshPtr->RotKeys( ).Key( f_frame ) ), mMeshPtr->ScaleKeys( ).Key( f_frame ) );
 	}
 }
 

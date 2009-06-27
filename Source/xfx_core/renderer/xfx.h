@@ -50,6 +50,9 @@
 #include <limits>
 
 // Boost
+#pragma warning( push )
+#pragma warning( disable: 4244 ) // possible loss of data in conversion
+
 #include <boost/array.hpp>
 #include <boost/scoped_ptr.hpp>
 //#include <boost/weak_ptr.hpp>
@@ -80,6 +83,7 @@
 #include <boost/type_traits.hpp>
 #include <boost/circular_buffer.hpp>
 
+#pragma warning( pop )
 
 // Boost.MPL
 //#include <boost/mpl/vector.hpp>

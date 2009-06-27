@@ -318,28 +318,31 @@ class OBB : public Primitive
 
 public:
 	//! Constructs empty OBB.
-	OBB							() : mLocation (0.0f), mE1 (0.0f), mE2 (0.0f), mE3 (0.0f) {};
+	OBB							( ) : mLocation( 0.0f ), mE1( 0.0f ), mE2( 0.0f ), mE3( 0.0f ) { };
+	
+	//! Constructs OBB from location and three edge vectors.
+	OBB							( const Vec3& loc, const Vec3& e1, const Vec3& e2, const Vec3& e3 ) : mLocation( loc ), mE1( e1 ), mE2( e2 ), mE3( e3 ) { };
 
 	//! Constructs OBB from two vertices.
-	OBB							(const Vec3& v0, const Vec3& v1) {From (v0, v1);};
+	OBB							( const Vec3& v0, const Vec3& v1 ) { From ( v0, v1 ); };
 
 	//! Constructs OBB from triangle.
-	OBB							(const Triangle& tri) {From (tri);};
+	OBB							( const Triangle& tri ) { From( tri ); };
 
 	//! Constructs OBB from AABB.
-	OBB							(const AABB& aabb) {From (aabb);};
+	OBB							( const AABB& aabb ) { From( aabb ); };
 
 	//! Reconstructs OBB from two vertice.
-	void From					(const Vec3& v0, const Vec3& v1);
+	void From					( const Vec3& v0, const Vec3& v1 );
 
 	//! Reconstructs OBB from triangle.
-	void From					(const Triangle& tri);
+	void From					( const Triangle& tri );
 
 	//! Reconstructs OBB from AABB.
-	void From					(const AABB& aabb);
+	void From					( const AABB& aabb );
 
 	//! Return closest AABB.
-	AABB EnlargeToAABB			() const {AABB res (mE1, mE2); res.Enlarge (mE3); res.Enlarge (mE1 + mE2); res.Enlarge (mE1 + mE3); res.Enlarge (mE2 + mE3); res.Enlarge (mE1 + mE2 + mE3); res.Shift (mLocation); return res;};
+	AABB EnlargeToAABB			( ) const { AABB res( mE1, mE2 ); res.Enlarge( mE3 ); res.Enlarge( mE1 + mE2 ); res.Enlarge( mE1 + mE3 ); res.Enlarge( mE2 + mE3 ); res.Enlarge( mE1 + mE2 + mE3 ); res.Shift( mLocation ); return res; };
 
 	//! Get center.
 	Vec3 Center					() const {return mLocation + (mE1 + mE2 + mE3) * 0.5;};
@@ -430,7 +433,15 @@ public:
 	//! Return non-normalized normal.
 	Vec3						Normal							( ) const { return Vec3( mA, mB, mC ); };
 
-	//! Transform Plane by matrix.
+	/*! \brief Transform Plane by matrix.
+
+		Transform acts in the following way. Three points on plane are transformed
+		by matrix, and then new plane is created from transformed points. This
+		method perfectly deals with situations when matrix contains scale and
+		even different scales for different axises.
+
+		\param[in] m	Transformation matrix.
+	*/
 	void						Transform						( const Mat4& m );
 
 	/*! \brief Project primitive to axis.

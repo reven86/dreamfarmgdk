@@ -94,9 +94,6 @@ public:
 	//! %Update scene.
 	virtual void					Update							( ) { };
 
-	//! Retrieves an interface pointer.
-	virtual class UIInterface *		pInterface						( ) { return NULL; };
-
 	const HWND&						hWnd							( ) const { return mWnd; };
 	const HINSTANCE&				hInstance						( ) const { return mhInstance; };
 	const String&					CommandLine						( ) const { return mCommandLine; };

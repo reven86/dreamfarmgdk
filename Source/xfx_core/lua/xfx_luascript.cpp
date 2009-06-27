@@ -106,8 +106,6 @@ HRESULT LuaScript::Open( )
 	luabind::open				( mpLuaVM );
 	luabind::set_pcall_callback	( &pcall_error_callback );
 
-#pragma message ( "FIXME: fix this" )
-	//UIInterface::LuaRegister( mpLuaVM );
 	LuaSMManager::LuaRegister( mpLuaVM );
 
 	// register xfx classes
