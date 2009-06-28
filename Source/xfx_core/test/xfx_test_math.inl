@@ -751,6 +751,30 @@ BOOST_AUTO_TEST_CASE( primitives )
 
 BOOST_AUTO_TEST_CASE( aabbtree )
 {
+	AABBTree aabbtree;
+	BOOST_CHECK( aabbtree.RootAABB( ).Min( ) == Vec3( 0.0f ) );
+	BOOST_CHECK( aabbtree.RootAABB( ).Max( ) == Vec3( 0.0f ) );
+
+	Primitives::Triangle tris[ ] =
+	{
+		Primitives::Triangle( Vec3( 0.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 0.0f, 1.0f, 0.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 1.0f, 0.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 0.0f, 1.0f, 0.0f ) ),
+		Primitives::Triangle( Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 0.0f ) ),
+		Primitives::Triangle( Vec3( 0.0f, 1.0f, 1.0f ), Vec3( 0.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 0.0f ) ),
+		Primitives::Triangle( Vec3( 0.0f, 1.0f, 0.0f ), Vec3( 1.0f, 1.0f, 0.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 1.0f, 1.0f ), Vec3( 1.0f, 1.0f, 0.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 1.0f, 1.0f, 0.0f ), Vec3( 1.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 1.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 0.0f, 0.0f, 1.0f ), Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 1.0f, 1.0f ), Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 1.0f ) )
+	};
+
+	aabbtree.Build( &tris[ 0 ], &tris[ sizeof( tris ) / sizeof( Primitives::Triangle ) ] );
+
+	Primitives::Triangle tri( Vec3( -1.0f, 0.5f, 0.5f ), Vec3( 0.5f, 0.25f, 0.5f ), Vec3( 0.25f, 0.5f, 0.75f ) );
+	BOOST_CHECK( aabbtree.TestIntersection( tri ) );
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

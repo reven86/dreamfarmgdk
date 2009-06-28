@@ -28,6 +28,9 @@ _XFX_BEGIN
  *	\ingroup MathGroup
  *	
  *	Collision representation for geometric objects.
+ *	AABBTree is collision tree where, for all nodes,
+ *	all triangles of geometry are divided into two sets,
+ *	based on length of longest axis of entire AABB for node.
  *
  *	\author Andrew "RevEn" Karpushin
  */
@@ -38,15 +41,15 @@ class AABBTree : boost::noncopyable
 	{
 		Primitives::AABB					box;
 
-#pragma message ( "FIXME: is vector really needed here?" )
-		std::vector< Primitives::Triangle >	triangles; //usually only one triangle
+		boost::scoped_array< Primitives::Triangle > triangles; //usually only one triangle
+		unsigned							triangles_count;
 
 		boost::scoped_ptr< Node >			positive;
 		boost::scoped_ptr< Node >			negative;
 
-		Node								() {};
+		Node								( ) : triangles_count( 0 ) { };
 
-		bool IsLeaf							() const
+		bool IsLeaf							( ) const
 		{
 			_ASSERTE ( ( !positive.get( ) && !negative.get( ) ) || ( positive.get( ) && negative.get( ) ) );
 			return !positive.get( );
@@ -154,10 +157,10 @@ bool AABBTree::RecursiveTestIntersection( const Node * node, const _Primitive& p
 		pfn = &Primitives::TestIntersection;
 
 		return std::find_if (
-			node->triangles.begin( ),
-			node->triangles.end( ),
+			node->triangles.get( ),
+			node->triangles.get( ) + node->triangles_count,
 			boost::bind( pfn, _1, boost::cref( p ) )
-			) != node->triangles.end( );
+			) != node->triangles.get( ) + node->triangles_count;
 	}
 	else if( Primitives::TestIntersection( node->box, p ) )
 		return( deep == 0 ) ||
@@ -174,7 +177,10 @@ void AABBTree::RecursiveBuild( Node * node, _InputIterator begin, _InputIterator
 {
 	if( boost::next( begin ) == end )
 	{
-		node->triangles.push_back( *begin );
+		node->triangles_count = 1;
+		node->triangles.reset( new Primitives::Triangle[ 1 ] );
+		node->triangles[ 0 ] = *begin;
+
 		node->box.From( *begin );
 	}
 	else
@@ -215,7 +221,10 @@ void AABBTree::RecursiveBuild( Node * node, _InputIterator begin, _InputIterator
 		//! So mark this node as leaf
 		if( ( begin == endneg ) || ( begpos == end ) )
 		{
-			std::copy( begin, end, std::back_inserter( node->triangles ) );
+			node->triangles_count = std::distance( begin, end );
+			node->triangles.reset( new Primitives::Triangle[ node->triangles_count ] );
+
+			std::copy( begin, end, node->triangles.get( ) );
 		}
 		else
 		{
