@@ -61,7 +61,10 @@ bool AABBTree::RecursiveTestIntersection (const Node * my, const Node * outside,
 	{
 		Mat4 m_inv (m.GetInversedAffine ());
 
-		BOOST_FOREACH( const Primitives::Triangle& it, my->triangles )
+		BOOST_FOREACH(
+			const Primitives::Triangle& it,
+			boost::make_iterator_range( &my->triangles[ 0 ], &my->triangles[ my->triangles_count ] )
+			)
 		{
 			Primitives::Triangle tri( it );
 			tri.Transform( m_inv );
@@ -74,7 +77,10 @@ bool AABBTree::RecursiveTestIntersection (const Node * my, const Node * outside,
 	{
 		if (outside->IsLeaf ())
 		{
-			BOOST_FOREACH( const Primitives::Triangle& it, my->triangles )
+			BOOST_FOREACH(
+				const Primitives::Triangle& it,
+				boost::make_iterator_range( &my->triangles[ 0 ], &my->triangles[ my->triangles_count ] )
+				)
 			{
 				Primitives::Triangle tri( it );
 				tri.Transform (m);
@@ -110,7 +116,10 @@ bool AABBTree::RecursiveTestIntersection (const Node * node, float& t, Vec3& nor
 		Vec3 curnorm;
 
 		bool res = false;
-		BOOST_FOREACH( const Primitives::Triangle& it, node->triangles )
+		BOOST_FOREACH(
+			const Primitives::Triangle& it,
+			boost::make_iterator_range( &node->triangles[ 0 ], &node->triangles[ node->triangles_count ] )
+			)
 		{
 			if (Primitives::TestIntersection (curt, curnorm, it, ray, t))
 			{

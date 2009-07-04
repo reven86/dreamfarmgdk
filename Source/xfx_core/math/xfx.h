@@ -78,6 +78,7 @@
 //#include <boost/thread.hpp>
 #include <boost/foreach.hpp>
 #include <boost/type_traits.hpp>
+#include <boost/range/iterator_range.hpp>
 
 
 // Boost.MPL

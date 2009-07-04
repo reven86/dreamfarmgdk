@@ -31,6 +31,12 @@
 #include <omp.h>
 #endif
 
+#pragma warning( push )
+#pragma warning( disable : 4244 )	// possible loss of data in conversion
+#pragma warning( disable : 4201 )	// nameless struct/union
+#pragma warning( disable : 4510 )	// can't generate default constructor for ParticleSystem::SystemsType
+#pragma warning( disable : 4610 )	// type cannot be instatiaated, user-defined constructor required
+
 // STL
 //#include <map>
 //#include <list>
@@ -51,9 +57,6 @@
 #include <limits>
 
 // Boost
-#pragma warning( push )
-#pragma warning( disable: 4244 ) // possible loss of data in conversion
-
 #include <boost/array.hpp>
 #include <boost/scoped_ptr.hpp>
 //#include <boost/weak_ptr.hpp>
@@ -84,9 +87,6 @@
 #include <boost/type_traits.hpp>
 #include <boost/circular_buffer.hpp>
 
-#pragma warning( pop )
-
-
 // Boost.MPL
 //#include <boost/mpl/vector.hpp>
 //#include <boost/mpl/vector_c.hpp>
@@ -101,9 +101,6 @@ namespace boost { namespace serialization {
 // D3D
 #include <d3d8.h>
 #include <d3dx8.h>
-
-#pragma warning( disable : 4201 )	// nameless struct/union
-#pragma warning( disable : 4510 )	// can't generate default constructor for ParticleSystem::SystemsType
 
 // XFX
 #include "utility\xfx_string.h"
@@ -127,3 +124,5 @@ namespace boost { namespace serialization {
 #include "renderer\xfx_shader.h"
 #include "renderer\xfx_renderer.h"
 #include "renderer\xfx_renderer_cvars.h"
+
+#pragma warning( pop )

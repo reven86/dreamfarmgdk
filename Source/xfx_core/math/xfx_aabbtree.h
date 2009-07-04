@@ -209,7 +209,6 @@ void AABBTree::RecursiveBuild( Node * node, _InputIterator begin, _InputIterator
 
 		_InputIterator endneg( begin );
 		_InputIterator begpos( end );
-		_InputIterator maxtriangle( begin );
 
 		while( endneg != begpos )
 			if( IsPositiveTriangle( *endneg, node->box, indofmaxboxdim ) )
@@ -221,7 +220,7 @@ void AABBTree::RecursiveBuild( Node * node, _InputIterator begin, _InputIterator
 		//! So mark this node as leaf
 		if( ( begin == endneg ) || ( begpos == end ) )
 		{
-			node->triangles_count = std::distance( begin, end );
+			node->triangles_count = static_cast< unsigned >( std::distance( begin, end ) );
 			node->triangles.reset( new Primitives::Triangle[ node->triangles_count ] );
 
 			std::copy( begin, end, node->triangles.get( ) );

@@ -101,20 +101,23 @@ extern "C"
 
 
 // LuaBind
-#pragma warning (push)
-#pragma warning (disable:4127) //conditional expression is constant
-#pragma warning (disable:4100) //unreferenced formal parameter
+#pragma warning( push )
+#pragma warning( disable : 4127 ) // conditional expression is constant
+#pragma warning( disable : 4100 ) // unreferenced formal parameter
 #include <luabind/luabind.hpp>
 #include <luabind/discard_result_policy.hpp>
 #include <luabind/out_value_policy.hpp>
 #include <luabind/raw_policy.hpp>
-#pragma warning (pop)
+#pragma warning( pop )
 
 
 
 // CEGUI
+#pragma warning( push )
+#pragma warning( disable : 4251 ) // class ... needs to have dll interface
 #include <cegui.h>
 #include <ceguilua.h>
+#pragma warning( pop )
 
 
 

@@ -768,13 +768,44 @@ BOOST_AUTO_TEST_CASE( aabbtree )
 		Primitives::Triangle( Vec3( 0.0f, 0.0f, 1.0f ), Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
 		Primitives::Triangle( Vec3( 1.0f, 1.0f, 1.0f ), Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 0.0f, 1.0f, 1.0f ) ),
 		Primitives::Triangle( Vec3( 0.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ) ),
-		Primitives::Triangle( Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 1.0f ) )
+		Primitives::Triangle( Vec3( 1.0f, 0.0f, 1.0f ), Vec3( 1.0f, 0.0f, 0.0f ), Vec3( 1.0f, 0.0f, 1.0f ) ),
+		Primitives::Triangle( Vec3( 0.5f, 0.5f, 0.5f ), Vec3( 2.0f, 0.5f, 0.5f ), Vec3( 2.0f, 1.0f, 1.0f ) )
 	};
 
 	aabbtree.Build( &tris[ 0 ], &tris[ sizeof( tris ) / sizeof( Primitives::Triangle ) ] );
+	BOOST_CHECK( aabbtree.RootAABB( ).Min( ) == Vec3( 0.0f ) );
+	BOOST_CHECK_LT( ( aabbtree.RootAABB( ).Max( ) - Vec3( 2.0f, 1.0f, 1.0f ) ).LenSq( ), gMathEpsSq );
 
 	Primitives::Triangle tri( Vec3( -1.0f, 0.5f, 0.5f ), Vec3( 0.5f, 0.25f, 0.5f ), Vec3( 0.25f, 0.5f, 0.75f ) );
 	BOOST_CHECK( aabbtree.TestIntersection( tri ) );
+	tri.vertices[ 1 ].x = -0.5f;
+	tri.vertices[ 2 ].x = -0.1f;
+	BOOST_CHECK( !aabbtree.TestIntersection( tri ) );
+	tri.vertices[ 0 ].xyz( 1.5f, 0.0f, 0.0f );
+	tri.vertices[ 1 ].xyz( 1.5f, 0.25f, 0.0f );
+	tri.vertices[ 2 ].xyz( 1.5f, 0.25f, 0.25f );
+	BOOST_CHECK( !aabbtree.TestIntersection( tri ) );
+	BOOST_CHECK( aabbtree.TestIntersection( tri, 0 ) );
+	BOOST_CHECK( !aabbtree.TestIntersection( tri, 1 ) );
+
+	AABBTree aabbtree2;
+	aabbtree2.Build( &tris[ 0 ], &tris[ sizeof( tris ) / sizeof( Primitives::Triangle ) - 1 ] );
+	Mat4 aabbtree2_mat( Vec3( 3.0f, 0.0f, 0.0f ), Euler( 0 ), Vec3( 1.0f ) );
+	BOOST_CHECK( !aabbtree.TestIntersection( aabbtree2, aabbtree2_mat ) );
+	aabbtree2_mat.Reset( Vec3( 3.0f, 0.0f, 0.0f ), Euler( 0, 0, Math::pi / 2 ), Vec3( 1.0f ) );
+	BOOST_CHECK( aabbtree.TestIntersection( aabbtree2, aabbtree2_mat ) );
+	aabbtree2_mat.Reset( Vec3( 3.0f, 0.0f, 0.0f ), Euler( 0, 0, Math::pi / 2 ), Vec3( 0.5f ) );
+	BOOST_CHECK( !aabbtree.TestIntersection( aabbtree2, aabbtree2_mat ) );
+
+	float t;
+	Vec3 norm;
+	BOOST_CHECK( aabbtree.TestIntersection( t, norm, Ray( Vec3( 1.5f, 0.5f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ) ) ) );
+	BOOST_CHECK_LT( fabs( t - 0.5f ), gMathEps );
+	BOOST_CHECK_LT( ( norm - Vec3( 0.0f, -1.0f, 1.0f ).GetNormalized( ) ).LenSq( ), gMathEpsSq );
+	BOOST_CHECK( aabbtree.TestIntersection( t, norm, Ray( Vec3( 1.5f, 0.75f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ) ) ) );
+	BOOST_CHECK_LT( fabs( t - 0.75f ), gMathEps );
+	BOOST_CHECK_LT( ( norm - Vec3( 0.0f, -1.0f, 1.0f ).GetNormalized( ) ).LenSq( ), gMathEpsSq );
+	BOOST_CHECK( !aabbtree.TestIntersection( t, norm, Ray( Vec3( 1.5f, 0.25f, 0.0f ), Vec3( 0.0f, 0.0f, 1.0f ) ) ) );
 }
 
 BOOST_AUTO_TEST_SUITE_END( )
