@@ -18,16 +18,6 @@ _XFX_BEGIN
 
 
 //
-// Variables
-//
-
-#include "xfx_engine_ver.inl"
-
-
-
-
-
-//
 // Engine
 //
 

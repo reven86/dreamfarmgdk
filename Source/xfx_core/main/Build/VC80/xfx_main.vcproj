@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="xfx_main"
 	ProjectGUID="{321CD26B-793E-44AA-87CE-987ABF22238C}"
 	RootNamespace="xfx_main"
@@ -22,6 +22,7 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\debug.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -79,6 +80,7 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\release.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -137,6 +139,7 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\shipping.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -195,6 +198,7 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\release_static.vsprops"
 			CharacterSet="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -319,6 +323,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_engine_ver.cpp"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_engine_ver.template"
 			>
 			<FileConfiguration
@@ -326,8 +334,8 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
-					Outputs="invalid"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).cpp"
+					Outputs="$(InputDir)$(InputName).cpp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -335,8 +343,8 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
-					Outputs="invalid"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).cpp"
+					Outputs="$(InputDir)$(InputName).cpp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -344,8 +352,8 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
-					Outputs="invalid"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).cpp"
+					Outputs="$(InputDir)$(InputName).cpp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -353,8 +361,8 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
-					Outputs="invalid"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).cpp"
+					Outputs="$(InputDir)$(InputName).cpp"
 				/>
 			</FileConfiguration>
 		</File>
