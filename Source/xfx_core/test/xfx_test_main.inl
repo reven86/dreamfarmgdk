@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_CASE( fs )
 	// read its content and check
 	unsigned long len = 0;
 	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).GetFileSize( "file1.txt", len ), S_OK );
-	BOOST_CHECK_EQUAL( len, 8 );
+	BOOST_CHECK_EQUAL( len, ( unsigned long )8 );
 
 	boost::uint8_t * mem = reinterpret_cast< boost::uint8_t * >( _alloca( sizeof( boost::uint8_t ) * len ) );
 	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).ReadFile( "file1.txt", mem ), S_OK );
