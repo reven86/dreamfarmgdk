@@ -582,12 +582,12 @@ BOOST_AUTO_TEST_CASE( primitives )
 	BOOST_CHECK_LT( ( aabb.Size( ) - Vec3( 1.0f, 2.0f, 3.0f ) ).LenSq( ), gMathEpsSq );
 
 	Vec3 v = aabb.RandomPoint( );
-	BOOST_CHECK_GT( v.x, aabb.Min( ).x );
-	BOOST_CHECK_LT( v.x, aabb.Max( ).x );
-	BOOST_CHECK_GT( v.y, aabb.Min( ).y );
-	BOOST_CHECK_LT( v.y, aabb.Max( ).y );
-	BOOST_CHECK_GT( v.z, aabb.Min( ).z );
-	BOOST_CHECK_LT( v.z, aabb.Max( ).z );
+	BOOST_CHECK_GE( v.x, aabb.Min( ).x );
+	BOOST_CHECK_LE( v.x, aabb.Max( ).x );
+	BOOST_CHECK_GE( v.y, aabb.Min( ).y );
+	BOOST_CHECK_LE( v.y, aabb.Max( ).y );
+	BOOST_CHECK_GE( v.z, aabb.Min( ).z );
+	BOOST_CHECK_LE( v.z, aabb.Max( ).z );
 
 	aabb.Shift( Vec3( -1.0f, -2.0f, -3.0f ) );
 	BOOST_CHECK_LT( ( aabb.Min( ) - Vec3( 0.0f, -2.0f, 0.0f ) ).LenSq( ), gMathEpsSq );
