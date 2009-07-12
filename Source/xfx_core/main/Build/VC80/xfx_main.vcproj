@@ -319,6 +319,46 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_engine_ver.template"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
+					Outputs="invalid"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
+					Outputs="invalid"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
+					Outputs="invalid"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release Static|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev $(SolutionDir)\..\.. $(InputDir)$(InputFileName) $(InputDir)$(InputName).inl&#x0D;&#x0A;"
+					Outputs="invalid"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
 			RelativePath="..\..\xfx_errorcodes.h"
 			>
 		</File>

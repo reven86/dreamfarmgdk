@@ -76,7 +76,7 @@ public:
 	Renderer_CVarsRegistrant				( )
 	{
 #define REGISTER_VAR( var_name, def_value, flags ) \
-		var_name = Cmd::Instance( ).Register( #var_name, String( def_value ), flags );
+		var_name = Cmd::Instance( ).RegisterVar( #var_name, String( def_value ), flags );
 
 		//
 		// Vars

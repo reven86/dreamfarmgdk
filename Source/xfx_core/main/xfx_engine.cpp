@@ -21,7 +21,7 @@ _XFX_BEGIN
 // Variables
 //
 
-const String Engine::msVersion( "1.0.$WCREV$" );
+#include "xfx_engine_ver.inl"
 
 
 
@@ -41,6 +41,12 @@ Engine::~Engine( )
 
 bool Engine::Init( bool init_input )
 {
+	if( mEngineLogPtr )
+	{
+		// if the log pointer is not null, then the engine is currently initialized
+		return false;
+	}
+
 	mEngineLogPtr.reset( new class Log( g_logfile->Value( ) ) );
 
 	gMess( "Initializing xfx:" );
@@ -98,6 +104,8 @@ bool Engine::Init( bool init_input )
 	gMess( "Initialization xfx was successfully completed!" );
 	gMess( "" );
 
+	Cmd::Instance( ).SetExecutionContext( Cmd::EEC_CODE );
+
 	return true;
 }
 
@@ -107,8 +115,15 @@ bool Engine::Shutdown( )
 
 	Input::Instance( ).Shutdown( );
 
+	// reset all variables, so the next time InitEngine is called
+	// the variables will be in the initial state
+	Cmd::Instance( ).ResetVariables( true );
+	Cmd::Instance( ).SetExecutionContext( Cmd::EEC_CODE );
+
 	gMess( "" );
 	gMess( "Shutting down xfx." );
+
+	mEngineLogPtr.reset( );
 
 	return true;
 }

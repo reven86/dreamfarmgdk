@@ -23,18 +23,18 @@ _XFX_BEGIN
  *	This class stores all running Lua State Machines.
  *
  *	Lua State Machine is defined as two lua tables: one for algorithm and one for data.
- *	The first lua table must have one specific functions "start", 
+ *	The first lua table must have one specific function "start", 
  *	which is called when state machine starts.
  *	Each function in first table should return next state function name.
  *	If function with returned name is not exists in table, lua call its panic function.
- *	To finish state machine return "" (empty) state.
- *	To setup timer call SM_SetTimer function with current state machine id, state name, time value in 
+ *	To finish state machine, return "" (empty) state.
+ *	To setup timer, call SM_SetTimer function with current state machine id, state name, time value in 
  *	100 microseconds and return "time_wait".
  *	The second lua table consist of data. This table is passed to each state in state machine.
  *
  *	Each function in algorithmic table takes two arguments.
- *	The first is current executed state machine id. This id should only be used in SM_SetTimer function to
- *	represent current state machine. This id can be different at different time slices, but not changed during 
+ *	The first one is current executed state machine id. This id should only be used in SM_SetTimer function to
+ *	represent current state machine. This id can be different at different time slices, but is not changed during 
  *	state execution time.
  *	The second argument is data table.
  *
@@ -44,14 +44,14 @@ _XFX_BEGIN
  -- declare algorith table.
  example_sm =
  {
-	init = function( sm_id, data )
+	start = function( sm_id, data )
 		data.test_member = "test string";
 
 		-- set one second timer to invoke state "time".
 		SM_SetTimer( sm_id, "time", 10000 );
 
 		-- note: "wait" state is absent, but we set timer.
-		return "wait";
+		return "time_wait";
 	end;
 
 	time = function( sm_id, data )
@@ -93,7 +93,7 @@ class LuaSMManager : public Singleton< LuaSMManager >
 		//! Defaut constructor.
 		StateMachine			( ) : state( "start" ), local_time( 0 ) { };
 
-		//! Another one constructor.
+		//! Another constructor.
 		StateMachine			( int i, luabind::object& alg, luabind::object& d ) : local_time( 0 ), id( i ), algorithm( alg ), data( d ), state( "start" ) { };
 	};
 

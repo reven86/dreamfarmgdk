@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="8.00"
 	Name="xfx_test"
 	ProjectGUID="{A02883FC-5456-4206-9308-014E471BE13B}"
 	RootNamespace="xfx_test"
@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Shipping|Win32"
-			OutputDirectory="../../../../../"
+			OutputDirectory="../../../../../Tools/Bin/Tests"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\shipping.vsprops"
@@ -91,7 +91,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../../../"
+			OutputDirectory="../../../../../Tools/Bin/Tests"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\debug.vsprops"
@@ -115,7 +115,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/Zm143"
+				AdditionalOptions="/Zm155"
 				AdditionalIncludeDirectories="&quot;../../../../third_party/lua-5.0.2/include&quot;;../../../../third_party/luabind;&quot;../../../../third_party/cegui-0.6.1/include&quot;;&quot;../../../../third_party/cegui-0.6.1/scriptingmodules/ceguilua/luascriptmodule/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 			/>
@@ -130,6 +130,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\$(ProjectName)_debug.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../../../../GDK/Lib"
 				GenerateDebugInformation="true"
@@ -193,6 +194,10 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_test.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_test_main.inl"
 			>
 		</File>
 		<File

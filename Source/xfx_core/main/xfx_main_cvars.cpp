@@ -143,7 +143,7 @@ public:
 	Main_CVarsRegistrant				( )
 	{
 #define REGISTER_VAR( var_name, def_value, flags ) \
-		var_name = Cmd::Instance( ).Register( #var_name, String( def_value ), flags );
+		var_name = Cmd::Instance( ).RegisterVar( #var_name, String( def_value ), flags );
 
 		//
 		// Vars
@@ -164,13 +164,13 @@ public:
 		//
 
 #define REGISTER_CMD( cmd_name, flags ) \
-		Cmd::Instance( ).Register( #cmd_name, cmd_##cmd_name, flags );
+		Cmd::Instance( ).RegisterCmd( #cmd_name, cmd_##cmd_name, flags );
 
-		Cmd::Instance( ).Register(
+		Cmd::Instance( ).RegisterCmd(
 			"bind",					boost::bind( &Input::Cmd_bind, boost::ref( Input::Instance( ) ), false, _1 ),	Cmd::ECF_DEFAULT
 			);
 
-		Cmd::Instance( ).Register(
+		Cmd::Instance( ).RegisterCmd(
 			"bindc",				boost::bind( &Input::Cmd_bind, boost::ref( Input::Instance( ) ), true, _1 ),	Cmd::ECF_DEFAULT
 			);
 

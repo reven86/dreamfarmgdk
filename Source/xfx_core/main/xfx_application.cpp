@@ -32,6 +32,14 @@ Application::Application( ) :
 
 HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WString& wndclass, const WString& caption )
 {
+	if( mhInstance != 0 )
+	{
+		// mhInstance must be real instance, and if it not null
+		// then InitEngine is called more than once, or
+		// Shutdown was not called
+		return XFXERR_INVALIDCALL;
+	}
+
 	mhInstance			= inst;
 	mCommandLine		= cmdline;
 	mWndClass			= wndclass;
@@ -69,6 +77,9 @@ void Application::Shutdown( )
 	Engine::Instance( ).Shutdown( );
 	//Audio::Instance ().Free ();
 	UnregisterClass( mWndClass.c_str( ), mhInstance );
+
+	mhInstance = 0;
+	mWnd = 0;
 }
 
 void Application::MainLoop( )
@@ -93,7 +104,7 @@ void Application::MainLoop( )
 
 			{
 				PROFILE( "xfx::Application::MessageLoop", "General" );
-				if( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
+				if( PeekMessage( &msg, hWnd( ), 0, 0, PM_REMOVE ) )
 				{
 					TranslateMessage	( &msg );
 					DispatchMessageW	( &msg );

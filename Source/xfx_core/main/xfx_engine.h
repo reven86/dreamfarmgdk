@@ -32,7 +32,11 @@ class Engine : public Singleton< Engine >
 {
 	friend class Singleton< Engine >;
 
-	//! Version string. Generated through control version system.
+	//! Version string. Generated through SVN.
+	static const int						msVersionMajor;
+	static const int						msVersionMinor;
+	static const int						msVersionBuild;
+	static const String						msVersionBuildDate;
 	static const String						msVersion;
 
 	boost::scoped_ptr< class Log >			mEngineLogPtr;
@@ -45,7 +49,7 @@ protected:
 public:
 	/*!	\brief %Engine initialization.
 	 *	
-	 *	Initialize engine by window handle. Performs next tasks:
+	 *	Initializes engine by window handle. Performs next tasks:
 	 *	- gather OS information
 	 *	- gather CPU information
 	 *	- initialize input system (calls Input::Init)
@@ -58,15 +62,28 @@ public:
 
 	/*!	\brief %Engine deinitialization.
 	 *
-	 *	Flush all Caches, deinitialize Input, deinitialize Render.
+	 *	Flushes all Caches, deinitializes Input.
 	 *
 	 *	\return Always return \b true.
 	 */
 	bool									Shutdown					( );
 
-	const String&							Version						( ) const { return msVersion; };
+	//! Gets engine major version number.
+	const int&								GetVersionMajor				( ) const { return msVersionMajor; };
 
-	/*! \brief Write message to common log file.
+	//! Get engine minor version number.
+	const int&								GetVersionMinor				( ) const { return msVersionMinor; };
+
+	//! Get engine build number.
+	const int&								GetVersionBuild				( ) const { return msVersionBuild; };
+
+	//! Get engine build date as string.
+	const String&							GetVersionBuildDate			( ) const { return msVersionBuildDate; };
+
+	//! Gets engine full version as string.
+	const String&							GetVersionFull				( ) const { return msVersion; };
+
+	/*! \brief Writes message to common log file.
 	 *
 	 *	\param[in]	type	Message type.
 	 *	\param[in]	msg		Message.

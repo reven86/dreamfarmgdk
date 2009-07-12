@@ -1,0 +1,5 @@
+const int Engine::msVersionMajor = 2;
+const int Engine::msVersionMinor = 0;
+const int Engine::msVersionBuild = $WCREV$;
+const String Engine::msVersionBuildDate( "$WCNOW$" );
+const String Engine::msVersion( boost::str( xfx::StringFormat( "%d.%d, Build %d - Date %s%s." ) % Engine::msVersionMajor % Engine::msVersionMinor % Engine::msVersionBuild % Engine::msVersionBuildDate % $WCMODS?" (local modifications)":""$ ) );

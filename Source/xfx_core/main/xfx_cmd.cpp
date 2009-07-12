@@ -23,32 +23,30 @@ Cmd::Cmd( ) :
 {
 }
 
-Var * Cmd::Register( const String& var, const String& def, const DWORD& flags )
+Var * Cmd::RegisterVar( const String& var, const String& def, const DWORD& flags )
 {
 	String var_copy( boost::to_lower_copy( var ) );
 
-	_ASSERTE( mVariables.find( var_copy ) == mVariables.end( ) );
+	Var * res = new Var( def );
 
 	VariablesType::iterator it = mVariables.find( var_copy );
 	if( it != mVariables.end( ) )
-		return ( *it ).second.first.get( );
+		( *it ).second = std::make_pair( boost::shared_ptr< Var >( res ), flags );
+	else
+		mVariables.insert( VariablesType::value_type( var_copy, std::make_pair( boost::shared_ptr< Var >( res ), flags ) ) );
 
-	Var * res = new Var( def );
-
-	mVariables.insert( VariablesType::value_type( var_copy, std::make_pair( boost::shared_ptr< Var >( res ), flags ) ) );
 	return res;
 }
 
-void Cmd::Register( const String& cmd, const boost::function1< void, String >& fn, const DWORD& flags )
+void Cmd::RegisterCmd( const String& cmd, const boost::function1< void, String >& fn, const DWORD& flags )
 {
 	String cmd_copy( boost::to_lower_copy( cmd ) );
 
-	_ASSERTE( mCommands.find( cmd_copy ) == mCommands.end( ) );
-
-	if( mCommands.find( cmd_copy ) != mCommands.end( ) )
-		return;
-
-	mCommands.insert( CommandsType::value_type( cmd_copy, std::make_pair( fn, flags ) ) );
+	CommandsType::iterator it = mCommands.find( cmd_copy );
+	if( it != mCommands.end( ) )
+		( *it ).second.first = fn;
+	else
+		mCommands.insert( CommandsType::value_type( cmd_copy, std::make_pair( fn, flags ) ) );
 }
 
 DWORD Cmd::GetVarFlags( const String& var ) const
@@ -100,10 +98,31 @@ void Cmd::Execute( const String& name )
 		if( tok[ 0 ] == ';' )
 		{
 			ExecOneCommand( cur_cmd );
-			cur_cmd = tok.substr( tok.find_first_not_of( ';' ) );
+
+			String::size_type s2 = tok.find_first_not_of( ';' );
+			if( s2 != String::npos )
+			{
+				cur_cmd = '\"';
+				cur_cmd += tok.substr( s2 ) + "\" ";
+			}
+			else
+				cur_cmd.clear( );
 		}
 		else
 		{
+			String::size_type s2 = 0;
+			String new_tok = next_token( tok, s2, ";" );
+
+			if( !tok.empty( ) && tok[ 0 ] == '\"' && tok[ tok.size( ) - 1 ] == '\"' && new_tok.size( ) == tok.size( ) - 2 )
+			{
+				tok = String( "\\\"" ) + new_tok + "\\\"";
+			}
+			else if( new_tok.size( ) != tok.size( ) )
+			{
+				s = s - tok.size( ) + new_tok.size( ) - 1;
+				tok = new_tok;
+			}
+
 			cur_cmd += '\"';
 			cur_cmd += tok + "\" ";
 		}
@@ -215,6 +234,15 @@ const String& Cmd::FindAlias( const String& cmd ) const
 	}
 
 	return( *it ).second;
+}
+
+void Cmd::ResetVariables( bool reset_all )
+{
+	BOOST_FOREACH( VariablesType::value_type& v, mVariables )
+	{
+		if( reset_all || ( v.second.second & EVF_AUTORESET ) != 0 )
+			v.second.first->Reset( );		
+	}
 }
 
 

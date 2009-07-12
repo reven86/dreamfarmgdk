@@ -149,7 +149,7 @@ public:
 
 	void								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
 	void								RemoveSearchPath			( const String& path );
-	void								RemoveAllSearchPaths		( );
+	void								RemoveAllSearchPathes		( );
 
 	void								AddPack						( const boost::shared_ptr< class Pack >& pack );
 
@@ -191,7 +191,7 @@ void FileSystem::FileSystem_impl::RemoveSearchPath( const String& path )
 	mSearchPaths.erase( std::remove( mSearchPaths.begin( ), mSearchPaths.end( ), path ), mSearchPaths.end( ) );
 }
 
-void FileSystem::FileSystem_impl::RemoveAllSearchPaths( )
+void FileSystem::FileSystem_impl::RemoveAllSearchPathes( )
 {
 	mSearchPaths.clear( );
 	mSearchPaths.push_back( "" );
@@ -349,9 +349,9 @@ void FileSystem::RemoveSearchPath( const String& path )
 	mImpl->RemoveSearchPath( path );
 }
 
-void FileSystem::RemoveAllSearchPaths( )
+void FileSystem::RemoveAllSearchPathes( )
 {
-	mImpl->RemoveAllSearchPaths( );
+	mImpl->RemoveAllSearchPathes( );
 }
 
 void FileSystem::AddPack( const boost::shared_ptr< class Pack >& pack )

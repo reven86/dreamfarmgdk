@@ -144,8 +144,8 @@ public:
 	//! Seach path priority value.
 	enum ESearchPathPriority
 	{
-		ESPP_LOW,						//!< Low search path priority
-		ESPP_HIGH,						//!< High search path priority
+		ESPP_LOW,						//!< Low search path priority, i.e. checked at last.
+		ESPP_HIGH,						//!< High search path priority, i.e. checked at first.
 	};
 
 private:
@@ -166,7 +166,7 @@ public:
 	 *	\note By default one search path added on FileSystem initialization.
 	 *	This search path is "", it cannot be deleted and has low priority.
 	 *
-	 *	\param[in]	path		New search path.
+	 *	\param[in]	path		New search path with '\\' at the end.
 	 *	\param[in]	priority	Search path priority.
 	 */
 	void								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
@@ -185,7 +185,7 @@ public:
 	 *	\note By default one search path added on FileSystem initialization.
 	 *	This search path is "", it cannot be deleted and has low priority.
 	 */
-	void								RemoveAllSearchPaths		( );
+	void								RemoveAllSearchPathes		( );
 
 	/*! \brief Add pack to file system
 	 *
@@ -208,8 +208,8 @@ public:
 	/*! \brief Read file contents.
 	 *
 	 *	\param[in] file		File name.
-	 *	\param[out] buf		Buffer where to hold file data.
-	 *	\note Buffer must be large enough to hold data.
+	 *	\param[out] buf		Buffer where to store file data.
+	 *	\note Buffer must be large enough to store data.
 	 *
 	 *	\return
 	 *	- S_OK if file was found;

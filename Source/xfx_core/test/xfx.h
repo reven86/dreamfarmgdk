@@ -75,7 +75,7 @@
 //#include <boost/algorithm/string.hpp>
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
-//#include <boost/thread.hpp>
+#include <boost/thread.hpp>
 #include <boost/foreach.hpp>
 #include <boost/type_traits.hpp>
 
