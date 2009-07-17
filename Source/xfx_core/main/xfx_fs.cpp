@@ -149,9 +149,10 @@ public:
 
 	void								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
 	void								RemoveSearchPath			( const String& path );
-	void								RemoveAllSearchPathes		( );
+	void								RemoveAllSearchPaths		( );
 
 	void								AddPack						( const boost::shared_ptr< class Pack >& pack );
+	void								RemoveAllPacks				( );
 
 	HRESULT								FindFile					( const String& file, boost::shared_ptr< class Pack > * pack ) const;
 	HRESULT								ReadFile					( const String& file, void * buf ) const;
@@ -191,7 +192,7 @@ void FileSystem::FileSystem_impl::RemoveSearchPath( const String& path )
 	mSearchPaths.erase( std::remove( mSearchPaths.begin( ), mSearchPaths.end( ), path ), mSearchPaths.end( ) );
 }
 
-void FileSystem::FileSystem_impl::RemoveAllSearchPathes( )
+void FileSystem::FileSystem_impl::RemoveAllSearchPaths( )
 {
 	mSearchPaths.clear( );
 	mSearchPaths.push_back( "" );
@@ -200,6 +201,11 @@ void FileSystem::FileSystem_impl::RemoveAllSearchPathes( )
 void FileSystem::FileSystem_impl::AddPack( const boost::shared_ptr< class Pack >& pack )
 {
 	mPacks.push_back( pack );
+}
+
+void FileSystem::FileSystem_impl::RemoveAllPacks( )
+{
+	mPacks.clear( );
 }
 
 boost::shared_ptr< FileSystem::FileSystem_impl::FileObjectProxyBase > FileSystem::FileSystem_impl::GetFileObject( const String& filename, const EOpenMode& mode ) const
@@ -245,9 +251,17 @@ boost::shared_ptr< FileSystem::FileSystem_impl::FileObjectProxyBase > FileSystem
 			res.reset( new DiskFileObjectProxy( f ) );
 			break;
 		}
+	}
 
-		if( !found_pack )
+	// if file was not found on disk, look for it in packs
+	if( sp_it == mSearchPaths.end( ) )
+		for( sp_it = mSearchPaths.begin( );
+			 sp_it != mSearchPaths.end( ) && !found_pack;
+			 ++sp_it )
 		{
+			String new_file_name( *sp_it + filename );
+			boost::algorithm::to_lower( new_file_name );
+
 			// search in packs
 			for( std::vector< boost::shared_ptr< Pack > >::const_iterator p_it = mPacks.begin( );
 				 p_it != mPacks.end( );
@@ -263,12 +277,9 @@ boost::shared_ptr< FileSystem::FileSystem_impl::FileObjectProxyBase > FileSystem
 				}
 			}
 		}
-	}
 
 	if( !res && found_pack )
-	{
 		res.reset( new PackFileObjectProxy( found_pack, pack_file_it ) );
-	}
 
 	return res;
 }
@@ -349,14 +360,19 @@ void FileSystem::RemoveSearchPath( const String& path )
 	mImpl->RemoveSearchPath( path );
 }
 
-void FileSystem::RemoveAllSearchPathes( )
+void FileSystem::RemoveAllSearchPaths( )
 {
-	mImpl->RemoveAllSearchPathes( );
+	mImpl->RemoveAllSearchPaths( );
 }
 
 void FileSystem::AddPack( const boost::shared_ptr< class Pack >& pack )
 {
 	mImpl->AddPack( pack );
+}
+
+void FileSystem::RemoveAllPacks( )
+{
+	mImpl->RemoveAllPacks( );
 }
 
 HRESULT FileSystem::FindFile( const String& file, boost::shared_ptr< class Pack > * pack ) const

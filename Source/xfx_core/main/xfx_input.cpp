@@ -203,6 +203,10 @@ Input::~Input( )
 
 HRESULT Input::Init( )
 {
+	// you can't call Init multiple times without calling Shutdown
+	if( mpInput )
+		return XFXERR_INVALIDCALL;
+
 	//Initialization input system
 	HRESULT res;
 
@@ -274,6 +278,9 @@ HRESULT Input::Shutdown( )
 
 	gMess ("");
 	gMess ("Shutting down input system:");
+
+	// remove all commands
+	std::fill( &mCommands[ 0 ][ 0 ], &mCommands[ MAX_KEYS ][ MAX_STATES ], "" );
 
 	if (mpMouse)
 	{

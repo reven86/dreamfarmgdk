@@ -22,10 +22,10 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\debug.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
-			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -80,11 +80,11 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\release.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
-			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -139,11 +139,11 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\shipping.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops"
 			CharacterSet="1"
-			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -198,11 +198,11 @@
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\..\..\Build\VC80\PropertySheets\common.vsprops;..\..\..\..\..\Build\VC80\PropertySheets\release_static.vsprops"
 			CharacterSet="1"
-			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;$(TargetPath);xfx_engine_ver.inl"
 			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"

@@ -111,7 +111,7 @@ BOOST_AUTO_TEST_CASE( engine )
 void test_pack( Pack& p )
 {
 	BOOST_CHECK( p.GetFirstFile( ) != p.GetLastFile( ) );
-	BOOST_CHECK_EQUAL( std::distance( p.GetFirstFile( ), p.GetLastFile( ) ), ( DWORD )2 );
+	BOOST_CHECK_EQUAL( ( DWORD )std::distance( p.GetFirstFile( ), p.GetLastFile( ) ), ( DWORD )2 );
 
 	Pack::FileIterator f1_iter = p.FindFile( "dir1\\file1.txt" );
 
@@ -151,17 +151,18 @@ void test_pack( Pack& p )
 
 BOOST_AUTO_TEST_CASE( pack )
 {
-	Pack p;
-	BOOST_CHECK( p.GetFirstFile( ) == p.GetLastFile( ) );
+	Pack p[ 3 ];
+	BOOST_CHECK( p[ 0 ].GetFirstFile( ) == p[ 0 ].GetLastFile( ) );
 
 	// create this pack from folder
-	BOOST_CHECK_EQUAL( p.CreateFromDirectory( "PackData", "pack1.pack" ), S_OK );
-	test_pack( p );
+	BOOST_CHECK_EQUAL( p[ 0 ].CreateFromDirectory( "PackData", "pack1.pack" ), S_OK );
+	test_pack( p[ 0 ] );
+	p[ 0 ].ClosePack( );
 
-	BOOST_CHECK_EQUAL( p.LoadFile( "pack1.pack" ), S_OK );
-	test_pack( p );
+	BOOST_CHECK_EQUAL( p[ 1 ].LoadFile( "pack1.pack" ), S_OK );
 
 	FILE * pfile = fopen( "pack1.pack", "rb" );
+	BOOST_CHECK_NE( pfile, ( FILE * )NULL );
 	if( pfile )
 	{
 		boost::shared_ptr< FILE > p_guard( pfile, boost::bind( &fclose, _1 ) );
@@ -173,9 +174,14 @@ BOOST_AUTO_TEST_CASE( pack )
 		boost::uint8_t * mem = reinterpret_cast< boost::uint8_t * >( _alloca( pack_size ) );
 		fread( mem, pack_size, 1, pfile );
 
-		BOOST_CHECK_EQUAL( p.LoadMemory( mem, pack_size ), S_OK );
-		test_pack( p );
+		BOOST_CHECK_EQUAL( p[ 2 ].LoadMemory( mem, pack_size ), S_OK );
 	}
+	//this->add( BOOST_PARAM_TEST_CASE( &test_pack, &p[ 0 ], &p[ 3 ] ) );
+	std::for_each(
+		&p[ 1 ],
+		&p[ 3 ],
+		boost::bind( &test_pack, _1 )
+		);
 }
 
 BOOST_AUTO_TEST_CASE( fs )
@@ -205,17 +211,69 @@ BOOST_AUTO_TEST_CASE( fs )
 	xfx::FileSystem::Instance( ).RemoveSearchPath( "FileData\\dir1\\" );
 
 	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).GetFileSize( "file1.txt", len ), S_OK );
-	BOOST_CHECK_EQUAL( len, 5 );
+	BOOST_CHECK_EQUAL( len, ( DWORD )5 );
 
 	mem = reinterpret_cast< boost::uint8_t * >( _alloca( sizeof( boost::uint8_t ) * len ) );
 	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).ReadFile( "file1.txt", mem ), S_OK );
 
 	BOOST_CHECK( !memcmp( mem, "file1", len ) );
 
-	xfx::FileSystem::Instance( ).RemoveAllSearchPathes( );
+	xfx::FileSystem::Instance( ).RemoveAllSearchPaths( );
 	BOOST_CHECK_NE( xfx::FileSystem::Instance( ).FindFile( "file1.txt" ), S_OK );
 
 	// test packs
+	boost::shared_ptr< Pack > p( new Pack( ) ), p_test;
+	p->LoadFile( "pack1.pack" );
+	xfx::FileSystem::Instance( ).AddPack( p );
+
+	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).FindFile( "file2.txt", &p_test ), S_OK );
+	BOOST_CHECK_EQUAL( p, p_test );
+	xfx::FileSystem::Instance( ).AddSearchPath( "FileData\\" );
+	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).FindFile( "dir1\\file1.txt", &p_test ), S_OK );
+	BOOST_CHECK( p_test == NULL );
+
+	BOOST_CHECK_EQUAL( xfx::FileSystem::Instance( ).WriteFile( "dir1\\file3.txt", "test", 4 ), S_OK );
+
+	xfx::FileSystem::Instance( ).RemoveAllSearchPaths( );
+	xfx::FileSystem::Instance( ).RemoveAllPacks( );
+}
+
+BOOST_AUTO_TEST_CASE( input )
+{
+	BOOST_CHECK_EQUAL( Input::Instance( ).Init( ), S_OK );
+	BOOST_CHECK_NE( Input::Instance( ).Init( ), S_OK );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Shutdown( ), S_OK );
+	BOOST_CHECK_NE( Input::Instance( ).Shutdown( ), S_OK );
+
+	BOOST_CHECK_EQUAL( ::Application::Instance( ).InitEngine( static_cast< HINSTANCE >( GetCurrentProcess( ) ), "-?", L"TestWndClass", L"TestWndCaption" ), S_OK );
+	Input::Instance( ).RetrieveData( );
+	BOOST_CHECK_EQUAL( Input::Instance( ).TestKey( DIK_Q ), false );
+	// don't know how to check key pressing and command execution
+	/*
+	SendMessage( gGetApplication( ).hWnd( ), WM_KEYDOWN, 'Q', 0x00110000 );
+	Input::Instance( ).RetrieveData( );
+	BOOST_CHECK_EQUAL( Input::Instance( ).TestKey( DIK_Q ), true );
+	*/
+
+	Input::Instance( ).Command( DIK_W, Input::FIRST_PUSHED, "cmd1" );
+	Input::Instance( ).Command( DIK_W, Input::PUSHED, "cmd2" );
+	Input::Instance( ).Command( DIK_W, Input::POPED, "cmd3" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_W, Input::FIRST_PUSHED ), "cmd1" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_W, Input::PUSHED ), "cmd2" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_W, Input::POPED ), "cmd3" );
+
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::FIRST_PUSHED ), "" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::PUSHED ), "" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::POPED ), "" );
+	Cmd::Instance( ).Execute( "bind +q qcmd1" );
+	Cmd::Instance( ).Execute( "bind q qcmd2" );
+	Cmd::Instance( ).Execute( "bind -q qcmd3" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::FIRST_PUSHED ), "qcmd1" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::PUSHED ), "qcmd2" );
+	BOOST_CHECK_EQUAL( Input::Instance( ).Command( DIK_Q, Input::POPED ), "qcmd3" );
+
+	BOOST_CHECK_EQUAL( Input::Instance( ).Shutdown( ), S_OK );
+	::Application::Instance( ).Shutdown( );
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

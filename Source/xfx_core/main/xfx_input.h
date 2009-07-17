@@ -60,7 +60,7 @@ public:
 	enum STATES
 	{
 		FIRST_PUSHED = 0,				//!< First pushed
-		PUSHED,							//!< Was pushed and still pushed now
+		PUSHED,							//!< Was pushed and is still being pushed now
 		POPED,							//!< Just poped
 
 		MAX_STATES
@@ -169,6 +169,9 @@ public:
 	const bool&					UseKeyMapping			( ) const { return mUseKeyMapping; };
 
 	/*! \brief Bind command, used in console.
+	 *
+	 *	\param[in]	in_console	Command will be executed even when console is active.
+	 *	\param[in]	str			Command.
 	 */
 	void						Cmd_bind				( bool in_console, const String& str );
 

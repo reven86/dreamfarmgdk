@@ -130,8 +130,9 @@ public:
  *	\ingroup FSGroup
  *
  *	File system class. Provides methods for file search, read and write operations.
+ *	Files on disk have higher search priority than files in packs.
  *	
- *	\note File system doesn't support Wide Char file names.
+ *	\note File system doesn't support wide char file names.
  *	\todo Implement wide char file names in FileSystem class.
  *	\author Andrew "RevEn" Karpushin
  */
@@ -185,13 +186,17 @@ public:
 	 *	\note By default one search path added on FileSystem initialization.
 	 *	This search path is "", it cannot be deleted and has low priority.
 	 */
-	void								RemoveAllSearchPathes		( );
+	void								RemoveAllSearchPaths		( );
 
 	/*! \brief Add pack to file system
 	 *
 	 *	\param[in]		pack	Pack file shared pointer.
 	 */
 	void								AddPack						( const boost::shared_ptr< class Pack >& pack );
+
+	/*! \brief Removes all packs added to file system.
+	 */
+	void								RemoveAllPacks				( );
 
 	/*! \brief Search file by name.
 	 *
@@ -229,6 +234,8 @@ public:
 	HRESULT								GetFileSize					( const String& file, unsigned long& len ) const;
 
 	/*! \brief Write file.
+	 *
+	 *	WriteFile works only for files on disk and not for packs.
 	 *
 	 *	\param[in] file		File name.
 	 *	\param[in] buf		Buffer to write.

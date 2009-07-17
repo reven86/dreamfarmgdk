@@ -83,6 +83,7 @@
 // Boost.Test
 #define BOOST_TEST_MODULE "XFX Test"
 #include <boost/test/unit_test.hpp>
+#include <boost/test/parameterized_test.hpp>
 
 
 // Boost.MPL
