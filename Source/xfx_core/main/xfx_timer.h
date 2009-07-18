@@ -7,7 +7,7 @@
 #pragma once
 
 /*!	\file xfx_timer.h 
- *	\brief %Timer, based on Performance Counters.
+ *	\brief %Timer, based on QueryPerformanceCounter.
  */
 
 _XFX_BEGIN
@@ -20,7 +20,7 @@ _XFX_BEGIN
  *	\brief %Timer class.
  *	\ingroup MainGroup
  *	
- *	Provides next time methods:
+ *	Provides following time methods:
  *	- Get current time.
  *	- Get time between two polls (in 100 microsecondes).
  *	- Pause/Resume timer.
@@ -52,7 +52,7 @@ public:
 	//! Get elapsed time in 100 microseconds.
 	const DWORD&				MicroSeconds100		( ) const { return m100MicroSeconds; };
 
-	//! Set elapsed time.
+	//! Set elapsed time. Accuracy is 1ms.
 	void						MicroSeconds100		( DWORD time ) { mstarttime.QuadPart += __int64( m100MicroSeconds - time ) * mTicksPerSecond.QuadPart / 10000; Update( ); };
 
 	//! Get 'paused' flag.

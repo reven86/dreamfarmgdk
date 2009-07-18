@@ -25,9 +25,8 @@ _XFX_BEGIN
  *	\brief Text resource storage.
  *	\ingroup MainGroup
  *
- *	Stores text resources in one logical storage calles MessagesBook.
- *	Example where to use books: user interface, game-specific content, etc.
- *	Book stores resouces in hash map and for each language specific resources there exists its tech name.
+ *	Stores localizable text resources in one logical storage.
+ *	Book stores resouces in hash map and each language-specific resources contains its tech name.
  *
  *	MessagesBook file syntax can be found at section \ref messagesbook_script.
  *
@@ -45,7 +44,7 @@ messages_book
 {
 	entry SYS_gameover
 	{
-		text		"Here is game over message"
+		text		"Here is Game Over messege"
 	}
 
 	// other entries...
@@ -54,8 +53,8 @@ messages_book
  *	
  *	Description:
  *
- *	\b entry		-	Describes a book entry. Next to entry keyword is entry tech name. \n
- *	\b text			-	Entry text.
+ *	\b entry		-	Describes a book entry. Following the entry keywork there is tech name. \n
+ *	\b text			-	Entry text in UTF8 format.
  *
  *	\see MessagesBook, BooksManager.
  *
@@ -115,10 +114,10 @@ private:
 
 
 /*! \class BooksManager xfx_messagesbook.h "utility/xfx_messagesbook.h"
- *	\brief Holds collection of MessagesBook.
+ *	\brief Holds collection of MessagesBooks.
  *	\ingroup UtilityGroup
  *
- *	General interface or holding collections of MessagesBook.
+ *	General interface of collection of MessagesBook.
  *
  *	\author Andrew "RevEn" Karpushin
  */

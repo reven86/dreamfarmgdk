@@ -25,12 +25,16 @@ Timer::Timer( ) :
 {
 	QueryPerformanceFrequency	( &mTicksPerSecond );
 	QueryPerformanceCounter		( &mstarttime );
+	mslasttime = mstarttime;
 }
 
 void Timer::Pause( )
 {
-	mIsPaused = true;
-	QueryPerformanceCounter( &moldtime );
+	if( !mIsPaused )
+	{
+		mIsPaused = true;
+		QueryPerformanceCounter( &moldtime );
+	}
 }
 
 void Timer::Resume( )
@@ -51,7 +55,9 @@ void Timer::Update( )
 	QueryPerformanceCounter( &currenttime );
 
 	m100MSPF = static_cast< DWORD >( ( currenttime.QuadPart - mslasttime.QuadPart ) * 10000 / mTicksPerSecond.QuadPart );// * mSpeed;
-	m100MicroSeconds = static_cast< DWORD >( ( currenttime.QuadPart - mstarttime.QuadPart ) * 10000 / mTicksPerSecond.QuadPart );// * mSpeed;
+
+	if( !mIsPaused )
+		m100MicroSeconds = static_cast< DWORD >( ( currenttime.QuadPart - mstarttime.QuadPart ) * 10000 / mTicksPerSecond.QuadPart );// * mSpeed;
 
 	// sometimes on AMD Athlon X2 delta between two frames can be negative
 	if( static_cast< int >( m100MSPF ) < 0 )

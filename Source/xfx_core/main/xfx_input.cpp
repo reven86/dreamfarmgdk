@@ -280,7 +280,7 @@ HRESULT Input::Shutdown( )
 	gMess ("Shutting down input system:");
 
 	// remove all commands
-	std::fill( &mCommands[ 0 ][ 0 ], &mCommands[ MAX_KEYS ][ MAX_STATES ], "" );
+	std::fill( &mCommands[ 0 ][ 0 ], &mCommands[ MAX_KEYS - 1 ][ MAX_STATES - 1 ] + 1, "" );
 
 	if (mpMouse)
 	{

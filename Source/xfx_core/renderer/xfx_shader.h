@@ -148,7 +148,7 @@ shader
  *
  *	\b map			-	Associate texture name in effect file (*.fx) with texture file. \n
  *	\b cubemap		-	Associate texture name in effect file (*.fx) with cubemap texture file. \n
- *	\b animmap		-	Associate texture name in effect file (*.fx) width animated texture file.
+ *	\b animmap		-	Associate texture name in effect file (*.fx) with animated texture file.
  *						Next to filename are frame width, frame height, FPS and total frames number. After applying \b animmap user can 
  *						use const xfx_<TexName>_time to set animation frame. (e.g. xfx_DiffuseTex_time 5.0).\n
  *	\b save_rs		-	Save render states and restore them after primitive draw call (Default: 0). \n
@@ -190,6 +190,7 @@ private:
 	boost::shared_ptr< const Effect >					mEffectPtr;
 	TextureMapsType										mTextureMaps;
 
+	// there should be Renderer::MAX_TEXTURE_STAGES
 	boost::array< TextureInfo *, 8 >					mTextureStages;
 
 	static Cache< Shader >								msCache;

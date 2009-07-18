@@ -1,0 +1,7 @@
+﻿messages_book
+{
+	entry entry1
+	{
+		text	"текст1"
+	}
+}

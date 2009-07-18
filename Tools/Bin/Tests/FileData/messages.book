@@ -1,0 +1,1095 @@
+﻿messages_book
+{
+	//
+	// System
+	//
+
+	entry SYS_loc1_name
+	{
+		text	"La Terre de la Valeur : Phuktu"
+	}
+
+	entry SYS_loc2_name
+	{
+		text	"La Terre de l'Espoir : Silvekur"
+	}
+
+	entry SYS_loc3_name
+	{
+		text	"La Terre de la Ruse : Gotion"
+	}
+
+	entry SYS_loc4_name
+	{
+		text	"La Terre de la Sagesse : Cavor"
+	}
+
+	entry SYS_loc5_name
+	{
+		text	"La Terre de la Bravoure : Clifur"
+	}
+
+	entry SYS_loc6_name
+	{
+		text	"La Terre de la Passion : Mi-Vo-Ha"
+	}
+
+	entry SYS_loc7_name
+	{
+		text	"La Terre de la Justice : Glorus"
+	}
+
+	entry SYS_loc8_name
+	{
+		text	"La Terre de l'Habilité : Kideur"
+	}
+
+	entry SYS_loc9_name
+	{
+		text	"La Terre de la Grandeur : Evalon"
+	}
+
+	entry SYS_level
+	{
+		text	"Niveau %d - %d"
+	}
+
+	entry SYS_bonus_level
+	{
+		text	"Niveau bonus"
+	}
+
+	entry SYS_default_player
+	{
+		text	"Visiteur"
+	}
+
+	entry SYS_trophy1_desc
+	{
+		text	"Pour avoir associé un groupe de 8 oeufs de même type"
+	}
+
+	entry SYS_trophy2_desc
+	{
+		text	"Pour avoir associé un groupe aux trois oeufs gelés"
+	}
+
+	entry SYS_trophy3_desc
+	{
+		text	"Pour combinaison x10"
+	}
+
+	entry SYS_trophy4_desc
+	{
+		text	"Pour l'obtention de tous les trophées"
+	}
+
+	entry SYS_trophy5_desc
+	{
+		text	"Pour être allé jusqu'au bout du jeu sans aide"
+	}
+
+	entry SYS_trophy6_desc
+	{
+		text	"Pour avoir supprimé tous les oeufs au niveau bonus"
+	}
+
+	entry SYS_trophy7_desc
+	{
+		text	"Pour avoir associé un groupe de 10 oeufs au niveau bonus"
+	}
+
+	entry SYS_trophy8_desc
+	{
+		text	"Pour avoir terminé rapidement le niveau"
+	}
+
+	entry SYS_trophy9_desc
+	{
+		text	"Pour avoir supprimé la moitié des oeufs de la carte en un mouvement"
+	}
+
+	entry SYS_trophy10_desc
+	{
+		text	"Pour avoir supprimé la ligne et la colonne en un seul mouvement"
+	}
+
+
+	//
+	// Registration
+	//
+
+	entry SYS_reg_time_left
+	{
+		text	"You have %d minutes left."
+	}
+
+	entry SYS_reg_notime_left
+	{
+		text	"Game time is finished. You need to register game."
+	}
+
+	entry SYS_reg_time_reg_but
+	{
+		text	"Register game"
+	}
+
+
+	entry SYS_reg_time_play_but
+	{
+		text	"Play game"
+	}
+
+	entry SYS_reg_buy
+	{
+		text	"Buy online"
+	}
+
+	entry SYS_reg_test
+	{
+		text	"Verify code"
+	}
+
+	entry SYS_reg_cancel
+	{
+		text	"Back"
+	}
+
+	entry SYS_reg_ok
+	{
+		text	"OK"
+	}
+
+	entry SYS_reg_valid
+	{
+		text	"Registration code is valid"
+	}
+
+	entry SYS_reg_invalid
+	{
+		text	"Registration code is invalid"
+	}
+
+	entry SYS_reg_info
+	{
+		text	
+"Thanks for being with the game \"The Book of Wanderer. The Story of Dragons\". We hope you liked playing it. The game is distributed on shareware bases. It means that there are some limits in a current version - time limit for free game is 60 minutes. 
+
+It’s necessary to get registration code and enter it below to get rid of limits. Press the button \"Buy online\" to get the code and \"Verify code\" to check the code.
+
+Register now \"The Book of Wanderer. The Story of Dragons\" to get: 
+
+- Unlimited game time and play as much as you will! 
+- Technical support and free updates. 
+- Information about new games releases and the possibility to get them with a considerable discount or for free.  
+
+Press the button \"Buy online\" to purchase the game right now!
+"
+	}
+
+	//
+	// Diary
+	//
+
+	//
+	// Phuktu
+	//
+
+	entry DIARY_note0
+	{
+		text
+"Le 13 septembre 1833
+
+Je savais que ce ne serait pas un jour de chance. Comme à l'accoutumée, je me hâtais vers mon lieu de travail pour remettre les documents. La chaleur était suffocante, ce qui était inhabituel dans notre ville, aussi je décidai de prendre un raccourci et de couper par le Bois du pendu. J'avais à peine fait quelques pas que je vis une pierre étrange au bord du chemin...
+"
+	}
+
+	entry DIARY_note1
+	{
+		text	
+"Le 13 septembre 1833
+
+Un rayon de soleil se reflétait à sa surface, formant une sorte d'auréole turquoise ressemblant à un petit pont. J'étais sous le charme et ne pus m'empêcher de toucher cette pierre qui était d'une douceur incroyable...
+
+Je revins à moi au bout de quelques heures.
+"
+	}
+
+	entry DIARY_note2
+	{
+		text	
+"Le 13 septembre 1833
+
+Je fus éveillé par une voix langoureuse. \"Willy, réveille-toi ! Tu vas bien ?\" Lorsque j'ouvris les yeux, je vis une étrange créature comme celles des histoires que me racontait ma grand-mère : une créature gigantesque au corps couvert d'écailles, avec des ailes immenses et un regard très profond. C'était un dragon, mais il portait un nom, comme un être humain. Il s'appelait Tobian.
+"
+	}
+
+	entry DIARY_note3
+	{
+		text	
+"Le 13 septembre 1833
+
+Il me dit que je me trouvais au pays des dragons et que les citoyens de ce pays étaient dotés de raison et que les histoires de mon enfance étaient vraies. La nature était d'une beauté à couper le souffle : de hautes montagnes surplombant de tous côtés une vallée riche et verdoyante. Deux rivières prenaient leur source dans ces montagnes. L'une d'entre elles faisait des méandres avant de disparaître à l'horizon et nous partîmes dans sa direction.
+"
+	}
+
+	entry DIARY_note4
+	{
+		text	
+"Le 13 septembre 1833
+
+\"Il fallait que nous te fassions quitter ton monde\", – poursuivit Tobian (Tobjan). \"Le malheur s'est abattu sur notre pays. Un sort a peut-être été jeté sur nous, mais nous ne savons ni par qui ni pourquoi. Je connais ta force de caractère et ton esprit d'initiative. Tu as ça dans le sang. Va vers l'est, vers les terres de Silvekrur. Tu y rencontreras Swelony qui en sait davantage. Il a voyagé à travers toutes nos terres et connaît tout le monde. \"
+Ma décision était prise, mon aide leur était acquise...
+"
+	} 
+
+	//
+	// Silvecur
+	//
+
+	entry DIARY_note5
+	{
+		text	
+"Le 15 septembre 1833
+
+Au moment des adieux, Tobian me donna un petit sac de poudre magique qui allait m'être très utile tout au long de mon périple. Je fus soudainement assailli par un épais brouillard rouge d'où émanait une puissance maléfique sur un chemin très glissant. Un peu de poussière magique répandue sur ma jambe m'a permis de voler pendant quelques secondes et ainsi de sauver ma vie.
+"
+	}
+
+	entry DIARY_note6
+	{
+		text	
+"Le 15 septembre 1833
+
+J'arrivai au pied de la cascade. L'eau avait la pureté du cristal et l'air était d'une fraîcheur vivifiante. J'entendais partout les cris incroyablement perçants d'oiseaux ou d'animaux exotiques. Une grande rivière prenait sa source ici. Des plantes d'un vert merveilleux poussaient sur les berges de la rivière, se frayant parmi les pierres et les rochers volumineux un chemin ressemblant à une tresse. Sur un de ces rochers, Swelony réchauffait au soleil son corps couvert d'écailles brillantes. Il m'attendait...
+"
+	}
+
+	entry DIARY_note7
+	{
+		text
+"Le 15 septembre 1833
+
+Swelony me dit qu'au pays des dragons tout être humain était doté de pouvoirs magiques. Pour les mettre en œuvre, il faut chercher et rassembler les objets porteurs du même signe. Apparaît alors, par exemple, quelque chose comme l'élixir qui se trouve dans la cuve-foyer que je tiens.
+"
+	}
+
+	entry DIARY_note8
+	{
+		text
+"Le 16 septembre 1833
+
+Aujourd'hui, j'ai eu la chance de remplir une cuve-foyer, mais je n'ai pas réussi à accomplir toute ma tâche. Swelony m'a rassuré en me disant que je trouverais les ingrédients pour d'autres sorts dans d'autres pays.
+"
+	}
+
+	entry DIARY_note9
+	{
+		text
+"Le 17 septembre 1833
+
+Au moment de nous quitter, comme avec Tobian, il me remit un sac contenant de la poudre magique, puis je me mis en route pour Gotion...
+"
+	}
+
+	//
+	// Gotion
+	//
+
+	entry DIARY_note10
+	{
+		text
+"Le 19 septembre 1833
+
+En contrebas, la rivière longeait le cañon. Au début je tentai de sauter d'une pierre à l'autre, mais plus j'avançais plus elles étaient grosses. J'étais à bout de force. Le brouillard m'entourait dans ce cañon rocailleux tapissé d'une mousse verte odorante. La rivière rugissait à 30 mètres de moi et il n'y avait plus de chemin praticable... 
+"
+	}
+
+	entry DIARY_note11
+	{
+		text
+"Le 19 septembre 1833
+
+Soudain une ombre noire apparut au-dessus de moi. \"N'aie pas peur, mon ami, grimpe sur mon dos. Je vais t'emmener dans un lieu plus hospitalier\". C'était Gomet. J'avais donc atteint le pays de Gotion...
+"
+	}
+
+	entry DIARY_note12
+	{
+		text
+"Le 19 septembre 1833
+
+Il m'emmena jusqu'à son nid où je pus reprendre des forces. J'appris que toute créature pouvait développer les mêmes capacités que les dragons grâce aux poudres magiques que Tobian et Swelony m'avaient données...
+"
+	}
+
+	entry DIARY_note13
+	{
+		text
+"Le 19 septembre 1833
+
+Gomet me dit que le monde des dragons était sous l'emprise d'une puissance maléfique que seul un être humain était à même de combattre. Mystérieusement, seul un être humain est capable de réunir toutes les qualités nécessaires. \"La poudre de Tobian te donnera l'héroïsme, celle de Swelony te permettra de ne pas perdre espoir devant les épreuves. Quant à la mienne, elle te donnera la ruse pour vaincre l'ennemi\", - poursuivit Gomet.
+"
+	}
+
+	entry DIARY_note14
+	{
+		text
+"Le 20 septembre 1833
+
+\"Nous voici à l'entrée des grottes de Kavor\", - dit Gomet en me montrant le passage sombre au pied du rocher, - \"C'est par là que tu dois poursuivre ta route. Je t'offre à présent ma poudre de   ruse.  Que   la   chance   t'accompagne !\". Gomet me remit le sac de poudre magique.
+"
+	}
+
+	//
+	// Cavor
+	//
+
+	entry DIARY_note15
+	{
+		text
+"Le 20 septembre 1833
+
+Je commençai à m'enfoncer dans les profondeurs de la grotte. J'y vis des peintures d'une sublime beauté. La grotte se subdivisait en une série de grandes salles interconnectées. Chaque salle avait un plafond en forme de coupole. Il y avait partout des stalactites et des stalagmites. Tout était recouvert d'une étrange poussière au scintillement brillant...  
+"
+	}
+
+	entry DIARY_note16
+	{
+		text
+"Le 20 septembre 1833
+
+Lorsque je pénétrai dans la salle suivante, je vis un vaste lac d'eau cristalline dont la surface était lisse comme du verre. Un vieux dragon du nom d'Oled était couché au bord de ce lac. \"Je t'attendais, Willy. Il y a près de 1000 ans que je vis ici et ces terres n'ont presque aucun secret pour moi.\", - Oled se mit à raconter.
+"
+	}	
+
+	entry DIARY_note17
+	{
+		text
+"Le 20 septembre 1833
+
+\"Depuis des temps immémoriaux, ces terres appartenaient à neuf puissants dragons. Mais en 833, un magicien du nom d'Hazerin vint sur ces terres pour les capturer et s'emparer de leur pouvoir. Cette fois, Hazerin fut vaincu et emprisonné dans une cage magique où il est resté jusqu'à ces derniers jours. Il y a deux semaines, la cage où il était enfermé a été trouvée ouverte.\"
+"
+	}
+
+	entry DIARY_note18
+	{
+		text
+"Le 20 septembre 1833
+
+\"Hazerin fut victorieux dans sa bataille contre les terres de Mi-Vo-Ha et Glorus. A présent, nous ne pourrons sans doute le défaire qu'en nous alliant à un humain. C'est pourquoi nous t'avons fait quitter ton monde pour le nôtre. Hazerin connaît ta présence au pays des dragons et il fait tout ce qu'il peut pour contrecarrer ta progression. C'est lui qui a créé ce brouillard rouge à la cascade.\"
+"
+	}
+
+	entry DIARY_note19
+	{
+		text
+"Le 20 septembre 1833
+
+\"Tu vas devoir réconcilier Rofin du volcan Mi-Vo-Ha et Isen du glacier du pays de Glorus, puis atteindre les îles volantes d'Evalon et faire savoir que tous les dragons sont prêts à combattre Hazerin. Voici un sac de poudre magique conférant la sagesse.\, - Oled me donna le sac. - \ “Bonne chance à toi Willy, et fais vite, le temps presse.\”
+"
+	}
+
+	//
+	// Clifur
+	//
+
+	entry DIARY_note20
+	{
+		text
+"Le 20 septembre 1833
+
+Une fois qu'Oled eut fini son histoire, toute la salle s'emplit d'une lumière vive de couleur émeraude. Je vis tout au fond de la salle un passage à gauche du lac qui montait. C'était le chemin à suivre. 
+"
+	}
+
+	entry DIARY_note21
+	{
+		text
+"Le 20 septembre 1833
+
+J'émergeai par dessous un gros rocher situé sur la face nord et une vue magnifique apparut à mes yeux : effilés comme des lances, les rochers s'élançaient vers le ciel, une rivière aux bouillonnements assourdissants faisait une boucle autour du volcan au bas du cañon. De la grotte d'où j'étais sorti, une sorte de chemin menait vers un rocher tricéphale vers lequel je me dirigeai car je ne vis aucun autre chemin.
+"
+	}
+
+	entry DIARY_note22
+	{
+		text
+"Le 20 septembre 1833
+
+Au début, le chemin était tout tracé, mais très vite il disparut ou je le perdis, aussi je continuai mon ascension au jugé sur des pierres de moins en moins sûres. Blessé aux doigts et aux genoux par les arêtes des pierres, je renonçai à toute prudence. J'étais fatigué et j'avais cessé de réfléchir. Je me contentais de monter aussi vite que je le pouvais jusqu'au moment où je compris que je me trouvais sur un sol extrêmement instable au bord du précipice. Les rochers commencèrent à s'écrouler... en bon ordre, comme des dominos... puis vint mon tour de chuter... 
+"
+	}
+
+	entry DIARY_note23
+	{
+		text
+"Le 20 septembre 1833
+
+Et là je sentis mon bras délicatement saisi par une énorme patte étonnamment douce dotée de griffes acérées et recourbées. Le dragon m'attrapa au vol et me déposa sur un gros rocher. Je restai en état de choc pendant un long moment. La tristesse du dragon se lisait sur ses traits tandis qu'il regardait en direction du volcan visible à l'horizon.
+"
+	}
+
+	entry DIARY_note24
+	{
+		text
+"Le 21 septembre 1833
+
+\"Je m'appelle Horon et mes frères Rofin et Isen sont brouillés à cause d'un stupide malentendu. Ils ne comprennent pas que ni l'un ni l'autre n'a quoi que ce soit à se reprocher et que tout est dû aux manigances du magicien Hazerin.\", - commença Horon.\"Que s'est-il donc passé ? Pourquoi sont-ils devenus ennemis ?\", - demandai-je.
+"
+	}
+
+	//
+	// Mivoha
+	//
+
+	entry DIARY_note25
+	{
+		text
+"Le 21 septembre 1833
+
+\"Il y a quelques jours, chacun d'eux reçut une lettre apparemment signée de l'autre, des lettres d'insulte cela va sans dire. Bien entendu ils furent choqués l'un comme l'autre, mais leurs fiertés respectives leur interdirent de se voir pour tirer les choses au clair.\", - poursuivit Horon. Je compris alors à quoi Oled avait fait allusion dans la grotte.
+"
+	}
+
+	entry DIARY_note26
+	{
+		text
+"Le 23 septembre 1833
+
+\"Je vais de ce pas les réconcilier pour aider à la lutte contre le magicien noir.\"- dis-je. \"Hâte-toi. Passe par la chaîne des Montagnes blanches. C'est la route la plus dangereuse, mais c'est aussi la seule qui permet de parvenir rapidement au volcan.\, - dit Horon. En me faisant ses adieux, il me remit un sac de poudre magique de bravoure.
+"
+	}
+
+	entry DIARY_note27
+	{
+		text
+"Le 23 septembre 1833
+
+Deux jours plus tard, je parvins au bord du cratère d'un volcan endormi. La vue était enchanteresse. Au pied du volcan s'étendait une petite forêt et une rivière toute proche coulait en méandres. Un peu plus loin, une prairie faisait un tapis vert jusqu'à l'horizon. Plus loin encore on distinguait de hauts pics enneigés. Je me retournai une dernière fois pour voir les gros rochers par où j'étais venu et je descendis dans le cratère.
+"
+	}
+
+	entry DIARY_note28
+	{
+		text
+"Le 23 septembre 1833
+
+Un dragon d'un rouge flamboyant était allongé au centre du cratère où il se réchauffait à une exhalaison émanant du cratère. \"Salut à toi, Rofin.\", - dis-je. - \"J'ai entendu parler de ta querelle avec ton frère Isen.\" \"Oui c'est vrai. J'ai reçu récemment une lettre dans laquelle Isen m'accusait d'iniquités que je n'ai pas commises. J'ai été réellement offensé et depuis je m'interdis toute communication avec lui tant que je n'aurai pas eu d'explication.\"
+"
+	}
+
+	entry DIARY_note29
+	{
+		text
+"Le 23 septembre 1833
+
+\"Isen n'est pas l'auteur de la lettre que tu as reçue. De son côté, il a reçu la même lettre signée de ton nom. Les deux lettres sont l'oeuvre du magicien Hazerin pour cherche à vous diviser. Son but est de s'emparer de toutes les terres des dragons. Et il y parviendra si vous continuez à vous quereller entre vous.\", - dis-je. \"Que j'ai été bête ! Va dire à Isen que notre brouille est terminée et que je suis prêt à défendre nos terres à ses côtés.\"
+"
+	}
+
+	//
+	// Glorus
+	//
+
+	entry DIARY_note30
+	{
+		text
+"Le 25 septembre 1833
+
+Rofin me fit ses adieux et me donna un sac de poudre magique dont l'effet est de donner de l'énergie et d'éliminer la fatigue. Pour rejoindre Isen, il fallait escalader la chaîne de montagnes et grimper au sommet du premier pic.
+"
+	}
+
+	entry DIARY_note31
+	{
+		text
+"Le 28 septembre 1833
+
+Il me fallut trois jours pour parvenir au pied de la montagne et j'entamai aussitôt mon escalade. Mon ascension était déjà bien avancée lorsque soudain le ciel se couvrit de nuages noirs et les ténèbres s'abattirent sur la terre. La température chuta et de fortes rafales de vent se mirent à souffler. En me retournant, je vis que s'approchait à toute vitesse un brouillard rouge comme celui de la cascade.
+"
+	}
+
+	entry DIARY_note32
+	{
+		text
+"Le 28 septembre 1833
+
+Le brouillard passa au-dessus de moi pour aller directement au sommet de la montagne. Il y eut ensuite un faible tremblement de terre, puis une énorme avalanche.
+"
+	}
+
+	entry DIARY_note33
+	{
+		text
+"Le 28 septembre 1833
+
+Sans perdre de temps, je cherchai du regard un abri caché et je vis, non loin de moi, l'entrée d'une petite grotte. Je courus m'y réfugier. J'étais juste entré que l'avalanche boucha l'issue. Pas moyen de faire marche arrière, il fallait que j'aille dans les profondeurs de cette grotte... Il y faisait sombre et froid. Tout en m'enfonçant toujours plus profondément je me mis à toucher les parois...
+"
+	}
+
+	entry DIARY_note34
+	{
+		text
+"Le 28 septembre 1833
+
+Au bout de quelques minutes, je distinguai un rai de lumière provenant de la paroi. Je m'en approchai et sentis un courant d'air frais sortant du même interstice que la lumière. J'écartai quelques pierres et je fus époustouflé par la beauté de la vue qui apparut par le trou que j'avais dégagé. Je tendis l'oreille attentivement et ressentis soudain une présence derrière moi...
+"
+	}
+
+	//
+	// Kideur
+	//
+
+	entry DIARY_note35
+	{
+		text
+"Le 28 septembre 1833
+
+Je me retournai et distinguai deux yeux jaunes qui brillaient dans le noir. La créature se rapprocha de la zone éclairée et je vis bientôt un dragon à l'air amical. \"Bonjour, que fais-tu ici ?\", - demanda le dragon. \"Bonjour, es-tu Isen ? Si c'est le cas, je suis porteur de bonnes nouvelles : ce n'est pas ton frère Rofin qui a envoyé la lettre, c'était un stratagème d'Hazerin.\ - dis-je.
+"
+	}
+
+	entry DIARY_note36
+	{
+		text
+"Le 28 septembre 1833
+
+\"Rofin désire te faire savoir qu'il est prêt à combattre l'ennemi côte à côte avec toi.\", - poursuivis-je. \"J'espérai bien que Rofin n'était pas coupable, mais ma fierté m'interdisait de lui parler. Je savais que notre amitié ne pouvait pas être effacée d'un seul coup. \", - dit Isen.
+"
+	}
+
+	entry DIARY_note37
+	{
+		text
+"Le 28 septembre 1833
+
+Isen m'expliqua que je devais me rendre aux îles volantes et que pour cela je devais passer par le bois magique de Kideur. Selon lui, le propriétaire de ce bois, du nom de Fircy, était très astucieux et facétieux. Lui seul pouvait m'emmener vers ces îles. Lors des adieux, Isen me présenta un sacre de poudre magique destiné à rendre plus fort.
+"
+	}
+
+	entry DIARY_note38
+	{
+		text
+"Le 30 septembre 1833
+
+Je descendis de la montagne pour arriver au bois magique. Tout y était vraiment magique : les arbres, bizarres et tordus, dont les racines traversaient des pierres brillantes pour s'enfoncer profondément dans le sol, le chant des oiseaux, les insectes, et même le vent dont le souffle faisait songer à un air de flûte. Je vis un drôle de petit dragon sur une branche d'un arbre. Dès qu'il m'aperçut, il disparut pour réapparaître près de moi.
+"
+	}
+
+	entry DIARY_note39
+	{
+		text
+"Le 30 septembre 1833
+
+\"Salut, étranger.\", - dit le dragon en surgissant derrière mon dos. - \"Que fais-tu ici ?\" \"Je m'appelle Willy et je cherche Fircy. Sais-tu où je peux le trouver ?\", - demandai-je. \"Peut-être que oui et peut-être que non ! Que lui veux-tu ?\", - demanda le dragon d'une voix joyeuse en se matérialisant à ma droite.\"Je dois me rendre à Evalon.\", - expliquai-je. \"Alors viens, je vais te mener à Fircy.\"
+"
+	}
+
+	//
+	// Evalon
+	//
+
+	entry DIARY_note40
+	{
+		text
+"Le 1er octobre 1833
+
+Nous parvînmes à l'orée de la forêt, là où commençait le précipice qui était rempli d'un brouillard épais. Le dragon s'arrêta. \"Reste ici et Fircy va apparaître.\", - dit-il avant de disparaître puis de réapparaître aussitôt - \"Fircy est là.\" – poursuivit-il avec sa drôle de voix. Il me fit un sourire que je lui rendis. Sa nature profonde était celle d'un gamin farceur et facétieux animé d'une sincère gentillesse. Fircy me donna un ruban couleur lilas roulé en boule.
+"
+	}
+
+	entry DIARY_note41
+	{
+		text
+"Le 1er octobre 1833
+
+\"Place un bout du ruban sur le sol et lance la boule vers l'horizon. N'aie pas peur, je ne plaisante plus. C'est de la magie.\"Je fis ce qu'il m'avait dit. La boule roula vers l'horizon, le brouillard surplombant le précipice se dissipa et je vis les îles volantes. Le ruban se déroula complètement jusqu'à former un pont menant à l'une des îles. 
+"
+	}
+
+	entry DIARY_note42
+	{
+		text
+"Le 1er octobre 1833
+
+Très vite je traversai le pont pour arriver sur une île verte au centre de laquelle était élevé un vaste nid fait de branchages. Un dragon doré était assis à proximité. C'était Lovard. \"Bonjour Willy.\", - dit le dragon, - \"Je te remercie d'avoir accepté de nous aider et d'avoir parcouru un tel chemin semé d'embûches. Prends ce sac de poudre magique. Cette poudre renforce la puissance de toutes les autres poudres.\"
+"
+	} 
+
+	entry DIARY_note43
+	{
+		text
+"Le 1er octobre 1833
+
+Soudain un brouillard rouge très épais se précipita sur moi avant de prendre la forme d'un être humain. Le magicien Hazerin se tenait devant nous en personne. Son regard transpirait la haine vis-à-vis de toute forme de vie. Il tenait une baguette à la main. Son visage reflétait la méchanceté la plus froide.\"Nous nous rencontrons enfin. Et tu crois pouvoir me vaincre ? Imbécile entêté !\", - dit Hazerin dardant vers moi toute la puissance de sa baguette.
+"
+	}
+
+	entry DIARY_note44
+	{
+		text
+"Le 1er octobre 1833
+
+\"Tout repose sur toi, Willy !\", - Les mots de Lovard résonnaient comme un et je mélangeai le contenu des neuf sacs de poudre magique. Une énorme boule brillante apparut et recouvrit immédiatement Hazerin pour le précipiter dans un abîme. \"Hazerin est désormais emprisonné pour toujours et il ne s'évadera plus jamais. Tu as débarrassé ces terres du sort jeté sur elles. Nous pouvons de nouveau voler.\", - dit Lovard.
+"
+	}
+
+	entry DIARY_note45
+	{
+		text
+"Le 1er octobre 1833
+
+Lovard me prit sur son dos et me déposa sur une île voisine au centre de laquelle trônait un autel de pierre. Au centre de cet autel se trouvait un cristal jaune. \"Touche le cristal pour retourner dans ton monde.\" – expliqua Lovard. Je le touchai de la paume et une inscription dans une langue que je ne connaissais pas apparut autour du cristal. Je perdis conscience... A mon réveil, je me trouvais dans ma ville et je tenais à la main une pierre portant la même inscription que sur l'autel...
+"
+	}
+
+	//
+	// Game process
+	//
+
+	entry GP_stage_bonus
+	{
+		text	"Bonus du niveau : %d"
+	}
+
+	entry GP_combo_bonus
+	{
+		text	"Bonus combo : %d x 100"
+	}
+
+	entry GP_eggs_bonus
+	{
+		text	"Bonus de groupes : %d x 100"
+	}
+
+	entry GP_total_bonus
+	{
+		text	"Bonus total : %d"
+	}
+
+	entry GP_combo
+	{
+		text	"x%d COMBO !"
+	}
+
+	entry GP_happy_text0
+	{
+		text	"Excellent !"
+	}
+
+	entry GP_happy_text1
+	{
+		text	"Magnifique !"
+	}
+
+	entry GP_happy_text2
+	{
+		text	"Superbe !"
+	}
+
+	entry GP_no_moves
+	{
+		text	"Aucun mouvement"
+	}
+
+	entry GP_bl_no_moves
+	{
+		text	"Aucun mouvement"
+	}
+
+	entry GP_bl_press_next
+	{
+		text	"Appuyez sur \"Suivant\" pour continuer"
+	}
+
+	entry GP_bl_addscore
+	{
+		text	"%d de bonus pour %d des oeufs restants"
+	}
+
+
+	//
+	// Help messages
+	//
+
+	entry HELP_basic_move
+	{
+		text	"Déplacez une ligne ou une colonne pour associer trois oeufs ou plus du même type."
+	}
+
+	entry HELP_first_stone
+	{
+		text	"L'oeuf s'est pétrifié et ne peut pas être associé à d'autres oeufs."
+	}
+
+	entry HELP_first_link
+	{
+		text	"Cet oeuf est lié à l'un des oeufs adjacents ; les deux oeufs se déplaceront ensemble."
+	}
+
+	entry HELP_first_lock
+	{
+		text	"Cet oeuf a gelé la ligne et la colonne."
+	}
+
+	entry HELP_bonus_level_desc
+	{
+		text	"Sélectionnez les groupes d'un ou de plusieurs oeufs pour effacer l'intégralité de la carte ! Plus le groupe comporte d'oeufs, plus vous obtiendrez de points !"
+	}
+
+	entry HELP_game_bonuses
+	{
+		text	"Remplissez le flacon magique pour jeter des sorts !"
+	}
+
+	entry HELP_allow_power_egg
+	{
+		text	"Vous pouvez maintenant créer des oeufs magiques en associant quatre oeufs ou davantage."
+	}
+
+	entry HELP_power_phuktu
+	{
+		text	"Associez quatre oeufs vert clair pour créer un oeuf magique capable d'effacer toute la colonne."
+	}
+
+	entry HELP_power_silvecur
+	{
+		text	"Associez quatre oeufs bleu azur pour créer un oeuf magique capable de s'associer à n'importe quel autre."
+	}
+
+	entry HELP_power_gotion
+	{
+		text	"Associez quatre oeufs marron pour créer un oeuf magique capable d'effacer toute la ligne."
+	}
+
+	entry HELP_power_cavor
+	{
+		text	"Associez quatre oeufs vert foncé pour créer un oeuf magique capable de détruire tous les oeufs liés."
+	}
+
+	entry HELP_power_clifur
+	{
+		text	"Associez quatre oeufs beiges pour créer un oeuf magique capable de détruire tous les oeufs pétrifiés."
+	}
+
+	entry HELP_power_mivoha
+	{
+		text	"Associez quatre oeufs rouges pour créer un oeuf magique capable de détruire quelques oeufs proches."
+	}
+
+	entry HELP_power_glorus
+	{
+		text	"Associez quatre oeufs bleus pour créer un oeuf magique capable de détruire tous les oeufs gelés."
+	}
+
+	entry HELP_power_kideur
+	{
+		text	"Associez quatre oeufs couleur lilas pour créer un oeuf magique capable de donner à d'autres oeufs des pouvoirs magiques."
+	}
+
+	entry HELP_power_evalon
+	{
+		text	"Associez quatre oeufs d'or pour créer un oeuf magique capable de déclencher la foudre."
+	}
+
+	entry HELP_allow_bonus_level_game
+	{
+		text	"Un nouveau mode de jeu a été déverrouillé !"
+	}
+
+	entry HELP_bad_good_part1
+	{
+		text	"A mesure que le jeu progresse, s'accumule une énergie magique négative susceptible de modifier ensuite les propriétés de certains oeufs."
+	}
+
+	entry HELP_bad_good_part2
+	{
+		text	"Vous pouvez accumuler votre propre énergie magique en créant des chaînes combinées. Pour l'utiliser, cliquez sur une lumière bleue."
+	}
+
+	entry HELP_progress_decrease
+	{
+		text	""
+	}
+
+	entry HELP_assemble_image
+	{
+		text	"Compilez l'image à partir d'éléments pour terminer et passer le niveau !"
+	}
+
+	entry HELP_no_moves
+	{
+		text	"Il n'y a aucun mouvement. S'il vous reste des sorts ou de l'énergie magique, utilisez-les ! Sinon, recommencez le jeu à cette étape ou à une étape précédente pour accumuler des sorts."
+	}
+
+	entry HELP_trophy_8_eggs
+	{
+		text	"Vous avez reçu un trophée pour avoir associé un groupe de 8 oeufs du même type !"
+	}
+
+	entry HELP_trophy_lock_master
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir associé un groupe à trois oeufs gelés !"
+	}
+
+	entry HELP_trophy_combo_x10
+	{
+		text	"Vous avez reçu un nouveau trophée pour une combinaison x10 !"
+	}
+
+	entry HELP_trophy_all_trophies
+	{
+		text	"Vous avez reçu le dernier trophée pour avoir reçu tous les autres trophées !"
+	}
+
+	entry HELP_trophy_no_hint
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir terminé le jeu sans aide !"
+	}
+
+	entry HELP_trophy_all_eggs_in_bonus_level
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir supprimé tous les oeufs au niveau bonus !"
+	}
+
+	entry HELP_trophy_15_eggs_in_bonus_level
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir associé un groupe de 10 oeufs au niveau bonus !"
+	}
+
+	entry HELP_trophy_speed
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir terminé rapidement le niveau !"
+	}
+
+	entry HELP_trophy_half_more_eggs
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir effacé la moitié de la carte !"
+	}
+
+	entry HELP_trophy_cross_bonus
+	{
+		text	"Vous avez reçu un nouveau trophée pour avoir effacé toute la ligne et toute la colonne !"
+	}
+
+
+	//
+	// User Interface
+	//
+
+	entry UI_play_game
+	{
+		text	"Jouer"
+	}
+
+	entry UI_menu
+	{
+		text	"Menu"
+	}
+
+	entry UI_back
+	{
+		text	"Retour"
+	}
+
+	entry UI_options
+	{
+		text	"Options"
+	}
+
+	entry UI_end_game
+	{
+		text	"Terminer le jeu"
+	}
+
+	entry UI_exit_game
+	{
+		text	"Quitter le jeu"
+	}
+
+	entry UI_resume_game
+	{
+		text	"Continuer le jeu"
+	}
+
+	entry UI_new_game
+	{
+		text	"Nouvelle partie"
+	}
+
+	entry UI_classic_game
+	{
+		text	"Mode classique"
+	}
+
+	entry UI_arcade_game
+	{
+		text	"Mode arcade"
+	}
+
+	entry UI_bonus_game
+	{
+		text	"Mode bonus"
+	}
+
+	entry UI_close
+	{
+		text	"Fermer"
+	}
+
+	entry UI_welcome
+	{
+		text	"Bonjour, %s !"
+	}
+
+	entry UI_player_change
+	{
+		text	"(changer)"
+	}
+
+	entry UI_new_fragment
+	{
+		text	"Nouvel élément !"
+	}
+
+	entry UI_start_new_game
+	{
+		text	"Redémarrer le jeu"
+	}
+
+	entry UI_continue_game
+	{
+		text	"Continuer le jeu"
+	}
+
+	entry UI_done
+	{
+		text	"Appliquer"
+	}
+
+	entry UI_create
+	{
+		text	"Créer"
+	}
+
+	entry UI_delete
+	{
+		text	"Supprimer"
+	}
+
+	entry UI_empty
+	{
+		text	"Vide"
+	}
+
+	entry UI_continue
+	{
+		text	"Continuer"
+	}
+
+	entry UI_arcade_mode
+	{
+		text	"Mode arcade"
+	}
+
+	entry UI_classic_mode
+	{
+		text	"Mode classique"
+	}
+
+	entry UI_help_window_show
+	{
+		text	"Afficher les bulles d'aide"
+	}
+
+	entry UI_res800x600
+	{
+		text	"800x600"
+	}
+
+	entry UI_res1024x768
+	{
+		text	"1024x768"
+	}
+
+	entry UI_res1280x1024
+	{
+		text	"1280x1024"
+	}
+
+	entry UI_fullscreen
+	{
+		text	"Plein écran"
+	}
+
+	entry UI_helps
+	{
+		text	"Bulles d'aide"
+	}
+
+	entry UI_results
+	{
+		text	"Résultats"
+	}
+
+	entry UI_credits
+	{
+		text	"Crédits"
+	}
+
+	entry UI_hiscores
+	{
+		text	"Meilleurs scores"
+	}
+
+	entry UI_unlocked_backgrounds
+	{
+		text	"Fonds d'écran"
+	}
+
+	entry UI_trophies
+	{
+		text	"Trophées"
+	}
+
+	entry UI_set_as_wallpaper
+	{
+		text	"En tant que papier peint"
+	}
+
+	entry UI_locked_background
+	{
+		text	"Verrouillé"
+	}
+
+	entry UI_change
+	{
+		text	"(changer)"
+	}
+
+	entry UI_are_you_sure
+	{
+		text	"Etes-vous sûr ?"
+	}
+
+	entry UI_yes
+	{
+		text	"Oui"
+	}
+
+	entry UI_no
+	{
+		text	"Non"
+	}
+
+	entry UI_next
+	{
+		text	"Suivant"
+	}
+
+	entry UI_new_player
+	{
+		text	"Nouveau joueur"
+	}
+}
