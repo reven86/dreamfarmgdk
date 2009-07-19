@@ -205,6 +205,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_test_renderer.inl"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_test_utility.inl"
 			>
 		</File>
