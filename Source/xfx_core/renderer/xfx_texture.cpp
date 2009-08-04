@@ -125,21 +125,23 @@ HRESULT Texture::Create (unsigned width, unsigned height, unsigned nummips, cons
 {
 	bool capped_size = false;
 
-	if( width > xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureWidth )
+	if( width > Renderer::Instance( ).D3DCaps( ).MaxTextureWidth )
 	{
 		capped_size = true;
-		width = xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureWidth;
+		width = Renderer::Instance( ).D3DCaps( ).MaxTextureWidth;
 	}
 
-	if( height > xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureHeight )
+	if( height > Renderer::Instance( ).D3DCaps( ).MaxTextureHeight )
 	{
 		capped_size = true;
-		height = xfx::Renderer::Instance( ).D3DCaps( ).MaxTextureHeight;
+		height = Renderer::Instance( ).D3DCaps( ).MaxTextureHeight;
 	}
 
 	Free ();
 
 	unsigned i = 0, j = 0;
+
+#pragma message ( "FIXME: if non power of 2 textures are supported, no need to extend texture surface" )
 
 	for (mSurfaceWidth = 1; mSurfaceWidth < width; mSurfaceWidth <<= 1, i++)
 		;
@@ -147,7 +149,7 @@ HRESULT Texture::Create (unsigned width, unsigned height, unsigned nummips, cons
 	for (mSurfaceHeight = 1; mSurfaceHeight < height; mSurfaceHeight <<= 1, j++)
 		;
 
-	mNumMips	= (nummips) ? nummips : std::max (i, j);
+	mNumMips	= ( nummips ) ? nummips : std::max( i, j );
 
 	if( capped_size )
 	{
@@ -714,7 +716,7 @@ HRESULT Texture::CopyAlphaFromRGB( const Texture& tex )
 			{
 				const ARGB& col = data2[ static_cast< int >( y * w * ky + x * kx ) ];
 
-				data1[ y * w + x ].a = static_cast< BYTE >( 0.3333f * ( col.r + col.g + col.b ) );
+				data1[ y * w + x ].a = static_cast< BYTE >( static_cast< unsigned >( col.r + col.g + col.b ) / 3 );
 			}
 
 		SetSurfaceData( level, data1.get( ) );
@@ -726,62 +728,76 @@ HRESULT Texture::CopyAlphaFromRGB( const Texture& tex )
 
 
 //CubemapTexture
-Cache<CubemapTexture> CubemapTexture::msCache;
+Cache< CubemapTexture > CubemapTexture::msCache;
 
-CubemapTexture::CubemapTexture () : Resource ("Cubemap"), mpTex (), mWidth (1),
-	mSurfaceWidth (1), mNumMips (0), mKWidth (1.0f)
+CubemapTexture::CubemapTexture( ) : Resource( "Cubemap" ), mpTex ( ), mWidth( 1 ),
+	mSurfaceWidth( 1 ), mNumMips( 0 ), mKWidth( 1.0f )
 {
 }
 
-CubemapTexture::~CubemapTexture ()
+CubemapTexture::~CubemapTexture( )
 {
-	Free ();
+	Free( );
 }
 
-CubemapTexture::CubemapTexture (const CubemapTexture& tex) : Resource ("Cubemap"),
-	mpTex (), mWidth (tex.mWidth), mSurfaceWidth (tex.mSurfaceWidth),
-	mKWidth (tex.mKWidth), mNumMips (tex.mNumMips), Transformable3D (tex)
+CubemapTexture::CubemapTexture( const CubemapTexture& tex ) : Resource( "Cubemap" ),
+	mpTex( ), mWidth( tex.mWidth ), mSurfaceWidth( tex.mSurfaceWidth ),
+	mKWidth( tex.mKWidth ), mNumMips( tex.mNumMips ), Transformable3D( tex )
 {
-	CopyTexture (tex.mpTex.get (), Width ());
+	CopyTexture( tex.mpTex.get( ), Width( ) );
 }
 
-CubemapTexture& CubemapTexture::operator = (const CubemapTexture& tex)
+CubemapTexture& CubemapTexture::operator = ( const CubemapTexture& tex )
 {
-	Free ();
+	Free( );
 
 	mWidth			= tex.mWidth;
 	mSurfaceWidth	= tex.mSurfaceWidth;
 	mKWidth			= tex.mKWidth;
 	mNumMips		= tex.mNumMips;
 
-	Transformable3D::operator = (tex);
+	Transformable3D::operator = ( tex );
 
-	CopyTexture (tex.mpTex.get (), Width ());
+	CopyTexture( tex.mpTex.get( ), Width( ) );
 
 	return *this;
 }
 
-void CubemapTexture::Free ()
+void CubemapTexture::Free( )
 {
-	mpTex.reset ();
-	mWidth		= mSurfaceWidth = mNumMips = 1;
-	mKWidth		= 1.0f;
+	mpTex.reset( );
+	mWidth = mSurfaceWidth = mNumMips = 1;
+	mKWidth = 1.0f;
 
-	ResetTransform (Vec3 (0.0f), Euler (0), Vec3 (1.0f));
+	ResetTransform( Vec3( 0.0f ), Euler( 0 ), Vec3( 1.0f ) );
 }
 
-HRESULT CubemapTexture::Create (unsigned width, unsigned nummips, const D3DFORMAT& fmt)
+HRESULT CubemapTexture::Create( unsigned width, unsigned nummips, const D3DFORMAT& fmt )
 {
-	Free ();
+	Free( );
+
+	if( width > Renderer::Instance( ).D3DCaps( ).MaxTextureWidth )
+	{
+		capped_size = true;
+		width = Renderer::Instance( ).D3DCaps( ).MaxTextureWidth;
+	}
 
 	unsigned i = 0;
-	for (mSurfaceWidth = 1; mSurfaceWidth < width; mSurfaceWidth <<= 1, i++)
+	for( mSurfaceWidth = 1; mSurfaceWidth < width; mSurfaceWidth <<= 1, i++ )
 		;
 
-	mWidth		= width;
-	mNumMips	= (nummips) ? nummips : i;
+	if( capped_size )
+	{
+		mWidth = mSurfaceWidth;
+		mKWidth = 1.0f;
+	}
+	else
+	{
+		mWidth = width;
+		mKWidth = static_cast< float >( mWidth ) / mSurfaceWidth;
+	}
 
-	mKWidth		= static_cast<float> (mWidth) / mSurfaceWidth;
+	mNumMips = ( nummips ) ? nummips : i;
 
 	mTextureMatrix = Mat4 (
 		mKWidth, 0.0f, 0.0f, 0.0f,
@@ -909,14 +925,14 @@ HRESULT CubemapTexture::SetSurfaceData (const D3DCUBEMAP_FACES& face, DWORD leve
 	return hr;
 }
 
-HRESULT CubemapTexture::LoadFile (const String& file)
+HRESULT CubemapTexture::LoadFile( const String& file )
 {
 	HRESULT hr;
 
 	String::size_type d_pos = file.find_first_of ('|');
 	String pos_x, neg_x, pos_y, neg_y, pos_z, neg_z;
 
-	if (d_pos == file.size ())
+	if( d_pos == file.size( ) )
 	{
 		String newfile;
 		if (FAILED (hr = sFindTexture (file, newfile)))

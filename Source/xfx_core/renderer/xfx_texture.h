@@ -59,6 +59,10 @@ public:
  *	\brief 2D texture.
  *	\ingroup RenderGroup
  *
+ *	If g_texture_cache_enable is 1, all textures will be converted to right format and 
+ *	stored in cache folder at g_texture_cache_folder. This leads to slow loading on
+ *	first time, but very fast loading on the following runs.
+ *
  *	\remark You should always use UpdateTransformation after update Transformable2D matrix.
  *	\author Andrew "RevEn" Karpushin
  */
@@ -115,6 +119,10 @@ public:
 	 *	\param[in]	nummips		Mipmaps count (0 - maximum).
 	 *	\param[in]	fmt			Texture format.
 	 *
+	 *	If width or height is more than maximum dimension in D3DCaps, then texture
+	 *	is created with maximum available dimension and the entire image is
+	 *	streched to new dimensions.
+	 *
 	 *	\return S_OK if succeeded.
 	 */
 	HRESULT							Create					( unsigned width, unsigned height, unsigned nummips, const D3DFORMAT& fmt = D3DFMT_A8R8G8B8 );
@@ -163,8 +171,8 @@ public:
 	 *
 	 *	\note If file extension absent, newly extension added by priorities: dds, tga, png, jpg, bmp.
 	 *	\note To load separate rgb and alpha channels use ':' separator. Ex. foo.jpg:foo_a.jpg
-	 *	\note To mipmaps count add "*mipmaps.3" at the filename end.
-	 *	\note To force texture format add "*fmt.dxt1". Supported formats are: x8r8g8b8, a8r8g8b8, dxt1, dxt2, dxt3, dxt4, dxt5
+	 *	\note Mipmaps count can be specified by adding "*mipmaps.3" at the filename end.
+	 *	\note To force texture format, add "*fmt.dxt1". Supported formats are: x8r8g8b8, a8r8g8b8, dxt1, dxt2, dxt3, dxt4, dxt5
 	 */
 	virtual HRESULT					LoadFile				( const String& filename );
 
@@ -217,9 +225,9 @@ private:
 class CubemapTexture : public ITexture, public Transformable3D, public Resource
 {
 #if (__XFX_DIRECTX_VER__ < 9)
-	boost::shared_ptr<IDirect3DCubeTexture8>			mpTex;
+	boost::shared_ptr< IDirect3DCubeTexture8 >			mpTex;
 #else
-	boost::shared_ptr<IDirect3DCubeTexture9>			mpTex;
+	boost::shared_ptr< IDirect3DCubeTexture9 >			mpTex;
 #endif
 
 	unsigned						mWidth;
@@ -228,19 +236,19 @@ class CubemapTexture : public ITexture, public Transformable3D, public Resource
 
 	float							mKWidth;
 
-	static Cache<CubemapTexture>	msCache;
+	static Cache< CubemapTexture >	msCache;
 
 	Mat4							mTextureMatrix;
 
 public:
 	//! Construct an empty cubemap texture.
-	CubemapTexture														();
+	CubemapTexture														( );
 
 	//! Destructor
-	virtual ~CubemapTexture												();
+	virtual ~CubemapTexture												( );
 
 	//! Copy constructor.
-	CubemapTexture														(const CubemapTexture& tex);
+	CubemapTexture														( const CubemapTexture& tex );
 
 	//! Assignment operator.
 	CubemapTexture&							operator =					(const CubemapTexture& tex);
@@ -253,7 +261,7 @@ public:
 	 *
 	 *	\return S_OK if succeeded.
 	 */
-	HRESULT									Create						(unsigned width, unsigned nummips, const D3DFORMAT& fmt = D3DFMT_A8R8G8B8);
+	HRESULT									Create						( unsigned width, unsigned nummips, const D3DFORMAT& fmt = D3DFMT_A8R8G8B8 );
 
 	//! Destroy all allocated resources for texture.
 	void									Free						();
@@ -292,7 +300,7 @@ public:
 	 *	\param[in]	filename		File name.
 	 *
 	 *	\note File extension stripped and newly added by priorities: dds, tga, png, jpg, bmp.
-	 *	\note To load cubemap faces from separate 2D texture files use '|'. Ex: neg_x|pos_x|neg_y|pos_y|neg_z|pos_z
+	 *	\note To load cubemap faces from separate 2D textures use '|'. Ex: neg_x|pos_x|neg_y|pos_y|neg_z|pos_z
 	 */
 	virtual HRESULT							LoadFile					(const String& filename);
 

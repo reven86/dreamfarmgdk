@@ -52,8 +52,8 @@ public:
 	//! Get elapsed time in 100 microseconds.
 	const DWORD&				MicroSeconds100		( ) const { return m100MicroSeconds; };
 
-	//! Set elapsed time. Accuracy is 1ms.
-	void						MicroSeconds100		( DWORD time ) { mstarttime.QuadPart += __int64( m100MicroSeconds - time ) * mTicksPerSecond.QuadPart / 10000; Update( ); };
+	//! Set elapsed time.
+	void						MicroSeconds100		( DWORD time ) { mstarttime.QuadPart += ( __int64( m100MicroSeconds ) - time ) * mTicksPerSecond.QuadPart / 10000; m100MicroSeconds = time; };
 
 	//! Get 'paused' flag.
 	const bool&					IsPaused			( ) const { return mIsPaused; };

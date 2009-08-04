@@ -32,16 +32,23 @@ _XFX_BEGIN
 
 class Viewer
 {
+	//! Viewer position.
 	Vec3				mPosition;
+
+	//! Viewer rotation.
 	Euler				mRotation;
 
-	float				mFOV;		//In radians!
+	//! Viewer FOV in radians.
+	float				mFOV;
 
+	//! Near clipping plane.
 	float				mNear;
+
+	//! Far clipping plane.
 	float				mFar;
 
 	// Frustum planes
-	// Note: Calculated when SetVPMatrices executed
+	// Note: Calculated in SetVPMatrices
 	enum FrustumPlanes
 	{
 		FP_LEFT = 0,
@@ -54,7 +61,9 @@ class Viewer
 		MAX_PLANES
 	};
 
-	mutable Primitives::Plane	mFrustum[ MAX_PLANES ];
+	Mat4				mView;
+	Mat4				mProj;
+	Primitives::Plane	mFrustum[ MAX_PLANES ];
 
 	//! Use left-handed projection matrix.
 	bool				mUseLH;
@@ -93,14 +102,20 @@ public:
 	/*! /brief Calculate and cache view and projection matrices, based on attributes.
 	 *
 	 *	Calculate and cache view and projection matrices, based on attributes.
-	 *	This should be done before DIP call in order to setup Direct3D viewer->
+	 *	This should be done before DIP call in order to setup Direct3D viewer.
 	 *
-	 *	/param set_vpmatrices		Set prepared matrices directly by invoking Renderer::SetTransform.
+	 *	/param set_vpmatrices Set prepared matrices directly by invoking Renderer::SetTransform.
 	 */
-	void								SetVPMatrices			( bool set_vpmatrices = true ) const;
+	void								SetVPMatrices			( bool set_vpmatrices = true );
 
-	//! Setups frustum from current view and proj matrices
-	void								SetupFrustum			( );
+	//! Setups frustum from view and proj matrices.
+	void								SetupFrustum			( const Mat4& view_proj );
+
+	//! Get view matrix.
+	const Mat4&							GetView					( ) const { return mView; };
+	
+	//! Get projection matrix.
+	const Mat4&							GetProjection			( ) const { return mProj; };
 
 	//! Performs frustum culling in view space with sphere.
 	bool								TestFrustumCulling		( const Primitives::Sphere& sphere ) const;

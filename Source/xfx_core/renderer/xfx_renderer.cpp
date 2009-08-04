@@ -655,6 +655,12 @@ Renderer::~Renderer ()
 
 HRESULT Renderer::CreateDevice( HWND hwnd )
 {
+	if( mpD3D || mpD3DDevice )
+	{
+		gError( "You have to call Shutdown prior to call CreateDevice second time" );
+		return XFXERR_INVALIDCALL;
+	}
+
 	//Creating device
 #if (__XFX_DIRECTX_VER__ < 9)
 	HMODULE d3d8lib = LoadLibraryA( "d3d8.dll" );
@@ -693,7 +699,7 @@ HRESULT Renderer::CreateDevice( HWND hwnd )
 
 #endif
 
-	mpD3D.reset (pd3d, IUnknownDeleter ());
+	mpD3D.reset( pd3d, IUnknownDeleter( ) );
 
 	gMess ("Creating D3D Device:");
 	gMess ("...creating D3D object: OK");

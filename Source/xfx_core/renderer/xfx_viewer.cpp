@@ -19,11 +19,8 @@ _XFX_BEGIN
 // Viewer
 //
 
-void Viewer::SetVPMatrices( bool set_vpmatrices ) const
+void Viewer::SetVPMatrices( bool set_vpmatrices )
 {
-	Mat4 proj;
-	Mat4 view;
-
 	D3DVIEWPORT8 viewport;
 	Renderer::Instance( ).GetViewport( viewport );
 
@@ -32,22 +29,22 @@ void Viewer::SetVPMatrices( bool set_vpmatrices ) const
 
 	if( mUseLH )
 	{
-		proj.PerspectiveFovLH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
-		view.LookAtLH( Position( ), dir, up );
+		mProj.PerspectiveFovLH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
+		mView.LookAtLH( Position( ), dir, up );
 	}
 	else
 	{
-		proj.PerspectiveFovRH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
-		view.LookAtRH( Position( ), dir, up );
+		mProj.PerspectiveFovRH( FOV( ), static_cast< float >( viewport.Width ) / viewport.Height, NearPlane( ), FarPlane( ) );
+		mView.LookAtRH( Position( ), dir, up );
 	}
 
 	if( set_vpmatrices )
 	{
-		Renderer::Instance( ).SetTransform( D3DTS_PROJECTION, proj );
-		Renderer::Instance( ).SetTransform( D3DTS_VIEW, view );
+		Renderer::Instance( ).SetTransform( D3DTS_PROJECTION, mProj );
+		Renderer::Instance( ).SetTransform( D3DTS_VIEW, mView );
 	}
 
-	const Mat4& f = set_vpmatrices ? Renderer::Instance( ).GetVP( ) : view * proj;
+	Mat4 f = mView * mProj;
 
 	mFrustum[ FP_LEFT ].ABCD		(f.x[0][3] + f.x[0][0], f.x[1][3] + f.x[1][0], f.x[2][3] + f.x[2][0], f.x[3][3] + f.x[3][0]);
 	mFrustum[ FP_RIGHT ].ABCD		(f.x[0][3] - f.x[0][0], f.x[1][3] - f.x[1][0], f.x[2][3] - f.x[2][0], f.x[3][3] - f.x[3][0]);
@@ -57,9 +54,9 @@ void Viewer::SetVPMatrices( bool set_vpmatrices ) const
 	mFrustum[ FP_FAR ].ABCD			(f.x[0][3] - f.x[0][2], f.x[1][3] - f.x[1][2], f.x[2][3] - f.x[2][2], f.x[3][3] - f.x[3][2]);
 }
 
-void Viewer::SetupFrustum( )
+void Viewer::SetupFrustum( const Mat4& view_proj )
 {
-	const Mat4& f = Renderer::Instance( ).GetVP( );
+	const Mat4& f = view_proj;
 
 	mFrustum[ FP_LEFT ].ABCD		(f.x[0][3] + f.x[0][0], f.x[1][3] + f.x[1][0], f.x[2][3] + f.x[2][0], f.x[3][3] + f.x[3][0]);
 	mFrustum[ FP_RIGHT ].ABCD		(f.x[0][3] - f.x[0][0], f.x[1][3] - f.x[1][0], f.x[2][3] - f.x[2][0], f.x[3][3] - f.x[3][0]);
@@ -76,7 +73,7 @@ bool Viewer::TestFrustumCulling( const Primitives::Sphere& sphere ) const
 
 	for( int i = 0; i < 6; i++ )
 	{
-		float dist = Vec3::Dot( mFrustum[ i ].Normal( ), sphere.Position( ) ) - mFrustum[ i ].D( );
+		float dist = Vec3::Dot( mFrustum[ i ].Normal( ), sphere.Position( ) ) + mFrustum[ i ].D( );
 
 		if( dist < -sphere.Radius( ) * mFrustum[ i ].Normal( ).Len( ) )
 			return false;
