@@ -170,6 +170,40 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="docs"
+			>
+			<File
+				RelativePath="..\..\..\..\docs\boost_reduced.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\docs\doxyfile.ini"
+				>
+				<FileConfiguration
+					Name="Shipping|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="&quot;$(ProgramFiles)\doxygen\bin\doxygen.exe&quot; $(InputPath)"
+						Outputs="$(InputDir)..\..\Documentation\html\index.html"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="&quot;$(ProgramFiles)\doxygen\bin\doxygen.exe&quot; $(InputPath)"
+						Outputs="$(InputDir)..\..\Documentation\html\index.html"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\..\docs\stl_reduced.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\xfx.cpp"
 			>

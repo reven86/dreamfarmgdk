@@ -25,7 +25,7 @@ _XFX_END
 #define DECLARE_VAR(x) \
 	extern xfx::Var * x
 
-/*! \defgroup CommonVariables Common cvars.
+/*! \addtogroup CommonVariables.
  */
 
 //! @{

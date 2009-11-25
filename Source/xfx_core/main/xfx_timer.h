@@ -16,7 +16,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Timer xfx_timer.h "engine/xfx_timer.h"
+/*! \class Timer xfx_timer.h "main/xfx_timer.h"
  *	\brief %Timer class.
  *	\ingroup MainGroup
  *	

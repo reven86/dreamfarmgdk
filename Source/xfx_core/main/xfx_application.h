@@ -20,7 +20,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Application xfx_application.h "engine/xfx_application.h"
+/*! \class Application xfx_application.h "main/xfx_application.h"
  *	\brief Defines a base class for application.
  *	\ingroup MainGroup
  *	

@@ -144,10 +144,7 @@ public:
 	 *	
 	 *	Unregister previously registered resource.
 	 *
-	 *	\note All weak pointers to resource will be invalidated if no
-	 *	shared pointers was assigned to resource.
-	 *
-	 *	\param	object	Resource weak pointer object.
+	 *	\param	object	Resource pointer object.
 	 */
 	void							Unregister					( const boost::shared_ptr< typename boost::add_const< T >::type >& object )
 	{

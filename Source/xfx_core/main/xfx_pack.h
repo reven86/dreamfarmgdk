@@ -142,7 +142,7 @@ public:
 	 *	\return
 	 *	- XFXERR_IO file can't be opened for writing.
 	 */
-	HRESULT								WriteFile					( const String&, const void *, unsigned long ) const { return XFXERR_IO; };
+	HRESULT								WriteFile					( const String& file, const void * buf, unsigned long len ) const { return XFXERR_IO; };
 
 	/*! \brief Create pack file from directory structure.
 	 *

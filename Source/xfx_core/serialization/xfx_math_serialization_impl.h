@@ -6,7 +6,7 @@
 
 #pragma once
 
-/*!	\file xfx_main_serialization_impl.h 
+/*!	\file xfx_math_serialization_impl.h 
  *	\brief Serialization implementation for Math library.
  */
 

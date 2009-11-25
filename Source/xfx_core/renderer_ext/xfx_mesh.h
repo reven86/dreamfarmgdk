@@ -23,7 +23,7 @@ _XFX_BEGIN
 /*!	\defgroup RenderExtGroup Renderer extension classes.
  */
 
-/*! \class Mesh xfx_model.h "renderer_ext/xfx_mesh.h"
+/*! \class Mesh xfx_mesh.h "renderer_ext/xfx_mesh.h"
  *	\brief Polygonal model class with keyframe animations.
  *	\ingroup RenderExtGroup
  *	
@@ -117,7 +117,7 @@ protected:
 
 
 
-/*! \class MeshState xfx_model.h "renderer_ext/xfx_mesh.h"
+/*! \class MeshState xfx_mesh.h "renderer_ext/xfx_mesh.h"
  *	\brief Solid model state class.
  *	\ingroup RenderExtGroup
  *	

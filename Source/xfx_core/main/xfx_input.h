@@ -24,7 +24,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Input xfx_input.h "engine/xfx_input.h"
+/*! \class Input xfx_input.h "main/xfx_input.h"
  *	\brief %Input class.
  *	\ingroup MainGroup
  *	

@@ -16,7 +16,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Font xfx_font.h "engine/xfx_font.h"
+/*! \class Font xfx_font.h "main/xfx_font.h"
  *	\brief %Font class.
  *	\ingroup RenderGroup
  *	

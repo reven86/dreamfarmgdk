@@ -17,7 +17,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Cmd xfx_cmd.h "engine/xfx_cmd.h"
+/*! \class Cmd xfx_cmd.h "main/xfx_cmd.h"
  *	\brief Command processor class.
  *	\ingroup MainGroup
  *	
@@ -137,7 +137,7 @@ private:
 
 
 
-/*! \class Var xfx_main_cvars.h "engine/xfx_main_cvars.h"
+/*! \class Var xfx_main_cvars.h "main/xfx_main_cvars.h"
  *	\brief Variable class.
  *	\ingroup MainGroup
  *	

@@ -8,7 +8,7 @@
 
 #include "xfx_drawtools.h"
 
-/*!	\file xfx_render.h 
+/*!	\file xfx_renderer.h 
  *	\brief %Renderer class.
  */
 

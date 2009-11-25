@@ -16,7 +16,7 @@ _XFX_BEGIN
 
 
 
-/*!	\defgroup GUIGroup Graphic user interface classes.
+/*!	\defgroup GUIGroup Graphics user interface classes.
  */
 
 /*! \class GUI xfx_gui.h "gui/xfx_gui.h"

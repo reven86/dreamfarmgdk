@@ -93,7 +93,7 @@ public:
 	 *
 	 *	\note If deep == 0 then intersection will be tested only for root AABB.
 	 *	\note The function xfx::Primitives::TestPrimitive ( Primitives::Triangle, _Primitive ) must be implemented.
-	 *	\todo Provide functor instead or Primitives::TestPrimitive.
+	 *	\todo Provide functor instead of Primitives::TestPrimitive.
 	 *
 	 *	\return \b true if intersection found.
 	 */

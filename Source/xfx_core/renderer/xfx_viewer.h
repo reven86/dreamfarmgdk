@@ -16,7 +16,7 @@ _XFX_BEGIN
 
 
 
-/*! \class Viewer xfx_viewer.h "engine/xfx_viewer.h"
+/*! \class Viewer xfx_viewer.h "main/xfx_viewer.h"
  *	\brief %Viewer attributes class.
  *	\ingroup RenderGroup
  *	
