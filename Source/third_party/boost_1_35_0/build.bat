@@ -1,1 +1,0 @@
-bjam.exe --toolset=%1 runtime-link=%2 link=static threading=multi variant=release %3
