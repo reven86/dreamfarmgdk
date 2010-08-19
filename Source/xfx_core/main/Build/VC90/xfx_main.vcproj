@@ -254,6 +254,41 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_engine_ver.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_engine_ver.template"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
 			RelativePath="..\..\xfx_errorcodes.h"
 			>
 		</File>

@@ -276,6 +276,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_quaternion.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_quaternion.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_transformable.cpp"
 			>
 		</File>

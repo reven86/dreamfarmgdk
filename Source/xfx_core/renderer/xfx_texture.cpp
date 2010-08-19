@@ -776,6 +776,8 @@ HRESULT CubemapTexture::Create( unsigned width, unsigned nummips, const D3DFORMA
 {
 	Free( );
 
+	bool capped_size = false;
+
 	if( width > Renderer::Instance( ).D3DCaps( ).MaxTextureWidth )
 	{
 		capped_size = true;

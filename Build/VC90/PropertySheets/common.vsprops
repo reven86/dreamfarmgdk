@@ -6,11 +6,15 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_35_0/;&quot;../../../../third_party/jpeg-6b/&quot;"
+		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_44_0/;&quot;../../../../third_party/jpeg-6b/&quot;;&quot;../../../../third_party/directx-8.1/include/&quot;"
 		StringPooling="true"
 		OpenMP="true"
 		UsePrecompiledHeader="2"
 		PrecompiledHeaderThrough="xfx.h"
 		WarningLevel="4"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="&quot;../../../../third_party/directx-8.1/lib&quot;"
 	/>
 </VisualStudioPropertySheet>

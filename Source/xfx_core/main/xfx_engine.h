@@ -35,7 +35,7 @@ class Engine : public Singleton< Engine >
 	//! Version string. Generated through SVN.
 	static const int						msVersionMajor;
 	static const int						msVersionMinor;
-	static const int						msVersionBuild;
+	static const int						msVersionRevision;
 	static const String						msVersionBuildDate;
 	static const String						msVersion;
 
@@ -75,7 +75,7 @@ public:
 	const int&								GetVersionMinor				( ) const { return msVersionMinor; };
 
 	//! Get engine build number.
-	const int&								GetVersionBuild				( ) const { return msVersionBuild; };
+	const int&								GetVersionRevision			( ) const { return msVersionRevision; };
 
 	//! Get engine build date as string.
 	const String&							GetVersionBuildDate			( ) const { return msVersionBuildDate; };

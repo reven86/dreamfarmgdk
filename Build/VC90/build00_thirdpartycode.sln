@@ -23,9 +23,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUItolua++", "..\..\Sourc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUIFalagardWRBase", "..\..\Source\third_party\cegui-0.6.1\makefiles\vc90\WindowRendererSets\Falagard\CEGUIFalagardWRBase.vcproj", "{F026B9DB-DE7F-514B-B89B-481A7E00C935}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\Source\third_party\boost_1_35_0\build\VC90\boost.vcproj", "{0307DF48-2750-43C5-8439-6A5391F3998E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat_static", "..\..\Source\third_party\expat-2.0.1\lib\VC90\expat_static.vcproj", "{842473BB-EAE9-4642-AD09-68AD02373CB9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\Source\third_party\boost_1_44_0\build\VC90\boost.vcproj", "{0307DF48-2750-43C5-8439-6A5391F3998E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,14 +77,14 @@ Global
 		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Debug|Win32.Build.0 = Debug|Win32
 		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.ActiveCfg = Release|Win32
 		{F026B9DB-DE7F-514B-B89B-481A7E00C935}.Release|Win32.Build.0 = Release|Win32
-		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.Build.0 = Debug|Win32
-		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.ActiveCfg = Release|Win32
-		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.Build.0 = Release|Win32
 		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Debug|Win32.ActiveCfg = Debug|Win32
 		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Debug|Win32.Build.0 = Debug|Win32
 		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Release|Win32.ActiveCfg = Release|Win32
 		{842473BB-EAE9-4642-AD09-68AD02373CB9}.Release|Win32.Build.0 = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.Build.0 = Debug|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.ActiveCfg = Release|Win32
+		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
