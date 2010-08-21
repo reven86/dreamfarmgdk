@@ -71,7 +71,7 @@ void Effect::SetupEffectData( ) const
 	if( mKnownSemantics[ ES_WORLD ] )
 	{
 		Renderer::Instance( ).GetTransform( D3DTS_WORLD, world );
-		mDXEffectPtr->SetMatrix( mKnownSemantics[ ES_WORLD ], world );
+		mDXEffectPtr->SetMatrix( mKnownSemantics[ ES_WORLD ], ( const D3DXMATRIX * )( &world ) );
 	}
 
 	if( mKnownSemantics[ ES_WORLDVIEW ] )
@@ -79,31 +79,33 @@ void Effect::SetupEffectData( ) const
 		Renderer::Instance( ).GetTransform( D3DTS_WORLD, world );
 		Renderer::Instance( ).GetTransform( D3DTS_VIEW, view );
 
-		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_WORLDVIEW], world * view);
+		xfx::Mat4 m( world * view );
+		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_WORLDVIEW], ( const D3DXMATRIX * )( &m ) );
 	}
 
 	if (mKnownSemantics[ES_WORLDVIEWPROJECTION])
 	{
 		Renderer::Instance ().GetTransform (D3DTS_WORLD, world);
 
-		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_WORLDVIEWPROJECTION], world * Renderer::Instance ().GetVP ());
+		xfx::Mat4 m( world * Renderer::Instance ().GetVP () );
+		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_WORLDVIEWPROJECTION], ( const D3DXMATRIX * )( &m ) );
 	}
 
 	if (mKnownSemantics[ES_VIEW])
 	{
 		Renderer::Instance ().GetTransform (D3DTS_VIEW, view);
-		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_VIEW], view);
+		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_VIEW], ( const D3DXMATRIX * )( &view ));
 	}
 
 	if (mKnownSemantics[ES_VIEWPROJECTION])
 	{
-		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_VIEWPROJECTION], Renderer::Instance ().GetVP ());
+		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_VIEWPROJECTION], ( const D3DXMATRIX * )( &Renderer::Instance ().GetVP ()));
 	}
 
 	if (mKnownSemantics[ES_PROJECTION])
 	{
 		Renderer::Instance ().GetTransform (D3DTS_PROJECTION, proj);
-		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_PROJECTION], proj);
+		mDXEffectPtr->SetMatrix (mKnownSemantics[ES_PROJECTION], ( const D3DXMATRIX * )( &proj ));
 	}
 #endif
 }
@@ -125,15 +127,15 @@ void Effect::RenderEffect( const boost::function0< void >& render_fn, DWORD flag
 
 		for( UINT i = 0; i < num_passes; i++ )
 		{
-//#if (__XFX_DIRECTX_VER__ < 9)
+#if (__XFX_DIRECTX_VER__ < 9)
 			mDXEffectPtr->Pass( i );
-//#else
-//			mDXEffectPtr->BeginPass (i);
-//#endif
+#else
+			mDXEffectPtr->BeginPass (i);
+#endif
 			render_fn( );
-//#if (__XFX_DIRECTX_VER__ >= 9)
-//			mDXEffectPtr->EndPass ();
-//#endif
+#if (__XFX_DIRECTX_VER__ >= 9)
+			mDXEffectPtr->EndPass ();
+#endif
 		}
 
 		mDXEffectPtr->End( );
@@ -315,16 +317,31 @@ int Shader::AddTextureMap( const TextureInfo& tex_info )
 {
 	mNamedTextureMaps[ tex_info.stage_name ] = tex_info.texture;
 
+#if (__XFX_DIRECTX_VER__ < 9)
 	TextureMapsType::iterator tex_it = 
 		std::find_if( 
 			mTextureMaps.begin( ),
 			mTextureMaps.end( ),
 			boost::bind( std::equal_to< String >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( tex_info.stage_name ) )
 			);
+#else
+	D3DXHANDLE th = mEffectPtr ? mEffectPtr->DXEffectPtr( )->GetParameterByName( NULL, tex_info.stage_name.c_str( ) ) : NULL;
+
+	TextureMapsType::iterator tex_it = 
+		std::find_if( 
+			mTextureMaps.begin( ),
+			mTextureMaps.end( ),
+			boost::bind( std::equal_to< D3DXHANDLE >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( th ) )
+			);
+#endif
 
 	if( tex_it == mTextureMaps.end( ) )
 	{
+#if (__XFX_DIRECTX_VER__ < 9)
 		mTextureMaps.push_back( boost::make_tuple( tex_info.stage_name, -1, tex_info ) );
+#else
+		mTextureMaps.push_back( boost::make_tuple( th, -1, tex_info ) );
+#endif
 		FindTextureStagesNum( );
 
 		return mTextureMaps.back( ).get< 1 >( );
@@ -364,8 +381,11 @@ void Shader::FindTextureStagesNum( )
 		{
 			DWORD fvf = 0;
 
-//#if (__XFX_DIRECTX_VER__ < 9)
+#if (__XFX_DIRECTX_VER__ < 9)
 			mEffectPtr->DXEffectPtr( )->Pass( i );
+#else
+			mEffectPtr->DXEffectPtr( )->BeginPass (i);
+#endif
 
 			// don't apply texture transform for TnL vertices
 #if (__XFX_DIRECTX_VER__ < 9)
@@ -377,14 +397,11 @@ void Shader::FindTextureStagesNum( )
 				{
 					mFlags &= ~ESF_USE_TEXTURE_TRANSFORM;
 				}
-//#else
-//			eff->DXEffectPtr( )->BeginPass (i);
-//#endif
 
 			//render_fn ();
-//#if (__XFX_DIRECTX_VER__ >= 9)
-//			mDXEffectPtr->EndPass ();
-//#endif
+#if (__XFX_DIRECTX_VER__ >= 9)
+			mEffectPtr->DXEffectPtr( )->EndPass ();
+#endif
 
 			// find texture on texture stage and apply texture matrix
 			BOOST_FOREACH( TextureMapsType::value_type& tex_ptr, mTextureMaps )

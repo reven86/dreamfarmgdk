@@ -472,11 +472,19 @@ public:
 	//! Get transform.
 	void								GetTransform				( const D3DTRANSFORMSTATETYPE& transform, Mat4& matr ) const { _ASSERTE( mpD3DDevice ); mpD3DDevice->GetTransform( transform, reinterpret_cast< D3DMATRIX * >( &matr ) ); };
 
+#if( __XFX_DIRECTX_VER__ < 9 )
 	//! Set viewport.
 	void								SetViewport					( const D3DVIEWPORT8& viewport ) { /*DrawTools ().FlushAll (); */_ASSERTE( mpD3DDevice ); mpD3DDevice->SetViewport( &viewport ); };
 
 	//! Get viewport.
 	void								GetViewport					( D3DVIEWPORT8& viewport ) { _ASSERTE( mpD3DDevice ); mpD3DDevice->GetViewport( &viewport ); };
+#else
+	//! Set viewport.
+	void								SetViewport					( const D3DVIEWPORT9& viewport ) { /*DrawTools ().FlushAll (); */_ASSERTE( mpD3DDevice ); mpD3DDevice->SetViewport( &viewport ); };
+
+	//! Get viewport.
+	void								GetViewport					( D3DVIEWPORT9& viewport ) { _ASSERTE( mpD3DDevice ); mpD3DDevice->GetViewport( &viewport ); };
+#endif
 
 	//! Get ViewProjection matrix.
 	const Mat4&							GetVP						( ) const { if( !mIsVPCached ) CacheVP( ); return mCachedVP; };

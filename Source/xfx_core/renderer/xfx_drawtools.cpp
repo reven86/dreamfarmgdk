@@ -534,7 +534,11 @@ void DrawTools::PushDraw3DSprite(
 	if ((sz >= 1.0f) || (sz < 0.0f))
 		return;
 
+#if( __XFX_DIRECTX_VER__ < 9 )
 	D3DVIEWPORT8 vp;
+#else
+	D3DVIEWPORT9 vp;
+#endif
 	Renderer::Instance( ).GetViewport (vp);
 
 	sx = rhw * (position.x * t._11 + position.y * t._21 + position.z * t._31 + t._41);
@@ -606,7 +610,11 @@ void DrawTools::PushDraw3DText(
 	if( ( sz >= 1.0f ) || ( sz < 0.0f ) )
 		return;
 
+#if( __XFX_DIRECTX_VER__ < 9 )
 	D3DVIEWPORT8 vp;
+#else
+	D3DVIEWPORT9 vp;
+#endif
 	Renderer::Instance( ).GetViewport( vp );
 
 	sx = rhw * (position.x * t._11 + position.y * t._21 + position.z * t._31 + t._41);

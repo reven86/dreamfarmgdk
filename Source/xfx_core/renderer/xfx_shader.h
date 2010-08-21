@@ -73,7 +73,7 @@ public:
 
 		if( it == mCachedParameters.end( ) )
 		{
-			return mCachedParameters[ parameter ] = mDXEffectPtr ? mDXEffectPtr->GetParameterByName( NULL, parameter.c_str( ) ) : NULL );
+			return mCachedParameters[ parameter ] = mDXEffectPtr ? mDXEffectPtr->GetParameterByName( NULL, parameter.c_str( ) ) : NULL;
 		}
 
 		return ( *it ).second;

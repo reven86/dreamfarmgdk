@@ -30,7 +30,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, con
 		return res;
 
 	// Initialize renderer.
-	res = xfx::Renderer::Instance( ).CreateDevice( );
+	res = xfx::Renderer::Instance( ).CreateDevice( hWnd( ) );
 
 	if( FAILED( res ) )
 		return res;

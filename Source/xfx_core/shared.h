@@ -46,6 +46,7 @@
 
 #define NOMINMAX
 
+#define __XFX_DIRECTX_VER__ 9
 
 #pragma warning (disable:4786)	//identifier was truncated to '255' characters...
 #pragma warning (disable:4800)	//identifier was truncated to '255' characters...

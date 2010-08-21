@@ -1,5 +1,5 @@
 #include "xfx.h"
-
+#include "omp.h"
 
 /*! \class Application
  *	\brief Defines a base class for application.

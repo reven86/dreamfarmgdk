@@ -21,7 +21,11 @@ _XFX_BEGIN
 
 void Viewer::SetVPMatrices( bool set_vpmatrices )
 {
+#if( __XFX_DIRECTX_VER__ < 9 )
 	D3DVIEWPORT8 viewport;
+#else
+	D3DVIEWPORT9 viewport;
+#endif
 	Renderer::Instance( ).GetViewport( viewport );
 
 	Vec3 dir, up, right;

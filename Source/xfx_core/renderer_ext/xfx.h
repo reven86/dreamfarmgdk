@@ -99,8 +99,15 @@ namespace boost { namespace serialization {
 
 
 // D3D
+#if( __XFX_DIRECTX_VER__ < 9 )
 #include <d3d8.h>
 #include <d3dx8.h>
+#else
+#include <d3d9.h>
+#include <d3dx9.h>
+#endif
+
+
 
 // XFX
 #include "utility\xfx_string.h"

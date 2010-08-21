@@ -6,7 +6,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_44_0/;&quot;../../../../third_party/jpeg-6b/&quot;;&quot;../../../../third_party/directx-8.1/include/&quot;"
+		AdditionalIncludeDirectories="../../../;../../../../third_party/boost_1_44_0/;&quot;../../../../third_party/jpeg-6b/&quot;;&quot;../../../../third_party/dxsdk-9.0c-sum04/include/&quot;;&quot;../../../../third_party/openmp-vc90/&quot;"
 		StringPooling="true"
 		OpenMP="true"
 		UsePrecompiledHeader="2"
@@ -15,6 +15,6 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalLibraryDirectories="&quot;../../../../third_party/directx-8.1/lib&quot;"
+		AdditionalLibraryDirectories="&quot;../../../../third_party/dxsdk-9.0c-sum04/lib&quot;;&quot;../../../../third_party/openmp-vc90&quot;"
 	/>
 </VisualStudioPropertySheet>
