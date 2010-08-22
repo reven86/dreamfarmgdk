@@ -7,6 +7,10 @@
 #include "xfx.h"
 #include "xfx_timer.h"
 
+#ifdef _WIN32
+#include "win32/xfx_timer_win32.cpp"
+#endif
+
 _XFX_BEGIN
 
 
@@ -23,9 +27,11 @@ Timer::Timer( ) :
 	m100MicroSeconds( 0 ),
 	m100MSPF( 0 )
 {
-	QueryPerformanceFrequency	( &mTicksPerSecond );
-	QueryPerformanceCounter		( &mstarttime );
-	mslasttime = mstarttime;
+	mImpl.reset( new Timer_impl( ) );
+}
+
+Timer::~Timer( )
+{
 }
 
 void Timer::Pause( )
@@ -33,7 +39,7 @@ void Timer::Pause( )
 	if( !mIsPaused )
 	{
 		mIsPaused = true;
-		QueryPerformanceCounter( &moldtime );
+		mImpl->Pause( );
 	}
 }
 
@@ -42,28 +48,19 @@ void Timer::Resume( )
 	if( mIsPaused )
 	{
 		mIsPaused = false;
-
-		QueryPerformanceCounter( &mslasttime );
-		mstarttime.QuadPart += mslasttime.QuadPart - moldtime.QuadPart;
+		mImpl->Resume( );
 	}
 }
 
 void Timer::Update( )
 {
-	LARGE_INTEGER currenttime;
-	
-	QueryPerformanceCounter( &currenttime );
+	mImpl->Update( m100MSPF, m100MicroSeconds );
+}
 
-	m100MSPF = static_cast< DWORD >( ( currenttime.QuadPart - mslasttime.QuadPart ) * 10000 / mTicksPerSecond.QuadPart );// * mSpeed;
-
-	if( !mIsPaused )
-		m100MicroSeconds = static_cast< DWORD >( ( currenttime.QuadPart - mstarttime.QuadPart ) * 10000 / mTicksPerSecond.QuadPart );// * mSpeed;
-
-	// sometimes on AMD Athlon X2 delta between two frames can be negative
-	if( static_cast< int >( m100MSPF ) < 0 )
-		m100MSPF = 0;
-
-	mslasttime = currenttime;
+void Timer::MicroSeconds100( boost::uint32_t time )
+{
+	mImpl->MicroSeconds100( m100MicroSeconds, time );
+	m100MicroSeconds = time;
 }
 
 

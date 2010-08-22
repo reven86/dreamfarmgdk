@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: Py++
+Version: 1.0.0
+Summary: Py++ is a framework of components for creating C++ code generator for Boost.Python library
+Home-page: http://www.language-binding.net/pyplusplus/pyplusplus.html
+Author: Roman Yakovenko
+Author-email: roman.yakovenko@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

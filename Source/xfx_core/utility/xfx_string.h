@@ -46,7 +46,7 @@ typedef boost::basic_format<wchar_t/*, std::char_traits<wchar_t>, boost::pool_al
 template< class _String >
 _String next_token( const _String& str, typename _String::size_type& s, const char * delimiters = " \n\t\r" )
 {
-	_String::size_type e;
+	typename _String::size_type e;
 	s = str.find_first_not_of( delimiters, s );
 
 	if( s != _String::npos )
@@ -61,7 +61,7 @@ _String next_token( const _String& str, typename _String::size_type& s, const ch
 
 			e = s;
 
-			_String::size_type str_size = str.size( );
+			typename _String::size_type str_size = str.size( );
 
 			while( e < str_size && str[ e ] != '\"' )
 			{
@@ -92,7 +92,7 @@ _String next_token( const _String& str, typename _String::size_type& s, const ch
 
 		e = str.find_first_of( delimiters, s );
 
-		_String::size_type olds = s;
+		typename _String::size_type olds = s;
 		s = ( e == _String::npos ) ? str.size( ) : e + 1;
 
 		return ( e == _String::npos ) ? str.substr( olds ) : str.substr( olds, e - olds );

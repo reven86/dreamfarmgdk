@@ -67,7 +67,7 @@
 //#include <boost/functional/hash.hpp>
 #include <boost/function.hpp>
 #include <boost/signals.hpp>
-//#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string.hpp>
 //#include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
 //#include <boost/thread.hpp>
@@ -90,4 +90,4 @@ namespace boost { namespace serialization {
 
 
 // XFX
-#include "main\xfx_errorcodes.h"
+#include "../main/xfx_errorcodes.h"

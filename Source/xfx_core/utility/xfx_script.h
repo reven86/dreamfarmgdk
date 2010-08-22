@@ -36,7 +36,7 @@ template< class _String = String, const char * _Delimiters = _ScriptBaseDelimite
 class Script
 {
 	typedef boost::function2< HRESULT, typename _String::size_type&, const _String& >	TokenFnType;
-	typedef stdext::hash_map< _String, TokenFnType, HashCompare< _String > >			TokenMapType;
+	typedef stdext::hash_map< _String, TokenFnType, HashCompare< _String > >		TokenMapType;
 
 	TokenMapType				mTokenMap;
 
@@ -47,7 +47,7 @@ public:
 	virtual ~Script										( ) { };
 
 	//! Parse string.
-	HRESULT						Parse					( const _String& str ) { _String::size_type pos = 0; return ParseAt( pos, str ); };
+	HRESULT						Parse					( const _String& str ) { typename _String::size_type pos = 0; return ParseAt( pos, str ); };
 
 	//! Parse string at specified position.
 	HRESULT						ParseAt					( typename _String::size_type& pos, const _String& str )
@@ -87,6 +87,8 @@ public:
 		_ASSERTE( !"invalid type passed to specialize ParseVariable" );
 		return XFXERR_INVALIDCALL;
 	};
+
+#ifndef __GCCXML__
 
 	//! Parse float variable.
 	template< >
@@ -156,6 +158,8 @@ public:
 		return S_OK;
 	};
 
+#endif
+
 protected:
 	//! Parse end token.
 	HRESULT						ParseEndToken			( typename _String::size_type&, const _String& )
@@ -199,7 +203,7 @@ private:
 
 		_String tok = next_token( str, pos, _Delimiters );
 
-		TokenMapType::const_iterator it = mTokenMap.find( tok );
+		typename TokenMapType::const_iterator it = mTokenMap.find( tok );
 
 		return ( it != mTokenMap.end( ) ) ? ( *it ).second( boost::ref( pos ), boost::cref( str ) ) : XFXERR_NOTFOUND;
 	};

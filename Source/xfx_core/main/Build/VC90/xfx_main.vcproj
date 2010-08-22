@@ -193,6 +193,14 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="win32"
+			>
+			<File
+				RelativePath="..\..\Win32\xfx_timer_win32.cpp"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\xfx.cpp"
 			>
@@ -265,7 +273,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
 					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
 				/>
 			</FileConfiguration>
@@ -274,7 +282,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
 					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
 				/>
 			</FileConfiguration>
@@ -283,7 +291,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;"
+					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
 					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
 				/>
 			</FileConfiguration>
