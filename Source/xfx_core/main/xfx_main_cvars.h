@@ -22,7 +22,7 @@ class Var;
 _XFX_END
 
 #define DECLARE_VAR(x) \
-	extern xfx::Var * x
+	extern boost::shared_ptr< xfx::Var > x
 
 /*! \defgroup CommonVariables Common cvars.
  */

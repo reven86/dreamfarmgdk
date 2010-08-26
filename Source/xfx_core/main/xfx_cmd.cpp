@@ -23,17 +23,17 @@ Cmd::Cmd( ) :
 {
 }
 
-Var * Cmd::RegisterVar( const String& var, const String& def, const DWORD& flags )
+boost::shared_ptr< Var > Cmd::RegisterVar( const String& var, const String& def, const DWORD& flags )
 {
 	String var_copy( boost::to_lower_copy( var ) );
 
-	Var * res = new Var( def );
+	boost::shared_ptr< Var > res ( new Var( def ) );
 
 	VariablesType::iterator it = mVariables.find( var_copy );
 	if( it != mVariables.end( ) )
-		( *it ).second = std::make_pair( boost::shared_ptr< Var >( res ), flags );
+		( *it ).second = std::make_pair( res, flags );
 	else
-		mVariables.insert( VariablesType::value_type( var_copy, std::make_pair( boost::shared_ptr< Var >( res ), flags ) ) );
+		mVariables.insert( VariablesType::value_type( var_copy, std::make_pair( res, flags ) ) );
 
 	return res;
 }

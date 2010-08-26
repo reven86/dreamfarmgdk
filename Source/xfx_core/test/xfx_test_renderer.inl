@@ -126,12 +126,12 @@ BOOST_AUTO_TEST_CASE( texture )
 	BOOST_CHECK_EQUAL( tex.Create( 256, 256, 3 ), S_OK );
 	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )256 );
 	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )256 );
-	BOOST_CHECK_EQUAL( tex.NumMips( ), 3 );
+	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )3 );
 	BOOST_CHECK( tex.IsIdentityResultTransform( ) );
 	BOOST_CHECK_EQUAL( tex.Create( 33, 44, 0 ), S_OK );
 	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )33 );
 	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )44 );
-	BOOST_CHECK_EQUAL( tex.NumMips( ), 6 );
+	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )6 );
 	BOOST_CHECK( !tex.IsEmpty( ) );
 	BOOST_CHECK( !tex.IsIdentityResultTransform( ) );
 	tex.Free( );
@@ -145,8 +145,8 @@ BOOST_AUTO_TEST_CASE( texture )
 
 	Texture tex2( tex );
 	ARGB * tex2_data = reinterpret_cast< ARGB * >( alloca( sizeof( ARGB ) * tex2.Width( ) * tex2.Height( ) ) );
-	BOOST_CHECK_EQUAL( tex2.Width( ), 100 );
-	BOOST_CHECK_EQUAL( tex2.Height( ), 50 );
+	BOOST_CHECK_EQUAL( tex2.Width( ), ( unsigned )100 );
+	BOOST_CHECK_EQUAL( tex2.Height( ), ( unsigned )50 );
 	BOOST_CHECK_EQUAL( tex2.GetSurfaceData( 0, tex2_data ), S_OK );
 	BOOST_CHECK( tex2_data[ 0 ] == ARGB( 255, 0, 0, 255 ) );
 	BOOST_CHECK( tex2_data[ tex2.Width( ) - 1 ] == ARGB( 255, 252, 0, 255 ) );
@@ -174,12 +174,12 @@ BOOST_AUTO_TEST_CASE( cubemap )
 	BOOST_CHECK_EQUAL( tex.Create( 256, 3 ), S_OK );
 	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )256 );
 	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )256 );
-	BOOST_CHECK_EQUAL( tex.NumMips( ), 3 );
+	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )3 );
 	BOOST_CHECK( tex.IsIdentityResultTransform( ) );
 	BOOST_CHECK_EQUAL( tex.Create( 33, 0 ), S_OK );
 	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )33 );
 	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )33 );
-	BOOST_CHECK_EQUAL( tex.NumMips( ), 6 );
+	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )6 );
 	BOOST_CHECK( !tex.IsEmpty( ) );
 	BOOST_CHECK( !tex.IsIdentityResultTransform( ) );
 	tex.Free( );

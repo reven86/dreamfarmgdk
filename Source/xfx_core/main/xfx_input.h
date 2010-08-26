@@ -160,13 +160,13 @@ public:
 	 *
 	 *	\return Returns current key mapping value.
 	 */
-	bool&						UseKeyMapping			( ) { return mUseKeyMapping; };
+	void						SetUseKeyMapping		( bool use ) { mUseKeyMapping = use; };
 
 	/*!	\brief Set whether or not use automatically key mapping (commands will be directly sent to command processor).
 	 *
 	 *	\return Returns current key mapping value.
 	 */
-	const bool&					UseKeyMapping			( ) const { return mUseKeyMapping; };
+	const bool&					GetUseKeyMapping		( ) const { return mUseKeyMapping; };
 
 	/*! \brief Bind command, used in console.
 	 *

@@ -95,7 +95,7 @@ public:
 				boost::bind( &Cache< T >::Clear, this ) );
 
 		String lower_name = boost::algorithm::to_lower_copy( filename );
-		ResourcesType::iterator it = mResources.find( lower_name );
+		typename ResourcesType::iterator it = mResources.find( lower_name );
 
 		T * res;
 		if( it == mResources.end( ) )
@@ -107,7 +107,7 @@ public:
 			if( FAILED( res->LoadFile( lower_name ) ) )
 			{
 				gError( "Can't load resource: %s", lower_name.c_str( ) );
-				return boost::shared_ptr< boost::add_const< T >::type >( );
+				return boost::shared_ptr< typename boost::add_const< T >::type >( );
 			}
 
 			mResources.insert( ResourcesType::value_type( lower_name, r ) );
@@ -130,7 +130,7 @@ public:
 	 */
 	HRESULT							Register					( T& object, const String& filename )
 	{
-		boost::shared_ptr< boost::add_const< T >::type > o = Register( filename );
+		boost::shared_ptr< typename boost::add_const< T >::type > o = Register( filename );
 		if( o )
 		{
 			object = *o;
@@ -151,7 +151,7 @@ public:
 		gMess( "Unregistering resource: %s", object->Filename( ).c_str( ) );
 
 		// Linear search used due to rarely function using.
-		ResourcesType::iterator it = mResources.begin( );
+		typename ResourcesType::iterator it = mResources.begin( );
 
 		while( it != mResources.end( ) )
 		{
@@ -168,7 +168,7 @@ public:
 	//! Unregister all registered resources.
 	void							Clear						( )
 	{
-		for( ResourcesType::iterator it = mResources.begin( ); it != mResources.end( ); it++ )
+		for( typename ResourcesType::iterator it = mResources.begin( ); it != mResources.end( ); it++ )
 			gMess( "Unregistering resource: %s", ( *it ).first.c_str( ) );
 
 		mResources.clear( );
@@ -177,7 +177,7 @@ public:
 	//! Reload all resources.
 	void							ReloadAll					( )
 	{
-		BOOST_FOREACH( ResourcesType::value_type& res, mResources )
+		BOOST_FOREACH( typename ResourcesType::value_type& res, mResources )
 		{
 			gMess( "Reloading resource: %s", res.first.c_str( ) );
 

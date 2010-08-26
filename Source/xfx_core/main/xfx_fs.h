@@ -96,7 +96,7 @@ class ScriptResource : public Script< String >, public Resource
 
 public:
 	//! Constructs a resource with specified name.
-	ScriptResource												( const char * name ) : Resource( name ), Script( ) { };
+	ScriptResource												( const char * name ) : Resource( name ) { };
 
 	//! Destructor.
 	virtual ~ScriptResource										( ) { };
@@ -157,9 +157,10 @@ private:
 
 protected:
 	FileSystem														( );
-	virtual ~FileSystem												( );
 
 public:
+	virtual ~FileSystem												( );
+
 	/*! \brief Add new search path.
 	 *
 	 *	Add new search path.

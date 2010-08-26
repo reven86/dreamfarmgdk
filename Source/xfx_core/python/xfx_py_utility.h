@@ -15,30 +15,32 @@
 // Check whether or not we are parsed by GCCXML library
 #ifdef __GCCXML__
 
-#define _HAS_TR1 0
-#define BOOST_RANGE_ENABLE_CONCEPT_ASSERT 0
-#define BOOST_MPL_CFG_ASSERT_USE_RELATION_NAMES 1
-#define __XFX_SHIPPING__ 1
-#define __XFX_DISABLE_PROFILER__ 1
-
 #include "../shared.h"
+
+#endif
+
 #include "../main/xfx_errorcodes.h"
 #include <string>
+#include <hash_map>
 #include <boost/cstdint.hpp>
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/scoped_array.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
-
-#endif
-
-
+#include <boost/signal.hpp>
+#include <boost/foreach.hpp>
 
 
-//#include "../utility/xfx_utils.h"
-//#include "../utility/xfx_string.h"
+
+
+#include "../utility/xfx_utils.h"
+#include "../utility/xfx_string.h"
 #include "../utility/xfx_profiler.h"
-//#include "../utility/xfx_script.h"
-//#include "../utility/xfx_argb.h"
+#include "../utility/xfx_argb.h"
+#include "../utility/xfx_log.h"
+#include "../utility/xfx_singleton.h"
+#include "../utility/xfx_cache.h"
+#include "../utility/xfx_script.h"

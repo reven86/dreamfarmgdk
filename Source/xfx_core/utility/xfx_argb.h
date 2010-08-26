@@ -30,6 +30,7 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
+#ifndef __GCCXML__
 union ARGB
 {
 	//! DWORD rerpesentation.
@@ -37,17 +38,25 @@ union ARGB
 
 	struct
 	{
+#else
+struct ARGB
+{
+#endif
 		boost::uint8_t b;			//!< Blue component.
 		boost::uint8_t g;			//!< Green component.
 		boost::uint8_t r;			//!< Red component.
 		boost::uint8_t a;			//!< Alpha component.
+#ifndef __GCCXML__
 	};
+#endif
 
 	//! Constructs an uninitialized color.
 	ARGB					( ) { };
 
+#ifndef __GCCXML__
 	//! Constructs color by dword.
 	ARGB					( boost::uint32_t dw ) : dword( dw ) { };
+#endif
 
 	//! Constructs color by each color component.
 	ARGB					( unsigned char a0, unsigned char r0, unsigned char g0, unsigned char b0 ) : r( r0 ), g( g0 ), b( b0 ), a( a0 ) { };
@@ -73,6 +82,8 @@ union ARGB
 
 #pragma warning (pop)
 
+#ifndef __GCCXML__
+
 //! Parse ARGB variable.
 template< class _String >
 HRESULT ParseVariable( ARGB& var, typename _String::size_type& pos, const _String& str )
@@ -85,11 +96,13 @@ HRESULT ParseVariable( ARGB& var, typename _String::size_type& pos, const _Strin
 	return S_OK;
 };
 
+#endif
 
 
 
 // operators
 
+#ifndef __GCCXML__
 //! Equality color operator.
 inline bool operator ==		( const ARGB& u, const ARGB& v ) { return u.dword == v.dword; };
 
@@ -101,6 +114,7 @@ inline bool operator <		( const ARGB& u, const ARGB& v ) { return u.dword < v.dw
 
 //! Greater color operator.
 inline bool operator >		( const ARGB& u, const ARGB& v ) { return u.dword > v.dword; };
+#endif
 
 //! Color multiply operator.
 inline ARGB operator *		( const ARGB& u, const ARGB& v )
@@ -140,7 +154,7 @@ inline ARGB operator *		( const ARGB& u, const float& t )
 {
 	int it = static_cast< int >( 256 * t );
 
-	return ( it < 0 ) ? ARGB( 0x00000000 ) : ARGB(
+	return ( it < 0 ) ? ARGB( 0, 0, 0, 0 ) : ARGB(
 		static_cast< boost::uint8_t >( std::min< int >( u.a * it, 255 * 256 ) >> 0x08 ),
 		static_cast< boost::uint8_t >( std::min< int >( u.r * it, 255 * 256 ) >> 0x08 ),
 		static_cast< boost::uint8_t >( std::min< int >( u.g * it, 255 * 256 ) >> 0x08 ),
@@ -149,6 +163,8 @@ inline ARGB operator *		( const ARGB& u, const float& t )
 };
 
 
+
+#ifndef __GCCXML__
 
 /*!	\brief Simple lerp functor for ARGB.
  *	\ingroup UtilityGroup
@@ -162,6 +178,6 @@ struct SimpleLerpFn< ARGB >
 	ARGB lerp ( const ARGB& a, const ARGB& b, const float& t ) { return ARGB::Interpolate( a, b, t ); };
 };
 
-
+#endif
 
 _XFX_END

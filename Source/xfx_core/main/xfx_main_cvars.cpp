@@ -20,7 +20,7 @@
 //
 
 #define DEFINE_VAR( v ) \
-	xfx::Var * v( NULL )
+	boost::shared_ptr< xfx::Var > v
 
 DEFINE_VAR( g_developer );
 DEFINE_VAR( g_cheats );

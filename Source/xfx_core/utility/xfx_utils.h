@@ -20,6 +20,8 @@ _XFX_BEGIN
 // IUnknown deleter
 //
 
+#ifndef __GCCXML__
+
 /*! \defgroup UtilityGroup Utility classes and functions.
  */
 
@@ -34,6 +36,9 @@ struct IUnknownDeleter : public std::unary_function< IUnknown *, void >
 {
 	void operator ( )			( IUnknown * u ) { _ASSERTE( u ); if( u ) u->Release( ); };
 };
+
+#endif // __GCCXML__
+
 
 
 

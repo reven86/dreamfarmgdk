@@ -41,6 +41,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 			/>
 			<Tool
@@ -97,6 +98,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
 			<Tool
@@ -153,6 +155,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
 			<Tool
@@ -187,6 +190,222 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="generated"
+			>
+			<File
+				RelativePath="..\..\generated\__call_policies.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\__convenience.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Application.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Application.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ARGB.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ARGB.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\BooksManager.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\BooksManager.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Caches.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Caches.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cmd.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cmd.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Console.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Console.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Engine.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Engine.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\exposed_decl.pypp.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\FileSystem.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\FileSystem.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Input.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Input.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\key_compare.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\key_compare.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Log.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Log.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\MessagesBook.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\MessagesBook.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\named_tuple.py"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Pack.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Pack.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Resource.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Resource.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ScriptResource.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ScriptResource.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_BooksManager__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_BooksManager__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Caches__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Caches__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Cmd__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Cmd__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Engine__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Engine__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_FileSystem__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_FileSystem__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Input__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Input__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Timer.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Timer.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Var.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Var.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx.main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx_free_functions.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx_free_functions.pypp.hpp"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\xfx.cpp"
 			>
@@ -220,8 +439,43 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_py_main.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_py_utility.h"
 			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_utility.py"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)generated\xfx.main.cpp"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)generated\xfx.main.cpp"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)generated\xfx.main.cpp"
+				/>
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

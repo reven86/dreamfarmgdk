@@ -91,7 +91,7 @@ public:
 	 *
 	 *	\return New variable.
 	 */
-	Var *							RegisterVar							( const String& var, const String& def, const DWORD& flags = EVF_DEFAULT );
+	boost::shared_ptr< Var >		RegisterVar							( const String& var, const String& def, const DWORD& flags = EVF_DEFAULT );
 
 	/*! \brief Registers new command.
 	 *	

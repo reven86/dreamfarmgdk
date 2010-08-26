@@ -32,7 +32,7 @@ extern const char _ScriptBaseDelimiters[ ];
  *	\author Andrew "RevEn" Karpushin
  */
 
-template< class _String = String, const char * _Delimiters = _ScriptBaseDelimiters >
+template< class _String = String >
 class Script
 {
 	typedef boost::function2< HRESULT, typename _String::size_type&, const _String& >	TokenFnType;
@@ -41,10 +41,17 @@ class Script
 	TokenMapType				mTokenMap;
 
 	bool						mIsParsingStopped;
+	_String						mDelimiters;
 
 public:
-	Script												( ) { };
+	Script												( ) : mDelimiters( _ScriptBaseDelimiters ) { };
 	virtual ~Script										( ) { };
+
+	//! Get delimiters.
+	const _String&				Delimiters				( ) const { return mDelimiters; };
+
+	//! Set delimiters.
+	void						SetDelimiters			( const _String& delimiters ) { mDelimiters = delimiters; };
 
 	//! Parse string.
 	HRESULT						Parse					( const _String& str ) { typename _String::size_type pos = 0; return ParseAt( pos, str ); };
@@ -74,6 +81,8 @@ public:
 	// Useful functions
 	//
 
+#ifndef __GCCXML__
+
 	//! Parse useless token.
 	static HRESULT				ParseUselessToken		( typename _String::size_type&, const _String& )
 	{
@@ -87,8 +96,6 @@ public:
 		_ASSERTE( !"invalid type passed to specialize ParseVariable" );
 		return XFXERR_INVALIDCALL;
 	};
-
-#ifndef __GCCXML__
 
 	//! Parse float variable.
 	template< >
@@ -199,9 +206,9 @@ protected:
 private:
 	HRESULT						ParseToken				( typename _String::size_type& pos, const _String& str )
 	{
-		skip_comments( str, pos, _Delimiters );
+		skip_comments( str, pos, mDelimiters.c_str( ) );
 
-		_String tok = next_token( str, pos, _Delimiters );
+		_String tok = next_token( str, pos, mDelimiters.c_str( ) );
 
 		typename TokenMapType::const_iterator it = mTokenMap.find( tok );
 
