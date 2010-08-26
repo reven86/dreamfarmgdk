@@ -18,6 +18,13 @@ _XFX_BEGIN
 // Pack
 //
 
+struct Pack::FileInfo : Pack::FileIterator_t
+{
+	DWORD			offset;
+	DWORD			length;
+	String			filename;
+};
+
 #pragma message( "FIXME: use log for filesystem" )
 
 Pack::Pack( ) :
@@ -35,6 +42,21 @@ Pack::~Pack( )
 		fclose( mPackFile );
 }
 
+Pack::FileIterator Pack::GetFirstFile( ) const
+{
+	return mFileStore.get( );
+}
+
+Pack::FileIterator Pack::GetLastFile( ) const
+{
+	return mFileStore ? GetFirstFile( ) + mFilesCount : GetFirstFile( );
+}
+
+unsigned Pack::GetFilesCount( ) const
+{
+	return ( unsigned )std::distance( GetFirstFile( ), GetLastFile( ) );
+}
+
 Pack::FileIterator Pack::FindFile( const String& file ) const
 {
 	if( !mFileStore || !mFilesCount )
@@ -43,9 +65,9 @@ Pack::FileIterator Pack::FindFile( const String& file ) const
 	FileInfo wrap;
 	wrap.filename = boost::algorithm::to_lower_copy( file );
 
-	FileIterator it = std::lower_bound(
-		GetFirstFile( ),
-		GetLastFile( ),
+	const FileInfo * it = std::lower_bound(
+		( const FileInfo * ) GetFirstFile( ),
+		( const FileInfo * ) GetLastFile( ),
 		wrap,
 		boost::bind( std::less< String >( ), boost::bind( &FileInfo::filename, _1 ), boost::bind( &FileInfo::filename, _2 ) )
 		);
@@ -60,7 +82,7 @@ HRESULT Pack::GetFileName( const FileIterator& file, String& name ) const
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
-	name = ( *file ).filename;
+	name = ( ( const FileInfo& ) *file ).filename;
 
 	return S_OK;
 }
@@ -76,15 +98,15 @@ HRESULT Pack::ReadFile( const FileIterator& file, void * buf ) const
 	{
 		if( mPackFile )
 		{
-			fseek( mPackFile, ( *file ).offset, SEEK_SET );
-			fread( buf, ( *file ).length, 1, mPackFile );
+			fseek( mPackFile, ( ( const FileInfo& ) *file ).offset, SEEK_SET );
+			fread( buf, ( ( const FileInfo& ) *file ).length, 1, mPackFile );
 		}
 	}
 	else
 	{
 		if( mpPackMemory )
 		{
-			memcpy( buf, mpPackMemory + ( *file ).offset, ( *file ).length );
+			memcpy( buf, mpPackMemory + ( ( const FileInfo& ) *file ).offset, ( ( const FileInfo& ) *file ).length );
 		}
 	}
 
@@ -98,7 +120,7 @@ HRESULT Pack::GetFileSize( const FileIterator& file, unsigned long& len ) const
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
-	len = ( *file ).length;
+	len = ( ( const FileInfo& ) *file ).length;
 
 	return S_OK;
 }
@@ -110,7 +132,7 @@ HRESULT Pack::GetFileOffset( const FileIterator& file, unsigned long& ofs ) cons
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
-	ofs = ( *file ).offset;
+	ofs = ( ( const FileInfo& ) *file ).offset;
 
 	return S_OK;
 }

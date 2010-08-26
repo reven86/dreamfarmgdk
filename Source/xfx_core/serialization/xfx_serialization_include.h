@@ -20,7 +20,6 @@
 #include "xfx_math_serialization_impl.h"
 #include "xfx_renderer_ext_serialization_impl.h"
 #include "xfx_renderer_serialization_impl.h"
-#include "xfx_ui_serialization_impl.h"
 #include "xfx_utility_serialization_impl.h"
 
 

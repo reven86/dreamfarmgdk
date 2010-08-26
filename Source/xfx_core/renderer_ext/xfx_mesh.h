@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "math\xfx_aabbtree.h"
+#include "..\math\xfx_aabbtree.h"
 
 /*!	\file xfx_mesh.h 
  *	\brief Simple geometry object with key frame animations.
@@ -94,7 +94,7 @@ public:
 	const Envelope< Vec3, float >&			ScaleKeys						( ) const { return mScaleKeys; };
 
 	//! Get AABB tree.
-	const class AABBTree&					AABBTree						( ) const { return mAABBTree ? *mAABBTree : msEmptyTree; };
+	const AABBTree&							GetAABBTree						( ) const { return mAABBTree ? *mAABBTree : msEmptyTree; };
 
 	//! Get root AABB.
 	const Primitives::AABB&					RootAABB						( ) const { return AABBTree( ).RootAABB( ); };

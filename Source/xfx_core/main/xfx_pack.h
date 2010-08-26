@@ -32,12 +32,14 @@ _XFX_BEGIN
 
 class Pack : boost::noncopyable, public Resource
 {
-	struct FileInfo
-	{
-		DWORD			offset;
-		DWORD			length;
-		String			filename;
-	};
+public:
+	//! File iterator type.
+	struct FileIterator_t{ };
+
+	typedef const FileIterator_t * FileIterator;
+
+private:
+	struct FileInfo;
 
 	//! Files are stored in lexicographical order.
 	boost::scoped_array< FileInfo >			mFileStore;
@@ -54,10 +56,6 @@ class Pack : boost::noncopyable, public Resource
 	//! Memory pointer.
 	const BYTE								* mpPackMemory;
 
-public:
-	//! File index type.
-	typedef const FileInfo *				FileIterator;
-
 	enum { VERSION = 1 };
 
 public:
@@ -69,10 +67,13 @@ public:
 	virtual ~Pack													( );
 
 	//! Get first file.
-	FileIterator						GetFirstFile				( ) const { return mFileStore.get( ); };
+	FileIterator						GetFirstFile				( ) const;
 
 	//! Get file iterator behind last.
-	FileIterator						GetLastFile					( ) const { return mFileStore ? GetFirstFile( ) + mFilesCount : GetFirstFile( ); };
+	FileIterator						GetLastFile					( ) const;
+
+	//! Get total files count.
+	unsigned							GetFilesCount				( ) const;
 
 	/*! \brief Search file in pack by name.
 	 *

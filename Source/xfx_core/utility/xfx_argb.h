@@ -82,21 +82,19 @@ struct ARGB
 
 #pragma warning (pop)
 
-#ifndef __GCCXML__
-
 //! Parse ARGB variable.
 template< class _String >
 HRESULT ParseVariable( ARGB& var, typename _String::size_type& pos, const _String& str )
 {
+#ifndef __GCCXML__
 	skip_comments( str, pos );
 	unsigned fvar;
 	Script< _String >::ParseVariable< unsigned >( fvar, pos, str );
 
 	var = ARGB( fvar );
+#endif
 	return S_OK;
 };
-
-#endif
 
 
 

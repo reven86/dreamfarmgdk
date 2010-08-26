@@ -108,7 +108,7 @@ public:
 			};
 		};
 
-		KeysType::const_iterator it2 = std::lower_bound(
+		typename KeysType::const_iterator it2 = std::lower_bound(
 			mKeys.begin( ),
 			mKeys.end( ),
 			KeyType( t, mEmptyKey ),
@@ -120,7 +120,7 @@ public:
 			if( it2 == mKeys.begin( ) )
 				return (*it2).second;
 
-			KeysType::const_iterator it = boost::prior( it2 );
+			typename KeysType::const_iterator it = boost::prior( it2 );
 
 			float lerp_frac = static_cast< float >( t - ( *it ).first ) / ( ( *it2 ).first - ( *it ).first );
 
@@ -144,6 +144,7 @@ public:
 
 	static HRESULT					ParseEnvelope				( Envelope< T, _KT, _LerpFn >& env, String::size_type& pos, const String& str )
 	{
+#ifndef __GCCXML__
 		env.Clear( );
 
 		String token;
@@ -173,6 +174,7 @@ public:
 
 			env.AddKey( key, value );
 		}
+#endif // __GCCXML__
 
 		return S_OK;
 	};

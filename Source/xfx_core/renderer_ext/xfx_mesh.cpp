@@ -58,7 +58,7 @@ void Mesh::Render( const MeshState& state ) const
 
 	if( r_drawbboxes->AsInt( ) )
 	{
-		Renderer::Instance( ).DrawTools( ).PushDrawBox( RootAABB( ), 0xffffffff, matr );
+		Renderer::Instance( ).GetDrawTools( ).PushDrawBox( RootAABB( ), 0xffffffff, matr );
 	}
 
 	if( r_debug_aabbtree->AsInt( ) >= 0 )

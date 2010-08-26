@@ -460,7 +460,7 @@ public:
 	void							Reset									( );
 
 	//! Render particle system.
-	virtual void					Render									( const ARGB& modulator = xfx::ARGB( 0xffffffff ) ) const;
+	virtual void					Render									( const ARGB& modulator = xfx::ARGB( 0xff, 0xff, 0xff, 0xff ) ) const;
 
 	//! Update particle system.
 	virtual void					Update									( DWORD mspf );

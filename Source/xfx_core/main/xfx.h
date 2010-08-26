@@ -88,10 +88,10 @@ namespace boost { namespace serialization {
 
 // Other XFX libraries
 #include "xfx_errorcodes.h"
-#include "utility/xfx_string.h"
-#include "utility/xfx_singleton.h"
-#include "utility/xfx_log.h"
-#include "utility/xfx_utils.h"
-#include "utility/xfx_profiler.h"
-#include "utility/xfx_script.h"
-#include "utility/xfx_cache.h"
+#include "../utility/xfx_string.h"
+#include "../utility/xfx_singleton.h"
+#include "../utility/xfx_log.h"
+#include "../utility/xfx_utils.h"
+#include "../utility/xfx_profiler.h"
+#include "../utility/xfx_script.h"
+#include "../utility/xfx_cache.h"

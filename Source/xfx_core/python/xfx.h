@@ -63,7 +63,6 @@ namespace boost { namespace serialization {
 
 
 // XFX
-#include "xfx_py_utility.h"
-#include "xfx_py_main.h"
+#include "xfx_py_bindings.h"
 
 #pragma warning( pop )

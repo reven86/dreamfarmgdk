@@ -157,8 +157,6 @@ public:
 	void						SetMouseMode			( const bool& isexclusive );
 
 	/*!	\brief Set whether or not use automatically key mapping (commands will be directly sent to command processor).
-	 *
-	 *	\return Returns current key mapping value.
 	 */
 	void						SetUseKeyMapping		( bool use ) { mUseKeyMapping = use; };
 

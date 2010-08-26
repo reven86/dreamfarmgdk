@@ -176,7 +176,7 @@ bool BaseParticleSystem::TestFrustumCulling( const Viewer * viewer, const Mat4& 
 	_ASSERTE( viewer );
 
 	if( r_debug_particles->AsInt( ) )
-		Renderer::Instance( ).DrawTools( ).PushDrawBox( obb, 0xffffff00 );
+		Renderer::Instance( ).GetDrawTools( ).PushDrawBox( obb, 0xffffff00 );
 
 	return viewer && viewer->TestFrustumCulling( obb );
 }
@@ -339,7 +339,7 @@ void ParticleSystem::Render( const ARGB& modulator ) const
 				if( col.a != 0 )
 					if( mFlags & EFL_2D )
 					{
-						Renderer::Instance( ).DrawTools( ).PushDraw2DSprite( 
+						Renderer::Instance( ).GetDrawTools( ).PushDraw2DSprite( 
 							pos.x * kw, pos.y * kh, 
 							par.size * scale_kw, par.size * scale_kh, 
 							par.angle, col, ( *it ).shader_ptr,
@@ -351,11 +351,11 @@ void ParticleSystem::Render( const ARGB& modulator ) const
 					{
 						if( r_debug_particles->AsInt( ) )
 						{
-							Renderer::Instance( ).DrawTools( ).PushDrawBox( Primitives::AABB( pos - Vec3( par.size * 0.5f ), pos + Vec3( par.size * 0.5f ) ), 0x40ffffff );
+							Renderer::Instance( ).GetDrawTools( ).PushDrawBox( Primitives::AABB( pos - Vec3( par.size * 0.5f ), pos + Vec3( par.size * 0.5f ) ), 0x40ffffff );
 						}
 						else
 						{
-							Renderer::Instance( ).DrawTools( ).PushDraw3DSprite( pos, par.size, par.angle, col, ( *it ).shader_ptr );
+							Renderer::Instance( ).GetDrawTools( ).PushDraw3DSprite( pos, par.size, par.angle, col, ( *it ).shader_ptr );
 						}
 					}
 			}

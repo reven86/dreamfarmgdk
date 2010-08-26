@@ -246,10 +246,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_ui_serialization_impl.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\xfx_utility_serialization_impl.h"
 			>
 		</File>

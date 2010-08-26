@@ -73,7 +73,7 @@ void Viewer::SetupFrustum( const Mat4& view_proj )
 bool Viewer::TestFrustumCulling( const Primitives::Sphere& sphere ) const
 {
 	if( r_debug_frustumculling->AsInt( ) )
-		Renderer::Instance( ).DrawTools( ).PushDrawSphere( sphere.Position( ), sphere.Radius( ), 0xff00ffff );
+		Renderer::Instance( ).GetDrawTools( ).PushDrawSphere( sphere.Position( ), sphere.Radius( ), 0xff00ffff );
 
 	for( int i = 0; i < 6; i++ )
 	{
@@ -89,7 +89,7 @@ bool Viewer::TestFrustumCulling( const Primitives::Sphere& sphere ) const
 bool Viewer::TestFrustumCulling( const Primitives::AABB& box ) const
 {
 	if( r_debug_frustumculling->AsInt( ) )
-		Renderer::Instance( ).DrawTools( ).PushDrawBox( box, 0xff00ffff );
+		Renderer::Instance( ).GetDrawTools( ).PushDrawBox( box, 0xff00ffff );
 
 	const Vec3 verts[ 8 ] =
 	{
@@ -123,7 +123,7 @@ bool Viewer::TestFrustumCulling( const Primitives::AABB& box ) const
 bool Viewer::TestFrustumCulling( const Primitives::OBB& box ) const
 {
 	if( r_debug_frustumculling->AsInt( ) )
-		Renderer::Instance( ).DrawTools( ).PushDrawBox( box, 0xff00ffff );
+		Renderer::Instance( ).GetDrawTools( ).PushDrawBox( box, 0xff00ffff );
 
 	const Vec3 verts[ 8 ] =
 	{

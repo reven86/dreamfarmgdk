@@ -311,7 +311,7 @@ private:
 
 class ShaderParams
 {
-	friend boost::serialization::access;
+	friend class boost::serialization::access;
 
 	stdext::hash_map< String, boost::shared_ptr< const ITexture >, HashCompare< String > >		mTextures;
 	stdext::hash_map< String, float, HashCompare< String > >									mFloats;
@@ -348,49 +348,9 @@ public:
 	template<class T>
 	void						SetValue				( const String& str, const T& value ) { _ASSERTE ( false ); };
 
-	//! Set a texture by name.
-	template<>
-	void						SetValue				( const String& str, const boost::shared_ptr< const ITexture >& value ) { mTextures[str] = value; };
-
-	//! Set a float value by name.
-	template<>
-	void						SetValue				( const String& str, const float& value ) { mFloats[ str ] = value; };
-
-	//! Set an int value by name.
-	template<>
-	void						SetValue				( const String& str, const int& value ) { mInts[ str ] = value; };
-
-	//! Set a Vec4 value by name.
-	template<>
-	void						SetValue				( const String& str, const Vec4& value ) { mVectors[ str ] = value; };
-
-	//! Set a Mat4 value by name.
-	template<>
-	void						SetValue				( const String& str, const Mat4& value ) { mMatrices[ str ] = value; };
-
 	//! Get a custom value by name. Return false if value not exists.
 	template< class T >
 	bool						GetValue				( const String& str, T& value ) const { _ASSERTE( false ); return false; };
-
-	//! Get a texture by name.
-	template< >
-	bool						GetValue				( const String& str, boost::shared_ptr< const ITexture >& value ) const { return GetValueCommon( str, value, mTextures ); };
-
-	//! Get a float value by name.
-	template< >
-	bool						GetValue				( const String& str, float& value ) const { return GetValueCommon( str, value, mFloats ); };
-
-	//! Get a int value by name.
-	template< >
-	bool						GetValue				( const String& str, int& value ) const { return GetValueCommon( str, value, mInts ); };;
-
-	//! Get a Vec4 value by name.
-	template< >
-	bool						GetValue				( const String& str, Vec4& value ) const { return GetValueCommon( str, value, mVectors ); };;
-
-	//! Get a Mat4 value by name.
-	template< >
-	bool						GetValue				( const String& str, Mat4& value ) const { return GetValueCommon( str, value, mMatrices ); };;
 
 	//! Apply values on Effect. Needed just prior rendering.
 	void						ApplyValues				( const Effect& eff ) const;
@@ -399,6 +359,53 @@ private:
 	template< class _Container >
 	bool						GetValueCommon			( const String& str, typename _Container::mapped_type& val, const _Container& cont ) const;
 };
+
+
+
+
+//
+// ShaderParams specializations
+//
+
+//! Set a texture by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const boost::shared_ptr< const ITexture >& value ) { mTextures[str] = value; };
+
+//! Set a float value by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const float& value ) { mFloats[ str ] = value; };
+
+//! Set an int value by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const int& value ) { mInts[ str ] = value; };
+
+//! Set a Vec4 value by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const Vec4& value ) { mVectors[ str ] = value; };
+
+//! Set a Mat4 value by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const Mat4& value ) { mMatrices[ str ] = value; };
+
+//! Get a texture by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, boost::shared_ptr< const ITexture >& value ) const { return GetValueCommon( str, value, mTextures ); };
+
+//! Get a float value by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, float& value ) const { return GetValueCommon( str, value, mFloats ); };
+
+//! Get a int value by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, int& value ) const { return GetValueCommon( str, value, mInts ); };;
+
+//! Get a Vec4 value by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, Vec4& value ) const { return GetValueCommon( str, value, mVectors ); };;
+
+//! Get a Mat4 value by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, Mat4& value ) const { return GetValueCommon( str, value, mMatrices ); };;
 
 
 
@@ -412,7 +419,7 @@ private:
 template< class _Container >
 bool ShaderParams::GetValueCommon( const String& str, typename _Container::mapped_type& tex, const _Container& cont ) const
 {
-	_Container::const_iterator it = cont.find( str );
+	typename _Container::const_iterator it = cont.find( str );
 
 	if( it != cont.end( ) )
 	{

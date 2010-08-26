@@ -93,5 +93,5 @@ namespace boost { namespace serialization {
 
 
 // XFX
-#include "utility/xfx_singleton.h"
-#include "utility/xfx_profiler.h"
+#include "../utility/xfx_singleton.h"
+#include "../utility/xfx_profiler.h"

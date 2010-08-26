@@ -155,6 +155,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm115"
 				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
@@ -439,11 +440,7 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\xfx_py_main.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_py_utility.h"
+			RelativePath="..\..\xfx_py_bindings.h"
 			>
 		</File>
 		<File

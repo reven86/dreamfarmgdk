@@ -161,6 +161,7 @@ inline float math_invsqrt( float x )
 	const float _0_47 = 0.47f;
 	const float _1_47 = 1.47f;
 	unsigned long y;
+#ifndef __GCCXML__
 	_asm
 	{
 		mov     eax, 07F000000h+03F800000h // (ONE_AS_INTEGER<<1) + ONE_AS_INTEGER
@@ -184,6 +185,7 @@ inline float math_invsqrt( float x )
 		and     y, 07FFFFFFFh
 
 	}
+#endif // __GCCXML__
 	return *( float * )&y;
 }
 

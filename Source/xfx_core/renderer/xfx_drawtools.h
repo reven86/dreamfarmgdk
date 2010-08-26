@@ -154,7 +154,7 @@ public:
 	 *	\param[in]	radius	Radius.
 	 *	\param[in]	color	Color.
 	 */
-	void								PushDrawSphere				( const Vec3& origin, const float& radius, const ARGB& color = 0xffffffff );
+	void								PushDrawSphere				( const Vec3& origin, const float& radius, const ARGB& color = ARGB( 0xff, 0xff, 0xff, 0xff ) );
 
 	/*! \brief Draw AABB, transformed by matrix.
 	 *
@@ -254,7 +254,7 @@ public:
 	 *	\param[in]	z				Output z coordinate.
 	 *	\param[in]	rhw				Output RHW.
 	 */
-	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& z = 0.0f, const float& rhw = 1.0f );
+	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = ARGB( 0xff, 0xff, 0xff, 0xff ), const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& z = 0.0f, const float& rhw = 1.0f );
 
 	/*! \brief Draw a 2D text in 3D space.
 	 *
@@ -266,7 +266,7 @@ public:
 	 *	\param[in]	color			Color.
 	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 */
-	void								PushDraw3DText				( const class Font& fnt, const Vec3& pos, const float& xscale, const float& yscale, const WString& text, const ARGB& color = 0xffffffff, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ) );
+	void								PushDraw3DText				( const class Font& fnt, const Vec3& pos, const float& xscale, const float& yscale, const WString& text, const ARGB& color = ARGB( 0xff, 0xff, 0xff, 0xff ), const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ) );
 
 	//! @}
 

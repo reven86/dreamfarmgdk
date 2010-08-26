@@ -55,7 +55,7 @@ void CEGUIRenderer::addQuad(const CEGUI::Rect &dest_rect, float z, const CEGUI::
 		float v2sx = Viewport::Instance( ).InvWidth( ) * xfx::Renderer::Instance( ).D3DPP( ).BackBufferWidth;
 		float v2sy = Viewport::Instance( ).InvHeight( ) * xfx::Renderer::Instance( ).D3DPP( ).BackBufferHeight;
 
-		DrawTools& dt = xfx::Renderer::Instance( ).DrawTools( );
+		DrawTools& dt = xfx::Renderer::Instance( ).GetDrawTools( );
 
 		dt.PushDraw2DSprite(
 			( el.x + el.w * 0.5f ) * v2sx,
@@ -76,7 +76,7 @@ void CEGUIRenderer::doRender()
 	float v2sx = Viewport::Instance( ).InvWidth( ) * xfx::Renderer::Instance( ).D3DPP( ).BackBufferWidth;
 	float v2sy = Viewport::Instance( ).InvHeight( ) * xfx::Renderer::Instance( ).D3DPP( ).BackBufferHeight;
 
-	DrawTools& dt = xfx::Renderer::Instance( ).DrawTools( );
+	DrawTools& dt = xfx::Renderer::Instance( ).GetDrawTools( );
 
 	BOOST_FOREACH( const QuadElem& el, mQuadArray )
 	{

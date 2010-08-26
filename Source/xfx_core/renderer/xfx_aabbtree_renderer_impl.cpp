@@ -25,7 +25,7 @@ void AABBTree::RecursiveDebugDraw( const Mat4& matr, Node * node, int level ) co
 	{
 		if( level == r_debug_aabbtree->AsInt( ) )
 		{
-			Renderer::Instance( ).DrawTools( ).PushDrawBox( node->box, node->IsLeaf( ) ? 0xffffff00 : 0xff00ff00, matr );
+			Renderer::Instance( ).GetDrawTools( ).PushDrawBox( node->box, node->IsLeaf( ) ? 0xffffff00 : 0xff00ff00, matr );
 		}
 
 		if( !node->IsLeaf( ) )

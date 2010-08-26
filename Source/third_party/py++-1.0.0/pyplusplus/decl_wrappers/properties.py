@@ -26,6 +26,9 @@ class property_t( object ):
     def name( self ):
         return self._name
 
+    def set_name( self, n ):
+        self._name = n
+
     @property
     def fget( self ):
         return self._fget

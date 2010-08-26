@@ -1477,11 +1477,11 @@ void Renderer::DrawFrameStatistics( const Font& fnt, const boost::shared_ptr< co
 		mFrameStat.num_batches % mFrameStat.num_tris % mFrameStat.num_lines % 
 		mFrameStat.num_sprites % mFrameStat.num_usertris ) );
 
-	Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
+	Renderer::Instance( ).GetDrawTools( ).PushDraw2DSprite(
 		cur_x + 80.0f, cur_y + 40.0f,
 		180.0f, 100.0f, 0, 0xa0000000, white_shader );
 
-	Renderer::Instance( ).DrawTools( ).PushDraw2DText(
+	Renderer::Instance( ).GetDrawTools( ).PushDraw2DText(
 		fnt,
 		cur_x, cur_y,
 		1.0f, 1.0f,

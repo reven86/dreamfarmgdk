@@ -114,10 +114,12 @@ public:
 template< class _String >
 HRESULT ParseVariable( Vec3& var, typename _String::size_type& pos, const _String& str )
 {
+#ifndef __GCCXML__
 	skip_comments( str, pos );
 	Script< _String >::ParseVariable< float >( var.x, pos, str );
 	Script< _String >::ParseVariable< float >( var.y, pos, str );
 	Script< _String >::ParseVariable< float >( var.z, pos, str );
+#endif
 	return S_OK;
 };
 

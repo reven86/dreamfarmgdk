@@ -52,13 +52,13 @@ void ProfilingManager::DrawPerformanceInfo( const Font& fnt, const boost::shared
 		if( percent < 3.0f )
 			continue;
 
-		Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
+		Renderer::Instance( ).GetDrawTools( ).PushDraw2DSprite(
 			cur_x + bar_w * percent * 0.01f * 0.5f, cur_y + bar_h * 0.5f - 4.0f,
 			bar_w * percent * 0.01f,
 			bar_h,
 			0, 0xff008000, white_shd );
 
-		Renderer::Instance( ).DrawTools( ).PushDraw2DText(
+		Renderer::Instance( ).GetDrawTools( ).PushDraw2DText(
 			fnt,
 			cur_x, cur_y,
 			1.0f, 1.0f,
@@ -94,13 +94,13 @@ void ProfilingManager::DrawPerformanceInfo( const Font& fnt, const boost::shared
 		if( percent < 3.0f )
 			continue;
 
-		Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
+		Renderer::Instance( ).GetDrawTools( ).PushDraw2DSprite(
 			cur_x + bar_w * percent * 0.01f * 0.5f, cur_y + bar_h * 0.5f - 4.0f,
 			bar_w * percent * 0.01f,
 			bar_h,
 			0, 0xff008000, white_shd );
 
-		Renderer::Instance( ).DrawTools( ).PushDraw2DText(
+		Renderer::Instance( ).GetDrawTools( ).PushDraw2DText(
 			fnt,
 			cur_x, cur_y,
 			1.0f, 1.0f,

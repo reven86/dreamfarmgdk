@@ -363,10 +363,10 @@ public:
 	void								DrawPrimitive				( D3DPRIMITIVETYPE type, UINT offset, UINT p_count ) { mpD3DDevice->DrawPrimitive( type, offset, p_count ); mFrameStat.num_tris += p_count; mFrameStat.num_batches++; };
 
 	//! Get draw tools.
-	class DrawTools&					DrawTools					( ) { return mDrawTools; };
+	xfx::DrawTools&						GetDrawTools				( ) { return mDrawTools; };
 
 	//! Get draw tools.
-	const class DrawTools&				DrawTools					( ) const { return mDrawTools; };
+	const xfx::DrawTools&				GetDrawTools				( ) const { return mDrawTools; };
 
 	//
 	//! \name State manager
