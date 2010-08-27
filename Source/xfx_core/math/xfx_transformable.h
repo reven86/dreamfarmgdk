@@ -54,25 +54,25 @@ public:
 	//Compiler-generated copy constructor and assignment operator are fine
 
 	//! Get position.
-	const Vec3&						Position					( ) const { return mPosition; };
+	const Vec3&						GetPosition					( ) const { return mPosition; };
 
 	//! Get rotation.
-	const Euler&					Rotation					( ) const { return mRotation; };
+	const Euler&					GetRotation					( ) const { return mRotation; };
 
 	//! Get scale.
-	const Vec3&						Scale						( ) const { return mScale; };
+	const Vec3&						GetScale					( ) const { return mScale; };
 
 	//! Get transformation matrix.
-	const Mat4&						Transformation				( ) const { return mTransformation; };
+	const Mat4&						GetTransformation			( ) const { return mTransformation; };
 
 	//! Set position.
-	void							Position					( const Vec3& pos );
+	void							SetPosition					( const Vec3& pos );
 
 	//! Set rotation.
-	void							Rotation					( const Euler& rot );
+	void							SetRotation					( const Euler& rot );
 
 	//! Set scale.
-	void							Scale						( const Vec3& scale );
+	void							SetScale					( const Vec3& scale );
 
 	//! Reset all transform: position, rotation and scale.
 	void							ResetTransform				( const Vec3& pos, const Euler& rot, const Vec3& scale );
@@ -114,25 +114,25 @@ public:
 	//Compiler-generated copy constructor and assignment operator are fine
 
 	//! Get position.
-	const Vec2&						Position					( ) const { return mPosition; };
+	const Vec2&						GetPosition					( ) const { return mPosition; };
 
 	//! Get rotation.
-	const Math::BigAngle&			Rotation					( ) const { return mRotation; };
+	const Math::BigAngle&			GetRotation					( ) const { return mRotation; };
 
 	//! Get scale.
-	const Vec2&						Scale						( ) const { return mScale; };
+	const Vec2&						GetScale					( ) const { return mScale; };
 
 	//! Get transformation matrix.
-	const Mat3&						Transformation				( ) const { return mTransformation; };
+	const Mat3&						GetTransformation			( ) const { return mTransformation; };
 
 	//! Set position.
-	void							Position					( const Vec2& pos );
+	void							SetPosition					( const Vec2& pos );
 
 	//! Set rotation.
-	void							Rotation					( const Math::BigAngle& rot );
+	void							SetRotation					( const Math::BigAngle& rot );
 
 	//! Set scale.
-	void							Scale						( const Vec2& scale );
+	void							SetScale					( const Vec2& scale );
 
 	//! Reset all transform: position, rotation and scale.
 	void							ResetTransform				( const Vec2& pos, const Math::BigAngle& rot, const Vec2& scale );

@@ -77,7 +77,7 @@ Texture::Texture (const Texture& tex) : Resource ("Texture"), mpTex (),
 	mKHeight (tex.mKHeight), mNumMips (tex.mNumMips), Transformable2D( tex ),
 	mIsIdentityTransform( tex.mIsIdentityTransform )
 {
-	CopyTexture( tex.mpTex.get( ), Width( ), Height( ) );
+	CopyTexture( tex.mpTex.get( ), GetWidth( ), GetHeight( ) );
 }
 
 Texture& Texture::operator = (const Texture& tex)
@@ -95,7 +95,7 @@ Texture& Texture::operator = (const Texture& tex)
 
 	Transformable2D::operator = ( tex );
 
-	CopyTexture (tex.mpTex.get (), Width (), Height ());
+	CopyTexture (tex.mpTex.get (), GetWidth (), GetHeight ());
 
 	return *this;
 }
@@ -116,9 +116,9 @@ void Texture::UpdateTransformation( )
 {
 	mIsIdentityTransform = mWidth == mSurfaceWidth && 
 		mHeight == mSurfaceHeight && 
-		Transformable2D::Transformation( ).IsIdentity( );
+		Transformable2D::GetTransformation( ).IsIdentity( );
 
-	mTransformation = Transformable2D::Transformation( ).ExpandToMat4( );
+	mTransformation = Transformable2D::GetTransformation( ).ExpandToMat4( );
 }
 
 HRESULT Texture::Create (unsigned width, unsigned height, unsigned nummips, const D3DFORMAT& fmt)
@@ -228,8 +228,8 @@ HRESULT Texture::GetSurfaceData (DWORD level, ARGB * data) const
 
 	HRESULT hr;
 
-	unsigned w = Width () >> level;
-	unsigned h = Height () >> level;
+	unsigned w = GetWidth () >> level;
+	unsigned h = GetHeight () >> level;
 	if (w < 1) w = 1;
 	if (h < 1) h = 1;
 
@@ -282,8 +282,8 @@ HRESULT Texture::SetSurfaceData (DWORD level, ARGB * data)
 
 	HRESULT hr;
 
-	unsigned w = Width () >> level;
-	unsigned h = Height () >> level;
+	unsigned w = GetWidth () >> level;
+	unsigned h = GetHeight () >> level;
 	if (w < 1) w = 1;
 	if (h < 1) h = 1;
 
@@ -694,14 +694,14 @@ HRESULT Texture::CopyAlphaFromRGB( const Texture& tex )
 	if( IsEmpty( ) || tex.IsEmpty( ) )
 		return XFXERR_INVALIDCALL;
 
-	boost::scoped_array< ARGB > data1( new ARGB[ Width( ) * Height( ) ] );
-	boost::scoped_array< ARGB > data2( new ARGB[ tex.Width( ) * tex.Height( ) ] );
+	boost::scoped_array< ARGB > data1( new ARGB[ GetWidth( ) * GetHeight( ) ] );
+	boost::scoped_array< ARGB > data2( new ARGB[ tex.GetWidth( ) * tex.GetHeight( ) ] );
 
-	float kx = static_cast< float >( tex.Width( ) ) / Width( );
-	float ky = static_cast< float >( tex.Height( ) ) / Height( );
+	float kx = static_cast< float >( tex.GetWidth( ) ) / GetWidth( );
+	float ky = static_cast< float >( tex.GetHeight( ) ) / GetHeight( );
 
-	int w = Width( );
-	int h = Height( );
+	int w = GetWidth( );
+	int h = GetHeight( );
 	DWORD max_level = std::min( NumMips( ), tex.NumMips( ) );
 	for( DWORD level = 0; level < max_level; level++, w >>= 1, h >>= 1 )
 	{
@@ -744,7 +744,7 @@ CubemapTexture::CubemapTexture( const CubemapTexture& tex ) : Resource( "Cubemap
 	mpTex( ), mWidth( tex.mWidth ), mSurfaceWidth( tex.mSurfaceWidth ),
 	mKWidth( tex.mKWidth ), mNumMips( tex.mNumMips ), Transformable3D( tex )
 {
-	CopyTexture( tex.mpTex.get( ), Width( ) );
+	CopyTexture( tex.mpTex.get( ), GetWidth( ) );
 }
 
 CubemapTexture& CubemapTexture::operator = ( const CubemapTexture& tex )
@@ -758,7 +758,7 @@ CubemapTexture& CubemapTexture::operator = ( const CubemapTexture& tex )
 
 	Transformable3D::operator = ( tex );
 
-	CopyTexture( tex.mpTex.get( ), Width( ) );
+	CopyTexture( tex.mpTex.get( ), GetWidth( ) );
 
 	return *this;
 }
@@ -831,7 +831,7 @@ HRESULT CubemapTexture::GetSurfaceData (const D3DCUBEMAP_FACES& face, DWORD leve
 
 	HRESULT hr;
 
-	unsigned w = Width () >> level;
+	unsigned w = GetWidth () >> level;
 	if (w < 1) w = 1;
 
 	XFX_PLACE_DEVICE_LOCK;
@@ -883,7 +883,7 @@ HRESULT CubemapTexture::SetSurfaceData (const D3DCUBEMAP_FACES& face, DWORD leve
 
 	HRESULT hr;
 
-	unsigned w = Width () >> level;
+	unsigned w = GetWidth () >> level;
 	if (w < 1) w = 1;
 
 	XFX_PLACE_DEVICE_LOCK;
@@ -1006,19 +1006,19 @@ HRESULT CubemapTexture::LoadFile( const String& file )
 
 HRESULT CubemapTexture::LoadFace (const D3DCUBEMAP_FACES& face, const Texture& tex)
 {
-	_ASSERTE (tex.Width () == tex.Height () && (IsEmpty () || Width () == tex.Width ()));
-	if (tex.Width () != tex.Height () || (!IsEmpty () && Width () != tex.Width ()))
+	_ASSERTE (tex.GetWidth () == tex.GetHeight () && (IsEmpty () || GetWidth () == tex.GetWidth ()));
+	if (tex.GetWidth () != tex.GetHeight () || (!IsEmpty () && GetWidth () != tex.GetWidth ()))
 		return XFXERR_INVALIDCALL;
 
 	HRESULT hr;
 
 	if (IsEmpty ())
-		if (FAILED (hr = Create (tex.Width (), tex.NumMips ())))
+		if (FAILED (hr = Create (tex.GetWidth (), tex.NumMips ())))
 			return hr;
 
-	boost::scoped_array<ARGB> src (new ARGB[Width () * Width ()]);
+	boost::scoped_array<ARGB> src (new ARGB[GetWidth () * GetWidth ()]);
 
-	int w = Width ();
+	int w = GetWidth ();
 	for (DWORD level = 0; level < NumMips (); level++, w >>= 1)
 	{
 		if (w < 1) w = 1;

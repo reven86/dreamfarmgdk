@@ -829,13 +829,13 @@ void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, uns
 	{
 		mActiveTexturesPtr[ stage ] = tex;
 
-		mpD3DDevice->SetTexture( stage, ( tex_ptr ) ? tex_ptr->D3DTex( ) : NULL );
+		mpD3DDevice->SetTexture( stage, ( tex_ptr ) ? tex_ptr->GetD3DTex( ) : NULL );
 	}
 
 	if( tex_ptr )
 	{
-		mpD3DDevice->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->TextureMatrix( ) ) );
-		mpD3DDevice->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->Transformation( ) ) );
+		mpD3DDevice->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->GetTextureMatrix( ) ) );
+		mpD3DDevice->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->GetTransformation( ) ) );
 	}
 }
 
@@ -1491,7 +1491,7 @@ void Renderer::DrawFrameStatistics( const Font& fnt, const boost::shared_ptr< co
 
 void Renderer::OnFullscreenChange( bool isfullscreen, unsigned width, unsigned height )
 {
-	HWND wnd = gGetApplication( ).hWnd( );
+	HWND wnd = gGetApplication( ).HWnd( );
 
 	if( !isfullscreen )
 	{

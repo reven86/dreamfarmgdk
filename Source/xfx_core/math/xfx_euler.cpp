@@ -239,7 +239,7 @@ Vec3 Euler::Right () const
 void Euler::Rotate (const Vec3& axis, const Math::BigAngle& ang)
 {
 	Mat4 m;
-	m.RotationAxisByAngle (axis, ang);
+	m.MakeRotationAxisByAngle (axis, ang);
 
 	FromMat4 (ToMat4 () * m);
 }

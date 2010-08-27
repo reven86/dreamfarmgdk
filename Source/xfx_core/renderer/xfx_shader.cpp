@@ -421,7 +421,7 @@ void Shader::FindTextureStagesNum( )
 							boost::shared_ptr< IUnknown > stage_tex_ptr( stage_tex, IUnknownDeleter( ) );
 
 							// Is this equality valid?
-							if( stage_tex == tex_ptr.get< 2 >( ).texture->D3DTex( ) )
+							if( stage_tex == tex_ptr.get< 2 >( ).texture->GetD3DTex( ) )
 							{
 								tex_ptr.get< 1 >( ) = stage;
 								mTextureStages[ stage ] = &tex_ptr.get< 2 >( );
@@ -447,9 +447,9 @@ void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr
 		if( (*it).get< 2 >( ).texture )
 		{
 #if ( __XFX_DIRECTX_VER__ < 9 )
-			eff_ptr->DXEffectPtr( )->SetTexture( ( *it ).get< 0 >( ).c_str( ), ( *it ).get< 2 >( ).texture->D3DTex( ) );
+			eff_ptr->DXEffectPtr( )->SetTexture( ( *it ).get< 0 >( ).c_str( ), ( *it ).get< 2 >( ).texture->GetD3DTex( ) );
 #else
-			eff_ptr->DXEffectPtr( )->SetTexture( ( *it ).get< 0 >( ), ( *it ).get< 2 >( ).texture->D3DTex( ) );
+			eff_ptr->DXEffectPtr( )->SetTexture( ( *it ).get< 0 >( ), ( *it ).get< 2 >( ).texture->GetD3DTex( ) );
 #endif
 		}
 
@@ -459,8 +459,8 @@ void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr
 			if( stage != -1 )
 			{
 				// Apply texture matrix
-				Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->TextureMatrix( ) ) );
-				Renderer::Instance( ).pD3DDevice( )->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->Transformation( ) ) );
+				Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->GetTextureMatrix( ) ) );
+				Renderer::Instance( ).pD3DDevice( )->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->GetTransformation( ) ) );
 
 #pragma message ( "FIXME: apply animation texture matrix" )
 			}
@@ -665,7 +665,7 @@ void ShaderParams::ApplyValues( const Effect& eff ) const
 	{
 		const boost::shared_ptr< const ITexture >& tex_ptr = ( *t_it ).second;
 
-		eff.DXEffectPtr( )->SetTexture( eff.GetHandle( ( *t_it ).first ), tex_ptr ? tex_ptr->D3DTex( ) : NULL );
+		eff.DXEffectPtr( )->SetTexture( eff.GetHandle( ( *t_it ).first ), tex_ptr ? tex_ptr->GetD3DTex( ) : NULL );
 	}
 
 	for( stdext::hash_map< String, float, HashCompare< String > >::const_iterator f_it = mFloats.begin( ); f_it != mFloats.end( ); f_it++ )

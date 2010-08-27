@@ -232,7 +232,7 @@ HRESULT Input::Init( )
 
 			gMess( "...creating keyboard input device: OK" );
 
-			mpKeyboard->SetCooperativeLevel	( gGetApplication( ).hWnd( ), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
+			mpKeyboard->SetCooperativeLevel	( gGetApplication( ).HWnd( ), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
 			mpKeyboard->SetDataFormat		( &c_dfDIKeyboard );
 			mpKeyboard->Acquire				( );
 
@@ -253,7 +253,7 @@ HRESULT Input::Init( )
 				hd.diph.dwSize			= sizeof (hd);
 				hd.dwData				= 256;
 
-				mpMouse->SetCooperativeLevel	( gGetApplication( ).hWnd( ), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
+				mpMouse->SetCooperativeLevel	( gGetApplication( ).HWnd( ), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
 				mpMouse->SetDataFormat			( &c_dfDIMouse );
 				mpMouse->SetProperty			( DIPROP_BUFFERSIZE, &hd.diph );
 				mpMouse->Acquire				( );
@@ -480,7 +480,7 @@ void Input::SetMouseMode( const bool& isexclusive )
 	if( mpMouse )
 	{
 		mpMouse->Unacquire( );
-		mpMouse->SetCooperativeLevel( gGetApplication( ).hWnd( ), ( isexclusive ? DISCL_EXCLUSIVE : DISCL_NONEXCLUSIVE ) | DISCL_FOREGROUND );
+		mpMouse->SetCooperativeLevel( gGetApplication( ).HWnd( ), ( isexclusive ? DISCL_EXCLUSIVE : DISCL_NONEXCLUSIVE ) | DISCL_FOREGROUND );
 		mpMouse->Acquire( );
 	}
 }

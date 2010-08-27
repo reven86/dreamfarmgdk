@@ -55,8 +55,8 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 	const Texture * tex = tex_ptr ? boost::polymorphic_downcast< const Texture *, const ITexture >( tex_ptr.get( ) ) : NULL;
 	if( tex && !charmapstr.empty( ) )
 	{
-		mTextureWidth	= tex->Width ();
-		mTextureHeight	= tex->Height ();
+		mTextureWidth	= tex->GetWidth ();
+		mTextureHeight	= tex->GetHeight ();
 
 		mCharHeight		= height;
 		mCharMapString	= charmapstr;
@@ -66,7 +66,7 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 
 		HRESULT hr;
 
-		boost::scoped_array<ARGB> buf (new ARGB[tex->Width () * tex->Height ()]);
+		boost::scoped_array<ARGB> buf (new ARGB[tex->GetWidth () * tex->GetHeight ()]);
 
 		hr = tex->GetSurfaceData (0, buf.get ());
 
@@ -82,11 +82,11 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 		for (WString::const_iterator cmit = charmapstr.begin (); cmit != charmapstr.end (); cmit++)
 			if (*cmit == '\n')
 			{
-				pscanline += tex->Width () * height;
+				pscanline += tex->GetWidth () * height;
 				x = 0;
 				y += height;
 
-				if (y >= tex->Height ())
+				if (y >= tex->GetHeight ())
 					return XFXERR_INVALIDCALL;
 
 				poldscanline = pscanline;
@@ -96,7 +96,7 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 				ARGB * pnewscanline = poldscanline + 1;
 				unsigned width = 1;
 
-				while ((pnewscanline->dword & 0x00ffffff) != breakcolor.dword && x + width < tex->Width ())
+				while ((pnewscanline->dword & 0x00ffffff) != breakcolor.dword && x + width < tex->GetWidth ())
 				{
 					pnewscanline++;
 					width++;

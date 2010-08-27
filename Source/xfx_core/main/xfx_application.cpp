@@ -104,7 +104,7 @@ void Application::MainLoop( )
 
 			{
 				PROFILE( "xfx::Application::MessageLoop", "General" );
-				if( PeekMessage( &msg, hWnd( ), 0, 0, PM_REMOVE ) )
+				if( PeekMessage( &msg, HWnd( ), 0, 0, PM_REMOVE ) )
 				{
 					TranslateMessage	( &msg );
 					DispatchMessageW	( &msg );

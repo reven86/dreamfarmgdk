@@ -17,14 +17,14 @@ _XFX_BEGIN
 // Transformable3D
 //
 
-void Transformable3D::Position( const Vec3& pos )
+void Transformable3D::SetPosition( const Vec3& pos )
 {
 	mPosition = pos;
 
 	mTransformation.SetTranslation( pos );
 }
 
-void Transformable3D::Rotation( const Euler& rot )
+void Transformable3D::SetRotation( const Euler& rot )
 {
 	mRotation = rot;
 
@@ -33,7 +33,7 @@ void Transformable3D::Rotation( const Euler& rot )
 	mTransformation.SetTranslation( mPosition );
 }
 
-void Transformable3D::Scale( const Vec3& scale )
+void Transformable3D::SetScale( const Vec3& scale )
 {
 	mScale = scale;
 	mTransformation.SetScale( mScale );
@@ -56,21 +56,21 @@ void Transformable3D::ResetTransform( const Vec3& pos, const Euler& rot, const V
 // Transformable2D
 //
 
-void Transformable2D::Position( const Vec2& pos )
+void Transformable2D::SetPosition( const Vec2& pos )
 {
 	mPosition = pos;
 
 	mTransformation.SetTranslation( pos );
 }
 
-void Transformable2D::Rotation( const Math::BigAngle& rot )
+void Transformable2D::SetRotation( const Math::BigAngle& rot )
 {
 	mRotation = rot;
 
 	mTransformation.Reset( mPosition, math_normalize_angle( mRotation ), mScale );
 }
 
-void Transformable2D::Scale( const Vec2& scale )
+void Transformable2D::SetScale( const Vec2& scale )
 {
 	mScale = scale;
 	mTransformation.SetScale( mScale );

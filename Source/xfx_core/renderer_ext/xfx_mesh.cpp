@@ -44,7 +44,7 @@ void Mesh::Cleanup( )
 void Mesh::Render( const MeshState& state ) const
 {
 	//do frustum culling
-	Mat4 matr = state.Transformation ();// * MatrixStack::Instance ().Top ();
+	Mat4 matr = state.GetTransformation ();// * MatrixStack::Instance ().Top ();
 
 	Primitives::OBB obb( RootAABB( ) );
 	obb.Transform( matr );

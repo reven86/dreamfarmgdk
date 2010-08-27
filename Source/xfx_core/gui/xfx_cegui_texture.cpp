@@ -44,7 +44,7 @@ CEGUI::ushort CEGUITexture::getWidth( ) const
 	if( !texinfo || !texinfo->texture )
 		return 0;
 
-	return static_cast< CEGUI::ushort >( texinfo->frame_width * texinfo->texture->Width( ) );
+	return static_cast< CEGUI::ushort >( texinfo->frame_width * texinfo->texture->GetWidth( ) );
 }
 
 CEGUI::ushort CEGUITexture::getHeight( ) const
@@ -57,7 +57,7 @@ CEGUI::ushort CEGUITexture::getHeight( ) const
 	if( !texinfo || !texinfo->texture )
 		return 0;
 
-	return static_cast< CEGUI::ushort >( texinfo->frame_height * texinfo->texture->Height( ) );
+	return static_cast< CEGUI::ushort >( texinfo->frame_height * texinfo->texture->GetHeight( ) );
 }
 
 void CEGUITexture::loadFromFile( const CEGUI::String& filename, const CEGUI::String& resourceGroup )

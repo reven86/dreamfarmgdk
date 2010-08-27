@@ -16,7 +16,7 @@ struct RendererFixture
 	RendererFixture( )
 	{
 		::Application::Instance( ).InitEngine( static_cast< HINSTANCE >( GetCurrentProcess( ) ), "", L"TestRendererWndClass2", L"TestRendererWndCaption2" );
-		Renderer::Instance( ).CreateDevice( gGetApplication( ).hWnd( ) );
+		Renderer::Instance( ).CreateDevice( gGetApplication( ).HWnd( ) );
 	}
 
 	~RendererFixture( )
@@ -30,8 +30,8 @@ BOOST_FIXTURE_TEST_SUITE( xfx_renderer_test_suite, AppFixture )
 
 BOOST_AUTO_TEST_CASE( renderer )
 {
-	BOOST_CHECK_EQUAL( Renderer::Instance( ).CreateDevice( gGetApplication( ).hWnd( ) ), S_OK );
-	BOOST_CHECK_NE( Renderer::Instance( ).CreateDevice( gGetApplication( ).hWnd( ) ), S_OK );
+	BOOST_CHECK_EQUAL( Renderer::Instance( ).CreateDevice( gGetApplication( ).HWnd( ) ), S_OK );
+	BOOST_CHECK_NE( Renderer::Instance( ).CreateDevice( gGetApplication( ).HWnd( ) ), S_OK );
 
 	BOOST_CHECK_NE( Renderer::Instance( ).pD3D( ), ( void * )NULL );
 	BOOST_CHECK_NE( Renderer::Instance( ).pD3DDevice( ), ( void * )NULL );
@@ -124,41 +124,41 @@ BOOST_AUTO_TEST_CASE( texture )
 	BOOST_CHECK( tex.IsEmpty( ) );
 
 	BOOST_CHECK_EQUAL( tex.Create( 256, 256, 3 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )256 );
-	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )256 );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), ( unsigned )256 );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), ( unsigned )256 );
 	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )3 );
 	BOOST_CHECK( tex.IsIdentityResultTransform( ) );
 	BOOST_CHECK_EQUAL( tex.Create( 33, 44, 0 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )33 );
-	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )44 );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), ( unsigned )33 );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), ( unsigned )44 );
 	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )6 );
 	BOOST_CHECK( !tex.IsEmpty( ) );
 	BOOST_CHECK( !tex.IsIdentityResultTransform( ) );
 	tex.Free( );
 	BOOST_CHECK( tex.IsEmpty( ) );
 	BOOST_CHECK_EQUAL( tex.Create( Renderer::Instance( ).D3DCaps( ).MaxTextureWidth * 2, Renderer::Instance( ).D3DCaps( ).MaxTextureHeight * 2, 0 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
-	BOOST_CHECK_EQUAL( tex.Height( ), Renderer::Instance( ).D3DCaps( ).MaxTextureHeight );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), Renderer::Instance( ).D3DCaps( ).MaxTextureHeight );
 
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1" ), S_OK );
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1.png*fmt.a8r8g8b8" ), S_OK );
 
 	Texture tex2( tex );
-	ARGB * tex2_data = reinterpret_cast< ARGB * >( alloca( sizeof( ARGB ) * tex2.Width( ) * tex2.Height( ) ) );
-	BOOST_CHECK_EQUAL( tex2.Width( ), ( unsigned )100 );
-	BOOST_CHECK_EQUAL( tex2.Height( ), ( unsigned )50 );
+	ARGB * tex2_data = reinterpret_cast< ARGB * >( alloca( sizeof( ARGB ) * tex2.GetWidth( ) * tex2.GetHeight( ) ) );
+	BOOST_CHECK_EQUAL( tex2.GetWidth( ), ( unsigned )100 );
+	BOOST_CHECK_EQUAL( tex2.GetHeight( ), ( unsigned )50 );
 	BOOST_CHECK_EQUAL( tex2.GetSurfaceData( 0, tex2_data ), S_OK );
 	BOOST_CHECK( tex2_data[ 0 ] == ARGB( 255, 0, 0, 255 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) - 1 ] == ARGB( 255, 252, 0, 255 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) * ( tex2.Height( ) - 1 ) ] == ARGB( 255, 0, 250, 5 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) * ( tex2.Height( ) - 1 ) + tex2.Width( ) - 1 ] == ARGB( 255, 252, 250, 5 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) - 1 ] == ARGB( 255, 252, 0, 255 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) * ( tex2.GetHeight( ) - 1 ) ] == ARGB( 255, 0, 250, 5 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) * ( tex2.GetHeight( ) - 1 ) + tex2.GetWidth( ) - 1 ] == ARGB( 255, 252, 250, 5 ) );
 
 	BOOST_CHECK_EQUAL( tex.CopyAlphaFromRGB( tex2 ), S_OK );
 	BOOST_CHECK_EQUAL( tex.GetSurfaceData( 0, tex2_data ), S_OK );
 	BOOST_CHECK( tex2_data[ 0 ] == ARGB( 85, 0, 0, 255 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) - 1 ] == ARGB( 169, 252, 0, 255 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) * ( tex2.Height( ) - 1 ) ] == ARGB( 85, 0, 250, 5 ) );
-	BOOST_CHECK( tex2_data[ tex2.Width( ) * ( tex2.Height( ) - 1 ) + tex2.Width( ) - 1 ] == ARGB( 169, 252, 250, 5 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) - 1 ] == ARGB( 169, 252, 0, 255 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) * ( tex2.GetHeight( ) - 1 ) ] == ARGB( 85, 0, 250, 5 ) );
+	BOOST_CHECK( tex2_data[ tex2.GetWidth( ) * ( tex2.GetHeight( ) - 1 ) + tex2.GetWidth( ) - 1 ] == ARGB( 169, 252, 250, 5 ) );
 
 	tex2_data[ 100 ] = ARGB( 0, 0, 0, 0 );
 	BOOST_CHECK_EQUAL( tex.SetSurfaceData( 0, tex2_data ), S_OK );
@@ -172,21 +172,21 @@ BOOST_AUTO_TEST_CASE( cubemap )
 	BOOST_CHECK( tex.IsEmpty( ) );
 
 	BOOST_CHECK_EQUAL( tex.Create( 256, 3 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )256 );
-	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )256 );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), ( unsigned )256 );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), ( unsigned )256 );
 	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )3 );
 	BOOST_CHECK( tex.IsIdentityResultTransform( ) );
 	BOOST_CHECK_EQUAL( tex.Create( 33, 0 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), ( unsigned )33 );
-	BOOST_CHECK_EQUAL( tex.Height( ), ( unsigned )33 );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), ( unsigned )33 );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), ( unsigned )33 );
 	BOOST_CHECK_EQUAL( tex.NumMips( ), ( unsigned )6 );
 	BOOST_CHECK( !tex.IsEmpty( ) );
 	BOOST_CHECK( !tex.IsIdentityResultTransform( ) );
 	tex.Free( );
 	BOOST_CHECK( tex.IsEmpty( ) );
 	BOOST_CHECK_EQUAL( tex.Create( Renderer::Instance( ).D3DCaps( ).MaxTextureWidth * 2, 0 ), S_OK );
-	BOOST_CHECK_EQUAL( tex.Width( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
-	BOOST_CHECK_EQUAL( tex.Height( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
+	BOOST_CHECK_EQUAL( tex.GetWidth( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
+	BOOST_CHECK_EQUAL( tex.GetHeight( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
 
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1" ), S_OK );
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1.png*fmt.a8r8g8b8" ), S_OK );

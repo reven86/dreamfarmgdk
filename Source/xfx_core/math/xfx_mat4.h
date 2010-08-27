@@ -78,7 +78,7 @@ public:
 	friend Mat4						operator *						(const Mat4& A, const Mat4& B);
 
 	//! Set identity matrix.
-	Mat4&							Identity						();
+	Mat4&							MakeIdentity					( );
 
 	//! Tests if matrix is identity.
 	bool							IsIdentity						( ) const;
@@ -87,25 +87,25 @@ public:
 	void							Translate						( const Vec3& l );
 
 	//! Set scale matrix.
-	void							Scale							( const Vec3& v );
+	void							MakeScale						( const Vec3& v );
 
 	//! Reset matrix by position, rotation and scale.
 	void							Reset							( const Vec3& pos, const Euler& orientation, const Vec3& scale );
 
 	//! Set rotation matrix around X axis.
-	void							RotationX						( Math::BigAngle angle );
+	void							MakeRotationX					( Math::BigAngle angle );
 
 	//! Set rotation matrix around Y axis.
-	void							RotationY						( Math::BigAngle angle );
+	void							MakeRotationY					( Math::BigAngle angle );
 
 	//! Set rotation matrix around Z axis.
-	void							RotationZ						( Math::BigAngle angle );
+	void							MakeRotationZ					( Math::BigAngle angle );
 
 	//! Set rotation matrix around custom axis and sine and cosine for angle.
-	void							RotationAxis					( const Vec3& axis, float cosine, float sine );
+	void							MakeRotationAxis				( const Vec3& axis, float cosine, float sine );
 
 	//! Set rotation matrix around custom axis.
-	void							RotationAxisByAngle				( const Vec3& axis, Math::BigAngle Angle ) { RotationAxis( axis, Math::Instance( ).Cos( Angle ), Math::Instance( ).Sin( Angle ) ); };
+	void							MakeRotationAxisByAngle			( const Vec3& axis, Math::BigAngle Angle ) { MakeRotationAxis( axis, Math::Instance( ).Cos( Angle ), Math::Instance( ).Sin( Angle ) ); };
 
 	//! Transpose matrix.
 	void							Transpose						( ) { *this = GetTransposed( ); };

@@ -313,7 +313,7 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 
 			if( tex_ptr && !tex_ptr->IsIdentityResultTransform( ) )
 			{
-				Mat4 tex_mat = tex_ptr->TextureMatrix( ) * tex_ptr->Transformation( );
+				Mat4 tex_mat = tex_ptr->GetTextureMatrix( ) * tex_ptr->GetTransformation( );
 
 				for( int i = 0; i < numtris * 3; i++ )
 				{
@@ -434,7 +434,7 @@ void DrawTools::PushDraw2DSprite(
 
 			if( tex_ptr && !tex_ptr->IsIdentityResultTransform( ) )
 			{
-				Mat4 tex_mat = tex_ptr->TextureMatrix( ) * tex_ptr->Transformation( );
+				Mat4 tex_mat = tex_ptr->GetTextureMatrix( ) * tex_ptr->GetTransformation( );
 
 				float u1 = nu1;
 				float v1 = nv1;

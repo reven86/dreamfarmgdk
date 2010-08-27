@@ -29,26 +29,26 @@ public:
 	virtual ~ITexture													( ) { };
 
 	//! Get texture width.
-	virtual unsigned						Width						( ) const = 0;
+	virtual unsigned						GetWidth					( ) const = 0;
 
 	//! Get texture height.
-	virtual unsigned						Height						( ) const = 0;
+	virtual unsigned						GetHeight					( ) const = 0;
 
 	//! Get texture matrix.
-	virtual const Mat4&						TextureMatrix				( ) const = 0;
+	virtual const Mat4&						GetTextureMatrix			( ) const = 0;
 
 	//! Get texture transformation.
-	virtual const Mat4&						Transformation				( ) const = 0;
+	virtual const Mat4&						GetTransformation			( ) const = 0;
 
 	//! Is texture matrix * texture transform identity matrix.
 	virtual bool							IsIdentityResultTransform	( ) const = 0;
 
 #if (__XFX_DIRECTX_VER__ < 9)
 	//! Get ID3DBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE8			D3DTex						( ) const = 0;
+	virtual LPDIRECT3DBASETEXTURE8			GetD3DTex					( ) const = 0;
 #else
 	//! Get ID3DBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE9			D3DTex						( ) const = 0;
+	virtual LPDIRECT3DBASETEXTURE9			GetD3DTex					( ) const = 0;
 #endif
 };
 
@@ -131,16 +131,16 @@ public:
 	void							Free					( );
 
 	//! Get width.
-	virtual unsigned				Width					( ) const { return mWidth; };
+	virtual unsigned				GetWidth				( ) const { return mWidth; };
 
 	//! Get height.
-	virtual unsigned				Height					( ) const { return mHeight; };
+	virtual unsigned				GetHeight				( ) const { return mHeight; };
 
 	//! Get texture matrix.
-	virtual const Mat4&				TextureMatrix			( ) const { return mTextureMatrix; };
+	virtual const Mat4&				GetTextureMatrix		( ) const { return mTextureMatrix; };
 
 	//! Get texture transformation.
-	virtual const Mat4&				Transformation			( ) const { return mTransformation; };
+	virtual const Mat4&				GetTransformation		( ) const { return mTransformation; };
 
 	//! Is texture matrix * texture transform identity matrix.
 	virtual bool					IsIdentityResultTransform	( ) const { return mIsIdentityTransform; };
@@ -153,10 +153,10 @@ public:
 
 #if (__XFX_DIRECTX_VER__ < 9)
 	//! Get ID3DXBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE8	D3DTex					( ) const { return mpTex.get( ); };
+	virtual LPDIRECT3DBASETEXTURE8	GetD3DTex				( ) const { return mpTex.get( ); };
 #else
 	//! Get ID3DXBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE9	D3DTex					( ) const { return mpTex.get( ); };
+	virtual LPDIRECT3DBASETEXTURE9	GetD3DTex				( ) const { return mpTex.get( ); };
 #endif
 
 	//! Get mipmaps count.
@@ -267,26 +267,26 @@ public:
 	void									Free						();
 
 	//! Get texture width.
-	virtual unsigned						Width						() const {return mWidth;};
+	virtual unsigned						GetWidth					() const {return mWidth;};
 
 	//! Get texture height.
-	virtual unsigned						Height						() const {return mWidth;};
+	virtual unsigned						GetHeight					() const {return mWidth;};
 
 	//! Get texture matrix.
-	virtual const Mat4&						TextureMatrix				() const {return mTextureMatrix;};
+	virtual const Mat4&						GetTextureMatrix			() const {return mTextureMatrix;};
 
 	//! Get texture transformation.
-	virtual const Mat4&						Transformation				() const {return Transformable3D::Transformation ();};
+	virtual const Mat4&						GetTransformation			() const {return Transformable3D::GetTransformation ();};
 
 	//! Is texture matrix * texture transform identity matrix.
-	virtual bool							IsIdentityResultTransform	( ) const { return mWidth == mSurfaceWidth && Transformable3D::Transformation( ).IsIdentity( ); };
+	virtual bool							IsIdentityResultTransform	( ) const { return mWidth == mSurfaceWidth && Transformable3D::GetTransformation( ).IsIdentity( ); };
 
 #if (__XFX_DIRECTX_VER__ < 9)
 	//! Get ID3DXBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE8			D3DTex						() const {return mpTex.get ();};
+	virtual LPDIRECT3DBASETEXTURE8			GetD3DTex					() const {return mpTex.get ();};
 #else
 	//! Get ID3DXBaseTexture.
-	virtual LPDIRECT3DBASETEXTURE9			D3DTex						() const {return mpTex.get ();};
+	virtual LPDIRECT3DBASETEXTURE9			GetD3DTex					() const {return mpTex.get ();};
 #endif
 
 	//! Get mipmaps count.

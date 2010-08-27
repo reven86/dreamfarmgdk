@@ -78,7 +78,7 @@ public:
 	Mat4							ExpandToMat4					( ) const;
 
 	//! Set identity matrix.
-	Mat3&							Identity						( );
+	Mat3&							MakeIdentity					( );
 
 	//! Tests if matrix is identity.
 	bool							IsIdentity						( ) const;
@@ -87,13 +87,13 @@ public:
 	void							Translate						( const Vec2& l );
 
 	//! Set scale matrix.
-	void							Scale							( const Vec2& v );
+	void							MakeScale						( const Vec2& v );
 
 	//! Reset matrix by position, rotation and scale.
 	void							Reset							( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale );
 
 	//! Set rotation matrix.
-	void							Rotation						( Math::BigAngle angle );
+	void							MakeRotation					( Math::BigAngle angle );
 
 	//! Transpose matrix.
 	void							Transpose						( ) { *this = GetTransposed( ); };

@@ -80,7 +80,7 @@ Mat3 operator * ( const Mat3& A, const Mat3& B )
 	return out;
 }
 
-Mat3& Mat3::Identity( )
+Mat3& Mat3::MakeIdentity( )
 {
 	x[ 0 ][ 0 ] = 1; x[ 0 ][ 1 ] = 0; x[ 0 ][ 2 ] = 0;
 	x[ 1 ][ 0 ] = 0; x[ 1 ][ 1 ] = 1; x[ 1 ][ 2 ] = 0;
@@ -111,7 +111,7 @@ void Mat3::Translate( const Vec2& loc )
 	x[ 2 ][ 0 ] = loc.x; x[ 2 ][ 1 ] = loc.y; x[ 2 ][ 2 ] = 1;
 }
 
-void Mat3::Scale( const Vec2& v )
+void Mat3::MakeScale( const Vec2& v )
 {
 	x[ 0 ][ 0 ] = v.x; x[ 0 ][ 1 ] = 0; x[ 0 ][ 2 ] = 0;
 	x[ 1 ][ 0 ] = 0; x[ 1 ][ 1 ] = v.y; x[ 1 ][ 2 ] = 0;
@@ -120,12 +120,12 @@ void Mat3::Scale( const Vec2& v )
 
 void Mat3::Reset( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale )
 {
-	Rotation( orientation );
+	MakeRotation( orientation );
 	SetScale( scale );
 	SetTranslation( pos );
 }
 
-void Mat3::Rotation( Math::BigAngle angle )
+void Mat3::MakeRotation( Math::BigAngle angle )
 {
 	float Cosine	= math_cos( angle );
 	float Sine		= math_sin( angle );

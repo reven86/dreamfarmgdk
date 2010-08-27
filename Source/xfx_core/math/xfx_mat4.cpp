@@ -72,7 +72,7 @@ Mat4 operator * (const Mat4& A, const Mat4 & B)
 	return out;
 }
 
-Mat4& Mat4::Identity ()
+Mat4& Mat4::MakeIdentity ()
 {
 	x[0][0] = 1; x[0][1] = 0; x[0][2] = 0; x[0][3] = 0;
 	x[1][0] = 0; x[1][1] = 1; x[1][2] = 0; x[1][3] = 0;
@@ -105,7 +105,7 @@ void Mat4::Translate (const Vec3& loc)
 	x[3][0] = loc.x; x[3][1] = loc.y; x[3][2] = loc.z; x[3][3] = 1;
 }
 
-void Mat4::Scale (const Vec3& v)
+void Mat4::MakeScale (const Vec3& v)
 {
 	x[0][0] = v.x; x[0][1] = 0; x[0][2] = 0; x[0][3] = 0;
 	x[1][0] = 0; x[1][1] = v.y; x[1][2] = 0; x[1][3] = 0;
@@ -120,7 +120,7 @@ void Mat4::Reset (const Vec3& pos, const Euler& orientation, const Vec3& scale)
 	SetTranslation (pos);
 }
 
-void Mat4::RotationX (Math::BigAngle angle)
+void Mat4::MakeRotationX (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -131,7 +131,7 @@ void Mat4::RotationX (Math::BigAngle angle)
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
 }
 
-void Mat4::RotationY (Math::BigAngle angle)
+void Mat4::MakeRotationY (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -142,7 +142,7 @@ void Mat4::RotationY (Math::BigAngle angle)
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
 }
 
-void Mat4::RotationZ (Math::BigAngle angle)
+void Mat4::MakeRotationZ (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -153,7 +153,7 @@ void Mat4::RotationZ (Math::BigAngle angle)
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
 }
 
-void Mat4::RotationAxis (const Vec3& Axis, float Cosine, float Sine)
+void Mat4::MakeRotationAxis (const Vec3& Axis, float Cosine, float Sine)
 {
 	Vec3 axis (Axis.GetNormalized ());
 

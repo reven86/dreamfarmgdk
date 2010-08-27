@@ -195,11 +195,31 @@
 			Name="generated"
 			>
 			<File
+				RelativePath="..\..\generated\__array_1.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\__call_policies.pypp.hpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\__convenience.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\AABB.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\AABB.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\AABBTree.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\AABBTree.pypp.hpp"
 				>
 			</File>
 			<File
@@ -216,6 +236,14 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\ARGB.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\BaseParticleSystem.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\BaseParticleSystem.pypp.hpp"
 				>
 			</File>
 			<File
@@ -251,11 +279,75 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\CubemapTexture.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\CubemapTexture.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\DrawTools.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\DrawTools.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Effect.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Effect.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Engine.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\Engine.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__float_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__float__greater___greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__float_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__float__greater___greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_ARGB_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_ARGB__greater___greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_ARGB_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_ARGB__greater___greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_Quaternion_comma__float_comma__xfx_scope_QuaternionLerpFn__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_Quaternion_comma__float_comma__xfx_scope_QuaternionLerpFn__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_Vec3_comma__float_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_Vec3__greater___greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Envelope_less__xfx_scope_Vec3_comma__float_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_Vec3__greater___greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Euler.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Euler.pypp.hpp"
 				>
 			</File>
 			<File
@@ -271,11 +363,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\Font.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Font.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\IndexBuffer.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\IndexBuffer.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Input.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\Input.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ITexture.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ITexture.pypp.hpp"
 				>
 			</File>
 			<File
@@ -295,6 +411,46 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\Mat3.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Mat3.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Mat4.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Mat4.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Math.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Math.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Mesh.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Mesh.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\MeshState.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\MeshState.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\MessagesBook.pypp.cpp"
 				>
 			</File>
@@ -307,11 +463,107 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\OBB.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\OBB.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Pack.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\Pack.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Particle.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Particle.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ParticleSubSystem.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ParticleSubSystem.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ParticleSystem.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ParticleSystem.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Plane.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Plane.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Primitive.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Primitive.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ProfilingManager.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ProfilingManager.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ProfilingObject.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ProfilingObject.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Quaternion.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Quaternion.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\QuaternionLerpFn.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\QuaternionLerpFn.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Ray.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Ray.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Renderer.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Renderer.pypp.hpp"
 				>
 			</File>
 			<File
@@ -323,11 +575,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\Script_less__std_scope_string__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Script_less__std_scope_string__greater_.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\ScriptResource.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\ScriptResource.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Shader.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Shader.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ShaderParams.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ShaderParams.pypp.hpp"
 				>
 			</File>
 			<File
@@ -379,6 +655,54 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Math__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Math__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_ProfilingManager__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_ProfilingManager__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Renderer__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Renderer__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Viewport__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Singleton_less__xfx_scope_Viewport__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Sphere.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Sphere.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Texture.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Texture.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Timer.pypp.cpp"
 				>
 			</File>
@@ -387,11 +711,83 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\Transformable2D.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Transformable2D.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Transformable3D.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Transformable3D.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Triangle.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Triangle.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Var.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\Var.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec2.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec2.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec3.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec3.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec4.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Vec4.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\VertexBuffer.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\VertexBuffer.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Viewer.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Viewer.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Viewport.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Viewport.pypp.hpp"
 				>
 			</File>
 			<File

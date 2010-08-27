@@ -94,8 +94,8 @@ public:
 	//! %Update scene.
 	virtual void					Update							( ) { };
 
-	const HWND&						hWnd							( ) const { return mWnd; };
-	const HINSTANCE&				hInstance						( ) const { return mhInstance; };
+	const HWND&						HWnd							( ) const { return mWnd; };
+	const HINSTANCE&				HInstance						( ) const { return mhInstance; };
 	const String&					CommandLine						( ) const { return mCommandLine; };
 	const WString&					WndClass						( ) const { return mWndClass; };
 

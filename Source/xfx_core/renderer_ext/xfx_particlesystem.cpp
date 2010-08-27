@@ -294,7 +294,7 @@ void ParticleSystem::Render( const ARGB& modulator ) const
 	if( modulator.a == 0 )
 		return;
 
-	const Mat4 * transform( &Transformation( ) );
+	const Mat4 * transform( &GetTransformation( ) );
 
 	float kw = 1.0f, kh = 1.0f;
 

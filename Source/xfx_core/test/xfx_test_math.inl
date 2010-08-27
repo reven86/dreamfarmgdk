@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE( mat3 )
 	BOOST_CHECK_LT( fabs( t.x - ( 1.0f - 0.25881904510252076234889883762405f * 2.0f * sqrtf( 2.0f ) * 0.5f ) ), gMathEps );
 	BOOST_CHECK_LT( fabs( t.y - ( 2.0f + 0.9659258262890682867497431997289f * 2.0f * sqrtf( 2.0f ) * 2.0f ) ), gMathEps );
 
-	m1.Identity( );
+	m1.MakeIdentity( );
 	for( i = 0; i < 3; i++ )
 		for( j = 0; j < 3; j++ )
 			if( i != j )
@@ -209,7 +209,7 @@ BOOST_AUTO_TEST_CASE( mat3 )
 
 	BOOST_CHECK( m1.IsIdentity( ) );
 
-	m1.Rotation( Math::pi / 3 );
+	m1.MakeRotation( Math::pi / 3 );
 	m1.SetTranslation( Vec2( 1.0f, 2.0f ) );
 	m1.SetScale( Vec2( 0.5f, 2.0f ) );
 
@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE( mat4 )
 	BOOST_CHECK_LT( fabs( t.y - ( 2.0f - 0.732050807f * 2.0f ) ), gMathEps );
 	BOOST_CHECK_LT( fabs( t.z - ( 3.0f + 3.36602540329f * 3.0f ) ), gMathEps );
 
-	m1.Identity( );
+	m1.MakeIdentity( );
 	for( i = 0; i < 4; i++ )
 		for( j = 0; j < 4; j++ )
 			if( i != j )
@@ -268,11 +268,11 @@ BOOST_AUTO_TEST_CASE( mat4 )
 
 	BOOST_CHECK( m1.IsIdentity( ) );
 
-	m2.RotationZ( Math::pi / 2 );
+	m2.MakeRotationZ( Math::pi / 2 );
 	m1 *= m2;
-	m2.RotationX( Math::pi / 3 );
+	m2.MakeRotationX( Math::pi / 3 );
 	m1 = m1 * m2;
-	m2.RotationY( Math::pi / 6 );
+	m2.MakeRotationY( Math::pi / 6 );
 	m1 = ( m2.GetTransposed( ) * m1.GetTransposed( ) ).GetTransposed( );
 
 	m1.SetTranslation( Vec3( 1.0f, 2.0f, 3.0f ) );
@@ -293,8 +293,8 @@ BOOST_AUTO_TEST_CASE( mat4 )
 	m1 = m3.GetInversedAffine( );
 	BOOST_CHECK( ( m1 * m3 ).IsIdentity( ) );
 
-	m2.RotationAxisByAngle( Vec3( 3.0f, 0.0f, 0.0f ), Math::pi / 6 );
-	m1.RotationX( -Math::pi / 6 );
+	m2.MakeRotationAxisByAngle( Vec3( 3.0f, 0.0f, 0.0f ), Math::pi / 6 );
+	m1.MakeRotationX( -Math::pi / 6 );
 
 	BOOST_CHECK( ( m2 * m1 ).IsIdentity( ) );
 }
@@ -311,7 +311,7 @@ BOOST_AUTO_TEST_CASE( quaternion )
 	Mat4 m1 = q1.ToMat4( );
 	Mat4 m2;
 
-	m2.RotationAxisByAngle( Vec3( 1.0f, 2.0f, 3.0f ), Math::pi / 3 );
+	m2.MakeRotationAxisByAngle( Vec3( 1.0f, 2.0f, 3.0f ), Math::pi / 3 );
 	BOOST_CHECK( ( m2.GetInversedAffine( ) * m1 ).IsIdentity( ) );
 	BOOST_CHECK( ( m2 * q1.GetInversed( ).ToMat4( ) ).IsIdentity( ) );
 
@@ -417,7 +417,7 @@ BOOST_AUTO_TEST_CASE( euler )
 	BOOST_CHECK( ( e2.ToQuaternion( ).ToMat4( ) * m.GetInversedAffine( ) ).IsIdentity( ) );
 
 	Mat4 mm;
-	mm.RotationAxisByAngle( Vec3( 1.0f, 2.0f, 3.0f ), Math::pi / 4 );
+	mm.MakeRotationAxisByAngle( Vec3( 1.0f, 2.0f, 3.0f ), Math::pi / 4 );
 
 	Quaternion q( Vec3( 1.0f, 2.0f, 3.0f ), Math::pi / 4 );
 	e2.FromQuaternion( q );
