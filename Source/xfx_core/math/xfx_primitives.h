@@ -49,8 +49,8 @@ public:
 	//! Constructs a ray with custom origin and direction.
 	Ray													( const Vec3& origin, const Vec3& direction ) : mOrigin ( origin ), mDirection ( direction ) { };
 
-	//! Get/Set origin.
-	Vec3&						Origin					( ) { return mOrigin; };
+	//! Set origin.
+	void						SetOrigin				( const Vec3& origin ) { mOrigin = origin; };
 
 	//! Get origin.
 	const Vec3&					Origin					( ) const { return mOrigin; };
@@ -59,7 +59,7 @@ public:
 	const Vec3&					Direction				( ) const { return mDirection; };
 
 	//! Set direction.
-	void						Direction				( const Vec3& dir ) { mDirection = dir.GetNormalized( ); };
+	void						SetDirection			( const Vec3& dir ) { mDirection = dir.GetNormalized( ); };
 
 	//! Get a point on ray with distance t.
 	Vec3						Point					( float t ) const { return mOrigin + t * mDirection; };
@@ -127,14 +127,14 @@ public:
 	//! Constructs custom sphere.
 	Sphere						( const Vec3& pos, float r ) : mPosition( pos ), mRadius( r ) { };
 
-	//! Get/Set origin.
-	Vec3& Position				( ) { return mPosition; };
+	//! Set origin.
+	void SetPosition			( const Vec3& p ) { mPosition = p; };
 
 	//! Get origin.
 	const Vec3& Position		( ) const { return mPosition; };
 
-	//! Get/Set radius.
-	float& Radius				( ) { return mRadius; };
+	//! Set radius.
+	void SetRadius				( float r ) { mRadius = r; };
 
 	//! Get radius.
 	const float& Radius			( ) const { return mRadius; };
@@ -417,10 +417,10 @@ public:
 	//! Create plane from A, B, C, D values.
 	void						ABCD							( const float& a, const float& b, const float& c, const float& d ) { mA = a; mB = b; mC = c; mD = d; };
 
-	float&						A								( ) { return mA; };
-	float&						B								( ) { return mB; };
-	float&						C								( ) { return mC; };
-	float&						D								( ) { return mD; };
+	void						SetA							( float a ) { mA = a; };
+	void						SetB							( float b ) { mB = b; };
+	void						SetC							( float c ) { mC = c; };
+	void						SetD							( float d ) { mD = d; };
 
 	const float&				A								( ) const { return mA; };
 	const float&				B								( ) const { return mB; };

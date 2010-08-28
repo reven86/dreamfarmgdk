@@ -346,8 +346,8 @@ public:
 	//! Clear frame.
 	void								Clear						( const DWORD& flags );
 
-	//! Get/Set clear flags for automatic clear.
-	DWORD&								ClearFlags					( ) { return mClearFlags; };
+	//! Set clear flags for automatic clear.
+	void								SetClearFlags				( DWORD fl ) { mClearFlags = fl; };
 
 	//! Get clear flags for automatic clear.
 	const DWORD&						ClearFlags					( ) const { return mClearFlags; };

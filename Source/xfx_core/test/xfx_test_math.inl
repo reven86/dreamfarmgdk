@@ -548,8 +548,8 @@ BOOST_AUTO_TEST_CASE( primitives )
 	BOOST_CHECK( s.Position( ) == Vec3( 0.0f ) );
 	BOOST_CHECK_EQUAL( s.Radius( ), 1.0f );
 
-	s.Position( ).xyz( 1.0f, 2.0f, 3.0f );
-	s.Radius( ) = 2.0f;
+	s.SetPosition( xfx::Vec3( 1.0f, 2.0f, 3.0f ) );
+	s.SetRadius( 2.0f );
 
 	float a, b;
 	s.Projection( a, b, Vec3( 1.0f, 0.0f, 0.0f ) );
@@ -728,8 +728,8 @@ BOOST_AUTO_TEST_CASE( primitives )
 	BOOST_CHECK_LT( ( norm - Vec3( -1.0f, 0.0f, 0.0f ) ).LenSq( ), gMathEps );
 	BOOST_CHECK( !Primitives::TestIntersection( t, norm, aabb1, Ray( Vec3( 1.25f, 0.25f, 0.5f ), Vec3( 1.0f, 0.0f, 0.0f ) ) ) );
 
-	r.Origin( ).xyz( 0.0f, 0.0f, 0.0f );
-	r.Direction( Vec3( 1.0f, 1.0f, 1.0f ) );
+	r.SetOrigin( Vec3( 0.0f, 0.0f, 0.0f ) );
+	r.SetDirection( Vec3( 1.0f, 1.0f, 1.0f ) );
 	BOOST_CHECK( Primitives::TestIntersection( t, norm, s, r ) );
 	BOOST_CHECK_LT( fabs( t - 1.0f / sqrtf( 3.0f ) * ( 6.0f - sqrtf( 6.0f ) ) ), gMathEps * 3.0f );
 	Vec3 p = r.Point( 1.0f / sqrtf( 3.0f ) * ( 6.0f - sqrtf( 6.0f ) ) );

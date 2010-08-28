@@ -86,18 +86,18 @@ public:
 	//! Get use of left-handed projection matrix.
 	const bool&							IsLH					( ) const { return mUseLH; };
 
-	//! Get/Set viewer position.
-	Vec3&								Position				( ) { return mPosition; };
-	//! Get/Set viewer rotation.
-	Euler&								Rotation				( ) { return mRotation; };
-	//! Get/Set viewer FOV.
-	float&								FOV						( ) { return mFOV; };
-	//! Get/Set viewer near plane.
-	float&								NearPlane				( ) { return mNear; };
-	//! Get/Set viewer far plane.
-	float&								FarPlane				( ) { return mFar; };
-	//! Get/Set use o left-handed projection matrix.
-	bool&								IsLH					( ) { return mUseLH; };
+	//! Set viewer position.
+	void								SetPosition				( const Vec3& p ) { mPosition = p; };
+	//! Set viewer rotation.
+	void								SetRotation				( const Euler& r ) { mRotation = r; };
+	//! Set viewer FOV.
+	void								SetFOV					( const float& f ) { mFOV = f; };
+	//! Set viewer near plane.
+	void								SetNearPlane			( const float& n ) { mNear = n; };
+	//! Set viewer far plane.
+	void								SetFarPlane				( const float& f ) { mFar = f; };
+	//! Set use o left-handed projection matrix.
+	void								SetLH					( const bool& lh ) { mUseLH = lh; };
 
 	/*! /brief Calculate and cache view and projection matrices, based on attributes.
 	 *

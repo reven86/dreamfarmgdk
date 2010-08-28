@@ -44,6 +44,7 @@ class Mat4
 	void serialize( _Archive& ar, const unsigned int version );
 
 public:
+#ifndef __GCCXML__
 	union
 	{
 		float x[4][4];				//!< Array access.
@@ -51,12 +52,15 @@ public:
 		//! Component access.
 		struct
 		{
+#endif // __GCCXML__
 			float _11; float _12; float _13; float _14;
 			float _21; float _22; float _23; float _24;
 			float _31; float _32; float _33; float _34;
 			float _41; float _42; float _43; float _44;
+#ifndef __GCCXML__
 		};
 	};
+#endif // __GCCXML__
 
 	//! Constructs uninitialized matrix.
 	Mat4															() {};
@@ -136,13 +140,13 @@ public:
 	Mat4							GetInversedAffine				() const;
 
 	//! Multiply current matrix by translation transform.
-	void							SetTranslation					(const Vec3& v) {x[3][0] = v.x; x[3][1] = v.y; x[3][2] = v.z;};
+	void							SetTranslation					(const Vec3& v) { _41 = v.x; _42 = v.y; _43 = v.z;};
 
 	//! Multiply current matrix by scale transform.
 	void							SetScale						(const Vec3& v);
 
 	//! Get translation from current transform.
-	Vec3							GetTranslation					() const {return Vec3 (x[3][0], x[3][1], x[3][2]);};
+	Vec3							GetTranslation					() const {return Vec3 (_41, _42, _43);};
 
 	//! Get scale from current transform.
 	Vec3							GetScale						() const {return Vec3 (Vec3 (_11, _21, _31).Len (), Vec3 (_12, _22, _32).Len (), Vec3 (_13, _23, _33).Len ());};

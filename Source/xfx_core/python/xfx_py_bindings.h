@@ -52,3 +52,20 @@ namespace boost { namespace serialization {
 #include "../renderer_ext/xfx_renderer_ext_include.h"
 //#include "../serialization/xfx_serialization_include.h"
 //#include "../gui/xfx_gui_include.h"
+
+
+#ifdef __GCCXML__
+void f( )
+{
+	using namespace xfx;
+
+	sizeof( Cache< ParticleSystem > );
+	sizeof( Cache< Mesh > );
+	sizeof( Cache< CubemapTexture > );
+	sizeof( Cache< Texture > );
+	sizeof( Cache< Shader > );
+	sizeof( Cache< Effect > );
+	sizeof( Cache< Font > );
+}
+
+#endif // __GCCXML__
