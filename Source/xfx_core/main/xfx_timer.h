@@ -51,7 +51,7 @@ public:
 	const boost::uint32_t&		MicroSeconds100		( ) const { return m100MicroSeconds; };
 
 	//! Set elapsed time.
-	void						MicroSeconds100		( boost::uint32_t time );
+	void						MicroSeconds100		( const boost::uint32_t& time );
 
 	//! Get 'paused' flag.
 	const bool&					IsPaused			( ) const { return mIsPaused; };

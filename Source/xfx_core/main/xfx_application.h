@@ -63,14 +63,13 @@ public:
 	 *	
 	 *	Creates a window and calls Engine::Initialize on that window.
 	 *
-	 *	\param[in] inst		HINSTANCE of execution process
 	 *	\param[in] cmdline	Command line
 	 *	\param[in] wndclass	Window Class of created window
 	 *	\param[in] caption	Caption of created window
 	 *
 	 *	\return Returns S_OK if engine has been initialized sucessfully.
 	 */
-	virtual HRESULT					InitEngine						( HINSTANCE inst, const String& cmdline, const WString& wndclass, const WString& caption );
+	virtual HRESULT					InitEngine						( const String& cmdline, const WString& wndclass, const WString& caption );
 
 	/*! \brief Deinitialization.
 	 *	

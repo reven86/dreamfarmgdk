@@ -435,14 +435,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\generated\HINSTANCE__.pypp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\generated\HINSTANCE__.pypp.hpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\generated\HWND__.pypp.cpp"
 				>
 			</File>

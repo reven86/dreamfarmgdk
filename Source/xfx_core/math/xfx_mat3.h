@@ -120,11 +120,11 @@ public:
 	//! Multiply current matrix by translation transform.
 	void							SetTranslation					( const Vec2& v ) { _31 = v.x; _32 = v.y; };
 
-	//! Multiply current matrix by scale transform.
-	void							SetScale						( const Vec2& v );
-
 	//! Get translation from current transform.
 	Vec2							GetTranslation					( ) const { return Vec2( _31, _32 ); };
+
+	//! Multiply current matrix by scale transform.
+	void							SetScale						( const Vec2& v );
 
 	//! Get scale from current transform.
 	Vec2							GetScale						( ) const { return Vec2( Vec2( _11, _21 ).Len( ), Vec2( _12, _22 ).Len( ) ); };

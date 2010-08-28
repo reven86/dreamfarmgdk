@@ -30,7 +30,7 @@ Application::Application( ) :
 {
 }
 
-HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WString& wndclass, const WString& caption )
+HRESULT Application::InitEngine( const String& cmdline, const WString& wndclass, const WString& caption )
 {
 	if( mhInstance != 0 )
 	{
@@ -40,7 +40,7 @@ HRESULT Application::InitEngine( HINSTANCE inst, const String& cmdline, const WS
 		return XFXERR_INVALIDCALL;
 	}
 
-	mhInstance			= inst;
+	mhInstance			= static_cast< HINSTANCE >( GetCurrentProcess( ) );
 	mCommandLine		= cmdline;
 	mWndClass			= wndclass;
 

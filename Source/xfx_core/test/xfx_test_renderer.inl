@@ -2,7 +2,7 @@ struct AppFixture
 {
 	AppFixture( )
 	{
-		::Application::Instance( ).InitEngine( static_cast< HINSTANCE >( GetCurrentProcess( ) ), "", L"TestRendererWndClass", L"TestRendererWndCaption" );
+		::Application::Instance( ).InitEngine( "", L"TestRendererWndClass", L"TestRendererWndCaption" );
 	}
 
 	~AppFixture( )
@@ -15,7 +15,7 @@ struct RendererFixture
 {
 	RendererFixture( )
 	{
-		::Application::Instance( ).InitEngine( static_cast< HINSTANCE >( GetCurrentProcess( ) ), "", L"TestRendererWndClass2", L"TestRendererWndCaption2" );
+		::Application::Instance( ).InitEngine( "", L"TestRendererWndClass2", L"TestRendererWndCaption2" );
 		Renderer::Instance( ).CreateDevice( gGetApplication( ).HWnd( ) );
 	}
 

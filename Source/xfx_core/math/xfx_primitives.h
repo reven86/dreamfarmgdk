@@ -134,7 +134,7 @@ public:
 	const Vec3& Position		( ) const { return mPosition; };
 
 	//! Set radius.
-	void SetRadius				( float r ) { mRadius = r; };
+	void SetRadius				( const float& r ) { mRadius = r; };
 
 	//! Get radius.
 	const float& Radius			( ) const { return mRadius; };
@@ -417,10 +417,10 @@ public:
 	//! Create plane from A, B, C, D values.
 	void						ABCD							( const float& a, const float& b, const float& c, const float& d ) { mA = a; mB = b; mC = c; mD = d; };
 
-	void						SetA							( float a ) { mA = a; };
-	void						SetB							( float b ) { mB = b; };
-	void						SetC							( float c ) { mC = c; };
-	void						SetD							( float d ) { mD = d; };
+	void						SetA							( const float& a ) { mA = a; };
+	void						SetB							( const float& b ) { mB = b; };
+	void						SetC							( const float& c ) { mC = c; };
+	void						SetD							( const float& d ) { mD = d; };
 
 	const float&				A								( ) const { return mA; };
 	const float&				B								( ) const { return mB; };
