@@ -207,6 +207,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\_D3DVIEWPORT9.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\_D3DVIEWPORT9.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\AABB.pypp.cpp"
 				>
 			</File>
@@ -252,6 +260,62 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\BooksManager.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_CubemapTexture__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_CubemapTexture__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Effect__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Effect__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Font__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Font__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Mesh__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Mesh__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_ParticleSystem__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_ParticleSystem__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Shader__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Shader__greater_.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Texture__greater_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\Cache_less__xfx_scope_Texture__greater_.pypp.hpp"
 				>
 			</File>
 			<File
@@ -400,14 +464,6 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\Input.pypp.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\generated\ITexture.pypp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\generated\ITexture.pypp.hpp"
 				>
 			</File>
 			<File
@@ -808,6 +864,14 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\xfx.main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx_enumerations.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx_enumerations.pypp.hpp"
 				>
 			</File>
 			<File

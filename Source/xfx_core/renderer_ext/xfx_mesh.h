@@ -35,7 +35,7 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
-class Mesh : public Resource, boost::noncopyable
+class Mesh : public Resource
 {
 public:
 	//! %Animation information.
@@ -46,25 +46,43 @@ public:
 		float			fps;			//!< Frames Per Second.
 	};
 
-private:
-	unsigned							mTotalVertices;
-	unsigned							mTotalFaces;
-
-	//! It is same for all clones.
-	boost::shared_ptr< AABBTree >		mAABBTree;
-
-	VertexBuffer						mVB;
-	IndexBuffer							mIB;
-
-public:
 	//! Animations container.
 	typedef stdext::hash_map< String, Animation >	AnimationsType;
 
 private:
-	AnimationsType									mAnimations;
-	Envelope< Vec3, float >							mPosKeys;
-	Envelope< Quaternion, float, QuaternionLerpFn >	mRotKeys;
-	Envelope< Vec3, float >							mScaleKeys;
+	//! It is same for all clones.
+	struct SharedData
+	{
+		unsigned total_vertices;
+		unsigned total_faces;
+
+		boost::shared_ptr< AABBTree > aabb_tree;
+
+		VertexBuffer vb;
+		IndexBuffer ib;
+
+		AnimationsType animations;
+		Envelope< Vec3, float > pos_keys;
+		Envelope< Quaternion, float, QuaternionLerpFn >	rot_keys;
+		Envelope< Vec3, float > scale_keys;
+
+		~SharedData( )
+		{
+			animations.clear( );
+			pos_keys.Clear( );
+			rot_keys.Clear( );
+			scale_keys.Clear( );
+
+			vb.Destroy( );
+			ib.Destroy( );
+
+			aabb_tree.reset( reinterpret_cast< class AABBTree * >( NULL ) );
+
+			total_vertices = total_faces = 0;
+		}
+	};
+
+	boost::shared_ptr< SharedData >					mData;
 
 public:
 	//! File version.
@@ -82,22 +100,22 @@ public:
 	virtual ~Mesh															( ) { Cleanup( ); };
 
 	//! Get all animations.
-	const AnimationsType&					Animations						( ) const { return mAnimations; };
+	const AnimationsType&					Animations						( ) const { return mData->animations; };
 
 	//! Get position keys.
-	const Envelope< Vec3, float >&			PosKeys							( ) const { return mPosKeys; };
+	const Envelope< Vec3, float >&			PosKeys							( ) const { return mData->pos_keys; };
 
 	//! Get rotation keys.
-	const Envelope< Quaternion, float, QuaternionLerpFn >& RotKeys			( ) const { return mRotKeys; };
+	const Envelope< Quaternion, float, QuaternionLerpFn >& RotKeys			( ) const { return mData->rot_keys; };
 
 	//! Get scale keys.
-	const Envelope< Vec3, float >&			ScaleKeys						( ) const { return mScaleKeys; };
+	const Envelope< Vec3, float >&			ScaleKeys						( ) const { return mData->scale_keys; };
 
 	//! Get AABB tree.
-	const AABBTree&							GetAABBTree						( ) const { return mAABBTree ? *mAABBTree : msEmptyTree; };
+	const AABBTree&							GetAABBTree						( ) const { return mData->aabb_tree ? *mData->aabb_tree : msEmptyTree; };
 
 	//! Get root AABB.
-	const Primitives::AABB&					RootAABB						( ) const { return AABBTree( ).RootAABB( ); };
+	const Primitives::AABB&					RootAABB						( ) const { return GetAABBTree( ).RootAABB( ); };
 
 	//! Load from memory.
 	virtual HRESULT							LoadMemory						( const void * memory, unsigned long filelen );
@@ -164,7 +182,7 @@ public:
 	~MeshState																( ) { };
 
 	//! Set associated Mesh object.
-	void										MeshPtr						( const boost::shared_ptr< const Mesh >& mdl )
+	void										SetMeshPtr					( const boost::shared_ptr< const Mesh >& mdl )
 	{
 		mMeshPtr = mdl;
 		if( mMeshPtr )
@@ -177,17 +195,17 @@ public:
 	//! \name Render-specific methods
 	//! @{
 
-	//! Get/Set Shader.
-	boost::shared_ptr< const Shader >&			ShaderPtr					( ) { return mShaderPtr;};
+	//! Set Shader.
+	void										SetShaderPtr				( const boost::shared_ptr< const Shader >& shd ) { mShaderPtr = shd;};
 
 	//! Get Shader.
 	const boost::shared_ptr< const Shader >&	ShaderPtr					( ) const { return mShaderPtr; };
 
 	//! Get/Set ShaderConsts.
-	class ShaderParams&							ShaderParams				( ) { return *mShaderParamsPtr; };
+	class ShaderParams&							GetShaderParams				( ) { return *mShaderParamsPtr; };
 
 	//! Get ShaderConsts.
-	const class ShaderParams&					ShaderParams				( ) const { return *mShaderParamsPtr; };
+	const class ShaderParams&					GetShaderParams				( ) const { return *mShaderParamsPtr; };
 
 	//! %Render Mesh with current state.
 	void										Render						( ) const

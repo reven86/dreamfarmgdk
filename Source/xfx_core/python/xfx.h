@@ -43,6 +43,7 @@
 #pragma warning( disable : 4121 )	// alignment of a member was sensitive to packing
 
 // Boost
+#define BOOST_PYTHON_MAX_ARITY 25
 #include <boost/python.hpp>
 
 // forward definition to use serialization

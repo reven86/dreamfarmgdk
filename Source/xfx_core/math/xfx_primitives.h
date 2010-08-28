@@ -353,8 +353,8 @@ public:
 	//! Get size.
 	float Size					() const {return (mE1 + mE2 + mE3).Len ();};
 
-	//! Get/Set origin.
-	Vec3& Location				() {return mLocation;};
+	//! Set origin.
+	void SetLocation			( const Vec3& l ) { mLocation = l; };
 
 	//! Get origin.
 	const Vec3& Location		() const {return mLocation;};

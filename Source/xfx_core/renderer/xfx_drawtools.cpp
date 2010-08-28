@@ -212,7 +212,7 @@ void DrawTools::FlushLines ()
 		Mat4 id( 1 );
 		Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTS_WORLD, ( D3DMATRIX * )( &id ) );
 
-		Renderer::Instance( ).FVF( FVF_LINEVERTEX );
+		Renderer::Instance( ).SetFVF( FVF_LINEVERTEX );
 		Renderer::Instance( ).pD3DDevice( )->DrawPrimitiveUP( D3DPT_LINELIST, static_cast< UINT >( mLinesCount >> 1 ), &( *mLines.begin( ) ), sizeof( LineVertex ) );
 
 		Renderer::Instance( ).State( Renderer::SM_ALPHABLENDENABLE, blend );
@@ -220,7 +220,7 @@ void DrawTools::FlushLines ()
 		Renderer::Instance( ).State( Renderer::SM_DESTBLEND, destblend );
 		Renderer::Instance( ).State( Renderer::SM_LIGHTING, light );
 
-		Renderer::Instance( ).FrameStatistics( ).num_lines += static_cast< unsigned >( mLinesCount >> 1 );
+		Renderer::Instance( ).GetFrameStatistics( ).num_lines += static_cast< unsigned >( mLinesCount >> 1 );
 
 		mLinesCount = 0;
 	}
@@ -702,7 +702,7 @@ void DrawTools::FlushTrisAndSprites( )
 					trfn
 					);
 
-				Renderer::Instance ().FrameStatistics ().num_usertris += ( *it ).count;
+				Renderer::Instance ().GetFrameStatistics ().num_usertris += ( *it ).count;
 			}
 		}
 		else
@@ -724,7 +724,7 @@ void DrawTools::FlushTrisAndSprites( )
 					srfn
 					);
 
-				Renderer::Instance ().FrameStatistics ().num_sprites += ( *it ).count;
+				Renderer::Instance ().GetFrameStatistics ().num_sprites += ( *it ).count;
 			}
 		}
 	}

@@ -55,7 +55,7 @@ namespace boost { namespace serialization {
 
 
 #ifdef __GCCXML__
-void f( )
+void _py_helper( )
 {
 	using namespace xfx;
 

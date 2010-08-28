@@ -917,7 +917,7 @@ void Renderer::SamplerState (unsigned stage, SAMPLER_STATES state, DWORD value)
 	}
 }
 
-void Renderer::FVF (const int& fvf)
+void Renderer::SetFVF (const int& fvf)
 {
 	if (mCurrentFVF != fvf)
 	{
@@ -985,7 +985,7 @@ HRESULT Renderer::ResetDevice ()
 
 	DWORD fvf = mCurrentFVF;
 	mCurrentFVF = 0;
-	FVF( fvf );
+	SetFVF( fvf );
 
 	return hr;
 }

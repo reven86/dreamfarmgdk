@@ -22,13 +22,12 @@ mb = module_builder.module_builder_t( [ r"xfx_py_bindings.h", ]
 mb.BOOST_PYTHON_MAX_ARITY = 16
 
 mb.namespace( 'xfx' ).include( )
-#mb.namespace( 'boost' ).classes( lambda x: x.name.startswith( 'shared_ptr' ) ).include( )
+#mb.namespace( 'boost' ).classes( 'noncopyable' ).include( )
 mb.calldefs( access_type_matcher_t( 'protected' ) ).exclude()
 mb.calldefs( access_type_matcher_t( 'private' ) ).exclude()
 mb.variables( access_type_matcher_t( 'protected' ) ).exclude()
 mb.variables( access_type_matcher_t( 'private' ) ).exclude()
-mb.member_functions( lambda x: x.name.startswith( '_' ) ).exclude()
-mb.variables( lambda x: x.name.startswith( '_' ) ).exclude()
+mb.decls( lambda x: x.name.startswith( '_' ) ).exclude()
 
 mb.class_( lambda x: x.name.startswith( 'HINSTANCE' ) ).include( )
 mb.class_( lambda x: x.name.startswith( 'HWND' ) ).include( )
@@ -37,6 +36,11 @@ mb.decls( lambda x: x.name.startswith( '_D3DCUBEMAP_FACES' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DFORMAT' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DPRIMITIVETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DVIEWPORT' ) ).include( )
+
+mb.class_( "ITexture" ).exclude( )
+mb.class_( "Texture" ).member_functions( "GetD3DTex" ).exclude( )
+mb.class_( "CubemapTexture" ).member_functions( "GetD3DTex" ).exclude( )
+mb.class_( "Renderer" ).member_functions( lambda x: x.name in ( 'pD3D', 'pD3DDevice' ) ).exclude( )
 
 mb.classes( ).add_properties( exclude_accessors=True )
 
@@ -55,8 +59,7 @@ for c in mb.classes( ):
 
 mb.class_( "Caches" ).member_functions( "ClearCallbacks" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterCmd" ).exclude( )
-#mb.class_( "Cmd" ).member_function( "RegisterVar" ).exclude( )
-mb.class_( "ITexture" ).member_functions( lambda x: x.name in ( "GetD3DTex", ) ).exclude( )
+mb.class_( "Cmd" ).member_function( "RegisterVar" ).use_overload_macro = True #exclude( )
 mb.member_functions( "ParseAt" ).exclude()
 
 #mb.free_function( "gToConsole" ).include( )
@@ -70,8 +73,19 @@ mb.free_function( "gGetApplication" ).call_policies = call_policies.return_inter
 mb.class_( "BooksManager" ).member_function( "GetBook" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Shader" ).member_function( "GetTextureInfoOnStage" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Pack" ).member_function( "FindFile" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Pack" ).member_function( "GetFirstFile" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Pack" ).member_function( "GetLastFile" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "ParticleSystem" ).member_functions( "GetSubSystem" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "ParticleSystem" ).member_functions( "GetParticle" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "BaseParticleSystem" ).member_functions( "EmitterTransformation" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Quaternion" ).member_function( "FromAxisAngle" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Mat3" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Mat4" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Euler" ).member_functions( lambda x: x.name in ( "FromMat4", "FromVec3", "FromQuaternion" ) ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Renderer" ).member_function( "GetFrameStatistics", return_type = '::xfx::Renderer::FrameStatistics &' ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools &' ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "MeshState" ).member_function( "GetShaderParams", return_type = '::xfx::ShaderParams &' ).call_policies = call_policies.return_internal_reference( )
+mb.member_functions( "Cache", arg_types = [] ).call_policies = call_policies.return_internal_reference( )
 
 #mb.class_( "FileIterator_t" ).opaque = True
 #mb.class_( "TextureInfo" ).opaque = True

@@ -24,7 +24,7 @@ _XFX_BEGIN
  *	\author Andrew "RevEn" Karpushin
  */
 
-class Effect : public Resource, boost::noncopyable
+class Effect : public Resource
 {
 	enum SemanticType
 	{

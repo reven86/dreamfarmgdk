@@ -329,10 +329,10 @@ public:
 	void								Shutdown					( );
 
 	//! Get/Set frame statistics.
-	struct FrameStatistics&				FrameStatistics				( ) { return mFrameStat; };
+	struct FrameStatistics&				GetFrameStatistics			( ) { return mFrameStat; };
 
 	//! Get frame statistics.
-	const struct FrameStatistics&		FrameStatistics				( ) const { return mFrameStat; };
+	const struct FrameStatistics&		GetFrameStatistics			( ) const { return mFrameStat; };
 
 	//! Draw per-frame statistics.
 	void								DrawFrameStatistics			( const class Font& fnt, const boost::shared_ptr< const class Shader >& white_shader ) const;
@@ -396,10 +396,10 @@ public:
 	void								SamplerState				( unsigned stage, SAMPLER_STATES state, DWORD value );	
 
 	//! Get FVF.
-	const int&							FVF							( ) const { return mCurrentFVF; };
+	const int&							GetFVF						( ) const { return mCurrentFVF; };
 
 	//! Set FVF.
-	void								FVF							( const int& fvf );
+	void								SetFVF						( const int& fvf );
 
 	//! @}
 

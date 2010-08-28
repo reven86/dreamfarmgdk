@@ -689,7 +689,7 @@ BOOST_AUTO_TEST_CASE( primitives )
 	BOOST_CHECK( Primitives::TestIntersection( obb1, obb2 ) );
 	obb2.From( Vec3( 0.0f ), Vec3( -1.0f ) );
 	BOOST_CHECK( Primitives::TestIntersection( obb1, obb2 ) );
-	obb2.Location( ) -= Vec3( 0.001f );
+	obb2.SetLocation( obb2.Location( ) - Vec3( 0.001f ) );
 	BOOST_CHECK( !Primitives::TestIntersection( obb1, obb2 ) );
 
 	// check AABB-triangle intersection

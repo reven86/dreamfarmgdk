@@ -38,9 +38,10 @@ class Viewport : public Singleton< Viewport >
 
 protected:
 	Viewport													( );
-	virtual ~Viewport											( );
 
 public:
+	virtual ~Viewport											( );
+
 	//! Initialize viewport with width and height.
 	void							Init						( unsigned width, unsigned height );
 

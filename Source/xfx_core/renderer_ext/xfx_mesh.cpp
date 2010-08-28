@@ -24,21 +24,12 @@ Cache< Mesh >				Mesh::msCache;
 
 Mesh::Mesh( ) : Resource( "Mesh" )
 {
+	mData.reset( new SharedData( ) );
 }
 
 void Mesh::Cleanup( )
 {
-	mAnimations.clear( );
-	mPosKeys.Clear( );
-	mRotKeys.Clear( );
-	mScaleKeys.Clear( );
-
-	mVB.Destroy( );
-	mIB.Destroy( );
-
-	mAABBTree.reset( reinterpret_cast< class AABBTree * >( NULL ) );
-
-	mTotalVertices = mTotalFaces = 0;
+	mData.reset( new SharedData( ) );
 }
 
 void Mesh::Render( const MeshState& state ) const
@@ -68,16 +59,16 @@ void Mesh::Render( const MeshState& state ) const
 
 	Renderer::Instance( ).SetTransform( D3DTS_WORLD, matr );
 
-	mVB.SetStream		( 0 );
-	mIB.SetIndices		( );
+	mData->vb.SetStream( 0 );
+	mData->ib.SetIndices( );
 
 	Renderer::Instance( ).RenderPrimitive(
 		state.ShaderPtr( ),
-		state.ShaderParams( ),
+		state.GetShaderParams( ),
 #if( __XFX_DIRECTX_VER__ < 9 )
-		boost::bind( &Renderer::DrawIndexedPrimitive, boost::ref( Renderer::Instance( ) ), D3DPT_TRIANGLELIST, 0, mTotalVertices, 0, mTotalFaces )
+		boost::bind( &Renderer::DrawIndexedPrimitive, boost::ref( Renderer::Instance( ) ), D3DPT_TRIANGLELIST, 0, mData->total_vertices, 0, mData->total_faces )
 #else
-		boost::bind( &Renderer::DrawIndexedPrimitive, boost::ref( Renderer::Instance( ) ), D3DPT_TRIANGLELIST, 0, 0, mTotalVertices, 0, mTotalFaces )
+		boost::bind( &Renderer::DrawIndexedPrimitive, boost::ref( Renderer::Instance( ) ), D3DPT_TRIANGLELIST, 0, 0, mData->total_vertices, 0, mData->total_faces )
 #endif
 	);
 }
@@ -108,22 +99,22 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 	curp += sizeof( flags );
 
 	//Loading vertex and index buffers
-	mTotalVertices = *( ( unsigned * ) curp );
-	curp += sizeof( mTotalVertices );
-	mTotalFaces = *( ( unsigned * ) curp );
-	curp += sizeof( mTotalFaces );
+	mData->total_vertices = *( ( unsigned * ) curp );
+	curp += sizeof( mData->total_vertices );
+	mData->total_faces = *( ( unsigned * ) curp );
+	curp += sizeof( mData->total_faces );
 
-	HRESULT hr = mVB.Create( vert_size, mTotalVertices, fvf, false );
+	HRESULT hr = mData->vb.Create( vert_size, mData->total_vertices, fvf, false );
 	if( FAILED( hr ) )
 		return hr;
 
-	hr = mIB.Create( false, mTotalFaces * 3, false );
+	hr = mData->ib.Create( false, mData->total_faces * 3, false );
 	if( FAILED( hr ) )
 		return hr;
 
 	{
-		BufferLocker< VertexBuffer > vb_lock( mVB, 0, 0 );
-		BufferLocker< IndexBuffer > ib_lock( mIB, 0, 0 );
+		BufferLocker< VertexBuffer > vb_lock( mData->vb, 0, 0 );
+		BufferLocker< IndexBuffer > ib_lock( mData->ib, 0, 0 );
 
 		BYTE * vbuf = vb_lock.data< BYTE >( );
 		unsigned short * ibuf = ib_lock.data< unsigned short >( );
@@ -132,17 +123,17 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 		if( !vbuf || !ibuf )
 			return XFXERR_UNKNOWN;
 
-		memcpy( vbuf, curp, mTotalVertices * vert_size );
-		curp += mTotalVertices * vert_size;
+		memcpy( vbuf, curp, mData->total_vertices * vert_size );
+		curp += mData->total_vertices * vert_size;
 
-		memcpy( ibuf, curp, ( mTotalFaces * 3 ) << ( ( flags & 1 ) ? 1 : 2 ) );
-		curp += ( mTotalFaces * 3 ) << ( ( flags & 1 ) ? 1 : 2 );
+		memcpy( ibuf, curp, ( mData->total_faces * 3 ) << ( ( flags & 1 ) ? 1 : 2 ) );
+		curp += ( mData->total_faces * 3 ) << ( ( flags & 1 ) ? 1 : 2 );
 
 		//Building AABB tree
 		std::vector< Primitives::Triangle > tris( 16384 );
 
 		unsigned short * ind = ibuf;
-		for( unsigned face = 0; face < mTotalFaces; face++, ind += 3 )
+		for( unsigned face = 0; face < mData->total_faces; face++, ind += 3 )
 		{
 			Vec3 * v1 = reinterpret_cast< Vec3 * >( vbuf + *ind * vert_size );
 			Vec3 * v2 = reinterpret_cast< Vec3 * >( vbuf + *( ind + 1 ) * vert_size );
@@ -151,8 +142,8 @@ HRESULT Mesh::LoadMemory( const void * memory, unsigned long )
 			tris.push_back( Primitives::Triangle( *v1, *v2, *v3 ) );
 		}
 
-		mAABBTree.reset( new class AABBTree( ) );
-		mAABBTree->Build( tris.begin( ), tris.end( ) );
+		mData->aabb_tree.reset( new class AABBTree( ) );
+		mData->aabb_tree->Build( tris.begin( ), tris.end( ) );
 	}
 
 	//

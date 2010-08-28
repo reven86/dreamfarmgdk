@@ -106,7 +106,7 @@ private:
 		String								char_map;
 	};
 
-	boost::scoped_ptr< LoadInfo >			mLoadInfoPtr;
+	boost::shared_ptr< LoadInfo >			mLoadInfoPtr;
 
 	static Cache< Font >					msCache;
 

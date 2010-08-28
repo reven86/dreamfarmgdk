@@ -92,8 +92,8 @@ BOOST_AUTO_TEST_CASE( viewer )
 	BOOST_CHECK_EQUAL( v.FarPlane( ), 100.0f );
 	BOOST_CHECK_EQUAL( v.IsLH( ), true );
 
-	v.Position( ).xyz( -1.0f, 1.0f, 0.0f );
-	v.Rotation( ).ypr( Math::pi / 2, Math::pi / 4, 0 );
+	v.SetPosition( Vec3( -1.0f, 1.0f, 0.0f ) );
+	v.SetRotation( Euler( Math::pi / 2, Math::pi / 4, 0 ) );
 
 	// Viewer uses aspect ration from current viewport, so we have to setup
 	// new viewport in order to use square frustum.
