@@ -800,7 +800,7 @@ void Renderer::BeginFrame( )
 
 void Renderer::EndFrame( )
 {
-	DrawTools ().FlushAll( );
+	GetDrawTools ().FlushAll( );
 
 	mpD3DDevice->EndScene( );
 
@@ -994,7 +994,7 @@ void Renderer::SetTransform( const D3DTRANSFORMSTATETYPE& transform, const Mat4&
 {
 	if( transform == D3DTS_PROJECTION || transform == D3DTS_VIEW )
 	{
-		//DrawTools ().FlushAll ();
+		//GetDrawTools ().FlushAll ();
 
 		mIsVPCached = false;
 	}

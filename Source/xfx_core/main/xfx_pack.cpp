@@ -49,12 +49,12 @@ Pack::FileIterator Pack::GetFirstFile( ) const
 
 Pack::FileIterator Pack::GetLastFile( ) const
 {
-	return mFileStore ? GetFirstFile( ) + mFilesCount : GetFirstFile( );
+	return mFileStore ? boost::next( ( const FileInfo * ) GetFirstFile( ), mFilesCount ) : GetFirstFile( );
 }
 
 unsigned Pack::GetFilesCount( ) const
 {
-	return ( unsigned )std::distance( GetFirstFile( ), GetLastFile( ) );
+	return mFilesCount;
 }
 
 Pack::FileIterator Pack::FindFile( const String& file ) const
@@ -77,8 +77,9 @@ Pack::FileIterator Pack::FindFile( const String& file ) const
 
 HRESULT Pack::GetFileName( const FileIterator& file, String& name ) const
 {
-	size_t dist = std::distance( GetFirstFile( ), file );
+	size_t dist = std::distance( ( const FileInfo * ) GetFirstFile( ), ( const FileInfo * )file );
 
+	_ASSERTE( dist < mFilesCount );
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
@@ -89,8 +90,9 @@ HRESULT Pack::GetFileName( const FileIterator& file, String& name ) const
 
 HRESULT Pack::ReadFile( const FileIterator& file, void * buf ) const
 {
-	size_t dist = std::distance( GetFirstFile( ), file );
+	size_t dist = std::distance( ( const FileInfo * ) GetFirstFile( ), ( const FileInfo * )file );
 
+	_ASSERTE( dist < mFilesCount );
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
@@ -115,8 +117,9 @@ HRESULT Pack::ReadFile( const FileIterator& file, void * buf ) const
 
 HRESULT Pack::GetFileSize( const FileIterator& file, unsigned long& len ) const
 {
-	size_t dist = std::distance( GetFirstFile( ), file );
+	size_t dist = std::distance( ( const FileInfo * ) GetFirstFile( ), ( const FileInfo * )file );
 
+	_ASSERTE( dist < mFilesCount );
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 
@@ -127,8 +130,9 @@ HRESULT Pack::GetFileSize( const FileIterator& file, unsigned long& len ) const
 
 HRESULT Pack::GetFileOffset( const FileIterator& file, unsigned long& ofs ) const
 {
-	size_t dist = std::distance( GetFirstFile( ), file );
+	size_t dist = std::distance( ( const FileInfo * ) GetFirstFile( ), ( const FileInfo * )file );
 
+	_ASSERTE( dist < mFilesCount );
 	if( dist >= mFilesCount ) 
 		return XFXERR_NOTFOUND;
 

@@ -22,15 +22,15 @@ xfx::Application& xfx::gGetApplication( )
 // Application
 //
 
-HRESULT Application::InitEngine( HINSTANCE inst, const xfx::String &cmdline, const xfx::WString &wndclass, const xfx::WString &caption )
+HRESULT Application::InitEngine( const xfx::String &cmdline, const xfx::WString &wndclass, const xfx::WString &caption )
 {
-	HRESULT res = xfx::Application::InitEngine( inst, cmdline, wndclass, caption );
+	HRESULT res = xfx::Application::InitEngine( cmdline, wndclass, caption );
 
 	if( FAILED( res ) )
 		return res;
 
 	// Initialize renderer.
-	res = xfx::Renderer::Instance( ).CreateDevice( hWnd( ) );
+	res = xfx::Renderer::Instance( ).CreateDevice( HWnd( ) );
 
 	if( FAILED( res ) )
 		return res;
@@ -64,7 +64,7 @@ void Application::Shutdown( )
 void Application::Update( )
 {
 	// that means we are in shutdown process, no update-render then
-	if( !hWnd( ) )
+	if( !HWnd( ) )
 		return;
 
 	// Update timer.
@@ -85,7 +85,7 @@ void Application::Update( )
 void Application::Render( ) const
 {
 	// render sprite
-	xfx::Renderer::Instance( ).DrawTools( ).PushDraw2DSprite(
+	xfx::Renderer::Instance( ).GetDrawTools( ).PushDraw2DSprite(
 		256, 256, 128, 128, 0, 0xffffffff, mSpriteShader, mShaderParamsConsts
 		);
 }

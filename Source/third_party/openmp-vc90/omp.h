@@ -26,7 +26,7 @@ typedef void * omp_nest_lock_t;
 #if !defined(_OPENMP)
 
 #if defined(_DEBUG)
-    #pragma comment(lib, "vcompd")
+    #pragma comment(lib, "vcomp")
 #else   // _DEBUG
     #pragma comment(lib, "vcomp")
 #endif  // _DEBUG
@@ -41,7 +41,7 @@ typedef void * omp_nest_lock_t;
 
         #if defined(_M_IX86)
             #pragma comment(linker,"/manifestdependency:\"type='win32' "            \
-                "name='" __OPENMP_ASSEMBLY_NAME_PREFIX ".DebugOpenMP' "         \
+                "name='" __OPENMP_ASSEMBLY_NAME_PREFIX ".OpenMP' "         \
                 "version='" __OPENMP_ASSEMBLY_VERSION "' "                          \
                 "processorArchitecture='x86' "                                  \
                 "publicKeyToken='" _VC_ASSEMBLY_PUBLICKEYTOKEN "'\"")

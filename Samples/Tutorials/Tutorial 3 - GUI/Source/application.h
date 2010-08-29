@@ -35,14 +35,13 @@ public:
 	 *	We override default InitEngine method and place renderer 
 	 *	initialization code there.
 	 *
-	 *	\param[in] inst		HINSTANCE of execution process
 	 *	\param[in] cmdline	Command line
 	 *	\param[in] wndclass	Window Class of created window
 	 *	\param[in] caption	Caption of created window
 	 *
 	 *	\return Returns S_OK if engine and renderer has been initialized sucessfully.
 	 */
-	virtual HRESULT					InitEngine						( HINSTANCE inst, const xfx::String& cmdline, const xfx::WString& wndclass, const xfx::WString& caption );
+	virtual HRESULT					InitEngine						( const xfx::String& cmdline, const xfx::WString& wndclass, const xfx::WString& caption );
 
 	/*! \brief Deinitialization.
 	 *	
