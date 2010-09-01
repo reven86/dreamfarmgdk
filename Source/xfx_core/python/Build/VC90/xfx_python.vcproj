@@ -41,6 +41,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm129"
 				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 			/>
@@ -98,6 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm123"
 				AdditionalIncludeDirectories="../../;&quot;../../../../third_party/python-2.7/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 			/>
@@ -432,14 +434,6 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\Font.pypp.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\generated\HWND__.pypp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\generated\HWND__.pypp.hpp"
 				>
 			</File>
 			<File
@@ -909,6 +903,10 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_py_bindings.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_python_include.h"
 			>
 		</File>
 		<File

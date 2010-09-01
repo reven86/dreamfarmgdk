@@ -44,7 +44,16 @@
 
 // Boost
 #define BOOST_PYTHON_MAX_ARITY 25
+#define BOOST_PYTHON_STATIC_LIB
+#ifdef _DEBUG
+#define BOOST_DEBUG_PYTHON
+#define BOOST_LINKING_PYTHON
+#endif
 #include <boost/python.hpp>
+#ifdef _DEBUG
+#undef BOOST_DEBUG_PYTHON
+#undef BOOST_LINKING_PYTHON
+#endif
 
 // forward definition to use serialization
 namespace boost { namespace serialization {

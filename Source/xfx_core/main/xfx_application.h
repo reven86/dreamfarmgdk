@@ -50,10 +50,10 @@ protected:
 	Timer						mTimer;
 
 protected:
-	Application														( );
-	virtual ~Application											( ) { };
 
 public:
+	Application														( );
+	virtual ~Application											( ) { };
 	/*!	\name Initialization/Deinitialization.
 	 *
 	 *	@{
@@ -93,7 +93,7 @@ public:
 	//! %Update scene.
 	virtual void					Update							( ) { };
 
-	const HWND&						HWnd							( ) const { return mWnd; };
+	HWND							HWnd							( ) const { return mWnd; };
 	const HINSTANCE&				HInstance						( ) const { return mhInstance; };
 	const String&					CommandLine						( ) const { return mCommandLine; };
 	const WString&					WndClass						( ) const { return mWndClass; };

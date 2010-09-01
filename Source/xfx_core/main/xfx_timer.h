@@ -44,6 +44,9 @@ public:
 	Timer											( );
 	~Timer											( );
 
+	Timer											( const Timer& t );
+	Timer&						operator =			( const Timer& t );
+
 	//! Get current time between to pools in 100 microseconds.
 	const boost::uint32_t&		MSPF100				( ) const { return m100MSPF; };
 

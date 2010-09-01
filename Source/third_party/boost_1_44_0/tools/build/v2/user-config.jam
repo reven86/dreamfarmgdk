@@ -84,3 +84,5 @@
 
 # Configure with an explicit installation prefix.
 # using qt : /usr/opt/qt ;
+
+using python : 2.7 ;

@@ -7,7 +7,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="../../../source/xfx_core/;../../../source/third_party/boost_1_44_0/;&quot;../../../source/third_party/jpeg-6b/&quot;;&quot;../../../source/third_party/lua-5.0.2/include&quot;;../../../source/third_party/luabind;&quot;../../../source/third_party/cegui-0.6.1/include&quot;;&quot;../../../source/third_party/cegui-0.6.1/scriptingmodules/ceguilua/luascriptmodule/include&quot;;&quot;../../../source/third_party/dxsdk-9.0c-sum04/include&quot;"
+		AdditionalIncludeDirectories="../../../source/xfx_core/;../../../source/third_party/boost_1_44_0/;&quot;../../../source/third_party/jpeg-6b/&quot;;&quot;../../../source/third_party/lua-5.0.2/include&quot;;../../../source/third_party/luabind;&quot;../../../source/third_party/cegui-0.6.1/include&quot;;&quot;../../../source/third_party/cegui-0.6.1/scriptingmodules/ceguilua/luascriptmodule/include&quot;;&quot;../../../source/third_party/dxsdk-9.0c-sum04/include&quot;;&quot;../../../source/third_party/python-2.7/include&quot;"
 		PreprocessorDefinitions="CEGUI_STATIC"
 		StringPooling="true"
 		OpenMP="true"
@@ -19,6 +19,6 @@
 	<Tool
 		Name="VCLinkerTool"
 		OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).exe"
-		AdditionalLibraryDirectories="..\..\..\GDK\Lib;&quot;..\..\..\Source\third_party\dxsdk-9.0c-sum04\lib&quot;;&quot;..\..\..\Source\third_party\openmp-vc90&quot;"
+		AdditionalLibraryDirectories="..\..\..\GDK\Lib;&quot;..\..\..\Source\third_party\dxsdk-9.0c-sum04\lib&quot;;&quot;..\..\..\Source\third_party\openmp-vc90&quot;;&quot;../../../source/third_party/python-2.7/libs&quot;"
 	/>
 </VisualStudioPropertySheet>

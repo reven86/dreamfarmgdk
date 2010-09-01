@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 2 - The First Spri
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 3 - GUI", "..\..\Samples\Tutorials\Tutorial 3 - GUI\tutorial 3 - gui.vcproj", "{6DB15BC4-C62C-42BF-8F42-B227A92B6F05}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 4 - Python Bindings", "..\..\Samples\Tutorials\Tutorial 4 - Python Bindings\Tutorial 4 - Python Bindings.vcproj", "{440DE951-C1AB-4964-A630-ECBFC2240833}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,6 +27,10 @@ Global
 		{6DB15BC4-C62C-42BF-8F42-B227A92B6F05}.Debug|Win32.Build.0 = Debug|Win32
 		{6DB15BC4-C62C-42BF-8F42-B227A92B6F05}.Release|Win32.ActiveCfg = Release|Win32
 		{6DB15BC4-C62C-42BF-8F42-B227A92B6F05}.Release|Win32.Build.0 = Release|Win32
+		{440DE951-C1AB-4964-A630-ECBFC2240833}.Debug|Win32.ActiveCfg = Debug|Win32
+		{440DE951-C1AB-4964-A630-ECBFC2240833}.Debug|Win32.Build.0 = Debug|Win32
+		{440DE951-C1AB-4964-A630-ECBFC2240833}.Release|Win32.ActiveCfg = Release|Win32
+		{440DE951-C1AB-4964-A630-ECBFC2240833}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

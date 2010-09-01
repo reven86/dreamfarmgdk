@@ -159,7 +159,7 @@ shader
  *	@}
  */
 
-class Shader : public ScriptResource, boost::noncopyable
+class Shader : public ScriptResource
 {
 	//
 	// Temporary loading data

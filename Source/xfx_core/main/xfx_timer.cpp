@@ -34,6 +34,23 @@ Timer::~Timer( )
 {
 }
 
+Timer::Timer( const Timer& t )
+{
+	*this = t;
+}
+
+Timer& Timer::operator = ( const Timer& t )
+{
+	mSpeed = t.mSpeed;
+	mIsPaused = t.mIsPaused;
+	m100MicroSeconds = t.m100MicroSeconds;
+	m100MSPF = t.m100MSPF;
+
+	mImpl.reset( new Timer_impl( *t.mImpl ) );
+
+	return *this;
+}
+
 void Timer::Pause( )
 {
 	if( !mIsPaused )

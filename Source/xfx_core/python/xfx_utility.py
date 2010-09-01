@@ -29,7 +29,7 @@ mb.variables( access_type_matcher_t( 'protected' ) ).exclude()
 mb.variables( access_type_matcher_t( 'private' ) ).exclude()
 mb.decls( lambda x: x.name.startswith( '_' ) ).exclude()
 
-mb.class_( lambda x: x.name.startswith( 'HWND' ) ).include( )
+#mb.class_( lambda x: x.name.startswith( 'HWND' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DTRANSFORMSTATETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DCUBEMAP_FACES' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DFORMAT' ) ).include( )
@@ -40,6 +40,7 @@ mb.class_( "ITexture" ).exclude( )
 mb.class_( "Texture" ).member_functions( "GetD3DTex" ).exclude( )
 mb.class_( "CubemapTexture" ).member_functions( "GetD3DTex" ).exclude( )
 mb.class_( "Renderer" ).member_functions( lambda x: x.name in ( 'pD3D', 'pD3DDevice' ) ).exclude( )
+mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools const &' ).exclude( )
 
 mb.classes( ).add_properties( exclude_accessors=True )
 
@@ -67,13 +68,18 @@ mb.member_functions( "ParseAt" ).exclude()
 #mb.free_function( "gError" ).include( )
 #mb.free_function( "gCError" ).include( )
 
+for c in mb.namespace( "xfx" ).classes( ):
+	#c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' > >( );' ) ), False )
+	c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
+	c.add_registration_code( ''.join( ( 'bp::implicitly_convertible< boost::shared_ptr< ', c.demangled, ' >, boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
+
 mb.class_( "DrawTools" ).member_functions( "PushDraw2DSprite" ).rename( "push_draw_2d_sprite" )
 mb.class_( "DrawTools" ).member_functions( "PushDraw2DText" ).rename( "push_draw_2d_text" )
 mb.class_( "DrawTools" ).member_functions( "PushDraw3DSprite" ).rename( "push_draw_3d_sprite" )
 mb.class_( "DrawTools" ).member_functions( "PushDraw3DText" ).rename( "push_draw_3d_text" )
 
-mb.member_functions( "Instance" ).call_policies = call_policies.return_internal_reference( )
-mb.free_function( "gGetApplication" ).call_policies = call_policies.return_internal_reference( )
+mb.member_functions( "Instance" ).call_policies = call_policies.return_value_policy( call_policies.reference_existing_object )
+mb.free_function( "gGetApplication" ).call_policies = call_policies.return_value_policy( call_policies.reference_existing_object )
 mb.class_( "BooksManager" ).member_function( "GetBook" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Shader" ).member_function( "GetTextureInfoOnStage" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Pack" ).member_function( "FindFile" ).call_policies = call_policies.return_internal_reference( )
@@ -82,17 +88,19 @@ mb.class_( "Pack" ).member_function( "GetLastFile" ).call_policies = call_polici
 mb.class_( "ParticleSystem" ).member_functions( "GetSubSystem" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "ParticleSystem" ).member_functions( "GetParticle" ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "BaseParticleSystem" ).member_function( "EmitterTransformation", return_type = '::xfx::Mat4 &' ).call_policies = call_policies.return_internal_reference( )
-mb.class_( "Quaternion" ).member_function( "FromAxisAngle" ).call_policies = call_policies.return_internal_reference( )
-mb.class_( "Mat3" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_internal_reference( )
-mb.class_( "Mat4" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_internal_reference( )
-mb.class_( "Euler" ).member_functions( lambda x: x.name in ( "FromMat4", "FromVec3", "FromQuaternion" ) ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Quaternion" ).member_function( "FromAxisAngle" ).call_policies = call_policies.return_self( )
+mb.class_( "Mat3" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_self( )
+mb.class_( "Mat4" ).member_function( "MakeIdentity" ).call_policies = call_policies.return_self( )
+mb.class_( "Euler" ).member_functions( lambda x: x.name in ( "FromMat4", "FromVec3", "FromQuaternion" ) ).call_policies = call_policies.return_self( )
 mb.class_( "Renderer" ).member_function( "GetFrameStatistics", return_type = '::xfx::Renderer::FrameStatistics &' ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools &' ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "MeshState" ).member_function( "GetShaderParams", return_type = '::xfx::ShaderParams &' ).call_policies = call_policies.return_internal_reference( )
-mb.member_functions( "Cache", arg_types = [] ).call_policies = call_policies.return_internal_reference( )
+mb.class_( "Application" ).member_function( "HWnd" ).call_policies = call_policies.return_value_policy( call_policies.return_opaque_pointer )
+mb.member_functions( "Cache", arg_types = [] ).call_policies = call_policies.return_value_policy( call_policies.reference_existing_object )
 
 #mb.class_( "FileIterator_t" ).opaque = True
 #mb.class_( "TextureInfo" ).opaque = True
+mb.class_( lambda x: x.name.startswith( 'HWND' ) ).opaque = True
 
 mb.class_( "FileSystem" ).member_function( "GetFileSize" ).add_transformation( ft.output( "len" ) )
 mb.class_( "Pack" ).member_function( "GetFileSize" ).add_transformation( ft.output( "len" ) )
