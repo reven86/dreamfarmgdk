@@ -22,14 +22,12 @@ mb = module_builder.module_builder_t( [ r"xfx_py_bindings.h", ]
 mb.BOOST_PYTHON_MAX_ARITY = 16
 
 mb.namespace( 'xfx' ).include( )
-#mb.namespace( 'boost' ).classes( 'noncopyable' ).include( )
 mb.calldefs( access_type_matcher_t( 'protected' ) ).exclude()
 mb.calldefs( access_type_matcher_t( 'private' ) ).exclude()
 mb.variables( access_type_matcher_t( 'protected' ) ).exclude()
 mb.variables( access_type_matcher_t( 'private' ) ).exclude()
 mb.decls( lambda x: x.name.startswith( '_' ) ).exclude()
 
-#mb.class_( lambda x: x.name.startswith( 'HWND' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DTRANSFORMSTATETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DCUBEMAP_FACES' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DFORMAT' ) ).include( )
@@ -53,9 +51,6 @@ for c in mb.variables( ):
 for c in mb.classes( ):
 	for p in c.properties:
 		p.set_name( camel_convert( p.name ) )
-		#c_same = c.member_functions( p.name, allow_empty = True )
-		#if c_same:
-		#	c_same.exclude( )
 
 mb.class_( "Caches" ).member_functions( "ClearCallbacks" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterCmd" ).exclude( )
@@ -69,7 +64,6 @@ mb.member_functions( "ParseAt" ).exclude()
 #mb.free_function( "gCError" ).include( )
 
 for c in mb.namespace( "xfx" ).classes( ):
-	#c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' > >( );' ) ), False )
 	c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
 	c.add_registration_code( ''.join( ( 'bp::implicitly_convertible< boost::shared_ptr< ', c.demangled, ' >, boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
 

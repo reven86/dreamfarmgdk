@@ -48,6 +48,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="0"
 				FavorSizeOrSpeed="1"
 				WholeProgramOptimization="false"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
@@ -57,7 +58,7 @@
 				RuntimeTypeInfo="false"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 				CompileAs="1"
 				ForcedIncludeFiles="windows.h"
 			/>
@@ -128,7 +129,7 @@
 				RuntimeTypeInfo="false"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 				CompileAs="1"
 				ForcedIncludeFiles="windows.h"
 			/>

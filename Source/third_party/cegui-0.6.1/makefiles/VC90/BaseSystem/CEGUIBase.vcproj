@@ -22,6 +22,7 @@
 			IntermediateDirectory="obj/Release"
 			ConfigurationType="4"
 			CharacterSet="2"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,6 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="0"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories="../../../include;../../../dependencies/include;../../../../freetype-2.3.7/include;../../../../pcre-7.7"
 				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUIBASE_EXPORTS;PCRE_STATIC;CEGUI_STATIC;TOLUA_STATIC"
@@ -49,7 +51,7 @@
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -114,7 +116,7 @@
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

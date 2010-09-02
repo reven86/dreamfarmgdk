@@ -44,6 +44,10 @@ namespace boost { namespace serialization {
 #endif
 
 
+#ifdef __GCCXML__
+#define HWND void *
+#endif
+
 
 #include "../utility/xfx_utility_include.h"
 #include "../main/xfx_main_include.h"

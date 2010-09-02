@@ -24,6 +24,7 @@
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -43,6 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="0"
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="..\..\..\include"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS"
@@ -128,7 +130,7 @@
 				ObjectFile=".\..\..\..\objs\release/"
 				ProgramDataBaseFileName=".\..\..\..\objs\release/"
 				WarningLevel="4"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
 			<Tool

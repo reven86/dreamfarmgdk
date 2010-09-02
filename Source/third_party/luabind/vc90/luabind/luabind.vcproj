@@ -39,6 +39,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="0"
 				FavorSizeOrSpeed="1"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\;..\..\..\boost_1_44_0\;&quot;..\..\..\lua-5.0.2\include&quot;"
@@ -47,6 +48,7 @@
 				RuntimeLibrary="2"
 				BufferSecurityCheck="false"
 				WarningLevel="3"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -110,6 +112,7 @@
 				RuntimeLibrary="3"
 				BufferSecurityCheck="false"
 				WarningLevel="3"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
