@@ -19,6 +19,6 @@
 	<Tool
 		Name="VCLinkerTool"
 		OutputFile="$(ProjectDir)\$(ConfigurationName)\$(ProjectName).exe"
-		AdditionalLibraryDirectories="..\..\..\GDK\Lib;&quot;..\..\..\Source\third_party\dxsdk-9.0c-sum04\lib&quot;;&quot;..\..\..\Source\third_party\openmp-vc90&quot;;&quot;../../../source/third_party/python-2.7/libs&quot;"
+		AdditionalLibraryDirectories="..\..\..\GDK\Lib;&quot;..\..\..\Source\third_party\dxsdk-9.0c-sum04\lib&quot;;&quot;..\..\..\Source\third_party\openmp-vc90&quot;"
 	/>
 </VisualStudioPropertySheet>

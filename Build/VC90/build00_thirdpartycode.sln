@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat_static", "..\..\Sourc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\Source\third_party\boost_1_44_0\build\VC90\boost.vcproj", "{0307DF48-2750-43C5-8439-6A5391F3998E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore", "..\..\Source\third_party\python-2.7\PCbuild\pythoncore.vcproj", "{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -85,6 +87,10 @@ Global
 		{0307DF48-2750-43C5-8439-6A5391F3998E}.Debug|Win32.Build.0 = Debug|Win32
 		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.ActiveCfg = Release|Win32
 		{0307DF48-2750-43C5-8439-6A5391F3998E}.Release|Win32.Build.0 = Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Debug|Win32.Build.0 = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Release|Win32.ActiveCfg = Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
