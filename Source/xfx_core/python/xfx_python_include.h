@@ -23,5 +23,4 @@
 //
 
 #pragma comment ( lib, "xfx_python" LIB_SUFFIX )
-#pragma comment ( lib, "python" LIB_3RD_SUFFIX )
 

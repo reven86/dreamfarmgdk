@@ -20,8 +20,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\..\GDK\Lib"
-			ConfigurationType="4"
+			OutputDirectory="..\..\..\..\GDK\DLL"
+			ConfigurationType="2"
 			InheritedPropertySheets=".\pyproject.vsprops;.\release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Zm200 "
 				AdditionalIncludeDirectories="..\Python;..\Modules\zlib"
-				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
 				RuntimeLibrary="2"
 			/>
 			<Tool
@@ -63,11 +63,16 @@
 				CommandLine="&quot;$(ProjectDir)make_buildinfo.exe&quot; Release"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\python_release.lib"
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\python27.dll"
+				ProgramDatabaseFile="$(IntDir)$(TargetName).pdb"
+				ImportLibrary="$(TargetDir)..\Lib\python27.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -79,13 +84,16 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\..\GDK\Lib"
-			ConfigurationType="4"
+			OutputDirectory="..\..\..\..\GDK\DLL"
+			ConfigurationType="2"
 			InheritedPropertySheets=".\pyproject.vsprops;.\debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -113,7 +121,7 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\Python;..\Modules\zlib"
-				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
 				RuntimeLibrary="3"
 			/>
 			<Tool
@@ -131,11 +139,16 @@
 				CommandLine="&quot;$(ProjectDir)make_buildinfo.exe&quot; Debug"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\python_debug.lib"
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\python27_d.dll"
+				ProgramDatabaseFile="$(IntDir)$(TargetName).pdb"
+				ImportLibrary="$(TargetDir)..\Lib\python27_d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -147,8 +160,10 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>

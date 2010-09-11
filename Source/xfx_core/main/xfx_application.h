@@ -49,8 +49,6 @@ protected:
 	//! Application timer.
 	Timer						mTimer;
 
-protected:
-
 public:
 	Application														( );
 	virtual ~Application											( ) { };
@@ -98,7 +96,7 @@ public:
 	const String&					CommandLine						( ) const { return mCommandLine; };
 	const WString&					WndClass						( ) const { return mWndClass; };
 
-	const Timer&					GetTimer						( ) const { return mTimer; };
+	Timer&							GetTimer						( ) { return mTimer; };
 
 private:
 	static LRESULT CALLBACK			sWndProc						( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );

@@ -23,8 +23,8 @@ mb.BOOST_PYTHON_MAX_ARITY = 16
 
 mb.namespace( 'xfx' ).include( )
 mb.calldefs( access_type_matcher_t( 'protected' ) ).exclude()
-mb.calldefs( access_type_matcher_t( 'private' ) ).exclude()
 mb.variables( access_type_matcher_t( 'protected' ) ).exclude()
+mb.calldefs( access_type_matcher_t( 'private' ) ).exclude()
 mb.variables( access_type_matcher_t( 'private' ) ).exclude()
 mb.decls( lambda x: x.name.startswith( '_' ) ).exclude()
 
@@ -38,7 +38,11 @@ mb.class_( "ITexture" ).exclude( )
 mb.class_( "Texture" ).member_functions( "GetD3DTex" ).exclude( )
 mb.class_( "CubemapTexture" ).member_functions( "GetD3DTex" ).exclude( )
 mb.class_( "Renderer" ).member_functions( lambda x: x.name in ( 'pD3D', 'pD3DDevice' ) ).exclude( )
-mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools const &' ).exclude( )
+mb.class_( "Renderer" ).member_functions( "GetDrawTools" ).exclude( )
+mb.class_( "Renderer" ).add_property( "draw_tools", fget = mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools &' ) )
+mb.class_( "Application" ).member_function( "GetTimer" ).exclude( )
+mb.class_( "Application" ).add_property( "timer", fget = mb.class_( "Application" ).member_function( "GetTimer" ) )
+mb.member_functions( "Instance" ).exclude( )
 
 mb.classes( ).add_properties( exclude_accessors=True )
 
@@ -90,7 +94,16 @@ mb.class_( "Renderer" ).member_function( "GetFrameStatistics", return_type = '::
 mb.class_( "Renderer" ).member_function( "GetDrawTools", return_type = '::xfx::DrawTools &' ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "MeshState" ).member_function( "GetShaderParams", return_type = '::xfx::ShaderParams &' ).call_policies = call_policies.return_internal_reference( )
 mb.class_( "Application" ).member_function( "HWnd" ).call_policies = call_policies.return_value_policy( call_policies.return_opaque_pointer )
+mb.class_( "Application" ).member_function( "GetTimer" ).call_policies = call_policies.return_internal_reference( )
 mb.member_functions( "Cache", arg_types = [] ).call_policies = call_policies.return_value_policy( call_policies.reference_existing_object )
+
+for c in mb.classes( lambda x: x.name.startswith( "Singleton" ) ):
+	c.add_static_property( 'instance', fget = c.member_function( "Instance" ) )
+
+for c in mb.classes( ):
+	for f in c.member_functions( "Cache", arg_types = [], allow_empty = True ):
+		f.exclude( )
+		c.add_static_property( 'cache', fget = f )
 
 #mb.class_( "FileIterator_t" ).opaque = True
 #mb.class_( "TextureInfo" ).opaque = True

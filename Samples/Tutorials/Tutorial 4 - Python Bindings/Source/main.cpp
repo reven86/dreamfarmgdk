@@ -37,8 +37,12 @@ int APIENTRY WinMain(HINSTANCE /*hInstance*/,
                      LPSTR     lpCmdLine,
                      int       /*nCmdShow*/)
 {
+	// Setting PYTHONPATH to point to PyDev installation
+	// Note: modify this path to your installation of PyDev
+	putenv( "PYTHONPATH=C:\\eclipse\\plugins\\org.python.pydev.debug_1.5.7.2010042100\\pysrc;.\\Data\\python_libs.zip;.\\Data\\DLLs" );
+
 	// Disable importing of 'site' module during initialization (we don't have that module)
-	Py_NoSiteFlag = 1;
+	//Py_NoSiteFlag = 1;
 	Py_Initialize( );
 
 	// Explicitly initialize Python bindings to XFX
@@ -50,6 +54,7 @@ int APIENTRY WinMain(HINSTANCE /*hInstance*/,
 
 	// Execute script
 	bp::handle_exception( boost::bind( &bp::exec_file, "Data\\app.py", boost::ref( gGlobals ), boost::ref( gGlobals ) ) );
+	//bp::handle_exception( boost::bind( &bp::exec_file, "C:\\Users\\RevEn\\workspace\\PyNN\\app.py", boost::ref( gGlobals ), boost::ref( gGlobals ) ) );
 
 	// Print errors, if any
 	if (PyErr_Occurred() != NULL)
