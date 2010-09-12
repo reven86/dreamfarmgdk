@@ -158,7 +158,7 @@ public:
 
 	/*!	\brief Set whether or not use automatically key mapping (commands will be directly sent to command processor).
 	 */
-	void						SetUseKeyMapping		( bool use ) { mUseKeyMapping = use; };
+	void						SetUseKeyMapping		( const bool& use ) { mUseKeyMapping = use; };
 
 	/*!	\brief Set whether or not use automatically key mapping (commands will be directly sent to command processor).
 	 *

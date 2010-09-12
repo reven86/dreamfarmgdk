@@ -144,13 +144,13 @@ bool Engine::IsConsoleActive( ) const
 	return false;
 }
 
-void Engine::Log( const Log::EMessageType& type, const String& msg )
+void Engine::Log( const Log::EMessageType& type, const String& msg, const String& prefix )
 {
 	if( type > g_log_level->AsInt( ) )
 		return;
 
 	if( mEngineLogPtr )
-		mEngineLogPtr->Print( type, msg );
+		mEngineLogPtr->Print( type, msg, prefix );
 
 	// duplicate in console
 	PrintToConsole( type, fromMBCS( msg ) );

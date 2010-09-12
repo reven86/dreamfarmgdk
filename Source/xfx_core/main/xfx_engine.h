@@ -87,8 +87,9 @@ public:
 	 *
 	 *	\param[in]	type	Message type.
 	 *	\param[in]	msg		Message.
+	 *	\param[in]	prefix	Prefix to each message line.
 	 */
-	void									Log							( const Log::EMessageType& type, const String& msg );
+	void									Log							( const Log::EMessageType& type, const String& msg, const String& prefix = "" );
 
 	/*! \brief Prints message to console.
 	 *

@@ -51,10 +51,13 @@ public:
 
 	/*!	\brief Print message to log file.
 	 *
+	 *	Message is split by '\n' characters.
+	 *
 	 *	\param[in]	type	Message type.
 	 *	\param[in]	msg		Message.
+	 *	\param[in]	prefix	Prefix to each message line.
 	 */
-	void							Print						( const EMessageType& type, const String& msg );
+	void							Print						( const EMessageType& type, const String& msg, const String& prefix = "" );
 };
 
 

@@ -868,6 +868,14 @@
 				RelativePath="..\..\generated\xfx_free_functions.pypp.hpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\generated\xfx_global_variables.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\xfx_global_variables.pypp.hpp"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\xfx.cpp"

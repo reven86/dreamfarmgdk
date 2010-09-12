@@ -49,7 +49,7 @@ Log::~Log( )
 	}
 }
 
-void Log::Print( const EMessageType& type, const String& msg )
+void Log::Print( const EMessageType& type, const String& msg, const String& pr )
 {
 	PROFILE( __FUNCTION__, "General" )
 
@@ -72,21 +72,37 @@ void Log::Print( const EMessageType& type, const String& msg )
 			prefix = "            ";
 	}
 
-	String all_msg( prefix + msg + '\n' );
+	//Write time information
+	struct __timeb64 timebuffer;
+	_ftime64( &timebuffer );
+
+	time_t seconds;
+	time( &seconds );
+	tm * t = localtime( &seconds );
+
+	char time_string[ 128 ];
+	_snprintf( time_string, 128, "[%02d/%02d/%02d %02d:%02d:%02d.%03d]  ", t->tm_mon + 1, t->tm_mday, t->tm_year % 100, t->tm_hour, t->tm_min, t->tm_sec, timebuffer.millitm );
+
+	prefix = String( time_string ) + prefix + pr;
 
 	FILE * file = fopen( mLogFile.c_str (), "a+t" );
 	
 	if( file )
 	{
-		//Write time information
-		struct __timeb64 timebuffer;
-		_ftime64( &timebuffer );
+		std::vector< String > lines;
+		boost::split( lines, msg, boost::is_any_of( "\n" ) );
 
-		time_t seconds;
-		time( &seconds );
-		tm * t = localtime( &seconds );
-
-		fprintf( file, "[%02d/%02d/%02d %02d:%02d:%02d.%03d]  %s", t->tm_mon + 1, t->tm_mday, t->tm_year % 100, t->tm_hour, t->tm_min, t->tm_sec, timebuffer.millitm, all_msg.c_str( ) );
+		if( lines.empty( ) )
+		{
+			fprintf( file, "%s\n", prefix.c_str( ) );
+		}
+		else
+		{
+			BOOST_FOREACH( const String& l, lines )
+			{
+				fprintf( file, "%s%s\n", prefix.c_str( ), l.c_str( ) );
+			}
+		}
 
 		fclose( file );
 	}

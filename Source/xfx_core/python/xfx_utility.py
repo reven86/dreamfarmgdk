@@ -27,6 +27,7 @@ mb.variables( access_type_matcher_t( 'protected' ) ).exclude()
 mb.calldefs( access_type_matcher_t( 'private' ) ).exclude()
 mb.variables( access_type_matcher_t( 'private' ) ).exclude()
 mb.decls( lambda x: x.name.startswith( '_' ) ).exclude()
+mb.variables( type = '::boost::shared_ptr<xfx::Var>' ).include()
 
 mb.decls( lambda x: x.name.startswith( '_D3DTRANSFORMSTATETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DCUBEMAP_FACES' ) ).include( )
