@@ -85,4 +85,4 @@
 # Configure with an explicit installation prefix.
 # using qt : /usr/opt/qt ;
 
-using python : 2.7 ;
+using python : 2.7 : : ..\\python-2.7\\include : ..\\..\\..\\GDK\\Lib ;
