@@ -121,8 +121,9 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\Python;..\Modules\zlib"
-				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32;_CRTDBG_MAP_ALLOC"
 				RuntimeLibrary="3"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

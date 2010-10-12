@@ -117,6 +117,11 @@ namespace boost { namespace serialization {
 #include "main\xfx_application.h"
 #include "main\xfx_cmd.h"
 
+#ifdef _DEBUG_NEW
+#pragma push_macro("new")
+#undef new
+#endif
+
 // D3D
 #if( __XFX_DIRECTX_VER__ < 9 )
 #include <d3d8.h>
@@ -124,4 +129,8 @@ namespace boost { namespace serialization {
 #else
 #include <d3d9.h>
 #include <d3dx9.h>
+#endif
+
+#ifdef _DEBUG_NEW
+#pragma pop_macro("new")
 #endif

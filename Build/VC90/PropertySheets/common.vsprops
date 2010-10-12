@@ -12,6 +12,7 @@
 		UsePrecompiledHeader="2"
 		PrecompiledHeaderThrough="xfx.h"
 		WarningLevel="4"
+		ForcedIncludeFiles=""
 	/>
 	<Tool
 		Name="VCLinkerTool"

@@ -121,7 +121,7 @@
 				Optimization="3"
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="..\..\..\include"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS;"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="true"
@@ -132,6 +132,7 @@
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

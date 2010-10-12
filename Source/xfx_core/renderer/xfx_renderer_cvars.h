@@ -41,6 +41,19 @@ DECLARE_VAR( r_device_type );
 DECLARE_VAR( r_device_depth_stencil );
 //! Preffered device vertex processing mode.
 DECLARE_VAR( r_device_vp );
+/*! \brief CSAA quality
+	Can be one of the following:
+	- 2x (nonmaskable)
+	- 4x (nonmaskable)
+	- 8x
+	- 8xQ
+	- 16x
+	- 16xQ
+
+	If the device can't be created with current level of CSAA,
+	the first valid of lowest one is used.
+*/
+DECLARE_VAR( r_device_csaa );
 //! Set background color.
 DECLARE_VAR( r_background );
 //! Set wireframe mode.

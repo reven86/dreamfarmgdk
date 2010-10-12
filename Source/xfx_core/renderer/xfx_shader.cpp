@@ -451,19 +451,10 @@ void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr
 #else
 			eff_ptr->DXEffectPtr( )->SetTexture( ( *it ).get< 0 >( ), ( *it ).get< 2 >( ).texture->GetD3DTex( ) );
 #endif
-		}
 
-		if( mFlags & ESF_USE_TEXTURE_TRANSFORM )
-		{
-			int stage = ( *it ).get< 1 >( );
-			if( stage != -1 )
-			{
-				// Apply texture matrix
-				Renderer::Instance( ).pD3DDevice( )->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->GetTextureMatrix( ) ) );
-				Renderer::Instance( ).pD3DDevice( )->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &( *it ).get< 2 >( ).texture->GetTransformation( ) ) );
-
+			if( ( *it ).get< 1 >( ) >= 0 )
+				xfx::Renderer::Instance( ).ApplyTexture( ( *it ).get< 2 >( ).texture, ( *it ).get< 1 >( ), ( mFlags & ESF_USE_TEXTURE_TRANSFORM ) != 0 );
 #pragma message ( "FIXME: apply animation texture matrix" )
-			}
 		}
 	}
 }
@@ -548,12 +539,27 @@ HRESULT Shader::AfterParsing ()
 	return S_OK;
 }
 
+template< class _Texture >
+boost::shared_ptr< const ITexture > sParseTextureMap( String::size_type& pos, const String& str, String& stage_name, const String& fname )
+{
+	Shader::ParseVariable( stage_name, pos, str );
+
+	// get shader folder and temporary add it as search path
+	String shader_folder = fname.substr( 0, fname.find_last_of( "\\/" ) + 1 );
+	bool revert = FileSystem::Instance( ).AddSearchPath( shader_folder, FileSystem::ESPP_LOW );
+
+	const boost::shared_ptr< const ITexture >& tex = _Texture::Cache( ).Register( next_token( str, pos ) );
+
+	if( revert )
+		FileSystem::Instance( ).RemoveSearchPath( shader_folder );
+
+	return tex;
+}
+
 HRESULT Shader::ParseMap( String::size_type& pos, const String& str )
 {
 	String stage_name;
-	ParseVariable( stage_name, pos, str );
-
-	const boost::shared_ptr< const ITexture >& tex = Texture::Cache( ).Register( next_token( str, pos ) );
+	boost::shared_ptr< const ITexture > tex = sParseTextureMap< Texture >( pos, str, stage_name, PhysicalPath( ) );
 
 	if( tex )
 	{
@@ -575,9 +581,7 @@ HRESULT Shader::ParseMap( String::size_type& pos, const String& str )
 HRESULT Shader::ParseCubeMap( String::size_type& pos, const String& str )
 {
 	String stage_name;
-	ParseVariable( stage_name, pos, str );
-
-	const boost::shared_ptr< const ITexture >& tex = CubemapTexture::Cache( ).Register( next_token( str, pos ) );
+	boost::shared_ptr< const ITexture > tex = sParseTextureMap< CubemapTexture >( pos, str, stage_name, PhysicalPath( ) );
 
 	if( tex )
 	{
@@ -599,9 +603,7 @@ HRESULT Shader::ParseCubeMap( String::size_type& pos, const String& str )
 HRESULT Shader::ParseAnimMap( String::size_type& pos, const String& str )
 {
 	String stage_name;
-	ParseVariable( stage_name, pos, str );
-
-	const boost::shared_ptr< const ITexture >& tex = Texture::Cache( ).Register( next_token( str, pos ) );
+	boost::shared_ptr< const ITexture > tex = sParseTextureMap< Texture >( pos, str, stage_name, PhysicalPath( ) );
 
 	if( tex )
 	{

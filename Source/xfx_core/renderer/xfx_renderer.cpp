@@ -645,7 +645,9 @@ Renderer::Renderer() :
 	mCurrentFVF( D3DFVF_XYZ ),
 	mClearFlags( D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ),
 	mSavedWindowStyle( 0 ),
-	mSavedWindowExStyle( 0 )
+	mSavedWindowExStyle( 0 ),
+	mDeviceVendor( EKV_UNKNOWN ),
+	mAlphaToCoverageSupported( false )
 {
 }
 
@@ -729,9 +731,35 @@ HRESULT Renderer::CreateDevice( HWND hwnd )
 
 	gMess( "" );
 	gMess( "Adapter information:" );
+	gMess( "...vendorID: 0x%X", adident.VendorId );
+	gMess( "...deviceID: 0x%X", adident.DeviceId );
 	gMess( "...driver: %s", adident.Driver );
 	gMess( "...description: %s", adident.Description );
 	gMess( "...driver version: %d.%d.%d.%d", HIWORD( adident.DriverVersion.HighPart ), LOWORD( adident.DriverVersion.HighPart ), HIWORD( adident.DriverVersion.LowPart ), LOWORD( adident.DriverVersion.LowPart ) );
+
+	switch( adident.VendorId )
+	{
+	case 0x1002:	// ATI
+		mDeviceVendor = EKV_ATI;
+		mAlphaToCoverageSupported = true;	// assume alpha to coverage is always available on ATI
+		break;
+	case 0x10DE:	// NVidia
+		mDeviceVendor = EKV_NVIDIA;
+		if( pD3D( )->CheckDeviceFormat(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
+				D3DFMT_X8R8G8B8, 0,D3DRTYPE_SURFACE,
+				(D3DFORMAT)MAKEFOURCC('A', 'T', 'O', 'C')) == S_OK)
+		{
+			gMess( "...transparency multisampling supported" );
+			mAlphaToCoverageSupported = true;
+		}
+		break;
+	case 0x8086:	// Intel
+		mDeviceVendor = EKV_INTEL;
+		break;
+
+	default:
+		mDeviceVendor = EKV_UNKNOWN;
+	}
 
 	//Getting memory status
 	MEMORYSTATUS ms;
@@ -785,8 +813,41 @@ void Renderer::Shutdown( )
 	}
 
 	mpD3D.reset( );
+	mDeviceVendor = EKV_UNKNOWN;
+	mAlphaToCoverageSupported = false;
 
 	gMess( "D3D device has been released." );
+}
+
+void Renderer::TryEnableAlphaToCoverage( )
+{
+	if( !mAlphaToCoverageSupported )
+		return;
+
+	switch( mDeviceVendor )
+	{
+	case EKV_ATI:
+		pD3DDevice( )->SetRenderState(D3DRS_POINTSIZE, MAKEFOURCC('A','2','M','1'));
+		break;
+
+	case EKV_NVIDIA:
+		pD3DDevice( )->SetRenderState(D3DRS_ADAPTIVETESS_Y,(D3DFORMAT)MAKEFOURCC('A', 'T', 'O', 'C'));
+		break;
+	}
+}
+
+void Renderer::DisableAlphaToCoverage( )
+{
+	switch( mDeviceVendor )
+	{
+	case EKV_ATI:
+		pD3DDevice( )->SetRenderState(D3DRS_POINTSIZE, 1);
+		break;
+
+	case EKV_NVIDIA:
+		pD3DDevice( )->SetRenderState(D3DRS_ADAPTIVETESS_Y,D3DFMT_UNKNOWN);
+		break;
+	}
 }
 
 void Renderer::BeginFrame( )
@@ -818,7 +879,7 @@ void Renderer::Clear( const DWORD& flags )
 	mpD3DDevice->Clear( 0, NULL, flags, r_background->AsInt( ), 1.0f, 0 );
 }
 
-void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, unsigned stage )
+void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, unsigned stage, bool apply_transforms )
 {
 	_ASSERTE (stage < 8);
 
@@ -832,7 +893,7 @@ void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, uns
 		mpD3DDevice->SetTexture( stage, ( tex_ptr ) ? tex_ptr->GetD3DTex( ) : NULL );
 	}
 
-	if( tex_ptr )
+	if( tex_ptr && apply_transforms )
 	{
 		mpD3DDevice->SetTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->GetTextureMatrix( ) ) );
 		mpD3DDevice->MultiplyTransform( D3DTRANSFORMSTATETYPE( D3DTS_TEXTURE0 + stage ), ( D3DMATRIX * )( &tex_ptr->GetTransformation( ) ) );
@@ -1058,6 +1119,25 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 		return hr;
 	}
 
+	// check desired CSAA quality support
+	boost::array< boost::tuple< D3DMULTISAMPLE_TYPE, unsigned, const char * >, 7 > ms_types;
+	ms_types[ 0 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONE, 0, "" );
+	ms_types[ 1 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 1, "2x" );
+	ms_types[ 2 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 3, "4x" );
+	ms_types[ 3 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 2, "8x" );
+	ms_types[ 4 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 0, "8xQ" );
+	ms_types[ 5 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 4, "16x" );
+	ms_types[ 6 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 2, "16xQ" );
+
+	unsigned desired_csaa_ind = 0;
+	for( unsigned i = 1; i < ms_types.size( ); i++ )
+		if( r_device_csaa->Value( ) == ms_types[ i ].get< 2 >( ) )
+		{
+			desired_csaa_ind = i;
+			break;
+		}
+	unsigned old_desired_csaa_ind = desired_csaa_ind;
+
 	boost::array< std::pair< D3DDEVTYPE, const char * >, 3 > devicetypes;
 	devicetypes[ 1 ] = std::pair< D3DDEVTYPE, const char * >( D3DDEVTYPE_HAL, "hal" );
 	devicetypes[ 2 ] = std::pair< D3DDEVTYPE, const char * >( D3DDEVTYPE_REF, "ref" );
@@ -1162,6 +1242,53 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 		mD3DPP.PresentationInterval		= (mD3DCaps.PresentationIntervals & D3DPRESENT_INTERVAL_IMMEDIATE) ? D3DPRESENT_INTERVAL_IMMEDIATE : D3DPRESENT_INTERVAL_ONE;
 #endif
 
+		desired_csaa_ind = old_desired_csaa_ind;
+		if( desired_csaa_ind > 0 )
+		{
+			while( desired_csaa_ind > 0 )
+			{
+				DWORD color_ms_quality;
+				DWORD depth_ms_quality;
+				if( SUCCEEDED( mpD3D->CheckDeviceMultiSampleType( 
+					D3DADAPTER_DEFAULT, ( *devit ).first,
+					mD3DPP.BackBufferFormat, FALSE,
+					ms_types[ desired_csaa_ind ].get< 0 >( ),
+					&color_ms_quality ) ) &&
+					SUCCEEDED( mpD3D->CheckDeviceMultiSampleType( 
+					D3DADAPTER_DEFAULT, ( *devit ).first,
+					( *dsfmt ).first, FALSE,
+					ms_types[ desired_csaa_ind ].get< 0 >( ),
+					&depth_ms_quality ) ) &&
+					depth_ms_quality == color_ms_quality &&
+					ms_types[ desired_csaa_ind ].get< 1 >( ) < color_ms_quality
+					)
+				{
+					gMess( "...CSAA value %s supported", r_device_csaa->Value( ).c_str( ) );
+					mD3DPP.MultiSampleType = ms_types[ desired_csaa_ind ].get< 0 >( );
+					mD3DPP.MultiSampleQuality = ms_types[ desired_csaa_ind ].get< 1 >( );
+					break;
+				}
+				else
+				{
+					gMess( "...CSAA value %s is not supported. trying lower one...", r_device_csaa->Value( ).c_str( ) );
+					if( desired_csaa_ind > 0 )
+					{
+						desired_csaa_ind--;
+						r_device_csaa->Change( ms_types[ desired_csaa_ind ].get< 2 >( ) );
+					}
+					else
+					{
+						mD3DPP.MultiSampleType = ms_types[ 0 ].get< 0 >( );
+						mD3DPP.MultiSampleQuality = ms_types[ 0 ].get< 1 >( );
+					}
+				}
+			}
+		}
+		else
+		{
+			gMess( "...multisample type is not set" );
+		}
+
 		for( boost::array< std::pair< DWORD, const char * >, 4 >::const_iterator vpit = vptypes.begin( ); vpit != vptypes.end( ); vpit++ )
 		{
 			if( r_device_vp->Value( ).empty( ) && vpit == vptypes.begin( ) )
@@ -1172,8 +1299,8 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 				D3DADAPTER_DEFAULT,
 				( *devit ).first,
 				hwnd,
-				//( *vpit ).first,
-				( *vpit ).first | D3DCREATE_MULTITHREADED,		// hack for stability
+				( *vpit ).first,
+				//( *vpit ).first | D3DCREATE_MULTITHREADED,		// hack for stability
 				&mD3DPP,
 				&dev ) ) )
 			{

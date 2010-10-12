@@ -110,13 +110,14 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../../include;../../../dependencies/include;../../../../freetype-2.3.7/include;../../../../pcre-7.7"
-				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUIBASE_EXPORTS;PCRE_STATIC;CEGUI_STATIC;TOLUA_STATIC"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUIBASE_EXPORTS;PCRE_STATIC;CEGUI_STATIC;TOLUA_STATIC;"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

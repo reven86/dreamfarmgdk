@@ -24,11 +24,13 @@ HRESULT Resource::LoadFile( const String& file )
 	PROFILE( __FUNCTION__, "General" );
 
 	mFilename = file;
+	mPhysicalPath.clear( );
 	gMess( "Loading %s from file \"%s\"...", mName.c_str( ), file.c_str( ) );
 
 	unsigned long filesize;
 	HRESULT hr;
-	if( FAILED( hr = FileSystem::Instance( ).GetFileSize( file, filesize ) ) )
+	if( FAILED( hr = FileSystem::Instance( ).FindFile( file, NULL, &mPhysicalPath ) ) ||
+		FAILED( hr = FileSystem::Instance( ).GetFileSize( file, filesize ) ) )
 	{
 		gError( "Can't open file \"%s\"", file.c_str( ) );
 		return hr;
@@ -66,9 +68,13 @@ class FileSystem::FileSystem_impl
 
 	class FileObjectProxyBase
 	{
+		String mPhysicalPath;
+
 	public:
-		FileObjectProxyBase											( ) { };
+		FileObjectProxyBase											( const String& phys_path ) : mPhysicalPath( phys_path ) { };
 		virtual ~FileObjectProxyBase								( ) { };
+
+		const String& PhysicalPath									( ) const { return mPhysicalPath; };
 
 		virtual boost::shared_ptr< Pack > GetPack					( ) const { return boost::shared_ptr< Pack >( ); };
 		virtual HRESULT					ReadFile					( void * buf ) const = 0;
@@ -81,7 +87,8 @@ class FileSystem::FileSystem_impl
 		boost::shared_ptr< FILE >		mFilePtr;
 
 	public:
-		DiskFileObjectProxy											( FILE * f ) : mFilePtr( f, boost::bind( &fclose, _1 ) ) { };
+		DiskFileObjectProxy											( FILE * f, const String& pp )
+			: FileObjectProxyBase( pp ), mFilePtr( f, boost::bind( &fclose, _1 ) ) { };
 		virtual ~DiskFileObjectProxy								( ) { };
 
 		virtual HRESULT					ReadFile					( void * buf ) const
@@ -118,7 +125,8 @@ class FileSystem::FileSystem_impl
 		Pack::FileIterator				mFileIterator;
 
 	public:
-		PackFileObjectProxy											( const boost::shared_ptr< Pack >& p, const Pack::FileIterator& f ) : mPackPtr( p ), mFileIterator( f ) { _ASSERTE( mPackPtr ); };
+		PackFileObjectProxy											( const boost::shared_ptr< Pack >& p, const Pack::FileIterator& f, const String& pp )
+			: FileObjectProxyBase( pp ), mPackPtr( p ), mFileIterator( f ) { _ASSERTE( mPackPtr ); };
 		virtual ~PackFileObjectProxy								( ) { };
 
 		virtual boost::shared_ptr< Pack > GetPack					( ) const { return mPackPtr; };
@@ -147,14 +155,14 @@ public:
 
 	~FileSystem_impl												( ) { };
 
-	void								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
+	bool								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
 	void								RemoveSearchPath			( const String& path );
 	void								RemoveAllSearchPaths		( );
 
 	void								AddPack						( const boost::shared_ptr< class Pack >& pack );
 	void								RemoveAllPacks				( );
 
-	HRESULT								FindFile					( const String& file, boost::shared_ptr< class Pack > * pack ) const;
+	HRESULT								FindFile					( const String& file, boost::shared_ptr< class Pack > * pack, String * phys_path ) const;
 	HRESULT								ReadFile					( const String& file, void * buf ) const;
 	HRESULT								GetFileSize					( const String& file, unsigned long& len ) const;
 	HRESULT								WriteFile					( const String& file, const void * buf, unsigned long len ) const;
@@ -170,8 +178,11 @@ private:
 // File system implementation details
 //
 
-void FileSystem::FileSystem_impl::AddSearchPath( const String& path, const ESearchPathPriority& priority )
+bool FileSystem::FileSystem_impl::AddSearchPath( const String& path, const ESearchPathPriority& priority )
 {
+	if( std::find( mSearchPaths.begin( ), mSearchPaths.end( ), path ) != mSearchPaths.end( ) )
+		return false;
+
 	if( priority == ESPP_HIGH )
 	{
 		mSearchPaths.push_front( path );
@@ -182,6 +193,8 @@ void FileSystem::FileSystem_impl::AddSearchPath( const String& path, const ESear
 		mSearchPaths.push_back( path );
 		gMess( "Low priority search path has been added: %s", path.c_str( ) );
 	}
+
+	return true;
 }
 
 void FileSystem::FileSystem_impl::RemoveSearchPath( const String& path )
@@ -248,10 +261,12 @@ boost::shared_ptr< FileSystem::FileSystem_impl::FileObjectProxyBase > FileSystem
 
 		if( f )
 		{
-			res.reset( new DiskFileObjectProxy( f ) );
+			res.reset( new DiskFileObjectProxy( f, new_file_name ) );
 			break;
 		}
 	}
+
+	String path_in_pack;
 
 	// if file was not found on disk, look for it in packs
 	if( sp_it == mSearchPaths.end( ) )
@@ -273,18 +288,19 @@ boost::shared_ptr< FileSystem::FileSystem_impl::FileObjectProxyBase > FileSystem
 				{
 					found_pack = *p_it;
 					pack_file_it = f_it;
+					path_in_pack = new_file_name;
 					break;
 				}
 			}
 		}
 
 	if( !res && found_pack )
-		res.reset( new PackFileObjectProxy( found_pack, pack_file_it ) );
+		res.reset( new PackFileObjectProxy( found_pack, pack_file_it, path_in_pack ) );
 
 	return res;
 }
 
-HRESULT FileSystem::FileSystem_impl::FindFile( const String& file, boost::shared_ptr< class Pack > * pack ) const
+HRESULT FileSystem::FileSystem_impl::FindFile( const String& file, boost::shared_ptr< class Pack > * pack, String * phys_path ) const
 {
 	boost::shared_ptr< FileObjectProxyBase > fileobj = GetFileObject( file, EOM_READ );
 
@@ -292,6 +308,9 @@ HRESULT FileSystem::FileSystem_impl::FindFile( const String& file, boost::shared
 	{
 		if( pack )
 			*pack = fileobj->GetPack( );
+
+		if( phys_path )
+			*phys_path = fileobj->PhysicalPath( );
 
 		return S_OK;
 	}
@@ -350,9 +369,9 @@ FileSystem::~FileSystem( )
 {
 }
 
-void FileSystem::AddSearchPath( const String& path, const ESearchPathPriority& priority )
+bool FileSystem::AddSearchPath( const String& path, const ESearchPathPriority& priority )
 {
-	mImpl->AddSearchPath( path, priority );
+	return mImpl->AddSearchPath( path, priority );
 }
 
 void FileSystem::RemoveSearchPath( const String& path )
@@ -375,9 +394,9 @@ void FileSystem::RemoveAllPacks( )
 	mImpl->RemoveAllPacks( );
 }
 
-HRESULT FileSystem::FindFile( const String& file, boost::shared_ptr< class Pack > * pack ) const
+HRESULT FileSystem::FindFile( const String& file, boost::shared_ptr< class Pack > * pack, String * phys_path ) const
 {
-	return mImpl->FindFile( file, pack );
+	return mImpl->FindFile( file, pack, phys_path );
 }
 
 HRESULT FileSystem::ReadFile (const String& file, void * buf) const

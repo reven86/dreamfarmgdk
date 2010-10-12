@@ -107,12 +107,13 @@
 				FavorSizeOrSpeed="1"
 				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories="..\..\;..\..\..\boost_1_44_0\;&quot;..\..\..\lua-5.0.2\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_SCL_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_SCL_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC"
 				ExceptionHandling="1"
 				RuntimeLibrary="3"
 				BufferSecurityCheck="false"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

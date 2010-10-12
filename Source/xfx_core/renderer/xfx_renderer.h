@@ -222,6 +222,17 @@ public:
 		void		clear( )	{ ZeroMemory( this, sizeof( *this ) ); };
 	};
 
+	//! Known vendors enumeration.
+	enum EKnownVendors
+	{
+		EKV_UNKNOWN,
+		EKV_ATI,
+		EKV_NVIDIA,
+		EKV_INTEL,
+
+		EKV_TOTAL
+	};
+
 private:
 
 #if( __XFX_DIRECTX_VER__ < 9 )
@@ -233,6 +244,10 @@ private:
 	boost::shared_ptr< IDirect3DDevice9 >	mpD3DDevice;
 	D3DCAPS9								mD3DCaps;
 #endif
+
+	//! Texture multisampling support flag (alpha-to-coverage)
+	EKnownVendors					mDeviceVendor;
+	bool							mAlphaToCoverageSupported;
 
 	D3DPRESENT_PARAMETERS			mD3DPP;
 	DWORD							mClearFlags;
@@ -266,7 +281,7 @@ private:
 #ifdef __XFX_ENABLE_MULTITHREADING__
 	/*! \brief Device mutex. 
 	 *
-	 *	Applications must this mutex in any device operation in multithreading environment.
+	 *	Applications must use this mutex in any device operation in multithreading environment.
 	 *	Recursive mutex is used to allow multiple locks by one thread.
 	 */
 	boost::recursive_try_mutex				mDeviceMutex;
@@ -347,7 +362,7 @@ public:
 	void								Clear						( const DWORD& flags );
 
 	//! Set clear flags for automatic clear.
-	void								SetClearFlags				( DWORD fl ) { mClearFlags = fl; };
+	void								SetClearFlags				( const DWORD& fl ) { mClearFlags = fl; };
 
 	//! Get clear flags for automatic clear.
 	const DWORD&						ClearFlags					( ) const { return mClearFlags; };
@@ -401,6 +416,15 @@ public:
 	//! Set FVF.
 	void								SetFVF						( const int& fvf );
 
+	//! Is alpha-to-coverage supported?
+	bool								IsAlphaToCoverageSupported	( ) const { return mAlphaToCoverageSupported; };
+
+	//! Enable alpha-to-coverage if it is supported.
+	void								TryEnableAlphaToCoverage	( );
+
+	//! Disable alpha-to-coverage.
+	void								DisableAlphaToCoverage		( );
+
 	//! @}
 
 	//
@@ -409,8 +433,8 @@ public:
 
 	//! @{
 
-	//! Apply texture to stage.
-	void								ApplyTexture				( const boost::shared_ptr< const ITexture >& tex, unsigned stage = 0 );
+	//! Apply texture to stage, texture transformation is set at D3DTS_TEXTUREn matrices.
+	void								ApplyTexture				( const boost::shared_ptr< const ITexture >& tex, unsigned stage = 0, bool apply_transforms = true );
 
 	//! Get current texture on stage.
 	const boost::shared_ptr< const ITexture >& ActiveTexture		( unsigned stage = 0 ) const { _ASSERTE( stage < MAX_TEXTURE_STAGES ); return mActiveTexturesPtr[ stage ]; };

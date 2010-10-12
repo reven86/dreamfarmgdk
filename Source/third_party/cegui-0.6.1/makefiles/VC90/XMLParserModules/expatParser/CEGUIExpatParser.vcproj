@@ -111,13 +111,14 @@
 				Optimization="0"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories="../../../../include;../../../../dependencies/include;../../../../XMLParserModules/expatParser/;&quot;../../../../../expat-2.0.1/lib&quot;"
-				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUIEXPATPARSER_EXPORTS;XML_STATIC;CEGUI_STATIC;TOLUA_STATIC"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;CEGUIEXPATPARSER_EXPORTS;XML_STATIC;CEGUI_STATIC;TOLUA_STATIC;_CRTDBG_MAP_ALLOC"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

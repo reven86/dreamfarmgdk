@@ -24,6 +24,7 @@ DEFINE_VAR( g_texture_cache_enable );
 DEFINE_VAR( r_device_type );
 DEFINE_VAR( r_device_depth_stencil );
 DEFINE_VAR( r_device_vp );
+DEFINE_VAR( r_device_csaa );
 DEFINE_VAR( r_background );
 DEFINE_VAR( r_wireframe );
 DEFINE_VAR( r_drawbboxes );
@@ -88,6 +89,7 @@ public:
 		REGISTER_VAR	( r_device_type,				"",						Cmd::EVF_DEFAULT );
 		REGISTER_VAR	( r_device_depth_stencil,		"",						Cmd::EVF_DEFAULT );
 		REGISTER_VAR	( r_device_vp,					"",						Cmd::EVF_DEFAULT );
+		REGISTER_VAR	( r_device_csaa,				"",						Cmd::EVF_DEFAULT );
 		REGISTER_VAR	( r_background,					"0",					Cmd::EVF_DEFAULT );
 		REGISTER_VAR	( r_wireframe,					"0",					Cmd::EVF_CHEAT );
 		REGISTER_VAR	( r_drawbboxes,					"0",					Cmd::EVF_DEFAULT );

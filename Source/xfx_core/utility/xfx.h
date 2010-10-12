@@ -91,3 +91,11 @@ namespace boost { namespace serialization {
 
 // XFX
 #include "../main/xfx_errorcodes.h"
+
+#if defined(_DEBUG) && defined(_CRTDBG_MAP_ALLOC) && defined(__cplusplus) && !defined(_DEBUG_NEW)
+    inline void* __cdecl operator new(size_t nSize, const char * pszFileName, int nLine)
+    {    return ::operator new(nSize, _NORMAL_BLOCK, pszFileName, nLine); }
+#    define _DEBUG_NEW new(__FILE__, __LINE__)
+#    define new _DEBUG_NEW
+#pragma warning (disable:4291)
+#endif

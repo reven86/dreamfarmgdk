@@ -111,13 +111,14 @@
 				Optimization="3"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories="../../../../../include;../../../../../dependencies/include;&quot;../../../../../../lua-5.0.2/include&quot;"
-				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;TOLUA_EXPORTS;CEGUI_STATIC;TOLUA_STATIC"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;HAVE_CONFIG_H;TOLUA_EXPORTS;CEGUI_STATIC;TOLUA_STATIC;_CRTDBG_MAP_ALLOC"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				ForcedIncludeFiles="stdlib.h;crtdbg.h"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

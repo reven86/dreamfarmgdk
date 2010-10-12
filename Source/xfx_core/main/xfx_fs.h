@@ -31,6 +31,7 @@ class Resource
 {
 	String							mName;
 	String							mFilename;
+	String							mPhysicalPath;
 
 	friend class boost::serialization::access;
 
@@ -54,6 +55,9 @@ public:
 
 	//! Get resource file name.
 	const String&					Filename					( ) const { return mFilename; };
+
+	//! Get physical path with filename (after applying search paths).
+	const String&					PhysicalPath				( ) const { return mPhysicalPath; };
 
 	//! Load resource from file.
 	virtual HRESULT					LoadFile					( const String& filename );
@@ -170,8 +174,10 @@ public:
 	 *
 	 *	\param[in]	path		New search path with '\\' at the end.
 	 *	\param[in]	priority	Search path priority.
+	 *
+	 *	\return \b True if search path was sucessfully added.
 	 */
-	void								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
+	bool								AddSearchPath				( const String& path, const ESearchPathPriority& priority = ESPP_HIGH );
 
 	/*! \brief Remove search path.
 	 *
@@ -203,13 +209,14 @@ public:
 	 *
 	 *	\param[in]	file		File name.
 	 *	\param[out]	pack		Pack file where file was found, if not NULL.
+	 *	\param[out]	phys_path	Physical path.
 	 *	\note Wildcards are not supported.
 	 *
 	 *	\return
 	 *	- S_OK if file was found;
 	 *	- XFXERR_NOTFOUND otherwise
 	 */
-	HRESULT								FindFile					( const String& file, boost::shared_ptr< class Pack > * pack = NULL ) const;
+	HRESULT								FindFile					( const String& file, boost::shared_ptr< class Pack > * pack = NULL, String * phys_path = NULL ) const;
 
 	/*! \brief Read file contents.
 	 *
