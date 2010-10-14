@@ -209,6 +209,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\_D3DPRESENT_PARAMETERS_.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\_D3DPRESENT_PARAMETERS_.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\_D3DVIEWPORT9.pypp.cpp"
 				>
 			</File>

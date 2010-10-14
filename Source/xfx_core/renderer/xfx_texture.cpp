@@ -589,10 +589,8 @@ HRESULT Texture::LoadMemory (const void * p, unsigned long filelen)
 	HRESULT hr;
 #if (__XFX_DIRECTX_VER__ < 9)
 	LPDIRECT3DTEXTURE8 tex;
-	LPDIRECT3DSURFACE8 s1;
 #else
 	LPDIRECT3DTEXTURE9 tex;
-	LPDIRECT3DSURFACE9 s1;
 #endif
 	D3DXIMAGE_INFO info;
 
@@ -602,41 +600,13 @@ HRESULT Texture::LoadMemory (const void * p, unsigned long filelen)
 	{
 	XFX_PLACE_DEVICE_LOCK;
 
-#if (__XFX_DIRECTX_VER__ < 9)
-	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SCRATCH, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
-#else
-	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
-		return hr;
-#endif
-	}
-
-	boost::shared_ptr<IUnknown> tex_lock (tex, IUnknownDeleter ());
-
-	if (FAILED (hr = tex->GetSurfaceLevel (0, &s1)))
-		return hr;
-
-	boost::shared_ptr<IUnknown> s1_lock (s1, IUnknownDeleter ());
-
-	D3DSURFACE_DESC d1;
-
-	if( FAILED( hr = s1->GetDesc( &d1 ) ) )
-		return hr;
-
-	if( info.Width > d1.Width || info.Height > d1.Height )
-	{
-		XFX_PLACE_DEVICE_LOCK;
-
-#if (__XFX_DIRECTX_VER__ < 9)
-		if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
-			return hr;
-#else
-		if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_DEFAULT, D3DX_DEFAULT, 0, &info, NULL, &tex)))
-			return hr;
-#endif
 	}
 
 	CopyTexture (tex, info.Width, info.Height);
+
+	tex->Release ();
 
 	return hr;
 }
@@ -1051,13 +1021,8 @@ HRESULT CubemapTexture::LoadMemory (const void * p, unsigned long filelen)
 	{
 	XFX_PLACE_DEVICE_LOCK;
 
-#if (__XFX_DIRECTX_VER__ < 9)
-	if (FAILED (hr = D3DXCreateCubeTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateCubeTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_SCRATCH, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
-#else
-	if (FAILED (hr = D3DXCreateCubeTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
-		return hr;
-#endif
 	}
 
 	CopyTexture (tex, info.Width);

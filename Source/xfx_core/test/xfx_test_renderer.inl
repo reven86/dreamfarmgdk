@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE( renderer )
 	BOOST_CHECK_NE( Renderer::Instance( ).pD3DDevice( ), ( void * )NULL );
 
 	Renderer::Instance( ).BeginFrame( );
-	Renderer::Instance( ).Clear( 0 );
+	Renderer::Instance( ).Clear( D3DCLEAR_TARGET );
 	Renderer::Instance( ).EndFrame( );
 
 	BOOST_CHECK_EQUAL( Renderer::Instance( ).ResetDevice( 10, 10 ), S_OK );
@@ -188,10 +188,10 @@ BOOST_AUTO_TEST_CASE( cubemap )
 	BOOST_CHECK_EQUAL( tex.GetWidth( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
 	BOOST_CHECK_EQUAL( tex.GetHeight( ), Renderer::Instance( ).D3DCaps( ).MaxTextureWidth );
 
+	/*
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1" ), S_OK );
 	BOOST_CHECK_EQUAL( tex.LoadFile( "FileData\\texture1.png*fmt.a8r8g8b8" ), S_OK );
 
-	/*
 	CubemapTexture tex2( tex );
 	ARGB * tex2_data = reinterpret_cast< ARGB * >( alloca( sizeof( ARGB ) * tex2.Width( ) * tex2.Height( ) ) );
 	BOOST_CHECK_EQUAL( tex2.Width( ), 100 );

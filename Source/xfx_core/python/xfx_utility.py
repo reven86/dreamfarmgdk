@@ -7,6 +7,11 @@ from pyplusplus.module_builder import call_policies
 from pygccxml.declarations.matchers import access_type_matcher_t 
 
 def camel_convert(name):
+    if name == "D3DPP":
+        return "d3dpp"
+    if name == "D3DCaps":
+        return "d3dcaps"
+		
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
@@ -34,6 +39,7 @@ mb.decls( lambda x: x.name.startswith( '_D3DCUBEMAP_FACES' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DFORMAT' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DPRIMITIVETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DVIEWPORT' ) ).include( )
+mb.decls( lambda x: x.name.startswith( '_D3DPRESENT_PARAMETERS' ) ).include( )
 
 mb.class_( "ITexture" ).exclude( )
 mb.class_( "Texture" ).member_functions( "GetD3DTex" ).exclude( )
