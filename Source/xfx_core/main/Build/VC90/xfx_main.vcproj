@@ -26,6 +26,8 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				Description="Creating build label"
+				CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputDir)..\..\labeller.py&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -84,6 +86,8 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				Description="Creating build label"
+				CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputDir)..\..\labeller.py&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -142,6 +146,8 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				Description="Creating build label"
+				CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputDir)..\..\labeller.py&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -201,6 +207,40 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\labeller.py"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)xfx_engine_ver.cpp"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)xfx_engine_ver.cpp"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Shipping|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="cd ../../&#x0D;&#x0A;cmd /c &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+					Outputs="$(InputDir)xfx_engine_ver.cpp"
+				/>
+			</FileConfiguration>
+		</File>
 		<File
 			RelativePath="..\..\xfx.cpp"
 			>
@@ -264,37 +304,6 @@
 		<File
 			RelativePath="..\..\xfx_engine_ver.cpp"
 			>
-		</File>
-		<File
-			RelativePath="..\..\xfx_engine_ver.template"
-			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
-					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
-					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Shipping|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="SubWCRev &quot;$(SolutionDir)\..\..&quot; &quot;$(InputDir)$(InputFileName)&quot; &quot;$(InputDir)$(InputName).cpp&quot;&#x0D;&#x0A;"
-					Outputs="&quot;$(InputDir)$(InputName).cpp&quot;"
-				/>
-			</FileConfiguration>
 		</File>
 		<File
 			RelativePath="..\..\xfx_errorcodes.h"

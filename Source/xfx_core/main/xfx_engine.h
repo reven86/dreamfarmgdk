@@ -35,9 +35,11 @@ class Engine : public Singleton< Engine >
 	//! Version string. Generated through SVN.
 	static const int						msVersionMajor;
 	static const int						msVersionMinor;
+	static const int						msVersionBuild;
 	static const int						msVersionRevision;
 	static const String						msVersionBuildDate;
 	static const String						msVersion;
+	static const String						msVersionGit;
 
 	boost::scoped_ptr< class Log >			mEngineLogPtr;
 	boost::shared_ptr< class Console >		mConsoleControlPtr;
@@ -75,6 +77,9 @@ public:
 	const int&								GetVersionMinor				( ) const { return msVersionMinor; };
 
 	//! Get engine build number.
+	const int&								GetVersionBuild				( ) const { return msVersionBuild; };
+
+	//! Get engine revision number.
 	const int&								GetVersionRevision			( ) const { return msVersionRevision; };
 
 	//! Get engine build date as string.
@@ -82,6 +87,9 @@ public:
 
 	//! Gets engine full version as string.
 	const String&							GetVersionFull				( ) const { return msVersion; };
+
+	//! Gets engine full version as string in Git format.
+	const String&							GetVersionGitFull			( ) const { return msVersionGit; };
 
 	/*! \brief Writes message to common log file.
 	 *

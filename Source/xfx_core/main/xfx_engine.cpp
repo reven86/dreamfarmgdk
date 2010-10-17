@@ -41,6 +41,7 @@ bool Engine::Init( bool init_input )
 
 	gMess( "Initializing xfx:" );
 	gMess( "...engine version: %s", msVersion.c_str( ) );
+	gMess( "...engine Git version: %s", msVersionGit.c_str( ) );
 
 	//Getting OS information
 	OSVERSIONINFO osinfo;
