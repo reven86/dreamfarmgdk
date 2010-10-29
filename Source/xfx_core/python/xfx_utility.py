@@ -11,6 +11,8 @@ def camel_convert(name):
         return "d3dpp"
     if name == "D3DCaps":
         return "d3dcaps"
+    if name == "gGetApplication":
+		return "application"
 		
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
@@ -62,7 +64,7 @@ for c in mb.variables( ):
 for c in mb.classes( ):
 	for p in c.properties:
 		p.set_name( camel_convert( p.name ) )
-
+		
 mb.class_( "Caches" ).member_functions( "ClearCallbacks" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterCmd" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterVar" ).use_overload_macro = True #exclude( )

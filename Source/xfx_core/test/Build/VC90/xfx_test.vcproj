@@ -88,6 +88,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="cd $(DFG_GDK)\Tools\Bin\Tests&#x0D;&#x0A;$(TargetPath)"
 			/>
 		</Configuration>
 		<Configuration
@@ -163,6 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="cd $(DFG_GDK)\Tools\Bin\Tests&#x0D;&#x0A;$(TargetPath)"
 			/>
 		</Configuration>
 	</Configurations>
