@@ -10,6 +10,16 @@
 /Source/xfx_core/serialization/Build/VC90/Debug
 /Source/xfx_core/test/Build/VC90/Debug
 /Source/xfx_core/utility/Build/VC90/Debug
+/Source/xfx_core/gui/Build/VC90/Release
+/Source/xfx_core/lua/Build/VC90/Release
+/Source/xfx_core/main/Build/VC90/Release
+/Source/xfx_core/math/Build/VC90/Release
+/Source/xfx_core/python/Build/VC90/Release
+/Source/xfx_core/renderer/Build/VC90/Release
+/Source/xfx_core/renderer_ext/Build/VC90/Release
+/Source/xfx_core/serialization/Build/VC90/Release
+/Source/xfx_core/test/Build/VC90/Release
+/Source/xfx_core/utility/Build/VC90/Release
 /Source/xfx_core/main/xfx_engine_ver.cpp
 /Source/xfx_core/python/generated
 /Tools/Bin/Tests/xfx_test_debug.exe

@@ -61,7 +61,7 @@ public:
 		mslasttime = currenttime;
 	}
 
-	void MicroSeconds100( boost::uint32_t oldtime, boost::uint32_t time )
+	void SetMicroSeconds100( boost::uint32_t oldtime, boost::uint32_t time )
 	{
 		mstarttime.QuadPart += ( __int64( oldtime ) - time ) * mTicksPerSecond.QuadPart / 10000;
 	}

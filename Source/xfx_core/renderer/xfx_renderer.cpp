@@ -876,7 +876,8 @@ void Renderer::EndFrame( )
 
 void Renderer::Clear( const DWORD& flags )
 {
-	mpD3DDevice->Clear( 0, NULL, flags, r_background->AsInt( ), 1.0f, 0 );
+	if( flags != 0 )
+		mpD3DDevice->Clear( 0, NULL, flags, r_background->AsInt( ), 1.0f, 0 );
 }
 
 void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, unsigned stage, bool apply_transforms )

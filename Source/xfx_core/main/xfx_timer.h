@@ -48,13 +48,13 @@ public:
 	Timer&						operator =			( const Timer& t );
 
 	//! Get current time between to pools in 100 microseconds.
-	const boost::uint32_t&		MSPF100				( ) const { return m100MSPF; };
+	const boost::uint32_t&		GetMSPF100			( ) const { return m100MSPF; };
 
 	//! Get elapsed time in 100 microseconds.
-	const boost::uint32_t&		MicroSeconds100		( ) const { return m100MicroSeconds; };
+	const boost::uint32_t&		GetMicroSeconds100	( ) const { return m100MicroSeconds; };
 
 	//! Set elapsed time.
-	void						MicroSeconds100		( const boost::uint32_t& time );
+	void						SetMicroSeconds100	( const boost::uint32_t& time );
 
 	//! Get 'paused' flag.
 	const bool&					IsPaused			( ) const { return mIsPaused; };

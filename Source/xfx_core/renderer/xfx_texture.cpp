@@ -1077,4 +1077,74 @@ HRESULT CubemapTexture::CopyTexture (LPDIRECT3DCUBETEXTURE9 ptex, unsigned width
 
 
 
+//
+// RenderedTexture
+//
+
+RenderedTexture::RenderedTexture( ) : mpTex (), mWidth (1),
+	mHeight (1), Transformable2D( ),
+	mIsIdentityTransform( true )
+{
+}
+
+HRESULT RenderedTexture::Create( unsigned width, unsigned height, const D3DFORMAT& fmt )
+{
+	Free ();
+
+	mWidth		= width;
+	mHeight		= height;
+
+	mTextureMatrix.MakeIdentity( );
+
+	XFX_PLACE_DEVICE_LOCK;
+
+#if (__XFX_DIRECTX_VER__ < 9)
+	LPDIRECT3DTEXTURE8 tex;
+	HRESULT hr = Renderer::Instance ().pD3DDevice ()->CreateTexture (mWidth, mHeight, 1, D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex);
+#else
+	LPDIRECT3DTEXTURE9 tex;
+	HRESULT hr = Renderer::Instance ().pD3DDevice ()->CreateTexture (mWidth, mHeight, 1, D3DUSAGE_RENDERTARGET, fmt, D3DPOOL_DEFAULT, &tex, NULL);
+#endif
+
+	if (SUCCEEDED (hr))
+	{
+		mpTex.reset (tex, IUnknownDeleter ());
+
+#if (__XFX_DIRECTX_VER__ < 9)
+		LPDIRECT3DSURFACE8 surf;
+#else
+		LPDIRECT3DSURFACE9 surf;
+#endif
+		hr = tex->GetSurfaceLevel( 0, &surf );
+
+		if( SUCCEEDED( hr ) )
+			mpSurface.reset( surf, IUnknownDeleter( ) );
+	}
+
+	UpdateTransformation( );
+
+	return hr;
+}
+
+void RenderedTexture::Free( )
+{
+	mpTex.reset ();
+	mpSurface.reset( );
+
+	mWidth = mHeight = 1;
+
+	mIsIdentityTransform = true;
+
+	Transformable2D::ResetTransform( Vec2( 0.0f ), 0, Vec2( 1.0f ) );
+}
+
+void RenderedTexture::UpdateTransformation( )
+{
+	mIsIdentityTransform = Transformable2D::GetTransformation( ).IsIdentity( );
+
+	mTransformation = Transformable2D::GetTransformation( ).ExpandToMat4( );
+}
+
+
+
 _XFX_END

@@ -15,11 +15,13 @@
 
 
 #include "xfx.h"
+#include "xfx_depthstencil.h"
 #include "xfx_drawtools.h"
 #include "xfx_font.h"
 #include "xfx_indexbuffer.h"
 #include "xfx_renderer.h"
 #include "xfx_renderer_cvars.h"
+#include "xfx_rendertargetgroup.h"
 #include "xfx_shader.h"
 #include "xfx_texture.h"
 #include "xfx_vertexbuffer.h"

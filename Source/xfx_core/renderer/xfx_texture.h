@@ -329,4 +329,87 @@ private:
 
 
 
+
+
+/*! \class RenderedTexture xfx_texture.h "render/xfx_texture.h"
+ *	\brief Texture to render to.
+ *	\ingroup RenderGroup
+ *
+ *	\remark You should always use UpdateTransformation after update Transformable2D matrix.
+ *	\author Andrew "RevEn" Karpushin
+ */
+
+class RenderedTexture : public ITexture, public Transformable2D, public boost::noncopyable
+{
+#if (__XFX_DIRECTX_VER__ < 9)
+	boost::shared_ptr< IDirect3DTexture8 >		mpTex;
+	boost::shared_ptr< IDirect3DSurface8 >		mpSurface;
+#else
+	boost::shared_ptr< IDirect3DTexture9 >		mpTex;
+	boost::shared_ptr< IDirect3DSurface9 >		mpSurface;
+#endif
+
+	unsigned				mWidth;				//bitmap width
+	unsigned				mHeight;			//bitmap height
+
+	Mat4					mTextureMatrix;
+	mutable Mat4			mTransformation;
+	bool					mIsIdentityTransform;
+
+public:
+	//! Construct an empty texture.
+	RenderedTexture											( );
+
+	//! Destructor.
+	virtual ~RenderedTexture								( ) { Free( ); };
+
+	/*! \brief Create new rendered texture.
+	 *
+	 *	\param[in]	width		Surface width.
+	 *	\param[in]	height		Surface height.
+	 *	\param[in]	fmt			Texture format.
+	 *
+	 *	\return S_OK if succeeded.
+	 */
+	HRESULT							Create					( unsigned width, unsigned height, const D3DFORMAT& fmt = D3DFMT_A8R8G8B8 );
+
+	//! Destroy all allocated resources for texture.
+	void							Free					( );
+
+	//! Get width.
+	virtual unsigned				GetWidth				( ) const { return mWidth; };
+
+	//! Get height.
+	virtual unsigned				GetHeight				( ) const { return mHeight; };
+
+	//! Get texture matrix.
+	virtual const Mat4&				GetTextureMatrix		( ) const { return mTextureMatrix; };
+
+	//! Get texture transformation.
+	virtual const Mat4&				GetTransformation		( ) const { return mTransformation; };
+
+	//! Is texture matrix * texture transform identity matrix.
+	virtual bool					IsIdentityResultTransform	( ) const { return mIsIdentityTransform; };
+
+	//! Update texture matrix transformation.
+	void							UpdateTransformation	( );
+
+#if (__XFX_DIRECTX_VER__ < 9)
+	//! Get ID3DXBaseTexture.
+	virtual LPDIRECT3DBASETEXTURE8	GetD3DTex				( ) const { return mpTex.get( ); };
+	LPDIRECT3DSURFACE8				GetD3DSurface			( ) const { return mpSurface.get( ); };
+#else
+	//! Get ID3DXBaseTexture.
+	virtual LPDIRECT3DBASETEXTURE9	GetD3DTex				( ) const { return mpTex.get( ); };
+	LPDIRECT3DSURFACE9				GetD3DSurface			( ) const { return mpSurface.get( ); };
+#endif
+
+	//! Is texture empty.
+	bool							IsEmpty					( ) const { return !mpTex; };
+};
+
+
+
+
+
 _XFX_END

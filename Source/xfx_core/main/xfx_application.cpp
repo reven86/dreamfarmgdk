@@ -114,7 +114,7 @@ void Application::MainLoop( )
 
 #ifndef __XFX_DISABLE_PROFILER__
 		ProfilingManager::Instance( ).SaveProfilerResults( );
-		ProfilingManager::Instance( ).SetFrameTime( g_profiler_frame_rate->AsInt( ) > 0 ? 10000 / g_profiler_frame_rate->AsInt( ) : mTimer.MSPF100( ) );
+		ProfilingManager::Instance( ).SetFrameTime( g_profiler_frame_rate->AsInt( ) > 0 ? 10000 / g_profiler_frame_rate->AsInt( ) : mTimer.GetMSPF100( ) );
 #endif
 	}
 }

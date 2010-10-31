@@ -230,6 +230,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\xfx_depthstencil.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_depthstencil.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\xfx_drawtools.cpp"
 			>
 		</File>
@@ -275,6 +283,14 @@
 		</File>
 		<File
 			RelativePath="..\..\xfx_renderer_include.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_rendertargetgroup.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\xfx_rendertargetgroup.h"
 			>
 		</File>
 		<File

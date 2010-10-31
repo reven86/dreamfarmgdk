@@ -361,6 +361,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\DepthStencil.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\DepthStencil.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\DrawTools.pypp.cpp"
 				>
 			</File>
@@ -625,11 +633,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\RenderedTexture.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\RenderedTexture.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\Renderer.pypp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\generated\Renderer.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\RenderTargetGroup.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\RenderTargetGroup.pypp.hpp"
 				>
 			</File>
 			<File

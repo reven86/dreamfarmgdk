@@ -74,9 +74,9 @@ void Timer::Update( )
 	mImpl->Update( m100MSPF, m100MicroSeconds );
 }
 
-void Timer::MicroSeconds100( const boost::uint32_t& time )
+void Timer::SetMicroSeconds100( const boost::uint32_t& time )
 {
-	mImpl->MicroSeconds100( m100MicroSeconds, time );
+	mImpl->SetMicroSeconds100( m100MicroSeconds, time );
 	m100MicroSeconds = time;
 }
 

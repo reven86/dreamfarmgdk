@@ -155,7 +155,15 @@ HRESULT Font::AfterParsing( )
 	if( !mLoadInfoPtr )
 		return XFXERR_INVALIDCALL;
 
+	// get font folder and temporary add it as search path
+	String fname = PhysicalPath( );
+	String font_folder = fname.substr( 0, fname.find_last_of( "\\/" ) + 1 );
+	bool revert = FileSystem::Instance( ).AddSearchPath( font_folder, FileSystem::ESPP_LOW );
+
 	HRESULT hr = Create( mLoadInfoPtr->height, Shader::Cache( ).Register( mLoadInfoPtr->shader ), fromUTF8( mLoadInfoPtr->char_map ) );
+
+	if( revert )
+		FileSystem::Instance( ).RemoveSearchPath( font_folder );
 
 	mLoadInfoPtr.reset( );
 	return hr;
