@@ -79,7 +79,7 @@ DWORD ProfilingManager::RegisterProfilerObject( const char * name, const char * 
 		if( mRegisteredObjects[ o ].first == name )
 			break;
 
-	// this can be if PROFILE macro set into template function
+	// this is possible if PROFILE macro is used in template function
 	//_ASSERTE( o == mRegisteredObjectsCount );
 
 	if( o == mRegisteredObjectsCount )

@@ -522,9 +522,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -537,9 +537,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -552,9 +552,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -567,9 +567,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -582,9 +582,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -597,9 +597,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -612,9 +612,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	},
 	{
 		D3DTADDRESS_WRAP,
@@ -627,9 +627,9 @@ DWORD Renderer::stateSampValue[Renderer::MAX_TEXTURE_STAGES][Renderer::SM_SAMP_M
 		0,
 		0,
 		1,
-		0x3f800000, //1.0f
 		0,
-		256
+		0,
+		0
 	}
 };
 
