@@ -202,8 +202,9 @@ public:
 	 *	\param[in]	z				Output z coordinate.
 	 *	\param[in]	rhw				Output RHW.
 	 *	\param[in]	fixed_size		If roll is present, rotate sprite in fixed size, used in ParticleSystem.
+	 *	\param[in]	vp				If \b true, coordinates are in viewport-space, not in render surface space.
 	 */
-	void								PushDraw2DSprite			( const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f, const float& z = 0.0f, const float& rhw = 1.0f, const bool& fixed_size = false );	
+	void								PushDraw2DSprite			( const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color, const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& u1 = 0.0f, const float& v1 = 0.0f, const float& u2 = 1.0f, const float& v2 = 1.0f, const float& z = 0.0f, const float& rhw = 1.0f, const bool& fixed_size = false, const bool& vp = false );	
 
 	/*! \brief Draw a 3D sprite.
 	 *
@@ -253,8 +254,9 @@ public:
 	 *	\param[in]	shader_params	Shader user-defined parameters.
 	 *	\param[in]	z				Output z coordinate.
 	 *	\param[in]	rhw				Output RHW.
+	 *	\param[in]	vp				If \b true, coordinates are in viewport-space, not in render surface space.
 	 */
-	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = ARGB( 0xff, 0xff, 0xff, 0xff ), const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& z = 0.0f, const float& rhw = 1.0f );
+	void								PushDraw2DText				( const class Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale, const WString& text, const ARGB& color = ARGB( 0xff, 0xff, 0xff, 0xff ), const boost::shared_ptr< const ShaderParams >& shader_params = boost::shared_ptr< const ShaderParams >( ), const float& z = 0.0f, const float& rhw = 1.0f, const bool& vp = false );
 
 	/*! \brief Draw a 2D text in 3D space.
 	 *

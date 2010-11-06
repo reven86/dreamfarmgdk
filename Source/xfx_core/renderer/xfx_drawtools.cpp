@@ -11,6 +11,7 @@
 #include "xfx_texture.h"
 #include "xfx_font.h"
 #include "xfx_renderer_cvars.h"
+#include "xfx_viewport.h"
 
 _XFX_BEGIN
 
@@ -332,16 +333,33 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 }
 
 void DrawTools::PushDraw2DSprite(
-	const float& x, const float& y, const float& scalex, const float& scaley, const Math::BigAngle& roll, const ARGB& color,
+	const float& _x, const float& _y, const float& _scalex, const float& _scaley, const Math::BigAngle& roll, const ARGB& color,
 	const boost::shared_ptr< const class Shader >& shader, const boost::shared_ptr< const ShaderParams >& shader_params,
 	const float& u1, const float& v1, const float& u2, const float& v2, const float& z, const float& rhw,
-	const bool& fixed_size
+	const bool& fixed_size, const bool& vp
 	)
 {
 	PROFILE( __FUNCTION__, "Render" );
 
 	if( mSpritesVertsCount + 3 > mSpritesVerts.capacity( ) )
 		return;
+
+	float x, y, scalex, scaley;
+	if( vp )
+	{
+		boost::tuple< float, float > dv = xfx::Viewport::Instance( ).MapViewportToRenderer( _x, _y );
+		boost::tuple< float, float > ds = xfx::Viewport::Instance( ).MapViewportToRenderer( _scalex, _scaley );
+		x = dv.get< 0 >( );
+		y = dv.get< 1 >( );
+		scalex = ds.get< 0 >( );
+		scaley = ds.get< 1 >( );
+	}
+	else
+	{
+		x = _x; y = _y;
+		scalex = _scalex;
+		scaley = _scaley;
+	}
 
 	float dx = scalex * 0.5f;
 	float dy = scaley * 0.5f;
@@ -557,12 +575,29 @@ void DrawTools::PushDraw3DSprite(
 }
 
 void DrawTools::PushDraw2DText(
-	const Font& fnt, const float& x, const float& y, const float& xscale, const float& yscale,
+	const Font& fnt, const float& _x, const float& _y, const float& _xscale, const float& _yscale,
 	const WString& text, const ARGB& color, const boost::shared_ptr< const ShaderParams >& shader_consts, 
-	const float& z, const float& rhw
+	const float& z, const float& rhw, const bool& vp
 	)
 {
 	PROFILE( __FUNCTION__, "Render" );
+
+	float x, y, xscale, yscale;
+	if( vp )
+	{
+		boost::tuple< float, float > dv = xfx::Viewport::Instance( ).MapViewportToRenderer( _x, _y );
+		boost::tuple< float, float > ds = xfx::Viewport::Instance( ).MapViewportToRenderer( _xscale, _yscale );
+		x = dv.get< 0 >( );
+		y = dv.get< 1 >( );
+		xscale = ds.get< 0 >( );
+		yscale = ds.get< 1 >( );
+	}
+	else
+	{
+		x = _x; y = _y;
+		xscale = _xscale;
+		yscale = _yscale;
+	}
 
 	struct visitor
 	{
