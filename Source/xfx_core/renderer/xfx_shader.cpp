@@ -424,6 +424,9 @@ void Shader::FindTextureStagesNum( )
 							if( stage_tex == tex_ptr.get< 2 >( ).texture->GetD3DTex( ) )
 							{
 								tex_ptr.get< 1 >( ) = stage;
+#if( __XFX_DIRECTX_VER__ >= 9 )
+								tex_ptr.get< 0 >( ) = mEffectPtr->DXEffectPtr( )->GetParameterByName( NULL, tex_ptr.get< 2 >( ).stage_name.c_str( ) );
+#endif
 								mTextureStages[ stage ] = &tex_ptr.get< 2 >( );
 
 								break;
