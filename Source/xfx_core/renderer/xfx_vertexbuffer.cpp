@@ -117,7 +117,8 @@ void VertexBuffer::SetStream (const int& stream) const
 #else
 		Renderer::Instance ().pD3DDevice ()->SetStreamSource (stream, mpVB.get (), 0, mVertexSize);
 #endif
-		Renderer::Instance ().SetFVF (mFVF);
+		if( mFVF )
+			Renderer::Instance ().SetFVF (mFVF);
 	}
 }
 
