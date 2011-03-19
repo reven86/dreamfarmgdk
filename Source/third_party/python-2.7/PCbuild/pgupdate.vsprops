@@ -3,8 +3,8 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="pgupdate"
-	OutputDirectory="$(SolutionDir)$(PlatformName)-pgo\"
-	InheritedPropertySheets="$(SolutionDir)\pginstrument.vsprops"
+	OutputDirectory="$(ProjectDir)$(PlatformName)-pgo\"
+	InheritedPropertySheets=".\pginstrument.vsprops"
 	>
 	<Tool
 		Name="VCLinkerTool"

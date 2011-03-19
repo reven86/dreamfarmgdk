@@ -4,7 +4,7 @@
 	Version="8.00"
 	Name="pginstrument"
 	OutputDirectory="$(OutDirPGI)"
-	IntermediateDirectory="$(SolutionDir)$(PlatformName)-temp-pgi\$(ProjectName)\"
+	IntermediateDirectory="$(ProjectDir)$(PlatformName)-temp-pgi\$(ProjectName)\"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
@@ -29,6 +29,6 @@
 	/>
 	<UserMacro
 		Name="OutDirPGI"
-		Value="$(SolutionDir)$(PlatformName)-pgi\"
+		Value="$(ProjectDir)$(PlatformName)-pgi\"
 	/>
 </VisualStudioPropertySheet>
