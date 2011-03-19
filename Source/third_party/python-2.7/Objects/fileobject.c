@@ -423,6 +423,7 @@ close_the_file(PyFileObject *f)
     int sts = 0;
     int (*local_close)(FILE *);
     FILE *local_fp = f->f_fp;
+    char *local_setbuf = f->f_setbuf;
     if (local_fp != NULL) {
         local_close = f->f_close;
         if (local_close != NULL && f->unlocked_count > 0) {
@@ -446,10 +447,15 @@ close_the_file(PyFileObject *f)
          * called. */
         f->f_fp = NULL;
         if (local_close != NULL) {
+            /* Issue #9295: must temporarily reset f_setbuf so that another
+               thread doesn't free it when running file_close() concurrently.
+               Otherwise this close() will crash when flushing the buffer. */
+            f->f_setbuf = NULL;
             Py_BEGIN_ALLOW_THREADS
             errno = 0;
             sts = (*local_close)(local_fp);
             Py_END_ALLOW_THREADS
+            f->f_setbuf = local_setbuf;
             if (sts == EOF)
                 return PyErr_SetFromErrno(PyExc_IOError);
             if (sts != 0)
@@ -1735,8 +1741,10 @@ static PyObject *
 file_write(PyFileObject *f, PyObject *args)
 {
     Py_buffer pbuf;
-    char *s;
+    const char *s;
     Py_ssize_t n, n2;
+    PyObject *encoded = NULL;
+
     if (f->f_fp == NULL)
         return err_closed();
     if (!f->writable)
@@ -1746,14 +1754,41 @@ file_write(PyFileObject *f, PyObject *args)
             return NULL;
         s = pbuf.buf;
         n = pbuf.len;
-    } else
-        if (!PyArg_ParseTuple(args, "t#", &s, &n))
-        return NULL;
+    }
+    else {
+        const char *encoding, *errors;
+        PyObject *text;
+        if (!PyArg_ParseTuple(args, "O", &text))
+            return NULL;
+
+        if (PyString_Check(text)) {
+            s = PyString_AS_STRING(text);
+            n = PyString_GET_SIZE(text);
+        } else if (PyUnicode_Check(text)) {
+            if (f->f_encoding != Py_None)
+                encoding = PyString_AS_STRING(f->f_encoding);
+            else
+                encoding = PyUnicode_GetDefaultEncoding();
+            if (f->f_errors != Py_None)
+                errors = PyString_AS_STRING(f->f_errors);
+            else
+                errors = "strict";
+            encoded = PyUnicode_AsEncodedString(text, encoding, errors);
+            if (encoded == NULL)
+                return NULL;
+            s = PyString_AS_STRING(encoded);
+            n = PyString_GET_SIZE(encoded);
+        } else {
+            if (PyObject_AsCharBuffer(text, &s, &n))
+                return NULL;
+        }
+    }
     f->f_softspace = 0;
     FILE_BEGIN_ALLOW_THREADS(f)
     errno = 0;
     n2 = fwrite(s, 1, n, f->f_fp);
     FILE_END_ALLOW_THREADS(f)
+    Py_XDECREF(encoded);
     if (f->f_binary)
         PyBuffer_Release(&pbuf);
     if (n2 != n) {
@@ -1819,6 +1854,11 @@ file_writelines(PyFileObject *f, PyObject *seq)
                     break;
                 }
                 PyList_SetItem(list, j, line);
+            }
+            /* The iterator might have closed the file on us. */
+            if (f->f_fp == NULL) {
+                err_closed();
+                goto error;
             }
         }
         if (j == 0)

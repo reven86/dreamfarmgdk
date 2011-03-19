@@ -440,7 +440,6 @@ scanstring_str(PyObject *pystr, Py_ssize_t end, char *encoding, int strict, Py_s
     Py_ssize_t len = PyString_GET_SIZE(pystr);
     Py_ssize_t begin = end - 1;
     Py_ssize_t next;
-    int has_unicode = 0;
     char *buf = PyString_AS_STRING(pystr);
     PyObject *chunks = PyList_New(0);
     if (chunks == NULL) {
@@ -463,9 +462,6 @@ scanstring_str(PyObject *pystr, Py_ssize_t end, char *encoding, int strict, Py_s
                 raise_errmsg("Invalid control character at", pystr, next);
                 goto bail;
             }
-            else if (c > 0x7f) {
-                has_unicode = 1;
-            }
         }
         if (!(c == '"' || c == '\\')) {
             raise_errmsg("Unterminated string starting at", pystr, begin);
@@ -477,15 +473,10 @@ scanstring_str(PyObject *pystr, Py_ssize_t end, char *encoding, int strict, Py_s
             if (strchunk == NULL) {
                 goto bail;
             }
-            if (has_unicode) {
-                chunk = PyUnicode_FromEncodedObject(strchunk, encoding, NULL);
-                Py_DECREF(strchunk);
-                if (chunk == NULL) {
-                    goto bail;
-                }
-            }
-            else {
-                chunk = strchunk;
+            chunk = PyUnicode_FromEncodedObject(strchunk, encoding, NULL);
+            Py_DECREF(strchunk);
+            if (chunk == NULL) {
+                goto bail;
             }
             if (PyList_Append(chunks, chunk)) {
                 Py_DECREF(chunk);
@@ -564,8 +555,8 @@ scanstring_str(PyObject *pystr, Py_ssize_t end, char *encoding, int strict, Py_s
                 end += 6;
                 /* Decode 4 hex digits */
                 for (; next < end; next++) {
-                    c2 <<= 4;
                     Py_UNICODE digit = buf[next];
+                    c2 <<= 4;
                     switch (digit) {
                         case '0': case '1': case '2': case '3': case '4':
                         case '5': case '6': case '7': case '8': case '9':
@@ -593,21 +584,9 @@ scanstring_str(PyObject *pystr, Py_ssize_t end, char *encoding, int strict, Py_s
             }
 #endif
         }
-        if (c > 0x7f) {
-            has_unicode = 1;
-        }
-        if (has_unicode) {
-            chunk = PyUnicode_FromUnicode(&c, 1);
-            if (chunk == NULL) {
-                goto bail;
-            }
-        }
-        else {
-            char c_char = Py_CHARMASK(c);
-            chunk = PyString_FromStringAndSize(&c_char, 1);
-            if (chunk == NULL) {
-                goto bail;
-            }
+        chunk = PyUnicode_FromUnicode(&c, 1);
+        if (chunk == NULL) {
+            goto bail;
         }
         if (PyList_Append(chunks, chunk)) {
             Py_DECREF(chunk);
@@ -755,8 +734,8 @@ scanstring_unicode(PyObject *pystr, Py_ssize_t end, int strict, Py_ssize_t *next
                 end += 6;
                 /* Decode 4 hex digits */
                 for (; next < end; next++) {
-                    c2 <<= 4;
                     Py_UNICODE digit = buf[next];
+                    c2 <<= 4;
                     switch (digit) {
                         case '0': case '1': case '2': case '3': case '4':
                         case '5': case '6': case '7': case '8': case '9':
@@ -2071,8 +2050,9 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
     static PyObject *empty_dict = NULL;
     PyObject *kstr = NULL;
     PyObject *ident = NULL;
-    PyObject *key, *value;
-    Py_ssize_t pos;
+    PyObject *key = NULL;
+    PyObject *value = NULL;
+    PyObject *it = NULL;
     int skipkeys;
     Py_ssize_t idx;
 
@@ -2083,7 +2063,7 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
         if (open_dict == NULL || close_dict == NULL || empty_dict == NULL)
             return -1;
     }
-    if (PyDict_Size(dct) == 0)
+    if (Py_SIZE(dct) == 0)
         return PyList_Append(rval, empty_dict);
 
     if (s->markers != Py_None) {
@@ -2117,10 +2097,12 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
 
     /* TODO: C speedup not implemented for sort_keys */
 
-    pos = 0;
+    it = PyObject_GetIter(dct);
+    if (it == NULL)
+        goto bail;
     skipkeys = PyObject_IsTrue(s->skipkeys);
     idx = 0;
-    while (PyDict_Next(dct, &pos, &key, &value)) {
+    while ((key = PyIter_Next(it)) != NULL) {
         PyObject *encoded;
 
         if (PyString_Check(key) || PyUnicode_Check(key)) {
@@ -2143,11 +2125,12 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
                 goto bail;
         }
         else if (skipkeys) {
+            Py_DECREF(key);
             continue;
         }
         else {
             /* TODO: include repr of key */
-            PyErr_SetString(PyExc_ValueError, "keys must be a string");
+            PyErr_SetString(PyExc_TypeError, "keys must be a string");
             goto bail;
         }
 
@@ -2155,6 +2138,10 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
             if (PyList_Append(rval, s->item_separator))
                 goto bail;
         }
+
+        value = PyObject_GetItem(dct, key);
+        if (value == NULL)
+            goto bail;
 
         encoded = encoder_encode_string(s, kstr);
         Py_CLEAR(kstr);
@@ -2170,7 +2157,13 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
         if (encoder_listencode_obj(s, rval, value, indent_level))
             goto bail;
         idx += 1;
+        Py_CLEAR(value);
+        Py_DECREF(key);
     }
+    if (PyErr_Occurred())
+        goto bail;
+    Py_CLEAR(it);
+
     if (ident != NULL) {
         if (PyDict_DelItem(s->markers, ident))
             goto bail;
@@ -2189,6 +2182,9 @@ encoder_listencode_dict(PyEncoderObject *s, PyObject *rval, PyObject *dct, Py_ss
     return 0;
 
 bail:
+    Py_XDECREF(it);
+    Py_XDECREF(key);
+    Py_XDECREF(value);
     Py_XDECREF(kstr);
     Py_XDECREF(ident);
     return -1;

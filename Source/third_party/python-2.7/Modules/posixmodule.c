@@ -1852,7 +1852,7 @@ force write of file with filedescriptor to disk.");
 static PyObject *
 posix_fsync(PyObject *self, PyObject *fdobj)
 {
-       return posix_fildes(fdobj, fsync);
+    return posix_fildes(fdobj, fsync);
 }
 #endif /* HAVE_FSYNC */
 
@@ -1870,7 +1870,7 @@ force write of file with filedescriptor to disk.\n\
 static PyObject *
 posix_fdatasync(PyObject *self, PyObject *fdobj)
 {
-       return posix_fildes(fdobj, fdatasync);
+    return posix_fildes(fdobj, fdatasync);
 }
 #endif /* HAVE_FDATASYNC */
 
@@ -1957,6 +1957,24 @@ PyDoc_STRVAR(posix_getcwd__doc__,
 "getcwd() -> path\n\n\
 Return a string representing the current working directory.");
 
+#if (defined(__sun) && defined(__SVR4)) || defined(__OpenBSD__)
+/* Issue 9185: getcwd() returns NULL/ERANGE indefinitely. */
+static PyObject *
+posix_getcwd(PyObject *self, PyObject *noargs)
+{
+    char buf[PATH_MAX+2];
+    char *res;
+
+    Py_BEGIN_ALLOW_THREADS
+    res = getcwd(buf, sizeof buf);
+    Py_END_ALLOW_THREADS
+
+    if (res == NULL)
+        return posix_error();
+
+    return PyString_FromString(buf);
+}
+#else
 static PyObject *
 posix_getcwd(PyObject *self, PyObject *noargs)
 {
@@ -1993,6 +2011,7 @@ posix_getcwd(PyObject *self, PyObject *noargs)
 
     return dynamic_return;
 }
+#endif /* getcwd() NULL/ERANGE workaround. */
 
 #ifdef Py_USING_UNICODE
 PyDoc_STRVAR(posix_getcwdu__doc__,
@@ -2108,7 +2127,9 @@ posix_listdir(PyObject *self, PyObject *args)
             free(wnamebuf);
             return NULL;
         }
+        Py_BEGIN_ALLOW_THREADS
         hFindFile = FindFirstFileW(wnamebuf, &wFileData);
+        Py_END_ALLOW_THREADS
         if (hFindFile == INVALID_HANDLE_VALUE) {
             int error = GetLastError();
             if (error == ERROR_FILE_NOT_FOUND) {
@@ -2178,7 +2199,9 @@ posix_listdir(PyObject *self, PyObject *args)
     if ((d = PyList_New(0)) == NULL)
         return NULL;
 
+    Py_BEGIN_ALLOW_THREADS
     hFindFile = FindFirstFile(namebuf, &FileData);
+    Py_END_ALLOW_THREADS
     if (hFindFile == INVALID_HANDLE_VALUE) {
         int error = GetLastError();
         if (error == ERROR_FILE_NOT_FOUND)
@@ -2310,11 +2333,16 @@ posix_listdir(PyObject *self, PyObject *args)
     }
     if (!PyArg_ParseTuple(args, "et:listdir", Py_FileSystemDefaultEncoding, &name))
         return NULL;
-    if ((dirp = opendir(name)) == NULL) {
+    Py_BEGIN_ALLOW_THREADS
+    dirp = opendir(name);
+    Py_END_ALLOW_THREADS
+    if (dirp == NULL) {
         return posix_error_with_allocated_filename(name);
     }
     if ((d = PyList_New(0)) == NULL) {
+        Py_BEGIN_ALLOW_THREADS
         closedir(dirp);
+        Py_END_ALLOW_THREADS
         PyMem_Free(name);
         return NULL;
     }
@@ -2327,7 +2355,9 @@ posix_listdir(PyObject *self, PyObject *args)
             if (errno == 0) {
                 break;
             } else {
+                Py_BEGIN_ALLOW_THREADS
                 closedir(dirp);
+                Py_END_ALLOW_THREADS
                 Py_DECREF(d);
                 return posix_error_with_allocated_filename(name);
             }
@@ -2368,7 +2398,9 @@ posix_listdir(PyObject *self, PyObject *args)
         }
         Py_DECREF(v);
     }
+    Py_BEGIN_ALLOW_THREADS
     closedir(dirp);
+    Py_END_ALLOW_THREADS
     PyMem_Free(name);
 
     return d;
@@ -2780,7 +2812,7 @@ posix_utime(PyObject *self, PyObject *args)
             !SystemTimeToFileTime(&now, &atime)) {
             win32_error("utime", NULL);
             goto done;
-            }
+        }
     }
     else if (!PyTuple_Check(arg) || PyTuple_Size(arg) != 2) {
         PyErr_SetString(PyExc_TypeError,
@@ -3858,25 +3890,60 @@ posix_getgroups(PyObject *self, PyObject *noargs)
 #define MAX_GROUPS 64
 #endif
     gid_t grouplist[MAX_GROUPS];
+
+    /* On MacOSX getgroups(2) can return more than MAX_GROUPS results 
+     * This is a helper variable to store the intermediate result when
+     * that happens.
+     *
+     * To keep the code readable the OSX behaviour is unconditional,
+     * according to the POSIX spec this should be safe on all unix-y
+     * systems.
+     */
+    gid_t* alt_grouplist = grouplist;
     int n;
 
     n = getgroups(MAX_GROUPS, grouplist);
-    if (n < 0)
-        posix_error();
-    else {
-        result = PyList_New(n);
-        if (result != NULL) {
+    if (n < 0) {
+        if (errno == EINVAL) {
+            n = getgroups(0, NULL);
+            if (n == -1) {
+                return posix_error();
+            }
+            if (n == 0) {
+                /* Avoid malloc(0) */
+                alt_grouplist = grouplist;
+            } else {
+                alt_grouplist = PyMem_Malloc(n * sizeof(gid_t));
+                if (alt_grouplist == NULL) {
+                    errno = EINVAL;
+                    return posix_error();
+                }
+                n = getgroups(n, alt_grouplist);
+                if (n == -1) {
+                    PyMem_Free(alt_grouplist);
+                    return posix_error();
+                }
+            }
+        } else {
+            return posix_error();
+        }
+    }
+    result = PyList_New(n);
+    if (result != NULL) {
         int i;
         for (i = 0; i < n; ++i) {
-            PyObject *o = PyInt_FromLong((long)grouplist[i]);
+            PyObject *o = PyInt_FromLong((long)alt_grouplist[i]);
             if (o == NULL) {
-            Py_DECREF(result);
-            result = NULL;
-            break;
+                Py_DECREF(result);
+                result = NULL;
+                break;
             }
             PyList_SET_ITEM(result, i, o);
         }
-        }
+    }
+
+    if (alt_grouplist != grouplist) {
+        PyMem_Free(alt_grouplist);
     }
 
     return result;
@@ -6505,8 +6572,10 @@ posix_read(PyObject *self, PyObject *args)
     buffer = PyString_FromStringAndSize((char *)NULL, size);
     if (buffer == NULL)
         return NULL;
-    if (!_PyVerify_fd(fd))
+    if (!_PyVerify_fd(fd)) {
+        Py_DECREF(buffer);
         return posix_error();
+    }
     Py_BEGIN_ALLOW_THREADS
     n = read(fd, PyString_AsString(buffer), size);
     Py_END_ALLOW_THREADS
@@ -6533,12 +6602,14 @@ posix_write(PyObject *self, PyObject *args)
 
     if (!PyArg_ParseTuple(args, "is*:write", &fd, &pbuf))
         return NULL;
-    if (!_PyVerify_fd(fd))
+    if (!_PyVerify_fd(fd)) {
+        PyBuffer_Release(&pbuf);
         return posix_error();
+    }
     Py_BEGIN_ALLOW_THREADS
     size = write(fd, pbuf.buf, (size_t)pbuf.len);
     Py_END_ALLOW_THREADS
-        PyBuffer_Release(&pbuf);
+    PyBuffer_Release(&pbuf);
     if (size < 0)
         return posix_error();
     return PyInt_FromSsize_t(size);
@@ -7314,33 +7385,33 @@ conv_confname(PyObject *arg, int *valuep, struct constdef *table,
               size_t tablesize)
 {
     if (PyInt_Check(arg)) {
-    *valuep = PyInt_AS_LONG(arg);
-    return 1;
+        *valuep = PyInt_AS_LONG(arg);
+        return 1;
     }
     if (PyString_Check(arg)) {
-    /* look up the value in the table using a binary search */
-    size_t lo = 0;
+        /* look up the value in the table using a binary search */
+        size_t lo = 0;
         size_t mid;
-    size_t hi = tablesize;
-    int cmp;
-    char *confname = PyString_AS_STRING(arg);
-    while (lo < hi) {
-        mid = (lo + hi) / 2;
-        cmp = strcmp(confname, table[mid].name);
-        if (cmp < 0)
-        hi = mid;
-        else if (cmp > 0)
-        lo = mid + 1;
-        else {
-        *valuep = table[mid].value;
-        return 1;
+        size_t hi = tablesize;
+        int cmp;
+        char *confname = PyString_AS_STRING(arg);
+        while (lo < hi) {
+            mid = (lo + hi) / 2;
+            cmp = strcmp(confname, table[mid].name);
+            if (cmp < 0)
+                hi = mid;
+            else if (cmp > 0)
+                lo = mid + 1;
+            else {
+                *valuep = table[mid].value;
+                return 1;
+            }
         }
-    }
-    PyErr_SetString(PyExc_ValueError, "unrecognized configuration name");
+        PyErr_SetString(PyExc_ValueError, "unrecognized configuration name");
     }
     else
-    PyErr_SetString(PyExc_TypeError,
-                    "configuration names must be strings or integers");
+        PyErr_SetString(PyExc_TypeError,
+                        "configuration names must be strings or integers");
     return 0;
 }
 
@@ -7423,14 +7494,14 @@ posix_fpathconf(PyObject *self, PyObject *args)
 
     if (PyArg_ParseTuple(args, "iO&:fpathconf", &fd,
                          conv_path_confname, &name)) {
-    long limit;
+        long limit;
 
-    errno = 0;
-    limit = fpathconf(fd, name);
-    if (limit == -1 && errno != 0)
-        posix_error();
-    else
-        result = PyInt_FromLong(limit);
+        errno = 0;
+        limit = fpathconf(fd, name);
+        if (limit == -1 && errno != 0)
+            posix_error();
+        else
+            result = PyInt_FromLong(limit);
     }
     return result;
 }
@@ -7458,10 +7529,10 @@ posix_pathconf(PyObject *self, PyObject *args)
     limit = pathconf(path, name);
     if (limit == -1 && errno != 0) {
         if (errno == EINVAL)
-        /* could be a path or name problem */
-        posix_error();
+            /* could be a path or name problem */
+            posix_error();
         else
-        posix_error_with_filename(path);
+            posix_error_with_filename(path);
     }
     else
         result = PyInt_FromLong(limit);
@@ -8249,21 +8320,21 @@ setup_confname_tables(PyObject *module)
                              sizeof(posix_constants_pathconf)
                                / sizeof(struct constdef),
                              "pathconf_names", module))
-    return -1;
+        return -1;
 #endif
 #ifdef HAVE_CONFSTR
     if (setup_confname_table(posix_constants_confstr,
                              sizeof(posix_constants_confstr)
                                / sizeof(struct constdef),
                              "confstr_names", module))
-    return -1;
+        return -1;
 #endif
 #ifdef HAVE_SYSCONF
     if (setup_confname_table(posix_constants_sysconf,
                              sizeof(posix_constants_sysconf)
                                / sizeof(struct constdef),
                              "sysconf_names", module))
-    return -1;
+        return -1;
 #endif
     return 0;
 }
@@ -8374,10 +8445,10 @@ posix_getloadavg(PyObject *self, PyObject *noargs)
 {
     double loadavg[3];
     if (getloadavg(loadavg, 3)!=3) {
-    PyErr_SetString(PyExc_OSError, "Load averages are unobtainable");
-    return NULL;
+        PyErr_SetString(PyExc_OSError, "Load averages are unobtainable");
+        return NULL;
     } else
-    return Py_BuildValue("ddd", loadavg[0], loadavg[1], loadavg[2]);
+        return Py_BuildValue("ddd", loadavg[0], loadavg[1], loadavg[2]);
 }
 #endif
 
@@ -8552,7 +8623,7 @@ posix_getresuid (PyObject *self, PyObject *noargs)
 #ifdef HAVE_GETRESGID
 PyDoc_STRVAR(posix_getresgid__doc__,
 "getresgid() -> (rgid, egid, sgid)\n\n\
-Get tuple of the current process's real, effective, and saved user ids.");
+Get tuple of the current process's real, effective, and saved group ids.");
 
 static PyObject*
 posix_getresgid (PyObject *self, PyObject *noargs)

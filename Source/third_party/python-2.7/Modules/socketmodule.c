@@ -379,7 +379,7 @@ const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
 #define SOCKETCLOSE close
 #endif
 
-#if defined(HAVE_BLUETOOTH_H) || defined(HAVE_BLUETOOTH_BLUETOOTH_H) &&  !defined(__NetBSD__)
+#if (defined(HAVE_BLUETOOTH_H) || defined(HAVE_BLUETOOTH_BLUETOOTH_H)) && !defined(__NetBSD__) && !defined(__DragonFly__)
 #define USE_BLUETOOTH 1
 #if defined(__FreeBSD__)
 #define BTPROTO_L2CAP BLUETOOTH_PROTO_L2CAP
@@ -393,11 +393,13 @@ const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
 #define _BT_L2_MEMB(sa, memb) ((sa)->l2cap_##memb)
 #define _BT_RC_MEMB(sa, memb) ((sa)->rfcomm_##memb)
 #define _BT_HCI_MEMB(sa, memb) ((sa)->hci_##memb)
-#elif defined(__NetBSD__)
+#elif defined(__NetBSD__) || defined(__DragonFly__)
 #define sockaddr_l2 sockaddr_bt
 #define sockaddr_rc sockaddr_bt
 #define sockaddr_hci sockaddr_bt
 #define sockaddr_sco sockaddr_bt
+#define SOL_HCI BTPROTO_HCI
+#define HCI_DATA_DIR SO_HCI_DIRECTION
 #define _BT_L2_MEMB(sa, memb) ((sa)->bt_##memb)
 #define _BT_RC_MEMB(sa, memb) ((sa)->bt_##memb)
 #define _BT_HCI_MEMB(sa, memb) ((sa)->bt_##memb)
@@ -1076,9 +1078,13 @@ makesockaddr(int sockfd, struct sockaddr *addr, int addrlen, int proto)
         case BTPROTO_HCI:
         {
             struct sockaddr_hci *a = (struct sockaddr_hci *) addr;
+#if defined(__NetBSD__) || defined(__DragonFly__)
+            return makebdaddr(&_BT_HCI_MEMB(a, bdaddr));
+#else
             PyObject *ret = NULL;
             ret = Py_BuildValue("i", _BT_HCI_MEMB(a, dev));
             return ret;
+#endif
         }
 
 #if !defined(__FreeBSD__)
@@ -1096,7 +1102,7 @@ makesockaddr(int sockfd, struct sockaddr *addr, int addrlen, int proto)
         }
 #endif
 
-#ifdef HAVE_NETPACKET_PACKET_H
+#if defined(HAVE_NETPACKET_PACKET_H) && defined(SIOCGIFNAME)
     case AF_PACKET:
     {
         struct sockaddr_ll *a = (struct sockaddr_ll *)addr;
@@ -1362,12 +1368,25 @@ getsockaddrarg(PySocketSockObject *s, PyObject *args,
         case BTPROTO_HCI:
         {
             struct sockaddr_hci *addr = (struct sockaddr_hci *)addr_ret;
+#if defined(__NetBSD__) || defined(__DragonFly__)
+			char *straddr = PyBytes_AS_STRING(args);
+
+			_BT_HCI_MEMB(addr, family) = AF_BLUETOOTH;
+            if (straddr == NULL) {
+                PyErr_SetString(socket_error, "getsockaddrarg: "
+                    "wrong format");
+                return 0;
+            }
+            if (setbdaddr(straddr, &_BT_HCI_MEMB(addr, bdaddr)) < 0)
+                return 0;
+#else
             _BT_HCI_MEMB(addr, family) = AF_BLUETOOTH;
             if (!PyArg_ParseTuple(args, "i", &_BT_HCI_MEMB(addr, dev))) {
                 PyErr_SetString(socket_error, "getsockaddrarg: "
                                 "wrong format");
                 return 0;
             }
+#endif
             *len_ret = sizeof *addr;
             return 1;
         }
@@ -1399,7 +1418,7 @@ getsockaddrarg(PySocketSockObject *s, PyObject *args,
     }
 #endif
 
-#ifdef HAVE_NETPACKET_PACKET_H
+#if defined(HAVE_NETPACKET_PACKET_H) && defined(SIOCGIFINDEX)
     case AF_PACKET:
     {
         struct sockaddr_ll* addr;
@@ -2729,7 +2748,7 @@ static PyObject *
 sock_sendall(PySocketSockObject *s, PyObject *args)
 {
     char *buf;
-    int len, n = -1, flags = 0, timeout;
+    int len, n = -1, flags = 0, timeout, saved_errno;
     Py_buffer pbuf;
 
     if (!PyArg_ParseTuple(args, "s*|i:sendall", &pbuf, &flags))
@@ -2742,42 +2761,44 @@ sock_sendall(PySocketSockObject *s, PyObject *args)
         return select_error();
     }
 
-    Py_BEGIN_ALLOW_THREADS
     do {
+        Py_BEGIN_ALLOW_THREADS
         timeout = internal_select(s, 1);
         n = -1;
-        if (timeout)
-            break;
+        if (!timeout) {
 #ifdef __VMS
-        n = sendsegmented(s->sock_fd, buf, len, flags);
+            n = sendsegmented(s->sock_fd, buf, len, flags);
 #else
-        n = send(s->sock_fd, buf, len, flags);
+            n = send(s->sock_fd, buf, len, flags);
 #endif
+        }
+        Py_END_ALLOW_THREADS
+        if (timeout == 1) {
+            PyBuffer_Release(&pbuf);
+            PyErr_SetString(socket_timeout, "timed out");
+            return NULL;
+        }
+        /* PyErr_CheckSignals() might change errno */
+        saved_errno = errno;
+        /* We must run our signal handlers before looping again.
+           send() can return a successful partial write when it is
+           interrupted, so we can't restrict ourselves to EINTR. */
+        if (PyErr_CheckSignals()) {
+            PyBuffer_Release(&pbuf);
+            return NULL;
+        }
         if (n < 0) {
-#ifdef EINTR
-            /* We must handle EINTR here as there is no way for
-             * the caller to know how much was sent otherwise.  */
-            if (errno == EINTR) {
-                /* Run signal handlers.  If an exception was
-                 * raised, abort and leave this socket in
-                 * an unknown state. */
-                if (PyErr_CheckSignals())
-                    return NULL;
+            /* If interrupted, try again */
+            if (saved_errno == EINTR)
                 continue;
-            }
-#endif
-            break;
+            else
+                break;
         }
         buf += n;
         len -= n;
     } while (len > 0);
-    Py_END_ALLOW_THREADS
     PyBuffer_Release(&pbuf);
 
-    if (timeout == 1) {
-        PyErr_SetString(socket_timeout, "timed out");
-        return NULL;
-    }
     if (n < 0)
         return s->errorhandler();
 
@@ -4642,9 +4663,13 @@ init_socket(void)
     PyModule_AddIntConstant(m, "BTPROTO_L2CAP", BTPROTO_L2CAP);
     PyModule_AddIntConstant(m, "BTPROTO_HCI", BTPROTO_HCI);
     PyModule_AddIntConstant(m, "SOL_HCI", SOL_HCI);
+#if !defined(__NetBSD__) && !defined(__DragonFly__)
     PyModule_AddIntConstant(m, "HCI_FILTER", HCI_FILTER);
+#endif
 #if !defined(__FreeBSD__)
+#if !defined(__NetBSD__) && !defined(__DragonFly__)
     PyModule_AddIntConstant(m, "HCI_TIME_STAMP", HCI_TIME_STAMP);
+#endif
     PyModule_AddIntConstant(m, "HCI_DATA_DIR", HCI_DATA_DIR);
     PyModule_AddIntConstant(m, "BTPROTO_SCO", BTPROTO_SCO);
 #endif
@@ -4653,16 +4678,32 @@ init_socket(void)
     PyModule_AddStringConstant(m, "BDADDR_LOCAL", "00:00:00:FF:FF:FF");
 #endif
 
-#ifdef HAVE_NETPACKET_PACKET_H
-    PyModule_AddIntConstant(m, "AF_PACKET", AF_PACKET);
-    PyModule_AddIntConstant(m, "PF_PACKET", PF_PACKET);
-    PyModule_AddIntConstant(m, "PACKET_HOST", PACKET_HOST);
-    PyModule_AddIntConstant(m, "PACKET_BROADCAST", PACKET_BROADCAST);
-    PyModule_AddIntConstant(m, "PACKET_MULTICAST", PACKET_MULTICAST);
-    PyModule_AddIntConstant(m, "PACKET_OTHERHOST", PACKET_OTHERHOST);
-    PyModule_AddIntConstant(m, "PACKET_OUTGOING", PACKET_OUTGOING);
-    PyModule_AddIntConstant(m, "PACKET_LOOPBACK", PACKET_LOOPBACK);
-    PyModule_AddIntConstant(m, "PACKET_FASTROUTE", PACKET_FASTROUTE);
+#ifdef AF_PACKET
+    PyModule_AddIntMacro(m, AF_PACKET);
+#endif
+#ifdef PF_PACKET
+    PyModule_AddIntMacro(m, PF_PACKET);
+#endif
+#ifdef PACKET_HOST
+    PyModule_AddIntMacro(m, PACKET_HOST);
+#endif
+#ifdef PACKET_BROADCAST
+    PyModule_AddIntMacro(m, PACKET_BROADCAST);
+#endif
+#ifdef PACKET_MULTICAST
+    PyModule_AddIntMacro(m, PACKET_MULTICAST);
+#endif
+#ifdef PACKET_OTHERHOST
+    PyModule_AddIntMacro(m, PACKET_OTHERHOST);
+#endif
+#ifdef PACKET_OUTGOING
+    PyModule_AddIntMacro(m, PACKET_OUTGOING);
+#endif
+#ifdef PACKET_LOOPBACK
+    PyModule_AddIntMacro(m, PACKET_LOOPBACK);
+#endif
+#ifdef PACKET_FASTROUTE
+    PyModule_AddIntMacro(m, PACKET_FASTROUTE);
 #endif
 
 #ifdef HAVE_LINUX_TIPC_H

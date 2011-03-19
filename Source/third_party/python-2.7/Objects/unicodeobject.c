@@ -285,8 +285,7 @@ int unicode_resize(register PyUnicodeObject *unicode,
   reset:
     /* Reset the object caches */
     if (unicode->defenc) {
-        Py_DECREF(unicode->defenc);
-        unicode->defenc = NULL;
+        Py_CLEAR(unicode->defenc);
     }
     unicode->hash = -1;
 
@@ -294,7 +293,7 @@ int unicode_resize(register PyUnicodeObject *unicode,
 }
 
 /* We allocate one more byte to make sure the string is
-   Ux0000 terminated -- XXX is this needed ?
+   Ux0000 terminated; some code relies on that.
 
    XXX This allocator could further be enhanced by assuring that the
    free list never reduces its size below 1.
@@ -384,8 +383,7 @@ void unicode_dealloc(register PyUnicodeObject *unicode)
             unicode->length = 0;
         }
         if (unicode->defenc) {
-            Py_DECREF(unicode->defenc);
-            unicode->defenc = NULL;
+            Py_CLEAR(unicode->defenc);
         }
         /* Add to free list */
         *(PyUnicodeObject **)unicode = free_list;
@@ -5938,7 +5936,7 @@ PyDoc_STRVAR(capitalize__doc__,
              "S.capitalize() -> unicode\n\
 \n\
 Return a capitalized version of S, i.e. make the first character\n\
-have upper case.");
+have upper case and the rest lower case.");
 
 static PyObject*
 unicode_capitalize(PyUnicodeObject *self)
@@ -7730,7 +7728,8 @@ unicode_endswith(PyUnicodeObject *self,
 PyDoc_STRVAR(format__doc__,
              "S.format(*args, **kwargs) -> unicode\n\
 \n\
-");
+Return a formatted version of S, using substitutions from args and kwargs.\n\
+The substitutions are identified by braces ('{' and '}').");
 
 static PyObject *
 unicode__format__(PyObject *self, PyObject *args)
@@ -7764,7 +7763,7 @@ unicode__format__(PyObject *self, PyObject *args)
 PyDoc_STRVAR(p_format__doc__,
              "S.__format__(format_spec) -> unicode\n\
 \n\
-");
+Return a formatted version of S as described by format_spec.");
 
 static PyObject *
 unicode__sizeof__(PyUnicodeObject *v)
@@ -8417,7 +8416,7 @@ PyObject *PyUnicode_Format(PyObject *format,
                 else if (c >= '0' && c <= '9') {
                     prec = c - '0';
                     while (--fmtcnt >= 0) {
-                        c = Py_CHARMASK(*fmt++);
+                        c = *fmt++;
                         if (c < '0' || c > '9')
                             break;
                         if ((prec*10) / 10 != prec) {

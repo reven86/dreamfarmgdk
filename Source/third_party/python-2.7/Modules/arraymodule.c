@@ -798,7 +798,7 @@ array_iter_extend(arrayobject *self, PyObject *bb)
         return -1;
 
     while ((v = PyIter_Next(it)) != NULL) {
-        if (ins1(self, (int) Py_SIZE(self), v) != 0) {
+        if (ins1(self, Py_SIZE(self), v) != 0) {
             Py_DECREF(v);
             Py_DECREF(it);
             return -1;
@@ -1090,7 +1090,7 @@ the buffer length in bytes.");
 static PyObject *
 array_append(arrayobject *self, PyObject *v)
 {
-    return ins(self, (int) Py_SIZE(self), v);
+    return ins(self, Py_SIZE(self), v);
 }
 
 PyDoc_STRVAR(append_doc,
@@ -1228,8 +1228,14 @@ array_fromfile(arrayobject *self, PyObject *args)
             PyMem_RESIZE(item, char, Py_SIZE(self)*itemsize);
             self->ob_item = item;
             self->allocated = Py_SIZE(self);
-            PyErr_SetString(PyExc_EOFError,
-                             "not enough items in file");
+            if (ferror(fp)) {
+                PyErr_SetFromErrno(PyExc_IOError);
+                clearerr(fp);
+            }
+            else {
+                PyErr_SetString(PyExc_EOFError,
+                                "not enough items in file");
+            }
             return NULL;
         }
     }

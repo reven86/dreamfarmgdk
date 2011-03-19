@@ -391,7 +391,7 @@ static PyObject *
 bytesio_readinto(bytesio *self, PyObject *args)
 {
     Py_buffer buf;
-    Py_ssize_t len;
+    Py_ssize_t len, n;
 
     CHECK_CLOSED(self);
 
@@ -399,8 +399,13 @@ bytesio_readinto(bytesio *self, PyObject *args)
         return NULL;
 
     len = buf.len;
-    if (self->pos + len > self->string_size)
-        len = self->string_size - self->pos;
+    /* adjust invalid sizes */
+    n = self->string_size - self->pos;
+    if (len > n) {
+        len = n;
+        if (len < 0)
+            len = 0;
+    }
 
     memcpy(buf.buf, self->buf + self->pos, len);
     assert(self->pos + len < PY_SSIZE_T_MAX);
@@ -825,7 +830,7 @@ static struct PyMethodDef bytesio_methods[] = {
     {"readline",   (PyCFunction)bytesio_readline,   METH_VARARGS, readline_doc},
     {"readlines",  (PyCFunction)bytesio_readlines,  METH_VARARGS, readlines_doc},
     {"read",       (PyCFunction)bytesio_read,       METH_VARARGS, read_doc},
-    {"getvalue",   (PyCFunction)bytesio_getvalue,   METH_VARARGS, getval_doc},
+    {"getvalue",   (PyCFunction)bytesio_getvalue,   METH_NOARGS,  getval_doc},
     {"seek",       (PyCFunction)bytesio_seek,       METH_VARARGS, seek_doc},
     {"truncate",   (PyCFunction)bytesio_truncate,   METH_VARARGS, truncate_doc},
     {"__getstate__",  (PyCFunction)bytesio_getstate,  METH_NOARGS, NULL},

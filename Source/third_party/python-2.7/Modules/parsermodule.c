@@ -1886,8 +1886,8 @@ count_from_dots(node *tree)
         return i-1;
 }
 
-/* 'from' ('.'* dotted_name | '.') 'import' ('*' | '(' import_as_names ')' |
- *     import_as_names
+/* import_from: ('from' ('.'* dotted_name | '.'+)
+ *               'import' ('*' | '(' import_as_names ')' | import_as_names))
  */
 static int
 validate_import_from(node *tree)
@@ -1897,7 +1897,8 @@ validate_import_from(node *tree)
         int havename = (TYPE(CHILD(tree, ndots + 1)) == dotted_name);
         int offset = ndots + havename;
         int res = validate_ntype(tree, import_from)
-                && (nch >= 4 + ndots)
+                && (offset >= 1)
+                && (nch >= 3 + offset)
                 && validate_name(CHILD(tree, 0), "from")
                 && (!havename || validate_dotted_name(CHILD(tree, ndots + 1)))
                 && validate_name(CHILD(tree, offset + 1), "import");
@@ -2682,14 +2683,15 @@ validate_funcdef(node *tree)
 static int
 validate_decorated(node *tree)
 {
-  int nch = NCH(tree);
-  int ok = (validate_ntype(tree, decorated)
-            && (nch == 2)
-            && validate_decorators(RCHILD(tree, -2))
-            && (validate_funcdef(RCHILD(tree, -1))
-                || validate_class(RCHILD(tree, -1)))
-            );
-  return ok;
+    int nch = NCH(tree);
+    int ok = (validate_ntype(tree, decorated)
+              && (nch == 2)
+              && validate_decorators(RCHILD(tree, -2)));
+    if (TYPE(RCHILD(tree, -1)) == funcdef)
+        ok = ok && validate_funcdef(RCHILD(tree, -1));
+    else
+        ok = ok && validate_class(RCHILD(tree, -1));
+    return ok;
 }
 
 static int

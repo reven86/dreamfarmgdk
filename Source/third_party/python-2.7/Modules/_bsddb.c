@@ -99,7 +99,7 @@
 #include "bsddb.h"
 #undef COMPILING_BSDDB_C
 
-static char *rcs_id = "$Id: _bsddb.c 81029 2010-05-09 14:46:46Z antoine.pitrou $";
+static char *rcs_id = "$Id: _bsddb.c 86317 2010-11-08 12:57:59Z jesus.cea $";
 
 /* --------------------------------------------------------------------- */
 /* Various macro definitions */
@@ -9976,8 +9976,23 @@ PyMODINIT_FUNC  PyInit__bsddb(void)    /* Note the two underscores */
     }
 #endif
 
-    PyDict_SetItemString(d, "api", py_api);
-    Py_DECREF(py_api);
+    /* Check error control */
+    /*
+    ** PyErr_NoMemory();
+    ** py_api = NULL;
+    */
+
+    if (py_api) {
+        PyDict_SetItemString(d, "api", py_api);
+        Py_DECREF(py_api);
+    } else { /* Something bad happened */
+        PyErr_WriteUnraisable(m);
+        if(PyErr_Warn(PyExc_RuntimeWarning,
+                "_bsddb/_pybsddb C API will be not available")) {
+            PyErr_WriteUnraisable(m);
+        }
+        PyErr_Clear();
+    }
 
     /* Check for errors */
     if (PyErr_Occurred()) {

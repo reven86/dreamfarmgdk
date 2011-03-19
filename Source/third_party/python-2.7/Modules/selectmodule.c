@@ -47,7 +47,7 @@ extern void bzero(void *, int);
 #endif
 
 #ifdef MS_WINDOWS
-#  include <winsock.h>
+#  include <winsock2.h>
 #else
 #  define SOCKET int
 #  ifdef __BEOS__
@@ -910,10 +910,9 @@ pyepoll_register(pyEpoll_Object *self, PyObject *args, PyObject *kwds)
 }
 
 PyDoc_STRVAR(pyepoll_register_doc,
-"register(fd[, eventmask]) -> bool\n\
+"register(fd[, eventmask]) -> None\n\
 \n\
-Registers a new fd or modifies an already registered fd. register() returns\n\
-True if a new fd was registered or False if the event mask for fd was modified.\n\
+Registers a new fd or modifies an already registered fd.\n\
 fd is the target file descriptor of the operation.\n\
 events is a bit set composed of the various EPOLL constants; the default\n\
 is EPOLL_IN | EPOLL_OUT | EPOLL_PRI.\n\
@@ -1769,6 +1768,10 @@ initselect(void)
     PyModule_AddObject(m, "error", SelectError);
 
 #ifdef PIPE_BUF
+#ifdef HAVE_BROKEN_PIPE_BUF
+#undef PIPE_BUF
+#define PIPE_BUF 512
+#endif
     PyModule_AddIntConstant(m, "PIPE_BUF", PIPE_BUF);
 #endif
 

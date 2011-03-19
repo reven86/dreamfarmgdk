@@ -636,9 +636,13 @@ np_ulonglong(char *p, PyObject *v, const formatdef *f)
 static int
 np_bool(char *p, PyObject *v, const formatdef *f)
 {
-    BOOL_TYPE y;
+    int y;
+    BOOL_TYPE x;
     y = PyObject_IsTrue(v);
-    memcpy(p, (char *)&y, sizeof y);
+    if (y < 0)
+        return -1;
+    x = y;
+    memcpy(p, (char *)&x, sizeof x);
     return 0;
 }
 
@@ -908,9 +912,11 @@ bp_double(char *p, PyObject *v, const formatdef *f)
 static int
 bp_bool(char *p, PyObject *v, const formatdef *f)
 {
-    char y;
+    int y;
     y = PyObject_IsTrue(v);
-    memcpy(p, (char *)&y, sizeof y);
+    if (y < 0)
+        return -1;
+    *p = (char)y;
     return 0;
 }
 
@@ -1283,6 +1289,9 @@ prepare_s(PyStructObject *self)
         PyErr_NoMemory();
         return -1;
     }
+    /* Free any s_codes value left over from a previous initialization. */
+    if (self->s_codes != NULL)
+        PyMem_FREE(self->s_codes);
     self->s_codes = codes;
 
     s = fmt;

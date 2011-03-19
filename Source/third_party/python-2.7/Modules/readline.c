@@ -356,6 +356,38 @@ PyDoc_STRVAR(doc_set_completer_delims,
 "set_completer_delims(string) -> None\n\
 set the readline word delimiters for tab-completion");
 
+/* _py_free_history_entry: Utility function to free a history entry. */
+
+#if defined(RL_READLINE_VERSION) && RL_READLINE_VERSION >= 0x0500
+
+/* Readline version >= 5.0 introduced a timestamp field into the history entry
+   structure; this needs to be freed to avoid a memory leak.  This version of
+   readline also introduced the handy 'free_history_entry' function, which
+   takes care of the timestamp. */
+
+static void
+_py_free_history_entry(HIST_ENTRY *entry)
+{
+    histdata_t data = free_history_entry(entry);
+    free(data);
+}
+
+#else
+
+/* No free_history_entry function;  free everything manually. */
+
+static void
+_py_free_history_entry(HIST_ENTRY *entry)
+{
+    if (entry->line)
+        free((void *)entry->line);
+    if (entry->data)
+        free(entry->data);
+    free(entry);
+}
+
+#endif
+
 static PyObject *
 py_remove_history(PyObject *self, PyObject *args)
 {
@@ -377,12 +409,7 @@ py_remove_history(PyObject *self, PyObject *args)
         return NULL;
     }
     /* free memory allocated for the history entry */
-    if (entry->line)
-        free((void *)entry->line);
-    if (entry->data)
-        free(entry->data);
-    free(entry);
-
+    _py_free_history_entry(entry);
     Py_RETURN_NONE;
 }
 
@@ -414,12 +441,7 @@ py_replace_history(PyObject *self, PyObject *args)
         return NULL;
     }
     /* free memory allocated for the old history entry */
-    if (old_entry->line)
-        free((void *)old_entry->line);
-    if (old_entry->data)
-        free(old_entry->data);
-    free(old_entry);
-
+    _py_free_history_entry(old_entry);
     Py_RETURN_NONE;
 }
 
@@ -490,6 +512,25 @@ PyDoc_STRVAR(doc_get_completer,
 \n\
 Returns current completer function.");
 
+/* Private function to get current length of history.  XXX It may be
+ * possible to replace this with a direct use of history_length instead,
+ * but it's not clear whether BSD's libedit keeps history_length up to date.
+ * See issue #8065.*/
+
+static int
+_py_get_history_length(void)
+{
+    HISTORY_STATE *hist_st = history_get_history_state();
+    int length = hist_st->length;
+    /* the history docs don't say so, but the address of hist_st changes each
+       time history_get_history_state is called which makes me think it's
+       freshly malloc'd memory...  on the other hand, the address of the last
+       line stays the same as long as history isn't extended, so it appears to
+       be malloc'd but managed by the history package... */
+    free(hist_st);
+    return length;
+}
+
 /* Exported function to get any element of history */
 
 static PyObject *
@@ -508,9 +549,7 @@ get_history_item(PyObject *self, PyObject *args)
          * code doesn't have to worry about the
          * difference.
          */
-        HISTORY_STATE *hist_st;
-        hist_st = history_get_history_state();
-
+        int length = _py_get_history_length();
         idx --;
 
         /*
@@ -518,7 +557,7 @@ get_history_item(PyObject *self, PyObject *args)
          * the index is out of range, therefore
          * test for that and fail gracefully.
          */
-        if (idx < 0 || idx >= hist_st->length) {
+        if (idx < 0 || idx >= length) {
             Py_RETURN_NONE;
         }
     }
@@ -540,10 +579,7 @@ return the current contents of history item at index.");
 static PyObject *
 get_current_history_length(PyObject *self, PyObject *noarg)
 {
-    HISTORY_STATE *hist_st;
-
-    hist_st = history_get_history_state();
-    return PyInt_FromLong(hist_st ? (long) hist_st->length : (long) 0);
+    return PyInt_FromLong((long)_py_get_history_length());
 }
 
 PyDoc_STRVAR(doc_get_current_history_length,
@@ -1024,29 +1060,22 @@ call_readline(FILE *sys_stdin, FILE *sys_stdout, char *prompt)
     n = strlen(p);
     if (n > 0) {
         const char *line;
-        HISTORY_STATE *state = history_get_history_state();
-        if (state->length > 0)
+        int length = _py_get_history_length();
+        if (length > 0)
 #ifdef __APPLE__
             if (using_libedit_emulation) {
                 /*
                  * Libedit's emulation uses 0-based indexes,
                  * the real readline uses 1-based indexes.
                  */
-                line = history_get(state->length - 1)->line;
+                line = history_get(length - 1)->line;
             } else
 #endif /* __APPLE__ */
-            line = history_get(state->length)->line;
+            line = history_get(length)->line;
         else
             line = "";
         if (strcmp(p, line))
             add_history(p);
-        /* the history docs don't say so, but the address of state
-           changes each time history_get_history_state is called
-           which makes me think it's freshly malloc'd memory...
-           on the other hand, the address of the last line stays the
-           same as long as history isn't extended, so it appears to
-           be malloc'd but managed by the history package... */
-        free(state);
     }
     /* Copy the malloc'ed buffer into a PyMem_Malloc'ed one and
        release the original. */

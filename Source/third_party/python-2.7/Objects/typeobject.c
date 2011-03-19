@@ -188,8 +188,8 @@ assign_version_tag(PyTypeObject *type)
 
 
 static PyMemberDef type_members[] = {
-    {"__basicsize__", T_INT, offsetof(PyTypeObject,tp_basicsize),READONLY},
-    {"__itemsize__", T_INT, offsetof(PyTypeObject, tp_itemsize), READONLY},
+    {"__basicsize__", T_PYSSIZET, offsetof(PyTypeObject,tp_basicsize),READONLY},
+    {"__itemsize__", T_PYSSIZET, offsetof(PyTypeObject, tp_itemsize), READONLY},
     {"__flags__", T_LONG, offsetof(PyTypeObject, tp_flags), READONLY},
     {"__weakrefoffset__", T_LONG,
      offsetof(PyTypeObject, tp_weaklistoffset), READONLY},
@@ -307,8 +307,11 @@ type_set_module(PyTypeObject *type, PyObject *value, void *context)
 static PyObject *
 type_abstractmethods(PyTypeObject *type, void *context)
 {
-    PyObject *mod = PyDict_GetItemString(type->tp_dict,
-                                         "__abstractmethods__");
+    PyObject *mod = NULL;
+    /* type itself has an __abstractmethods__ descriptor (this). Don't return
+       that. */
+    if (type != &PyType_Type)
+        mod = PyDict_GetItemString(type->tp_dict, "__abstractmethods__");
     if (!mod) {
         PyErr_Format(PyExc_AttributeError, "__abstractmethods__");
         return NULL;
@@ -2655,7 +2658,7 @@ static PyMethodDef type_methods[] = {
     {"__instancecheck__", type___instancecheck__, METH_O,
      PyDoc_STR("__instancecheck__() -> check if an object is an instance")},
     {"__subclasscheck__", type___subclasscheck__, METH_O,
-     PyDoc_STR("__subclasschck__ -> check if an class is a subclass")},
+     PyDoc_STR("__subclasscheck__() -> check if a class is a subclass")},
     {0}
 };
 
@@ -6001,7 +6004,7 @@ static slotdef slotdefs[] = {
            wrap_descr_delete, "descr.__delete__(obj)"),
     FLSLOT("__init__", tp_init, slot_tp_init, (wrapperfunc)wrap_init,
            "x.__init__(...) initializes x; "
-           "see x.__class__.__doc__ for signature",
+           "see help(type(x)) for signature",
            PyWrapperFlag_KEYWORDS),
     TPSLOT("__new__", tp_new, slot_tp_new, NULL, ""),
     TPSLOT("__del__", tp_del, slot_tp_del, NULL, ""),

@@ -118,6 +118,7 @@ pwd pwdmodule.c			# this is needed to find out the user's home dir
 				# if $HOME is not set
 _sre _sre.c			# Fredrik Lundh's new regular expressions
 _codecs _codecsmodule.c		# access to the builtin codecs and codec registry
+_weakref _weakref.c             # weak references
 
 # The zipimport module is always imported at startup. Having it as a
 # builtin module avoids some bootstrapping problems and reduces overhead.
@@ -173,7 +174,6 @@ GLHACK=-Dclear=__GLclear
 #_struct _struct.c	# binary structure packing/unpacking
 #time timemodule.c # -lm # time operations and variables
 #operator operator.c	# operator.add() and similar goodies
-#_weakref _weakref.c	# basic weak reference support
 #_testcapi _testcapimodule.c    # Python C API test module
 #_random _randommodule.c	# Random number generator
 #_collections _collectionsmodule.c # Container types

@@ -1,7 +1,7 @@
 /*
  /  Author: Sam Rushing <rushing@nightmare.com>
  /  Hacked for Unix by AMK
- /  $Id: mmapmodule.c 81029 2010-05-09 14:46:46Z antoine.pitrou $
+ /  $Id: mmapmodule.c 83410 2010-08-01 15:47:53Z brian.curtin $
 
  / Modified to support mmap with offset - to map a 'window' of a file
  /   Author:  Yotam Medini  yotamm@mellanox.co.il
@@ -1280,6 +1280,11 @@ new_mmap_object(PyTypeObject *type, PyObject *args, PyObject *kwdict)
                    "don't use 0 for anonymous memory");
      */
     if (fileno != -1 && fileno != 0) {
+        /* Ensure that fileno is within the CRT's valid range */
+        if (_PyVerify_fd(fileno) == 0) {
+            PyErr_SetFromErrno(mmap_module_error);
+            return NULL;
+        }
         fh = (HANDLE)_get_osfhandle(fileno);
         if (fh==(HANDLE)-1) {
             PyErr_SetFromErrno(mmap_module_error);

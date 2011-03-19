@@ -415,6 +415,9 @@ call_character_handler(xmlparseobject *self, const XML_Char *buffer, int len)
     PyObject *args;
     PyObject *temp;
 
+    if (!have_handler(self, CharacterData))
+        return -1;
+
     args = PyTuple_New(1);
     if (args == NULL)
         return -1;
@@ -1812,7 +1815,7 @@ PyDoc_STRVAR(pyexpat_module_documentation,
 static PyObject *
 get_version_string(void)
 {
-    static char *rcsid = "$Revision: 81029 $";
+    static char *rcsid = "$Revision: 85819 $";
     char *rev = rcsid;
     int i = 0;
 

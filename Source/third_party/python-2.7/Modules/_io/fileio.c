@@ -268,7 +268,8 @@ fileio_init(PyObject *oself, PyObject *args, PyObject *kwds)
             if (rwa) {
             bad_mode:
                 PyErr_SetString(PyExc_ValueError,
-                                "Must have exactly one of read/write/append mode");
+                                "Must have exactly one of read/write/append "
+                                "mode and at most one plus");
                 goto error;
             }
             rwa = 1;
@@ -367,8 +368,13 @@ fileio_init(PyObject *oself, PyObject *args, PyObject *kwds)
            end of file (otherwise, it might be done only on the
            first write()). */
         PyObject *pos = portable_lseek(self->fd, NULL, 2);
-        if (pos == NULL)
+        if (pos == NULL) {
+            if (closefd) {
+                close(self->fd);
+                self->fd = -1;
+            }
             goto error;
+        }
         Py_DECREF(pos);
     }
 

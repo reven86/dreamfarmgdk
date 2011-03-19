@@ -1045,7 +1045,7 @@ print_error_text(PyObject *f, int offset, const char *text)
 {
     char *nl;
     if (offset >= 0) {
-        if (offset > 0 && offset == (int)strlen(text))
+        if (offset > 0 && offset == strlen(text) && text[offset - 1] == '\n')
             offset--;
         for (;;) {
             nl = strchr(text, '\n');
@@ -1149,7 +1149,7 @@ PyErr_PrintEx(int set_sys_last_vars)
         PySys_SetObject("last_traceback", tb);
     }
     hook = PySys_GetObject("excepthook");
-    if (hook) {
+    if (hook && hook != Py_None) {
         PyObject *args = PyTuple_Pack(3,
             exception, v, tb ? tb : Py_None);
         PyObject *result = PyEval_CallObject(hook, args);
@@ -1199,7 +1199,7 @@ PyErr_Display(PyObject *exception, PyObject *value, PyObject *tb)
     int err = 0;
     PyObject *f = PySys_GetObject("stderr");
     Py_INCREF(value);
-    if (f == NULL)
+    if (f == NULL || f == Py_None)
         fprintf(stderr, "lost sys.stderr\n");
     else {
         if (Py_FlushLine())

@@ -6,13 +6,10 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		Optimization="3"
-		FavorSizeOrSpeed="1"
-		WholeProgramOptimization="true"
 		PreprocessorDefinitions="NDEBUG"
 	/>
 	<UserMacro
 		Name="KillPythonExe"
 		Value="$(OutDir)\kill_python.exe"
-	/>
+	/>	
 </VisualStudioPropertySheet>

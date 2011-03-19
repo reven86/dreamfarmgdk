@@ -55,14 +55,15 @@ _Py_acosh(double x)
     else if (x >= two_pow_p28) {        /* x > 2**28 */
         if (Py_IS_INFINITY(x)) {
             return x+x;
-        } else {
-            return log(x)+ln2;                  /* acosh(huge)=log(2x) */
+        }
+        else {
+            return log(x)+ln2;          /* acosh(huge)=log(2x) */
         }
     }
     else if (x == 1.) {
-        return 0.0;                             /* acosh(1) = 0 */
+        return 0.0;                     /* acosh(1) = 0 */
     }
-    else if (x > 2.) {                          /* 2 < x < 2**28 */
+    else if (x > 2.) {                  /* 2 < x < 2**28 */
         double t = x*x;
         return log(2.0*x - 1.0 / (x + sqrt(t - 1.0)));
     }
@@ -94,7 +95,7 @@ _Py_asinh(double x)
         return x+x;
     }
     if (absx < two_pow_m28) {           /* |x| < 2**-28 */
-        return x;               /* return x inexact except 0 */
+        return x;                       /* return x inexact except 0 */
     }
     if (absx > two_pow_p28) {           /* |x| > 2**28 */
         w = log(absx)+ln2;
@@ -114,9 +115,9 @@ _Py_asinh(double x)
  * Method :
  *    1.Reduced x to positive by atanh(-x) = -atanh(x)
  *    2.For x>=0.5
- *                1           2x                          x
- *      atanh(x) = --- * log(1 + -------) = 0.5 * log1p(2 * --------)
- *                2          1 - x                    1 - x
+ *                  1              2x                          x
+ *      atanh(x) = --- * log(1 + -------) = 0.5 * log1p(2 * -------)
+ *                  2             1 - x                      1 - x
  *
  *      For x<0.5
  *      atanh(x) = 0.5*log1p(2x+2x*x/(1-x))
@@ -173,15 +174,15 @@ _Py_expm1(double x)
     */
 
     if (fabs(x) < 0.7) {
-    double u;
-    u = exp(x);
-    if (u == 1.0)
-        return x;
-    else
-        return (u - 1.0) * x / log(u);
+        double u;
+        u = exp(x);
+        if (u == 1.0)
+            return x;
+        else
+            return (u - 1.0) * x / log(u);
     }
     else
-    return exp(x) - 1.0;
+        return exp(x) - 1.0;
 }
 
 /* log1p(x) = log(1+x).  The log1p function is designed to avoid the
@@ -194,7 +195,7 @@ _Py_log1p(double x)
     /* For x small, we use the following approach.  Let y be the nearest float
        to 1+x, then
 
-      1+x = y * (1 - (y-1-x)/y)
+         1+x = y * (1 - (y-1-x)/y)
 
        so log(1+x) = log(y) + log(1-(y-1-x)/y).  Since (y-1-x)/y is tiny, the
        second term is well approximated by (y-1-x)/y.  If abs(x) >=
@@ -213,17 +214,19 @@ _Py_log1p(double x)
 
     double y;
     if (fabs(x) < DBL_EPSILON/2.) {
-    return x;
-    } else if (-0.5 <= x && x <= 1.) {
-    /* WARNING: it's possible than an overeager compiler
-       will incorrectly optimize the following two lines
-       to the equivalent of "return log(1.+x)". If this
-       happens, then results from log1p will be inaccurate
-       for small x. */
-    y = 1.+x;
-    return log(y)-((y-1.)-x)/y;
-    } else {
-    /* NaNs and infinities should end up here */
-    return log(1.+x);
+        return x;
+    }
+    else if (-0.5 <= x && x <= 1.) {
+        /* WARNING: it's possible than an overeager compiler
+           will incorrectly optimize the following two lines
+           to the equivalent of "return log(1.+x)". If this
+           happens, then results from log1p will be inaccurate
+           for small x. */
+        y = 1.+x;
+        return log(y)-((y-1.)-x)/y;
+    }
+    else {
+        /* NaNs and infinities should end up here */
+        return log(1.+x);
     }
 }

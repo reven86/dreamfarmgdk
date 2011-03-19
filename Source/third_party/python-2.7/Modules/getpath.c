@@ -232,7 +232,11 @@ copy_absolute(char *path, char *p)
     if (p[0] == SEP)
         strcpy(path, p);
     else {
-        getcwd(path, MAXPATHLEN);
+        if (!getcwd(path, MAXPATHLEN)) {
+            /* unable to get the current directory */
+            strcpy(path, p);
+            return;
+        }
         if (p[0] == '.' && p[1] == SEP)
             p += 2;
         joinpath(path, p);
@@ -471,7 +475,7 @@ calculate_path(void)
         if (!ismodule(argv0_path)) {
                 /* We are in the build directory so use the name of the
                    executable - we know that the absolute path is passed */
-                strncpy(argv0_path, prog, MAXPATHLEN);
+                strncpy(argv0_path, progpath, MAXPATHLEN);
         }
         else {
                 /* Use the location of the library as the progpath */
