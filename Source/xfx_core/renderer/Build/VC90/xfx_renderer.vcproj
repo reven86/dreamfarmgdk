@@ -78,7 +78,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\..\..\Build\VC90\PropertySheets\release.vsprops;..\..\..\..\..\Build\VC90\PropertySheets\common.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Build\VC90\PropertySheets\common.vsprops;..\..\..\..\..\Build\VC90\PropertySheets\release.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>

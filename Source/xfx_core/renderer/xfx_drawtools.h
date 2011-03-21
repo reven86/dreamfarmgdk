@@ -43,12 +43,14 @@ public:
 	struct TriVertex
 	{
 		Vec3	pos;			//!< Position.
+		Vec3	norm;			//!< Normal.
 		ARGB	color;			//!< Color.
 		float	tu;				//!< %Texture coordinate u.
 		float	tv;				//!< %Texture coordinate v.
 
 		TriVertex		( ) { };
-		TriVertex		( const Vec3& ver, const ARGB& c, const float& u, const float& v ) : pos( ver ), color( c ), tu( u ), tv( v ) { };
+		TriVertex		( const Vec3& ver, const Vec3& n, const ARGB& c, const float& u, const float& v ) :
+			pos( ver ), norm( n ), color( c ), tu( u ), tv( v ) { };
 	};
 
 private:
@@ -76,7 +78,7 @@ private:
 	typedef TriBuffer SpriteBuffer;			//it's same
 
 	static const int FVF_LINEVERTEX		= D3DFVF_XYZ | D3DFVF_DIFFUSE;
-	static const int FVF_TRIVERTEX		= D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+	static const int FVF_TRIVERTEX		= D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1;
 	static const int FVF_SPRITEVERTEX	= D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1;
 
 	struct DrawChunkInfo

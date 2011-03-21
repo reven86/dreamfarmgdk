@@ -62,7 +62,11 @@ HRESULT RenderTargetGroup::CreateCompatibleDepthStencil( )
 	D3DFORMAT fmts[ ] = { D3DFMT_D32, D3DFMT_D24S8, D3DFMT_D24X8, D3DFMT_D16 };
 
 	D3DSURFACE_DESC sd;
+#if __XFX_DIRECTX_VER__ < 9
+	if( FAILED( hr = ( ( LPDIRECT3DTEXTURE8 ) mRenderedTexturePtr->GetD3DTex( ) )->GetLevelDesc( 0, &sd ) ) )
+#else
 	if( FAILED( hr = ( ( LPDIRECT3DTEXTURE9 ) mRenderedTexturePtr->GetD3DTex( ) )->GetLevelDesc( 0, &sd ) ) )
+#endif
 		return hr;
 
 	D3DDEVICE_CREATION_PARAMETERS dcp;
@@ -106,7 +110,11 @@ HRESULT RenderTargetGroup::ValidateDepthStencilMatch( RenderedTexture * tex, Dep
 	HRESULT hr;
 
 	D3DSURFACE_DESC sd;
+#if __XFX_DIRECTX_VER__ < 9
+	if( FAILED( hr = ( ( LPDIRECT3DTEXTURE8 ) tex->GetD3DTex( ) )->GetLevelDesc( 0, &sd ) ) )
+#else
 	if( FAILED( hr = ( ( LPDIRECT3DTEXTURE9 ) tex->GetD3DTex( ) )->GetLevelDesc( 0, &sd ) ) )
+#endif
 		return hr;
 
 	D3DSURFACE_DESC ds_sd;
@@ -151,7 +159,11 @@ HRESULT RenderTargetGroup::BeginUsing( )
 	LPDIRECT3DSURFACE9 saved_depth;
 #endif
 
+#if (__XFX_DIRECTX_VER__ < 9)
+	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( &saved_color ) ) )
+#else
 	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( 0, &saved_color ) ) )
+#endif
 		return hr;
 
 	mpSavedColor.reset( saved_color, IUnknownDeleter( ) );
@@ -163,11 +175,16 @@ HRESULT RenderTargetGroup::BeginUsing( )
 
 	xfx::Renderer::Instance( ).GetDrawTools( ).FlushAll( );
 
+#if (__XFX_DIRECTX_VER__ < 9)
+	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( mRenderedTexturePtr->GetD3DSurface( ), mDepthStencilPtr ? mDepthStencilPtr->GetD3DSurface( ) : NULL ) ) )
+		return hr;
+#else
 	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( 0, mRenderedTexturePtr->GetD3DSurface( ) ) ) )
 		return hr;
 
 	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetDepthStencilSurface( mDepthStencilPtr ? mDepthStencilPtr->GetD3DSurface( ) : NULL ) ) )
 		return hr;
+#endif
 
 	if( GetClearFlags( ) )
 		xfx::Renderer::Instance( ).pD3DDevice( )->Clear( 0, NULL, mDepthStencilPtr && !mDepthStencilPtr->IsEmpty( ) ? GetClearFlags( ) : GetClearFlags( ) & ~D3DCLEAR_ZBUFFER, GetClearColor( ).dword, GetClearDepth( ), GetClearStencil( ) );
@@ -185,11 +202,16 @@ void RenderTargetGroup::EndUsing( )
 
 	xfx::Renderer::Instance( ).GetDrawTools( ).FlushAll( );
 
+#if (__XFX_DIRECTX_VER__ < 9)
+	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( mpSavedColor.get( ), mpSavedDepth.get( ) ) ) )
+		return;
+#else
 	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( 0, mpSavedColor.get( ) ) ) )
 		return;
 
 	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetDepthStencilSurface( mpSavedDepth.get( ) ) ) )
 		return;
+#endif
 
 	mpSavedColor.reset( );
 	mpSavedDepth.reset( );

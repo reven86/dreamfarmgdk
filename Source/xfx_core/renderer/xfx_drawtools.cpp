@@ -47,7 +47,7 @@ DrawTools::~DrawTools( )
 void DrawTools::Init( )
 {
 	mLines.assign( r_maxlines->AsInt( ), LineVertex( ) );
-	mTris.assign( r_maxtris->AsInt( ) * 4, TriVertex( ) );
+	mTris.assign( r_maxtris->AsInt( ) * 3, TriVertex( ) );
 	mTrisBuffer.assign( r_maxtris->AsInt( ), TriBuffer( ) );
 	mSpritesVerts.assign( r_maxsprites->AsInt( ) * 4, SpriteVertex( ) );
 	mSpritesBuffer.assign( r_maxsprites->AsInt( ), SpriteBuffer( ) );
@@ -60,7 +60,7 @@ void DrawTools::Init( )
 	mSpritesBufferCount = 0;
 	mDrawChunksCount = 0;
 
-	mTrisVB.Create( sizeof( TriVertex ), r_maxtris->AsInt( ) * 6, FVF_TRIVERTEX, true );
+	mTrisVB.Create( sizeof( TriVertex ), r_maxtris->AsInt( ) * 3, FVF_TRIVERTEX, true );
 	mSpritesVB.Create( sizeof( SpriteVertex ), r_maxsprites->AsInt( ) * 4, FVF_SPRITEVERTEX, true );
 
 	mSpritesIB.Create( false, r_maxsprites->AsInt( )* 6, false );
@@ -272,7 +272,7 @@ void DrawTools::PushDrawTris( int numtris, const TriVertex * vertices, const boo
 		mTrisBufferCount++;
 	}
 
-	std::copy( vertices, vertices + 3 * numtris, mTris.begin( ) + mTrisCount );
+	std::copy( vertices, vertices + 3 * numtris, mTris.begin( ) + mTrisCount * 3 );
 	mTrisCount += numtris;
 
 	if( shader )
@@ -666,7 +666,7 @@ void DrawTools::FlushTrisAndSprites( )
 
 	if( mTrisCount != 0 )
 	{
-		BufferLocker< VertexBuffer > bl( mTrisVB, 0, mTrisCount );
+		BufferLocker< VertexBuffer > bl( mTrisVB, 0, mTrisCount * 3 );
 
 		if( bl.data< void >( ) )
 			memcpy( bl.data< void >( ), &( *mTris.begin( ) ), sizeof( TriVertex ) * mTrisCount * 3 );

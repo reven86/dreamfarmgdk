@@ -61,3 +61,5 @@
 /Source/xfx_core/python_dll/Build/VC90/Debug
 /Source/third_party/pcre-7.7/build/vc90/pcre/Release
 /Source/third_party/pcre-7.7/build/vc90/pcre/Debug
+/Source/xfx_core/python_dll/Build/VC90/Release
+/Source/xfx_core/python_dll/Build/VC90/Shipping

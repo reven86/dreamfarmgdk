@@ -77,7 +77,12 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/format.hpp>
-#include <boost/thread/recursive_mutex.hpp>
+
+//#pragma managed(push, off)
+//extern "C" void tss_cleanup_implemented(void) {}
+//#include <boost/thread/recursive_mutex.hpp>
+//#pragma managed(pop)
+
 #include <boost/foreach.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/type_traits.hpp>

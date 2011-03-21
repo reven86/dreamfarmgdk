@@ -821,6 +821,10 @@ void Renderer::Shutdown( )
 
 void Renderer::TryEnableAlphaToCoverage( )
 {
+#if (__XFX_DIRECTX_VER__ < 9)
+	return;
+#else
+
 	if( !mAlphaToCoverageSupported )
 		return;
 
@@ -834,10 +838,16 @@ void Renderer::TryEnableAlphaToCoverage( )
 		pD3DDevice( )->SetRenderState(D3DRS_ADAPTIVETESS_Y,(D3DFORMAT)MAKEFOURCC('A', 'T', 'O', 'C'));
 		break;
 	}
+
+#endif
 }
 
 void Renderer::DisableAlphaToCoverage( )
 {
+#if (__XFX_DIRECTX_VER__ < 9)
+	return;
+#else
+
 	switch( mDeviceVendor )
 	{
 	case EKV_ATI:
@@ -848,6 +858,8 @@ void Renderer::DisableAlphaToCoverage( )
 		pD3DDevice( )->SetRenderState(D3DRS_ADAPTIVETESS_Y,D3DFMT_UNKNOWN);
 		break;
 	}
+
+#endif
 }
 
 void Renderer::BeginFrame( )
@@ -1122,16 +1134,19 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 
 	// check desired CSAA quality support
 	boost::array< boost::tuple< D3DMULTISAMPLE_TYPE, unsigned, const char * >, 7 > ms_types;
-	ms_types[ 0 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONE, 0, "" );
-	ms_types[ 1 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 1, "2x" );
-	ms_types[ 2 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 3, "4x" );
-	ms_types[ 3 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 2, "8x" );
-	ms_types[ 4 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 0, "8xQ" );
-	ms_types[ 5 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 4, "16x" );
-	ms_types[ 6 ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 2, "16xQ" );
+	unsigned ms_types_ind = 0;
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONE, 0, "" );
+#if !(__XFX_DIRECTX_VER__ < 9)
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 1, "2x" );
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_NONMASKABLE, 3, "4x" );
+#endif
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 2, "8x" );
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 0, "8xQ" );
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_4_SAMPLES, 4, "16x" );
+	ms_types[ ms_types_ind++ ] = boost::tuples::make_tuple( D3DMULTISAMPLE_8_SAMPLES, 2, "16xQ" );
 
 	unsigned desired_csaa_ind = 0;
-	for( unsigned i = 1; i < ms_types.size( ); i++ )
+	for( unsigned i = 1; i < ms_types_ind; i++ )
 		if( r_device_csaa->Value( ) == ms_types[ i ].get< 2 >( ) )
 		{
 			desired_csaa_ind = i;
@@ -1244,6 +1259,7 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 #endif
 
 		desired_csaa_ind = old_desired_csaa_ind;
+#if !(__XFX_DIRECTX_VER__ < 9)
 		if( desired_csaa_ind > 0 )
 		{
 			while( desired_csaa_ind > 0 )
@@ -1286,6 +1302,7 @@ HRESULT Renderer::TryToCreateD3DDevice( HWND hwnd )
 			}
 		}
 		else
+#endif
 		{
 			gMess( "...multisample type is not set" );
 		}

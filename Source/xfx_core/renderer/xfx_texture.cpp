@@ -600,11 +600,11 @@ HRESULT Texture::LoadMemory (const void * p, unsigned long filelen)
 	{
 	XFX_PLACE_DEVICE_LOCK;
 
-	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SCRATCH, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, D3DX_DEFAULT, num_mips, 0, fmt, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
 	}
 
-	CopyTexture (tex, info.Width, info.Height);
+	hr = CopyTexture (tex, info.Width, info.Height);
 
 	tex->Release ();
 
@@ -1021,11 +1021,11 @@ HRESULT CubemapTexture::LoadMemory (const void * p, unsigned long filelen)
 	{
 	XFX_PLACE_DEVICE_LOCK;
 
-	if (FAILED (hr = D3DXCreateCubeTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_SCRATCH, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
+	if (FAILED (hr = D3DXCreateCubeTextureFromFileInMemoryEx (Renderer::Instance ().pD3DDevice (), p, filelen, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_SYSTEMMEM, D3DX_FILTER_NONE, D3DX_DEFAULT, 0, &info, NULL, &tex)))
 		return hr;
 	}
 
-	CopyTexture (tex, info.Width);
+	hr = CopyTexture (tex, info.Width);
 
 	tex->Release ();
 
