@@ -490,7 +490,7 @@ Vec2 Input::GetCursorPos( ) const
 	POINT p;
 	if ( ::GetCursorPos( &p ) )
 		if( ::ScreenToClient( gGetApplication( ).HWnd( ), &p ) )
-			return Vec2( p.x, p.y );
+			return Vec2( static_cast< float >( p.x ), static_cast< float >( p.y ) );
 
 	return Vec2( 0.0f );
 }
