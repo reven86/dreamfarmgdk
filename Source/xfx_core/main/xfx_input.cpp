@@ -485,6 +485,16 @@ void Input::SetMouseMode( const bool& isexclusive )
 	}
 }
 
+Vec2 Input::GetCursorPos( ) const
+{
+	POINT p;
+	if ( ::GetCursorPos( &p ) )
+		if( ::ScreenToClient( gGetApplication( ).HWnd( ), &p ) )
+			return Vec2( p.x, p.y );
+
+	return Vec2( 0.0f );
+}
+
 const char * Input::KeyName( unsigned key ) const
 {
 	_ASSERTE( key < MAX_KEYS );

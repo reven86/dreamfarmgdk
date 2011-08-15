@@ -217,6 +217,38 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\generated\_D3DVIEWPORT8.pypp.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Shipping|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\generated\_D3DVIEWPORT8.pypp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\generated\_D3DVIEWPORT9.pypp.cpp"
 				>
 			</File>
@@ -466,6 +498,14 @@
 			</File>
 			<File
 				RelativePath="..\..\generated\Input.pypp.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ITexture.pypp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\generated\ITexture.pypp.hpp"
 				>
 			</File>
 			<File

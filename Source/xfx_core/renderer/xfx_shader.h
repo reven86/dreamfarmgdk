@@ -236,7 +236,7 @@ public:
 	static Cache< Shader >&					Cache					( ) { return msCache; };
 
 	//! Get texture by name.
-	boost::shared_ptr< const ITexture >		TextureMap				( const String& name ) const;
+	boost::shared_ptr< const ITexture >		GetTextureMap			( const String& name ) const;
 
 	/*! \brief Get texture on specific stage.
 	 *

@@ -46,10 +46,10 @@ public:
 	void							Init						( unsigned width, unsigned height );
 
 	//! Get viewport width.
-	const unsigned&					Width						( ) const { return mWidth; };
+	const unsigned&					GetWidth					( ) const { return mWidth; };
 
 	//! Get viewport height.
-	const unsigned&					Height						( ) const { return mHeight; };
+	const unsigned&					GetHeight					( ) const { return mHeight; };
 
 	//! Get viewport 1.0 / width.
 	const float&					InvWidth					( ) const { return mInvWidth; };
@@ -58,10 +58,10 @@ public:
 	const float&					InvHeight					( ) const { return mInvHeight; };
 
 	//! Set viewport width.
-	void							Width						( unsigned width );
+	void							SetWidth					( unsigned width );
 
 	//! Set viewport height.
-	void							Height						( unsigned height );
+	void							SetHeight					( unsigned height );
 
 	//! Viewport to render surface coordinate mapping.
 	boost::tuple< float, float >	MapViewportToRenderer		( float x, float y ) const;

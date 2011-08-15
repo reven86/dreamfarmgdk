@@ -82,8 +82,8 @@ bool GUI::ProcessWndMessage( HWND /*hwnd*/, UINT msg, WPARAM wparam, LPARAM lpar
 	case WM_MBUTTONDBLCLK:
 	case 0x020A://WM_MOUSEWHEEL:
 		{
-			float x = static_cast< float >( LOWORD( lparam ) ) / Renderer::Instance( ).D3DPP( ).BackBufferWidth * Viewport::Instance( ).Width( );
-			float y = static_cast< float >( HIWORD( lparam ) ) / Renderer::Instance( ).D3DPP( ).BackBufferHeight * Viewport::Instance( ).Height( );
+			float x = static_cast< float >( LOWORD( lparam ) ) / Renderer::Instance( ).D3DPP( ).BackBufferWidth * Viewport::Instance( ).GetWidth( );
+			float y = static_cast< float >( HIWORD( lparam ) ) / Renderer::Instance( ).D3DPP( ).BackBufferHeight * Viewport::Instance( ).GetHeight( );
 
 			mSystemPtr->injectMousePosition( x, y );
 

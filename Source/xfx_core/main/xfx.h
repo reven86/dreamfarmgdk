@@ -95,3 +95,4 @@ namespace boost { namespace serialization {
 #include "../utility/xfx_profiler.h"
 #include "../utility/xfx_script.h"
 #include "../utility/xfx_cache.h"
+#include "../math/xfx_vec2.h"

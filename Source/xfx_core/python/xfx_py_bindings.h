@@ -50,8 +50,8 @@ namespace boost { namespace serialization {
 
 
 #include "../utility/xfx_utility_include.h"
-#include "../main/xfx_main_include.h"
 #include "../math/xfx_math_include.h"
+#include "../main/xfx_main_include.h"
 #include "../renderer/xfx_renderer_include.h"
 #include "../renderer_ext/xfx_renderer_ext_include.h"
 //#include "../serialization/xfx_serialization_include.h"

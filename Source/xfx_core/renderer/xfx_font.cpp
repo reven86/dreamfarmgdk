@@ -50,7 +50,7 @@ HRESULT Font::Create( unsigned height, const boost::shared_ptr< const Shader >& 
 	mShaderPtr = shd;
 
 	const boost::shared_ptr< const Shader >& shd_ptr		= mShaderPtr;
-	const boost::shared_ptr< const ITexture >& tex_ptr		= shd_ptr ? shd_ptr->TextureMap( "FontTex" ) : boost::shared_ptr< const ITexture >( );
+	const boost::shared_ptr< const ITexture >& tex_ptr		= shd_ptr ? shd_ptr->GetTextureMap( "FontTex" ) : boost::shared_ptr< const ITexture >( );
 
 	const Texture * tex = tex_ptr ? boost::polymorphic_downcast< const Texture *, const ITexture >( tex_ptr.get( ) ) : NULL;
 	if( tex && !charmapstr.empty( ) )

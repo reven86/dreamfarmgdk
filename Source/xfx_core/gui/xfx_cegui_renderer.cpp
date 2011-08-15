@@ -167,12 +167,12 @@ bool CEGUIRenderer::isQueueingEnabled() const
 
 float CEGUIRenderer::getWidth() const
 {
-	return static_cast< float >( Viewport::Instance( ).Width( ) );
+	return static_cast< float >( Viewport::Instance( ).GetWidth( ) );
 }
 
 float CEGUIRenderer::getHeight() const
 {
-	return static_cast< float >( Viewport::Instance( ).Height( ) );
+	return static_cast< float >( Viewport::Instance( ).GetHeight( ) );
 }
 
 CEGUI::Size CEGUIRenderer::getSize() const

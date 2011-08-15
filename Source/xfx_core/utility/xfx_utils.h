@@ -34,7 +34,7 @@ _XFX_BEGIN
 
 struct IUnknownDeleter : public std::unary_function< IUnknown *, void >
 {
-	void operator ( )			( IUnknown * u ) { _ASSERTE( u ); if( u ) u->Release( ); };
+	void operator ( )			( IUnknown * u ) { if( u ) u->Release( ); };
 };
 
 #endif // __GCCXML__

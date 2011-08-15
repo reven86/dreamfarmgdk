@@ -156,6 +156,10 @@ public:
 	 */
 	void						SetMouseMode			( const bool& isexclusive );
 
+	/*! \brief Get cursor position (window space).
+	 */
+	Vec2						GetCursorPos			( ) const;
+
 	/*!	\brief Set whether or not use automatically key mapping (commands will be directly sent to command processor).
 	 */
 	void						SetUseKeyMapping		( const bool& use ) { mUseKeyMapping = use; };

@@ -478,7 +478,7 @@ void Shader::RenderEffect( const ShaderParams& consts, const boost::function0< v
 	}
 }
 
-boost::shared_ptr< const ITexture > Shader::TextureMap( const String& name ) const
+boost::shared_ptr< const ITexture > Shader::GetTextureMap( const String& name ) const
 {
 	NameTextureMapsType::const_iterator it = mNamedTextureMaps.find( name );
 
