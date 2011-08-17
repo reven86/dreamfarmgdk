@@ -108,6 +108,8 @@ private:
 
 	void											Cleanup					( );
 	void											InvalidateCallback		( bool invalidate );
+
+	HRESULT											OnLoadDXEffect			( ID3DXEffect * eff );
 };
 
 
@@ -316,8 +318,9 @@ class ShaderParams
 	stdext::hash_map< String, boost::shared_ptr< const ITexture >, HashCompare< String > >		mTextures;
 	stdext::hash_map< String, float, HashCompare< String > >									mFloats;
 	stdext::hash_map< String, int, HashCompare< String > >										mInts;
-	stdext::hash_map< String, Vec4, HashCompare< String > >										mVectors;
-	stdext::hash_map< String, Mat4, HashCompare< String > >										mMatrices;
+	stdext::hash_map< String, Vec4, HashCompare< String > >										mVec4;
+	stdext::hash_map< String, Mat3, HashCompare< String > >										mMat3;
+	stdext::hash_map< String, Mat4, HashCompare< String > >										mMat4;
 
 #ifdef __XFX_USE_BOOST_SERIALIZATION__
 
@@ -346,11 +349,11 @@ public:
 
 	//! Set a custom value by name.
 	template<class T>
-	void						SetValue				( const String& str, const T& value ) { _ASSERTE ( false ); };
+	void						SetValue				( const String& str, const T& value ) { _ASSERTE ( !"Not implemented." ); };
 
 	//! Get a custom value by name. Return false if value not exists.
 	template< class T >
-	bool						GetValue				( const String& str, T& value ) const { _ASSERTE( false ); return false; };
+	bool						GetValue				( const String& str, T& value ) const { _ASSERTE( !"Not implemented." ); return false; };
 
 	//! Apply values on Effect. Needed just prior rendering.
 	void						ApplyValues				( const Effect& eff ) const;
@@ -381,11 +384,15 @@ inline void ShaderParams::SetValue	( const String& str, const int& value ) { mIn
 
 //! Set a Vec4 value by name.
 template<>
-inline void ShaderParams::SetValue	( const String& str, const Vec4& value ) { mVectors[ str ] = value; };
+inline void ShaderParams::SetValue	( const String& str, const Vec4& value ) { mVec4[ str ] = value; };
+
+//! Set a Mat3 value by name.
+template<>
+inline void ShaderParams::SetValue	( const String& str, const Mat3& value ) { mMat3[ str ] = value; };
 
 //! Set a Mat4 value by name.
 template<>
-inline void ShaderParams::SetValue	( const String& str, const Mat4& value ) { mMatrices[ str ] = value; };
+inline void ShaderParams::SetValue	( const String& str, const Mat4& value ) { mMat4[ str ] = value; };
 
 //! Get a texture by name.
 template< >
@@ -401,11 +408,15 @@ inline bool ShaderParams::GetValue ( const String& str, int& value ) const { ret
 
 //! Get a Vec4 value by name.
 template< >
-inline bool ShaderParams::GetValue ( const String& str, Vec4& value ) const { return GetValueCommon( str, value, mVectors ); };;
+inline bool ShaderParams::GetValue ( const String& str, Vec4& value ) const { return GetValueCommon( str, value, mVec4 ); };;
+
+//! Get a Mat3 value by name.
+template< >
+inline bool ShaderParams::GetValue ( const String& str, Mat3& value ) const { return GetValueCommon( str, value, mMat3 ); };;
 
 //! Get a Mat4 value by name.
 template< >
-inline bool ShaderParams::GetValue ( const String& str, Mat4& value ) const { return GetValueCommon( str, value, mMatrices ); };;
+inline bool ShaderParams::GetValue ( const String& str, Mat4& value ) const { return GetValueCommon( str, value, mMat4 ); };;
 
 
 

@@ -65,6 +65,9 @@ public:
 	//! Load resource from memory.
 	virtual HRESULT					LoadMemory					( const void *, unsigned long ) { return XFXERR_INVALIDCALL; };
 
+	//! String representation.
+	String							ToString					( ) const { return "<" + mName + " from '" + ( mFilename.empty( ) ? "memory" : mFilename ) + "'>"; };
+
 protected:
 	//! Get/Set resource file name.
 	String&							rFilename					( ) { return mFilename; };

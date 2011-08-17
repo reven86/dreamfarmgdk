@@ -104,6 +104,9 @@ public:
 
 	//! Linear interpolation of Euler angles.
 	static inline Euler				Lerp						( const Euler& u, const Euler& v, const float& t ) { return v * t + u * ( 1.0f - t ); };
+
+	//! String representation.
+	String							ToString					( ) const { return boost::str( StringFormat( "Euler(%f, %f, %f)" ) % yaw % pitch % roll ); };
 };
 
 

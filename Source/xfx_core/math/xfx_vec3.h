@@ -106,6 +106,9 @@ public:
 
 	//! Clips coords in range [0.0f, 1.0f]
 	static void Clip					(Vec3& v);
+
+	//! String representation.
+	String ToString						( ) const { return boost::str( StringFormat( "Vec3(%f, %f, %f)" ) % x % y % z ); };
 };
 
 

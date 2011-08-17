@@ -160,8 +160,43 @@ HRESULT Effect::LoadFile( const String& filename )
 
 	while( **ext && !found )
 	{
-		if( SUCCEEDED( FileSystem::Instance( ).FindFile( new_filename = filename + *ext ) ) )
+		boost::shared_ptr< class Pack > p;
+		String phys_file;
+		if( SUCCEEDED( FileSystem::Instance( ).FindFile( new_filename = filename + *ext, &p, &phys_file ) ) )
+		{
 			found = true;
+
+			if( !p && !phys_file.empty( ) )
+			{
+				Cleanup( );
+
+				HRESULT hr;
+
+				ID3DXEffect * eff = NULL;
+
+				XFX_PLACE_DEVICE_LOCK;
+
+				LPD3DXBUFFER err_buf = NULL;
+
+#if( __XFX_DIRECTX_VER__ < 9 )
+				if( FAILED( hr = D3DXCreateEffectFromFile( Renderer::Instance( ).pD3DDevice( ), phys_file.c_str( ), &eff, &err_buf ) ) )
+#else
+				DWORD flags = 0;
+#ifndef __XFX_SHIPPING__
+				flags |= D3DXSHADER_DEBUG;// | D3DXSHADER_SKIPOPTIMIZATION;
+#endif
+				if( FAILED( hr = D3DXCreateEffectFromFileA( Renderer::Instance( ).pD3DDevice( ), phys_file.c_str( ), NULL, NULL, flags, NULL, &eff, &err_buf ) ) )
+#endif
+				{
+					boost::shared_ptr< ID3DXBuffer > err_buf_ptr( err_buf, IUnknownDeleter( ) );
+					if( err_buf )
+						gError( "Effect creation error: %s", err_buf->GetBufferPointer( ) );
+
+					return hr;
+				}
+				return OnLoadDXEffect( eff );
+			}
+		}
 
 		ext++;
 	}
@@ -184,7 +219,11 @@ HRESULT Effect::LoadMemory( const void *pmemory, unsigned long filelen )
 #if( __XFX_DIRECTX_VER__ < 9 )
 	if( FAILED( hr = D3DXCreateEffect( Renderer::Instance( ).pD3DDevice( ), pmemory, filelen, &eff, &err_buf ) ) )
 #else
-	if( FAILED( hr = D3DXCreateEffect( Renderer::Instance( ).pD3DDevice( ), pmemory, filelen, NULL, NULL, 0, NULL, &eff, &err_buf ) ) )
+	DWORD flags = 0;
+#ifndef __XFX_SHIPPING__
+	flags |= D3DXSHADER_DEBUG;// | D3DXSHADER_SKIPOPTIMIZATION;
+#endif
+	if( FAILED( hr = D3DXCreateEffect( Renderer::Instance( ).pD3DDevice( ), pmemory, filelen, NULL, NULL, flags, NULL, &eff, &err_buf ) ) )
 #endif
 	{
 		boost::shared_ptr< ID3DXBuffer > err_buf_ptr( err_buf, IUnknownDeleter( ) );
@@ -193,6 +232,13 @@ HRESULT Effect::LoadMemory( const void *pmemory, unsigned long filelen )
 
 		return hr;
 	}
+
+	return OnLoadDXEffect( eff );
+}
+
+HRESULT Effect::OnLoadDXEffect( ID3DXEffect * eff )
+{
+	HRESULT hr;
 
 	mDXEffectPtr.reset( eff, IUnknownDeleter( ) );
 
@@ -687,12 +733,18 @@ void ShaderParams::ApplyValues( const Effect& eff ) const
 #endif
 	}
 
-	for( stdext::hash_map< String, Vec4, HashCompare< String > >::const_iterator v_it = mVectors.begin( ); v_it != mVectors.end( ); v_it++ )
+	for( stdext::hash_map< String, Vec4, HashCompare< String > >::const_iterator v_it = mVec4.begin( ); v_it != mVec4.end( ); v_it++ )
 	{
 		eff.DXEffectPtr( )->SetVector( eff.GetHandle( ( *v_it ).first ), ( D3DXVECTOR4 * )( &( *v_it ).second ) );
 	}
+	
+	typedef stdext::hash_map< String, Mat3, HashCompare< String > >::value_type mat3_iterator;
+	BOOST_FOREACH( const mat3_iterator& v, mMat3 )
+	{
+		eff.DXEffectPtr( )->SetFloatArray( eff.GetHandle( v.first ), &v.second._11, 9 );
+	}
 
-	for( stdext::hash_map< String, Mat4, HashCompare< String > >::const_iterator m_it = mMatrices.begin( ); m_it != mMatrices.end( ); m_it++ )
+	for( stdext::hash_map< String, Mat4, HashCompare< String > >::const_iterator m_it = mMat4.begin( ); m_it != mMat4.end( ); m_it++ )
 	{
 		eff.DXEffectPtr( )->SetMatrix( eff.GetHandle( ( *m_it ).first ), ( D3DXMATRIX * )( &( *m_it ).second ) );
 	}

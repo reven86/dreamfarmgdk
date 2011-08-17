@@ -102,6 +102,9 @@ public:
 
 	//! Clips coords in range [0.0f, 1.0f]
 	static void Clip					( Vec2& v );
+
+	//! String representation.
+	String ToString						( ) const { return boost::str( StringFormat( "Vec2(%f, %f)" ) % x % y ); };
 };
 
 

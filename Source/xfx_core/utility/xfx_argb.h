@@ -78,6 +78,9 @@ struct ARGB
 			static_cast< boost::uint8_t >( ( it * ( col2.b - col1.b ) + 256 * col1.b ) >> 0x08 )
 			);		
 	};
+
+	//! String representation.
+	String ToString ( ) const { return boost::str( StringFormat( "ARGB(%d, %d, %d, %d)" ) % a % r % g % b ); };
 };
 
 #pragma warning (pop)

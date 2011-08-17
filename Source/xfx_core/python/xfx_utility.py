@@ -5,6 +5,13 @@ from pyplusplus import module_builder, code_creators, messages
 from pyplusplus import function_transformers as ft
 from pyplusplus.module_builder import call_policies
 from pygccxml.declarations.matchers import access_type_matcher_t 
+from pyplusplus.decl_wrappers.properties import name_based_recognizer_t
+
+class PropertyRecognizer( name_based_recognizer_t ):
+	def create_read_only_property( self, fget ):
+		if fget.name == 'ToString':
+			return None
+		return name_based_recognizer_t.create_read_only_property( self, fget )
 
 def camel_convert(name):
     if name == "D3DPP":
@@ -56,10 +63,10 @@ mb.class_( "Application" ).member_function( "GetTimer" ).exclude( )
 mb.class_( "Application" ).add_property( "timer", fget = mb.class_( "Application" ).member_function( "GetTimer" ) )
 mb.member_functions( "Instance" ).exclude( )
 
-mb.classes( ).add_properties( exclude_accessors=True )
+mb.classes( ).add_properties( recognizer = PropertyRecognizer( ), exclude_accessors=True )
 
 for c in mb.member_functions( ):
-	c.rename( camel_convert( c.alias ) )
+	c.rename( camel_convert( c.alias ) if c.alias != 'ToString' else '__repr__' )
 for c in mb.free_functions( ):
 	c.rename( camel_convert( c.alias ) )
 for c in mb.variables( ):

@@ -39,7 +39,7 @@ void Viewport::Init( unsigned width, unsigned height )
 	mViewportUpdateSignals( );
 }
 
-void Viewport::SetWidth( unsigned width )
+void Viewport::SetWidth( const unsigned& width )
 {
 	mWidth		= width;
 	mInvWidth	= 1.0f / width;
@@ -47,7 +47,7 @@ void Viewport::SetWidth( unsigned width )
 	mViewportUpdateSignals( );
 }
 
-void Viewport::SetHeight( unsigned height )
+void Viewport::SetHeight( const unsigned& height )
 {
 	mHeight		= height;
 	mInvHeight	= 1.0f / height;
