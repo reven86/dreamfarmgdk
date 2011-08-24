@@ -88,43 +88,43 @@ public:
 	bool							IsIdentity						( ) const;
 
 	//! Set translate matrix.
-	void							Translate						( const Vec2& l );
+	Mat3&							Translate						( const Vec2& l );
 
 	//! Set scale matrix.
-	void							MakeScale						( const Vec2& v );
+	Mat3&							MakeScale						( const Vec2& v );
 
 	//! Reset matrix by position, rotation and scale.
-	void							Reset							( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale );
+	Mat3&							Reset							( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale );
 
 	//! Set rotation matrix.
-	void							MakeRotation					( Math::BigAngle angle );
+	Mat3&							MakeRotation					( Math::BigAngle angle );
 
 	//! Transpose matrix.
-	void							Transpose						( ) { *this = GetTransposed( ); };
+	Mat3&							Transpose						( ) { *this = GetTransposed( ); return *this; };
 
 	//! Get transposed matrix.
 	Mat3							GetTransposed					( ) const;
 
 	//! Inverse matrix. For affine matrices use InverseAffine.
-	void							Inverse							( ) { *this = GetInversed( ); };
+	Mat3&							Inverse							( ) { *this = GetInversed( ); return *this; };
 
 	//! Get inversed matrix. For affine matrices use GetInversedAffine.
 	Mat3							GetInversed						( ) const;
 
 	//! Inverse affine matrix. Fast.
-	void							InverseAffine					( ) { *this = GetInversedAffine( ); };
+	Mat3&							InverseAffine					( ) { *this = GetInversedAffine( ); return *this; };
 
 	//! Get inversed affine matrix. Fast.
 	Mat3							GetInversedAffine				( ) const;
 
 	//! Multiply current matrix by translation transform.
-	void							SetTranslation					( const Vec2& v ) { _31 = v.x; _32 = v.y; };
+	Mat3&							SetTranslation					( const Vec2& v ) { _31 = v.x; _32 = v.y; return *this; };
 
 	//! Get translation from current transform.
 	Vec2							GetTranslation					( ) const { return Vec2( _31, _32 ); };
 
 	//! Multiply current matrix by scale transform.
-	void							SetScale						( const Vec2& v );
+	Mat3&							SetScale						( const Vec2& v );
 
 	//! Get scale from current transform.
 	Vec2							GetScale						( ) const { return Vec2( Vec2( _11, _21 ).Len( ), Vec2( _12, _22 ).Len( ) ); };

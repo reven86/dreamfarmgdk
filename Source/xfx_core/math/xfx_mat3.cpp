@@ -104,28 +104,34 @@ bool Mat3::IsIdentity( ) const
 	return true;
 }
 
-void Mat3::Translate( const Vec2& loc )
+Mat3& Mat3::Translate( const Vec2& loc )
 {
 	x[ 0 ][ 0 ] = 1; x[ 0 ][ 1 ] = 0; x[ 0 ][ 2 ] = 0;
 	x[ 1 ][ 0 ] = 0; x[ 1 ][ 1 ] = 1; x[ 1 ][ 2 ] = 0;
 	x[ 2 ][ 0 ] = loc.x; x[ 2 ][ 1 ] = loc.y; x[ 2 ][ 2 ] = 1;
+
+	return *this;
 }
 
-void Mat3::MakeScale( const Vec2& v )
+Mat3& Mat3::MakeScale( const Vec2& v )
 {
 	x[ 0 ][ 0 ] = v.x; x[ 0 ][ 1 ] = 0; x[ 0 ][ 2 ] = 0;
 	x[ 1 ][ 0 ] = 0; x[ 1 ][ 1 ] = v.y; x[ 1 ][ 2 ] = 0;
 	x[ 2 ][ 0 ] = 0; x[ 2 ][ 1 ] = 0; x[ 2 ][ 2 ] = 1.0f;
+
+	return *this;
 }
 
-void Mat3::Reset( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale )
+Mat3& Mat3::Reset( const Vec2& pos, const Math::Angle& orientation, const Vec2& scale )
 {
 	MakeRotation( orientation );
 	SetScale( scale );
 	SetTranslation( pos );
+
+	return *this;
 }
 
-void Mat3::MakeRotation( Math::BigAngle angle )
+Mat3& Mat3::MakeRotation( Math::BigAngle angle )
 {
 	float Cosine	= math_cos( angle );
 	float Sine		= math_sin( angle );
@@ -133,6 +139,8 @@ void Mat3::MakeRotation( Math::BigAngle angle )
 	x[ 0 ][ 0 ] = Cosine; x[ 0 ][ 1 ] = Sine; x[ 0 ][ 2 ] = 0;
 	x[ 1 ][ 0 ] = -Sine; x[ 1 ][ 1 ] = Cosine; x[ 1 ][ 2 ] = 0;
 	x[ 2 ][ 0 ] = 0; x[ 2 ][ 1 ] = 0; x[ 2 ][ 2 ] = 1;
+
+	return *this;
 }
 
 Mat3 Mat3::GetTransposed( ) const
@@ -226,13 +234,15 @@ Vec2 Mat3::TransformNormal( const Vec2& v ) const
 	return out;
 }
 
-void Mat3::SetScale( const Vec2& v )
+Mat3& Mat3::SetScale( const Vec2& v )
 {
 	float kx = v.x / ( Vec2( _11, _21 ).Len( ) );
 	float ky = v.y / ( Vec2( _12, _22 ).Len( ) );
 
 	_11 *= kx; _12 *= ky;
 	_21 *= kx; _22 *= ky;
+
+	return *this;
 }
 
 

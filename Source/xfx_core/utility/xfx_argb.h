@@ -80,7 +80,9 @@ struct ARGB
 	};
 
 	//! String representation.
-	String ToString ( ) const { return boost::str( StringFormat( "ARGB(%d, %d, %d, %d)" ) % a % r % g % b ); };
+	String ToString ( ) const { return boost::str( StringFormat( "ARGB(%u, %u, %u, %u)" ) % 
+		static_cast< unsigned >( a ) % static_cast< unsigned >( r ) %
+		static_cast< unsigned >( g ) % static_cast< unsigned >( b ) ); };
 };
 
 #pragma warning (pop)

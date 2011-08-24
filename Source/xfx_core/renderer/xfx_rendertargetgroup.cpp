@@ -144,34 +144,37 @@ HRESULT RenderTargetGroup::ValidateDepthStencilMatch( RenderedTexture * tex, Dep
 	return S_OK;
 }
 
-HRESULT RenderTargetGroup::BeginUsing( )
+HRESULT RenderTargetGroup::BeginUsing( bool push_state )
 {
 	if( !mRenderedTexturePtr || mRenderedTexturePtr->IsEmpty( ) )
 		return XFXERR_INVALIDCALL;
 
 	HRESULT hr;
 
+	if( push_state )
+	{
 #if (__XFX_DIRECTX_VER__ < 9)
-	LPDIRECT3DSURFACE8 saved_color;
-	LPDIRECT3DSURFACE8 saved_depth;
+		LPDIRECT3DSURFACE8 saved_color;
+		LPDIRECT3DSURFACE8 saved_depth;
 #else
-	LPDIRECT3DSURFACE9 saved_color;
-	LPDIRECT3DSURFACE9 saved_depth;
+		LPDIRECT3DSURFACE9 saved_color;
+		LPDIRECT3DSURFACE9 saved_depth;
 #endif
 
 #if (__XFX_DIRECTX_VER__ < 9)
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( &saved_color ) ) )
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( &saved_color ) ) )
 #else
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( 0, &saved_color ) ) )
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetRenderTarget( 0, &saved_color ) ) )
 #endif
-		return hr;
+			return hr;
 
-	mpSavedColor.reset( saved_color, IUnknownDeleter( ) );
+		mpSavedColor.reset( saved_color, IUnknownDeleter( ) );
 
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetDepthStencilSurface( &saved_depth ) ) )
-		return hr;
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->GetDepthStencilSurface( &saved_depth ) ) )
+			return hr;
 
-	mpSavedDepth.reset( saved_depth, IUnknownDeleter( ) );
+		mpSavedDepth.reset( saved_depth, IUnknownDeleter( ) );
+	}
 
 	xfx::Renderer::Instance( ).GetDrawTools( ).FlushAll( );
 
@@ -192,7 +195,7 @@ HRESULT RenderTargetGroup::BeginUsing( )
 	return S_OK;
 }
 
-void RenderTargetGroup::EndUsing( )
+void RenderTargetGroup::EndUsing( bool pop_state )
 {
 	_ASSERTE( IsActive( ) );
 	if( !IsActive( ) )
@@ -202,19 +205,22 @@ void RenderTargetGroup::EndUsing( )
 
 	xfx::Renderer::Instance( ).GetDrawTools( ).FlushAll( );
 
+	if( pop_state )
+	{
 #if (__XFX_DIRECTX_VER__ < 9)
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( mpSavedColor.get( ), mpSavedDepth.get( ) ) ) )
-		return;
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( mpSavedColor.get( ), mpSavedDepth.get( ) ) ) )
+			return;
 #else
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( 0, mpSavedColor.get( ) ) ) )
-		return;
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetRenderTarget( 0, mpSavedColor.get( ) ) ) )
+			return;
 
-	if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetDepthStencilSurface( mpSavedDepth.get( ) ) ) )
-		return;
+		if( FAILED( hr = xfx::Renderer::Instance( ).pD3DDevice( )->SetDepthStencilSurface( mpSavedDepth.get( ) ) ) )
+			return;
 #endif
 
-	mpSavedColor.reset( );
-	mpSavedDepth.reset( );
+		mpSavedColor.reset( );
+		mpSavedDepth.reset( );
+	}
 }
 
 bool RenderTargetGroup::IsActive( ) const

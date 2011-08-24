@@ -334,6 +334,7 @@ void Input::RetrieveData( )
 	bool console_active = Engine::Instance( ).IsConsoleActive( );
 
 	hr = mpKeyboard->GetDeviceState( sizeof( keys ), keys );
+	std::copy( mKeyMap.begin( ), mKeyMap.end( ), mOldKeyMap.begin( ) );
 
 	if( SUCCEEDED( hr ) )
 	{
@@ -536,6 +537,18 @@ unsigned Input::GetKeyForCommand( const String& command ) const
 	}
 
 	return MAX_KEYS;
+}
+
+unsigned Input::KeyCodeByName( const char * key_name ) const 
+{
+	unsigned i;
+	for( i = 0; i < sKeyDWORDCount; i++ )
+		if( !strcmp( sKeyDWORD[ i ].first, key_name ) )
+			break;
+
+	if( i == sKeyDWORDCount )
+		return MAX_KEYS;
+	return sKeyDWORD[ i ].second;
 }
 
 void Input::Cmd_bind( bool in_console, const String &str )

@@ -892,7 +892,8 @@ void Renderer::Clear( const DWORD& flags )
 		mpD3DDevice->Clear( 0, NULL, flags, r_background->AsInt( ), 1.0f, 0 );
 }
 
-void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, unsigned stage, bool apply_transforms )
+void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex,
+							unsigned stage, bool apply_transforms, bool notify_only  )
 {
 	_ASSERTE (stage < 8);
 
@@ -903,7 +904,8 @@ void Renderer::ApplyTexture( const boost::shared_ptr< const ITexture >& tex, uns
 	{
 		mActiveTexturesPtr[ stage ] = tex;
 
-		mpD3DDevice->SetTexture( stage, ( tex_ptr ) ? tex_ptr->GetD3DTex( ) : NULL );
+		if( !notify_only )
+			mpD3DDevice->SetTexture( stage, ( tex_ptr ) ? tex_ptr->GetD3DTex( ) : NULL );
 	}
 
 	if( tex_ptr && apply_transforms )

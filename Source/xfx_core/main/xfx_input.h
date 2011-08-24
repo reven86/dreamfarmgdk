@@ -78,6 +78,7 @@ private:
 	};
 
 	boost::array< BYTE, MAX_KEYS >				mKeyMap;
+	boost::array< BYTE, MAX_KEYS >				mOldKeyMap;
 	String										mCommands[ MAX_KEYS ][ MAX_STATES ];
 	bool										mUseKeyMapping;
 
@@ -106,6 +107,9 @@ public:
 	//! \brief Retrieves keyboard and mouse data.
 	void						RetrieveData			( );
 
+	//! Returns key code by its name or MAX_KEYS.
+	unsigned					KeyCodeByName			( const char * name ) const;
+
 	/*!	\brief Test whether key is pushed.
 	 *
 	 *	\param[in] key		Key from DIK_* and KeysType.
@@ -113,6 +117,47 @@ public:
 	 *	\return Returns \b true if key is pushed and \b false otherwise.
 	 */
 	bool						TestKey					( unsigned key ) const { _ASSERTE( key < MAX_KEYS ); return ( mKeyMap[ key ] & EKF_PUSHED ) != 0; };
+
+	/*!	\brief Test whether key is pushed by its name.
+	 *
+	 *	\param[in] key		Key name.
+	 *
+	 *	\note Uses linear search to find key code.
+	 *	\return Returns \b true if key is pushed and \b false otherwise.
+	 */
+	bool						TestKey					( const char * key ) const { return TestKey( KeyCodeByName( key ) ); };
+
+	/*! \brief Checks whether key was pressed.
+	 *
+	 *	\param[in] key		Key code (DIK_* and KeysType).
+	 *
+	 *	\return Returns \b true is key was pressed between to calls of RetrieveData.
+	 */
+	bool						TestKeyPressed			( unsigned key ) const { _ASSERTE( key < MAX_KEYS ); return ( mKeyMap[ key ] & EKF_PUSHED ) != 0 && ( mOldKeyMap[ key ] & EKF_PUSHED ) == 0; }; 
+
+	/*! \brief Checks whether key was pressed.
+	 *
+	 *	\param[in] key		Key name.
+	 *
+	 *	\return Returns \b true is key was pressed between to calls of RetrieveData.
+	 */
+	bool						TestKeyPressed			( const char * key ) const { return TestKeyPressed( KeyCodeByName( key ) ); }; 
+
+	/*! \brief Checks whether key was released.
+	 *
+	 *	\param[in] key		Key code (DIK_* and KeysType).
+	 *
+	 *	\return Returns \b true is key was released between to calls of RetrieveData.
+	 */
+	bool						TestKeyReleased			( unsigned key ) const { _ASSERTE( key < MAX_KEYS ); return ( mKeyMap[ key ] & EKF_PUSHED ) == 0 && ( mOldKeyMap[ key ] & EKF_PUSHED ) != 0; }; 
+
+	/*! \brief Checks whether key was released.
+	 *
+	 *	\param[in] key		Key name.
+	 *
+	 *	\return Returns \b true is key was released between to calls of RetrieveData.
+	 */
+	bool						TestKeyReleased			( const char * key ) const { return TestKeyReleased( KeyCodeByName( key ) ); }; 
 
 	/*!	\brief Associate string with key and key state.
 	 *

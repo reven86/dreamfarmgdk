@@ -97,30 +97,36 @@ bool Mat4::IsIdentity( ) const
 	return true;
 }
 
-void Mat4::Translate (const Vec3& loc)
+Mat4& Mat4::Translate (const Vec3& loc)
 {
 	x[0][0] = 1; x[0][1] = 0; x[0][2] = 0; x[0][3] = 0;
 	x[1][0] = 0; x[1][1] = 1; x[1][2] = 0; x[1][3] = 0;
 	x[2][0] = 0; x[2][1] = 0; x[2][2] = 1; x[2][3] = 0;
 	x[3][0] = loc.x; x[3][1] = loc.y; x[3][2] = loc.z; x[3][3] = 1;
+
+	return *this;
 }
 
-void Mat4::MakeScale (const Vec3& v)
+Mat4& Mat4::MakeScale (const Vec3& v)
 {
 	x[0][0] = v.x; x[0][1] = 0; x[0][2] = 0; x[0][3] = 0;
 	x[1][0] = 0; x[1][1] = v.y; x[1][2] = 0; x[1][3] = 0;
 	x[2][0] = 0; x[2][1] = 0; x[2][2] = v.z; x[2][3] = 0;
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
+
+	return *this;
 }
 
-void Mat4::Reset (const Vec3& pos, const Euler& orientation, const Vec3& scale)
+Mat4& Mat4::Reset (const Vec3& pos, const Euler& orientation, const Vec3& scale)
 {
 	*this = orientation.ToMat4 ();
 	SetScale (scale);
 	SetTranslation (pos);
+
+	return *this;;
 }
 
-void Mat4::MakeRotationX (Math::BigAngle angle)
+Mat4& Mat4::MakeRotationX (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -129,9 +135,11 @@ void Mat4::MakeRotationX (Math::BigAngle angle)
 	x[1][0] = 0; x[1][1] = Cosine; x[1][2] = Sine; x[1][3] = 0;
 	x[2][0] = 0; x[2][1] = -Sine; x[2][2] = Cosine; x[2][3] = 0;
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
+
+	return *this;
 }
 
-void Mat4::MakeRotationY (Math::BigAngle angle)
+Mat4& Mat4::MakeRotationY (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -140,9 +148,11 @@ void Mat4::MakeRotationY (Math::BigAngle angle)
 	x[1][0] = 0; x[1][1] = 1; x[1][2] = 0; x[1][3] = 0;
 	x[2][0] = Sine; x[2][1] = 0; x[2][2] = Cosine; x[2][3] = 0;
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
+
+	return *this;
 }
 
-void Mat4::MakeRotationZ (Math::BigAngle angle)
+Mat4& Mat4::MakeRotationZ (Math::BigAngle angle)
 {
 	float Cosine	= Math::Instance ().Cos (angle);
 	float Sine		= Math::Instance ().Sin (angle);
@@ -151,9 +161,11 @@ void Mat4::MakeRotationZ (Math::BigAngle angle)
 	x[1][0] = -Sine; x[1][1] = Cosine; x[1][2] = 0; x[1][3] = 0;
 	x[2][0] = 0; x[2][1] = 0; x[2][2] = 1; x[2][3] = 0;
 	x[3][0] = 0; x[3][1] = 0; x[3][2] = 0; x[3][3] = 1;
+
+	return *this;
 }
 
-void Mat4::MakeRotationAxis (const Vec3& Axis, float Cosine, float Sine)
+Mat4& Mat4::MakeRotationAxis (const Vec3& Axis, float Cosine, float Sine)
 {
 	Vec3 axis (Axis.GetNormalized ());
 
@@ -173,6 +185,8 @@ void Mat4::MakeRotationAxis (const Vec3& Axis, float Cosine, float Sine)
 	x[3][1] = 0;
 	x[3][2] = 0;
 	x[3][3] = 1;
+
+	return *this;
 }
 
 Mat4 Mat4::GetTransposed () const
@@ -186,7 +200,7 @@ Mat4 Mat4::GetTransposed () const
 	return res;
 }
 
-void Mat4::PerspectiveFovLH (float fov, float aspect, float znear, float zfar)
+Mat4& Mat4::PerspectiveFovLH (float fov, float aspect, float znear, float zfar)
 {
 	float t		= 1.0f / tanf (fov * 0.5f);
 	float kz	= zfar / (zfar - znear);
@@ -207,9 +221,11 @@ void Mat4::PerspectiveFovLH (float fov, float aspect, float znear, float zfar)
 	x[3][1] = 0.0f;
 	x[3][2] = -znear * kz;
 	x[3][3] = 0.0f;
+
+	return *this;
 }
 
-void Mat4::PerspectiveFovRH (float fov, float aspect, float znear, float zfar)
+Mat4& Mat4::PerspectiveFovRH (float fov, float aspect, float znear, float zfar)
 {
 	float t		= 1.0f / tanf (fov * 0.5f);
 	float kz	= zfar / (zfar - znear);
@@ -230,9 +246,11 @@ void Mat4::PerspectiveFovRH (float fov, float aspect, float znear, float zfar)
 	x[3][1] = 0.0f;
 	x[3][2] = -znear * kz;
 	x[3][3] = 0.0f;
+
+	return *this;
 }
 
-void Mat4::LookAtLH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
+Mat4& Mat4::LookAtLH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
 {
 	Vec3 normdir	(dir.GetNormalized ());
 	Vec3 normvy		(vy.GetNormalized ());
@@ -254,9 +272,11 @@ void Mat4::LookAtLH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
 	x[3][1] = -Vec3::Dot (normvy, cam);
 	x[3][2] = -Vec3::Dot (normdir, cam);
 	x[3][3] = 1.0f;
+
+	return *this;
 }
 
-void Mat4::LookAtRH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
+Mat4& Mat4::LookAtRH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
 {
 	Vec3 normdir	(-dir.GetNormalized ());
 	Vec3 normvx		(Vec3::Cross (vy, normdir).GetNormalized( ));
@@ -278,6 +298,8 @@ void Mat4::LookAtRH (const Vec3& cam, const Vec3& dir, const Vec3& vy)
 	x[3][1] = -Vec3::Dot (normvy, cam);
 	x[3][2] = -Vec3::Dot (normdir, cam);
 	x[3][3] = 1.0f;
+
+	return *this;
 }
 
 Mat4 Mat4::GetInversed () const
@@ -369,7 +391,7 @@ Vec3 Mat4::TransformNormal (const Vec3& v) const
 	return out;
 }
 
-void Mat4::SetScale (const Vec3& v)
+Mat4& Mat4::SetScale (const Vec3& v)
 {
 	float kx = v.x / (Vec3 (_11, _21, _31).Len ());
 	float ky = v.y / (Vec3 (_12, _22, _32).Len ());
@@ -378,6 +400,8 @@ void Mat4::SetScale (const Vec3& v)
 	_11 *= kx; _12 *= ky; _13 *= kz;
 	_21 *= kx; _22 *= ky; _23 *= kz;
 	_31 *= kx; _32 *= ky; _33 *= kz;
+
+	return *this;
 }
 
 

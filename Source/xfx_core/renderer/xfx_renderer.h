@@ -434,7 +434,7 @@ public:
 	//! @{
 
 	//! Apply texture to stage, texture transformation is set at D3DTS_TEXTUREn matrices.
-	void								ApplyTexture				( const boost::shared_ptr< const ITexture >& tex, unsigned stage = 0, bool apply_transforms = true );
+	void								ApplyTexture				( const boost::shared_ptr< const ITexture >& tex, unsigned stage = 0, bool apply_transforms = true, bool notify_only = false );
 
 	//! Get current texture on stage.
 	const boost::shared_ptr< const ITexture >& ActiveTexture		( unsigned stage = 0 ) const { _ASSERTE( stage < MAX_TEXTURE_STAGES ); return mActiveTexturesPtr[ stage ]; };

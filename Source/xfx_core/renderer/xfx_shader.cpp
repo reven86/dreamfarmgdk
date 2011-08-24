@@ -502,7 +502,7 @@ void Shader::SetEffectTextures( const boost::shared_ptr< const Effect >& eff_ptr
 #endif
 
 			if( ( *it ).get< 1 >( ) >= 0 )
-				xfx::Renderer::Instance( ).ApplyTexture( ( *it ).get< 2 >( ).texture, ( *it ).get< 1 >( ), ( mFlags & ESF_USE_TEXTURE_TRANSFORM ) != 0 );
+				xfx::Renderer::Instance( ).ApplyTexture( ( *it ).get< 2 >( ).texture, ( *it ).get< 1 >( ), ( mFlags & ESF_USE_TEXTURE_TRANSFORM ) != 0, true );
 #pragma message ( "FIXME: apply animation texture matrix" )
 		}
 	}

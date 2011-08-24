@@ -88,62 +88,64 @@ public:
 	bool							IsIdentity						( ) const;
 
 	//! Set translate matrix.
-	void							Translate						( const Vec3& l );
+	Mat4&							Translate						( const Vec3& l );
 
 	//! Set scale matrix.
-	void							MakeScale						( const Vec3& v );
+	Mat4&							MakeScale						( const Vec3& v );
 
 	//! Reset matrix by position, rotation and scale.
-	void							Reset							( const Vec3& pos, const Euler& orientation, const Vec3& scale );
+	Mat4&							Reset							( const Vec3& pos, const Euler& orientation, const Vec3& scale );
 
 	//! Set rotation matrix around X axis.
-	void							MakeRotationX					( Math::BigAngle angle );
+	Mat4&							MakeRotationX					( Math::BigAngle angle );
 
 	//! Set rotation matrix around Y axis.
-	void							MakeRotationY					( Math::BigAngle angle );
+	Mat4&							MakeRotationY					( Math::BigAngle angle );
 
 	//! Set rotation matrix around Z axis.
-	void							MakeRotationZ					( Math::BigAngle angle );
+	Mat4&							MakeRotationZ					( Math::BigAngle angle );
 
 	//! Set rotation matrix around custom axis and sine and cosine for angle.
-	void							MakeRotationAxis				( const Vec3& axis, float cosine, float sine );
+	Mat4&							MakeRotationAxis				( const Vec3& axis, float cosine, float sine );
 
 	//! Set rotation matrix around custom axis.
-	void							MakeRotationAxisByAngle			( const Vec3& axis, Math::BigAngle Angle ) { MakeRotationAxis( axis, Math::Instance( ).Cos( Angle ), Math::Instance( ).Sin( Angle ) ); };
+	Mat4&							MakeRotationAxisByAngle			( const Vec3& axis, Math::BigAngle Angle ) { return MakeRotationAxis( axis, Math::Instance( ).Cos( Angle ), Math::Instance( ).Sin( Angle ) ); };
 
 	//! Transpose matrix.
-	void							Transpose						( ) { *this = GetTransposed( ); };
+	Mat4&							Transpose						( ) { *this = GetTransposed( ); return *this; };
 
 	//! Get transposed matrix.
 	Mat4							GetTransposed					( ) const;
 
 	//! Set left-handed perspective matrix.
-	void							PerspectiveFovLH				( float fov, float aspect, float znear, float zfar );
+	Mat4&							PerspectiveFovLH				( float fov, float aspect, float znear, float zfar );
 
 	//! Set right-handed perspective matrix.
-	void							PerspectiveFovRH				( float fov, float aspect, float znear, float zfar );
+	Mat4&							PerspectiveFovRH				( float fov, float aspect, float znear, float zfar );
 
 	//! Set left-handed "look at" matrix.
-	void							LookAtLH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
+	Mat4&							LookAtLH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
 
 	//! Set right-handed "look at" matrix.
-	void							LookAtRH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
+	Mat4&							LookAtRH						(const Vec3& cam, const Vec3& dir, const Vec3& vy);
 
 	//! Inverse matrix. For affine matrices use InverseAffine.
-	void							Inverse							() {*this = GetInversed ();};
+	Mat4&							Inverse							() {*this = GetInversed (); return *this;};
+
 	//! Get inversed matrix. For affine matrices use GetInversedAffine.
 	Mat4							GetInversed						() const;
 
 	//! Inverse affine matrix. Fast.
-	void							InverseAffine					() {*this = GetInversedAffine ();};
+	Mat4&							InverseAffine					() { *this = GetInversedAffine( ); return *this; };
+
 	//! Get inversed affine matrix. Fast.
 	Mat4							GetInversedAffine				() const;
 
 	//! Multiply current matrix by translation transform.
-	void							SetTranslation					(const Vec3& v) { _41 = v.x; _42 = v.y; _43 = v.z;};
+	Mat4&							SetTranslation					(const Vec3& v) { _41 = v.x; _42 = v.y; _43 = v.z; return *this; };
 
 	//! Multiply current matrix by scale transform.
-	void							SetScale						(const Vec3& v);
+	Mat4&							SetScale						(const Vec3& v);
 
 	//! Get translation from current transform.
 	Vec3							GetTranslation					() const {return Vec3 (_41, _42, _43);};

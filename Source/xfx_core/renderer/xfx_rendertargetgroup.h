@@ -83,12 +83,14 @@ public:
 	 *	The current active render target group is saved and replaced by this one,
 	 *	then the Device::Clear method is called with proper clear parameters.
 	 *
+	 *	\param[in]	push_state	Save current render target and depth stencil to pop them later.
+	 *
 	 *	\return S_OK if render target group was successfully set.
 	 */
-	HRESULT BeginUsing( );
+	HRESULT BeginUsing( bool push_state = true );
 
 	//! End using render target group.
-	void EndUsing( );
+	void EndUsing( bool pop_state = true );
 
 	//! Is render target group active.
 	bool IsActive( ) const;
