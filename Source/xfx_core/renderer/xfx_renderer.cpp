@@ -775,12 +775,6 @@ HRESULT Renderer::CreateDevice( HWND hwnd )
 	gMess ("...available texture memory: %u MB", mpD3DDevice->GetAvailableTextureMem () >> 20);
 	gMess ("");
 
-	State	( SM_NORMALIZENORMALS, true );
-	State	( SM_ALPHATESTENABLE, true );
-	State	( SM_ALPHAFUNC, D3DCMP_GREATER );
-	State	( SM_ALPHAREF, 0x00000005 );
-	State	( SM_LIGHTING, false );
-
 	mDrawTools.Init( );
 
 	mSavedWindowStyle	= GetWindowLong( hwnd, GWL_STYLE );

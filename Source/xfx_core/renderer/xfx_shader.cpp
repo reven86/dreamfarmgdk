@@ -342,6 +342,18 @@ void Shader::CopyShader( const Shader& shd )
 	FindTextureStagesNum( );
 }
 
+HRESULT Shader::SetTextureToStage( const int& stage, const boost::shared_ptr< const ITexture >& tex )
+{
+	_ASSERTE( stage >= 0 && stage < Renderer::MAX_TEXTURE_STAGES );
+	if( stage < 0 || stage >= Renderer::MAX_TEXTURE_STAGES ||
+		mTextureStages[ stage ] == NULL )
+		return XFXERR_INVALIDCALL;
+
+	mTextureStages[ stage ]->texture = tex;
+
+	return S_OK;
+}
+
 void Shader::RemoveTextureMap( const String& name )
 {
 	mNamedTextureMaps.erase( name );
@@ -413,6 +425,7 @@ void Shader::FindTextureStagesNum( )
 	// setup texture stages
 	//
 
+	mTextureStages.assign( NULL );
 	if( mEffectPtr )
 	{
 		XFX_PLACE_DEVICE_LOCK;

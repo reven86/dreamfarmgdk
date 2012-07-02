@@ -94,7 +94,7 @@ public:
 	 *	
 	 *	\param[in]	filename		File name.
 	 *
-	 *	\note If file extension absent, newly extensions added by priorities: fx, fxo.
+	 *	\note If file extension is absent, new extensions are added by priorities: fx, fxo.
 	 */
 	virtual HRESULT									LoadFile				( const String& filename );
 
@@ -245,6 +245,15 @@ public:
 	 *	\param[in]	stage		Stage number.
 	 */
 	const TextureInfo *						GetTextureInfoOnStage	( const int& stage ) const { _ASSERTE( stage >= 0 && stage < 8 ); return mTextureStages[ stage ]; };
+
+	/*! \brief Set texture on stage. Stage name and animation modifiers are not changed.
+	 *
+	 *	\param[in]	stage		Stage number.
+	 *	\param[in]	tex			Texture.
+	 *
+	 *	\return S_OK in case of success. XFXERR_INVALIDCALL if stage is invalid/not used in effect.
+	 */
+	HRESULT									SetTextureToStage		( const int& stage, const boost::shared_ptr< const ITexture >& texture );
 
 	/*! \brief Remove texture map from shader.
 	 *

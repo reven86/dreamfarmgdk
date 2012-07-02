@@ -1,6 +1,11 @@
 
 import os
 import re
+import sys
+
+sys.path.append( os.path.join( '..', '..', 'third_party', 'py++-1.0.0' ) )
+sys.path.append( os.path.join( '..', '..', 'third_party', 'pygccxml-1.0.0' ) )
+
 from pyplusplus import module_builder, code_creators, messages
 from pyplusplus import function_transformers as ft
 from pyplusplus.module_builder import call_policies
@@ -49,6 +54,7 @@ mb.decls( lambda x: x.name.startswith( '_D3DFORMAT' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DPRIMITIVETYPE' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DVIEWPORT' ) ).include( )
 mb.decls( lambda x: x.name.startswith( '_D3DPRESENT_PARAMETERS' ) ).include( )
+mb.decls( lambda x: x.name.startswith( '_D3DCMPFUNC' ) ).include( )
 
 mb.class_( "ITexture" ).member_functions( ).exclude( )
 mb.class_( "Texture" ).member_functions( "GetD3DTex" ).exclude( )

@@ -44,6 +44,7 @@ void ProfilingManager::DrawPerformanceInfo( const Font& fnt, const boost::shared
 	float cur_y = 100.0f;
 	float bar_w = 200.0f;
 	float bar_h	= static_cast< float >( fnt.CharHeight( ) ) + 8.0f;
+	float ms = gGetApplication( ).GetTimer( ).GetMSPF100( ) * 0.1f * 0.01f;
 
 	BOOST_FOREACH( const ProfileInfo& pi, mProfileObjectsResult )
 	{
@@ -62,7 +63,7 @@ void ProfilingManager::DrawPerformanceInfo( const Font& fnt, const boost::shared
 			fnt,
 			cur_x, cur_y,
 			1.0f, 1.0f,
-			xfx::fromMBCS( boost::str( xfx::StringFormat( "%s: %.1f" ) % pi.first % percent ) )
+			xfx::fromMBCS( boost::str( xfx::StringFormat( "%s: %.1fms %.1f%%" ) % pi.first % ( percent * ms ) % percent ) )
 			);
 
 		cur_y += bar_h + 8.0f;
@@ -104,7 +105,7 @@ void ProfilingManager::DrawPerformanceInfo( const Font& fnt, const boost::shared
 			fnt,
 			cur_x, cur_y,
 			1.0f, 1.0f,
-			xfx::fromMBCS( boost::str( xfx::StringFormat( "%s: %.1f" ) % pi.first % percent ) )
+			xfx::fromMBCS( boost::str( xfx::StringFormat( "%s: %.1fms %.1f%%" ) % pi.first % ( percent * ms ) % percent ) )
 			);
 
 		cur_y += bar_h + 8.0f;
