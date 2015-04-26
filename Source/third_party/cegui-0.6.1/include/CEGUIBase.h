@@ -95,6 +95,8 @@
 #endif
 
 
+#include <algorithm>
+
 // The following defines macros used within CEGUI for std::min/std::max
 // usage, and is done as a compatibility measure for VC6 with native STL.
 #if defined(_MSC_VER) && (_MSC_VER <= 1200) && !defined(_STLPORT_VERSION)

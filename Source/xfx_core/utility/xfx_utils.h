@@ -78,8 +78,8 @@ struct NullDeleter : public std::unary_function< _Type *, void>
 template< class _Type >
 struct HashCompare : public stdext::hash_compare< _Type, std::less< _Type > >
 {
-	using stdext::hash_compare< _Type, std::less< _Type > >::operator ();
-	size_t operator ( )					( const _Type& a ) const { return boost::hash_value( a ); };
+	//using stdext::hash_compare< _Type, std::less< _Type > >::operator ();
+	//size_t operator ( )					( const _Type& a ) const { return boost::hash_value( a ); };
 };
 
 

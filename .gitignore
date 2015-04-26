@@ -67,3 +67,6 @@
 /Source/third_party/pygccxml-1.0.0/docs
 /Source/third_party/boost_1_44_0/build/VC90/Release
 /Source/third_party/boost_1_44_0/build/VC90/Debug
+/Source/third_party/boost_1_58_0/bin.v2
+
+/Build/VC90/*.sdf

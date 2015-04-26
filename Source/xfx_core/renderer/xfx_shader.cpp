@@ -362,7 +362,8 @@ void Shader::RemoveTextureMap( const String& name )
 		std::find_if( 
 			mTextureMaps.begin( ),
 			mTextureMaps.end( ),
-			boost::bind( std::equal_to< String >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( name ) )
+            [&](const TextureMapsType::value_type& it) -> bool { return it.get<0>() == name; }
+			//boost::bind( std::equal_to< String >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( name ) )
 			);
 
 	if( tex_it != mTextureMaps.end( ) )
@@ -389,7 +390,8 @@ int Shader::AddTextureMap( const TextureInfo& tex_info )
 		std::find_if( 
 			mTextureMaps.begin( ),
 			mTextureMaps.end( ),
-			boost::bind( std::equal_to< D3DXHANDLE >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( th ) )
+            [&](const TextureMapsType::value_type& it) -> bool { return it.get<0>() == th; }
+			//boost::bind( std::equal_to< D3DXHANDLE >( ), boost::bind( &TextureMapsType::value_type::get< 0 >, _1 ), boost::cref( th ) )
 			);
 #endif
 

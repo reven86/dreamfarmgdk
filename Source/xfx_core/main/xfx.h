@@ -46,6 +46,7 @@
 //#include <iostream>
 //#include <fstream>
 #include <hash_map>
+#include <unordered_map>
 
 // Boost
 #include <boost/array.hpp>

@@ -147,14 +147,14 @@ public:
 	};
 
 	//! Parse unsigned variable.
-	template< >
-	static HRESULT				ParseVariable			( unsigned& var, typename _String::size_type& pos, const _String& str )
-	{
-		skip_comments( str, pos );
-		_String::value_type * ch;
-		var = static_cast< unsigned >( strtoul( next_token( str, pos ).c_str( ), &ch, 0 ) );
-		return S_OK;
-	};
+	//template< >
+	//static HRESULT				ParseVariable			( unsigned& var, typename _String::size_type& pos, const _String& str )
+	//{
+	//	skip_comments( str, pos );
+	//	_String::value_type * ch;
+	//	var = static_cast< unsigned >( strtoul( next_token( str, pos ).c_str( ), &ch, 0 ) );
+	//	return S_OK;
+	//};
 
 	//! Parse String or WString variable.
 	template< >

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0307DF48-2750-43C5-8439-6A5391F3998E}</ProjectGuid>
+    <RootNamespace>boost</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <ExtensionsToDeleteOnClean>*.obj%3b*.ilk%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.pgc%3b*.pgd%3b$(TargetPath)%3b..\..\..\GDK\Lib\libboost_serialization-vc80-mt-1_35.lib%3b..\..\..\GDK\Lib\libboost_signals-vc80-mt-1_35.lib%3b..\..\..\GDK\Lib\libboost_thread-vc80-mt-1_35.lib</ExtensionsToDeleteOnClean>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <ExtensionsToDeleteOnClean>*.obj%3b*.ilk%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.pgc%3b*.pgd%3b$(TargetPath)%3b..\..\..\GDK\Lib\libboost_serialization-vc80-mt-s-1_35.lib%3b..\..\..\GDK\Lib\libboost_signals-vc80-mt-s-1_35.lib%3b..\..\..\GDK\Lib\libboost_thread-vc80-mt-s-1_35.lib</ExtensionsToDeleteOnClean>
+    <GenerateManifest>false</GenerateManifest>
+    <EmbedManifest>true</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>cd ..\..\
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release serialization
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release signals
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release thread
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release date_time
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release unit_test_framework
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=release python
+
+copy bin.v2\libs\serialization\build\msvc-12.0\release\link-static\threading-multi\libboost_serialization-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_serialization-vc120-mt-1_58.lib
+copy bin.v2\libs\signals\build\msvc-12.0\release\link-static\threading-multi\libboost_signals-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_signals-vc120-mt-1_58.lib
+copy bin.v2\libs\thread\build\msvc-12.0\release\link-static\threading-multi\libboost_thread-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_thread-vc120-mt-1_58.lib
+copy bin.v2\libs\date_time\build\msvc-12.0\release\link-static\threading-multi\libboost_date_time-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_date_time-vc120-mt-1_58.lib
+copy bin.v2\libs\test\build\msvc-12.0\release\asynch-exceptions-on\link-static\threading-multi\libboost_unit_test_framework-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_unit_test_framework-vc120-mt-1_58.lib
+copy bin.v2\libs\python\build\msvc-12.0\release\link-static\threading-multi\libboost_python-vc120-mt-1_58.lib ..\..\..\GDK\Lib\libboost_python-vc120-mt-1_58.lib
+</Command>
+      <Outputs>..\..\..\..\..\GDK\Lib\libboost_serialization-vc120-mt-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_signals-vc120-mt-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_thread-vc120-mt-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_date_time-vc120-mt-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_unit_test_framework-vc120-mt-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_python-vc90-mt-1_44.lib;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Link>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+    </Link>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>cd ..\..\
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug serialization
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug signals
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug thread
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug date_time
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug unit_test_framework
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug cxxflags="/D _CRTDBG_MAP_ALLOC /FI stdlib.h /FI crtdbg.h" python
+bjam.exe --toolset=msvc runtime-link=shared link=static threading=multi variant=debug python-debugging=on cxxflags="/D _CRTDBG_MAP_ALLOC /FI stdlib.h /FI crtdbg.h" python
+
+copy bin.v2\libs\serialization\build\msvc-12.0\debug\link-static\threading-multi\libboost_serialization-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_serialization-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\signals\build\msvc-12.0\debug\link-static\threading-multi\libboost_signals-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_signals-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\thread\build\msvc-12.0\debug\link-static\threading-multi\libboost_thread-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_thread-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\date_time\build\msvc-12.0\debug\link-static\threading-multi\libboost_date_time-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_date_time-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\test\build\msvc-12.0\debug\asynch-exceptions-on\link-static\threading-multi\libboost_unit_test_framework-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_unit_test_framework-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\python\build\msvc-12.0\debug\link-static\threading-multi\libboost_python-vc120-mt-gd-1_58.lib ..\..\..\GDK\Lib\libboost_python-vc120-mt-gd-1_58.lib
+copy bin.v2\libs\python\build\msvc-12.0\debug\link-static\python-debugging-on\threading-multi\libboost_python-vc120-mt-gyd-1_58.lib ..\..\..\GDK\Lib\libboost_python-vc120-mt-gyd-1_58.lib
+</Command>
+      <Outputs>..\..\..\..\..\GDK\Lib\libboost_serialization-vc120-mt-gd-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_signals-vc120-mt-gd-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_thread-vc120-mt-gd-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_date_time-vc120-mt-gd-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_unit_test_framework-vc120-mt-gd-1_58.lib;..\..\..\..\..\GDK\Lib\libboost_python-vc90-mt-gd-1_44.lib;..\..\..\..\..\GDK\Lib\libboost_python-vc90-mt-gyd-1_44.lib;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Link>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+    </Link>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
