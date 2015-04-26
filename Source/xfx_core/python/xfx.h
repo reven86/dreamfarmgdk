@@ -27,6 +27,7 @@
 //
 
 #include <crtdbg.h>		//search for memory leaks
+#include <boost/container/detail/placement_new.hpp>
 
 // OpenMP
 #if _MSC_VER < 1500

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="WindowRendererSets">
+      <UniqueIdentifier>{efb7242c-6a88-41ad-a690-90ee15aa7da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRendererSets\Falagard">
+      <UniqueIdentifier>{fa214a65-2c7c-42d7-a59d-8bde924976fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRendererSets\Falagard\src">
+      <UniqueIdentifier>{7f121dd4-84dd-4ad0-a52b-44c5183724c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRendererSets\Falagard\include">
+      <UniqueIdentifier>{017f7c82-e1e2-42b8-859d-0edae0b5a144}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalButton.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalDefault.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalEditbox.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalFrameWindow.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalItemEntry.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalItemListbox.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalListbox.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalListHeader.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalListHeaderProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalListHeaderSegment.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalMenubar.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalMenuItem.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalModule.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalMultiColumnList.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalMultiLineEditbox.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalPopupMenu.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalProgressBar.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalProgressBarProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalScrollablePane.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalScrollbar.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalScrollbarProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalSlider.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalSliderProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStatic.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStaticImage.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStaticImageProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStaticProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStaticText.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalStaticTextProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalSystemButton.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTabButton.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTabControl.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTabControlProperties.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTitlebar.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalToggleButton.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTooltip.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\WindowRendererSets\Falagard\src\FalTree.cpp">
+      <Filter>WindowRendererSets\Falagard\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalButton.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalDefault.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalEditbox.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalFrameWindow.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalItemEntry.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalItemListbox.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalListbox.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalListHeader.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalListHeaderProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalListHeaderSegment.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalMenubar.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalMenuItem.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalModule.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalMultiColumnList.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalMultiLineEditbox.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalPopupMenu.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalProgressBar.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalProgressBarProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalScrollablePane.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalScrollbar.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalScrollbarProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalSlider.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalSliderProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStatic.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStaticImage.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStaticImageProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStaticProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStaticText.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalStaticTextProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalSystemButton.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTabButton.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTabControl.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTabControlProperties.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTitlebar.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalToggleButton.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTooltip.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\WindowRendererSets\Falagard\include\FalTree.h">
+      <Filter>WindowRendererSets\Falagard\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

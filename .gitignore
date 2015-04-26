@@ -70,3 +70,12 @@
 /Source/third_party/boost_1_58_0/bin.v2
 
 /Build/VC90/*.sdf
+
+/Build/VC90/ipch/xfx_lua-2038535f/*.ipch
+/Build/VC90/Debug
+/Build/VC90/ipch
+/Build/VC90/Release
+
+/Source/third_party/boost_1_58_0/*.exe
+/Source/third_party/python-2.7/PCbuild/*.sdf
+/Source/third_party/python-2.7/PCbuild/*.suo

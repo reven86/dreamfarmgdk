@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Shipping|Win32">
+      <Configuration>Shipping</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1E35E560-5E21-46C0-A9C8-3B262570E388}</ProjectGuid>
+    <RootNamespace>xfx_python</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\shipping.props" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\release.props" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\debug.props" />
+    <Import Project="..\..\..\..\..\Build\VC90\PropertySheets\common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm144 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>../../;../../../../third_party/python-2.7/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm136 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>../../;../../../../third_party/python-2.7/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm115 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>../../;../../../../third_party/python-2.7/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\generated\__array_1.pypp.hpp" />
+    <ClInclude Include="..\..\generated\__call_policies.pypp.hpp" />
+    <ClInclude Include="..\..\generated\__convenience.pypp.hpp" />
+    <ClInclude Include="..\..\generated\_D3DPRESENT_PARAMETERS_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\_D3DVIEWPORT8.pypp.hpp" />
+    <ClInclude Include="..\..\generated\_D3DVIEWPORT9.pypp.hpp" />
+    <ClInclude Include="..\..\generated\AABB.pypp.hpp" />
+    <ClInclude Include="..\..\generated\AABBTree.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Application.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ARGB.pypp.hpp" />
+    <ClInclude Include="..\..\generated\BaseParticleSystem.pypp.hpp" />
+    <ClInclude Include="..\..\generated\BooksManager.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_CubemapTexture__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_Effect__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_Font__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_Mesh__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_ParticleSystem__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_Shader__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cache_less__xfx_scope_Texture__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Caches.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Cmd.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Console.pypp.hpp" />
+    <ClInclude Include="..\..\generated\CubemapTexture.pypp.hpp" />
+    <ClInclude Include="..\..\generated\DepthStencil.pypp.hpp" />
+    <ClInclude Include="..\..\generated\DrawTools.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Effect.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Engine.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Envelope_less__float_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__float__greater___greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Envelope_less__xfx_scope_ARGB_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_ARGB__greater___greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Envelope_less__xfx_scope_Quaternion_comma__float_comma__xfx_scope_QuaternionLerpFn__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Envelope_less__xfx_scope_Vec3_comma__float_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_Vec3__greater___greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Euler.pypp.hpp" />
+    <ClInclude Include="..\..\generated\FileSystem.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Font.pypp.hpp" />
+    <ClInclude Include="..\..\generated\IndexBuffer.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Input.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ITexture.pypp.hpp" />
+    <ClInclude Include="..\..\generated\key_compare.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Log.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Mat3.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Mat4.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Math.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Mesh.pypp.hpp" />
+    <ClInclude Include="..\..\generated\MeshState.pypp.hpp" />
+    <ClInclude Include="..\..\generated\MessagesBook.pypp.hpp" />
+    <ClInclude Include="..\..\generated\OBB.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Pack.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Particle.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ParticleSubSystem.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ParticleSystem.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Plane.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Primitive.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ProfilingManager.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ProfilingObject.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Quaternion.pypp.hpp" />
+    <ClInclude Include="..\..\generated\QuaternionLerpFn.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Ray.pypp.hpp" />
+    <ClInclude Include="..\..\generated\RenderedTexture.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Renderer.pypp.hpp" />
+    <ClInclude Include="..\..\generated\RenderTargetGroup.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Resource.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Script_less__std_scope_string__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ScriptResource.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Shader.pypp.hpp" />
+    <ClInclude Include="..\..\generated\ShaderParams.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_BooksManager__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Caches__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Cmd__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Engine__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_FileSystem__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Input__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Math__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_ProfilingManager__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Renderer__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Singleton_less__xfx_scope_Viewport__greater_.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Sphere.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Texture.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Timer.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Transformable2D.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Transformable3D.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Triangle.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Var.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Vec2.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Vec3.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Vec4.pypp.hpp" />
+    <ClInclude Include="..\..\generated\VertexBuffer.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Viewer.pypp.hpp" />
+    <ClInclude Include="..\..\generated\Viewport.pypp.hpp" />
+    <ClInclude Include="..\..\generated\xfx_enumerations.pypp.hpp" />
+    <ClInclude Include="..\..\generated\xfx_free_functions.pypp.hpp" />
+    <ClInclude Include="..\..\generated\xfx_global_variables.pypp.hpp" />
+    <ClInclude Include="..\..\xfx.h" />
+    <ClInclude Include="..\..\xfx_py_bindings.h" />
+    <ClInclude Include="..\..\xfx_python_include.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\generated\_D3DPRESENT_PARAMETERS_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\_D3DVIEWPORT8.pypp.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\_D3DVIEWPORT9.pypp.cpp" />
+    <ClCompile Include="..\..\generated\AABB.pypp.cpp" />
+    <ClCompile Include="..\..\generated\AABBTree.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Application.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ARGB.pypp.cpp" />
+    <ClCompile Include="..\..\generated\BaseParticleSystem.pypp.cpp" />
+    <ClCompile Include="..\..\generated\BooksManager.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_CubemapTexture__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_Effect__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_Font__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_Mesh__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_ParticleSystem__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_Shader__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cache_less__xfx_scope_Texture__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Caches.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Cmd.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Console.pypp.cpp" />
+    <ClCompile Include="..\..\generated\CubemapTexture.pypp.cpp" />
+    <ClCompile Include="..\..\generated\DepthStencil.pypp.cpp" />
+    <ClCompile Include="..\..\generated\DrawTools.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Effect.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Engine.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Envelope_less__float_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__float__greater___greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Envelope_less__xfx_scope_ARGB_comma__unsigned_char_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_ARGB__greater___greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Envelope_less__xfx_scope_Quaternion_comma__float_comma__xfx_scope_QuaternionLerpFn__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Envelope_less__xfx_scope_Vec3_comma__float_comma__xfx_scope_SimpleLerpFn_less__xfx_scope_Vec3__greater___greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Euler.pypp.cpp" />
+    <ClCompile Include="..\..\generated\FileSystem.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Font.pypp.cpp" />
+    <ClCompile Include="..\..\generated\IndexBuffer.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Input.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ITexture.pypp.cpp" />
+    <ClCompile Include="..\..\generated\key_compare.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Log.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Mat3.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Mat4.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Math.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Mesh.pypp.cpp" />
+    <ClCompile Include="..\..\generated\MeshState.pypp.cpp" />
+    <ClCompile Include="..\..\generated\MessagesBook.pypp.cpp" />
+    <ClCompile Include="..\..\generated\OBB.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Pack.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Particle.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ParticleSubSystem.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ParticleSystem.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Plane.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Primitive.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ProfilingManager.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ProfilingObject.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Quaternion.pypp.cpp" />
+    <ClCompile Include="..\..\generated\QuaternionLerpFn.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Ray.pypp.cpp" />
+    <ClCompile Include="..\..\generated\RenderedTexture.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Renderer.pypp.cpp" />
+    <ClCompile Include="..\..\generated\RenderTargetGroup.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Resource.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Script_less__std_scope_string__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ScriptResource.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Shader.pypp.cpp" />
+    <ClCompile Include="..\..\generated\ShaderParams.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_BooksManager__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Caches__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Cmd__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Engine__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_FileSystem__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Input__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Math__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_ProfilingManager__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Renderer__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Singleton_less__xfx_scope_Viewport__greater_.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Sphere.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Texture.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Timer.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Transformable2D.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Transformable3D.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Triangle.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Var.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Vec2.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Vec3.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Vec4.pypp.cpp" />
+    <ClCompile Include="..\..\generated\VertexBuffer.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Viewer.pypp.cpp" />
+    <ClCompile Include="..\..\generated\Viewport.pypp.cpp" />
+    <ClCompile Include="..\..\generated\xfx.main.cpp" />
+    <ClCompile Include="..\..\generated\xfx_enumerations.pypp.cpp" />
+    <ClCompile Include="..\..\generated\xfx_free_functions.pypp.cpp" />
+    <ClCompile Include="..\..\generated\xfx_global_variables.pypp.cpp" />
+    <ClCompile Include="..\..\xfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\generated\exposed_decl.pypp.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\generated\named_tuple.py" />
+    <CustomBuild Include="..\..\xfx_utility.py">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cd ../../
+cmd /c "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)generated\xfx.main.cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cd ../../
+cmd /c "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)generated\xfx.main.cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">cd ../../
+cmd /c "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">%(RootDir)%(Directory)generated\xfx.main.cpp;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

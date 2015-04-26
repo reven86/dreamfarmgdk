@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="docs">
+      <UniqueIdentifier>{df7f37f2-296f-4d1e-b403-38b0d6f73734}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\docs\boost_reduced.h">
+      <Filter>docs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\docs\stl_reduced.h">
+      <Filter>docs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xfx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\xfx_test_main.inl" />
+    <None Include="..\..\xfx_test_math.inl" />
+    <None Include="..\..\xfx_test_renderer.inl" />
+    <None Include="..\..\xfx_test_utility.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\xfx.cpp" />
+    <ClCompile Include="..\..\xfx_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\docs\doxyfile.ini">
+      <Filter>docs</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

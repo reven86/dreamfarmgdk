@@ -13,10 +13,10 @@ from pygccxml.declarations.matchers import access_type_matcher_t
 from pyplusplus.decl_wrappers.properties import name_based_recognizer_t
 
 class PropertyRecognizer( name_based_recognizer_t ):
-	def create_read_only_property( self, fget ):
-		if fget.name == 'ToString':
-			return None
-		return name_based_recognizer_t.create_read_only_property( self, fget )
+    def create_read_only_property( self, fget ):
+        if fget.name == 'ToString':
+            return None
+        return name_based_recognizer_t.create_read_only_property( self, fget )
 
 def camel_convert(name):
     if name == "D3DPP":
@@ -24,20 +24,20 @@ def camel_convert(name):
     if name == "D3DCaps":
         return "d3dcaps"
     if name == "gGetApplication":
-		return "application"
-		
+        return "application"
+        
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 #Creating an instance of class that will help you to expose your declarations
 mb = module_builder.module_builder_t( [ r"xfx_py_bindings.h", ]
                                       , gccxml_path=r"../../third_party/gccxml-0.9/bin/gccxml.exe" 
-                                      , working_directory=r"."
-                                      , include_paths=[u'../../third_party/boost_1_44_0', u'../../third_party/dxsdk-9.0c-sum04/include', '.', ]
+                                      , working_directory=r".."
+                                      , include_paths=[u'../../third_party/boost_1_44_0', u'../../third_party/dxsdk-9.0c-sum04/include', '.']
                                       , define_symbols=['WIN32=1', 'NDEBUG=1', '_LIB=1', 'UNICODE=1', '_UNICODE=1',
-														'_HAS_TR1=0', 'BOOST_RANGE_ENABLE_CONCEPT_ASSERT=0',
-														'BOOST_MPL_CFG_ASSERT_USE_RELATION_NAMES=1' ] )
-														
+                                                        '_HAS_TR1=0', 'BOOST_RANGE_ENABLE_CONCEPT_ASSERT=0',
+                                                        'BOOST_MPL_CFG_ASSERT_USE_RELATION_NAMES=1' ] )
+                                                        
 mb.BOOST_PYTHON_MAX_ARITY = 16
 
 mb.namespace( 'xfx' ).include( )
@@ -72,15 +72,15 @@ mb.member_functions( "Instance" ).exclude( )
 mb.classes( ).add_properties( recognizer = PropertyRecognizer( ), exclude_accessors=True )
 
 for c in mb.member_functions( ):
-	c.rename( camel_convert( c.alias ) if c.alias != 'ToString' else '__repr__' )
+    c.rename( camel_convert( c.alias ) if c.alias != 'ToString' else '__repr__' )
 for c in mb.free_functions( ):
-	c.rename( camel_convert( c.alias ) )
+    c.rename( camel_convert( c.alias ) )
 for c in mb.variables( ):
-	c.rename( camel_convert( c.alias ) )
+    c.rename( camel_convert( c.alias ) )
 for c in mb.classes( ):
-	for p in c.properties:
-		p.set_name( camel_convert( p.name ) )
-		
+    for p in c.properties:
+        p.set_name( camel_convert( p.name ) )
+        
 mb.class_( "Caches" ).member_functions( "ClearCallbacks" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterCmd" ).exclude( )
 mb.class_( "Cmd" ).member_function( "RegisterVar" ).use_overload_macro = True #exclude( )
@@ -94,8 +94,8 @@ mb.member_operators( "operator[]" ).exclude( )
 #mb.free_function( "gCError" ).include( )
 
 for c in mb.namespace( "xfx" ).classes( ):
-	c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
-	c.add_registration_code( ''.join( ( 'bp::implicitly_convertible< boost::shared_ptr< ', c.demangled, ' >, boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
+    c.add_registration_code( ''.join( ( 'bp::register_ptr_to_python< boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
+    c.add_registration_code( ''.join( ( 'bp::implicitly_convertible< boost::shared_ptr< ', c.demangled, ' >, boost::shared_ptr< ', c.demangled, ' const > >( );' ) ), False )
 
 mb.class_( "DrawTools" ).member_functions( "PushDraw2DSprite" ).rename( "push_draw_2d_sprite" )
 mb.class_( "DrawTools" ).member_functions( "PushDraw2DText" ).rename( "push_draw_2d_text" )
@@ -124,12 +124,12 @@ mb.class_( "Application" ).member_function( "GetTimer" ).call_policies = call_po
 mb.member_functions( "Cache", arg_types = [] ).call_policies = call_policies.return_value_policy( call_policies.reference_existing_object )
 
 for c in mb.classes( lambda x: x.name.startswith( "Singleton" ) ):
-	c.add_static_property( 'instance', fget = c.member_function( "Instance" ) )
+    c.add_static_property( 'instance', fget = c.member_function( "Instance" ) )
 
 for c in mb.classes( ):
-	for f in c.member_functions( "Cache", arg_types = [], allow_empty = True ):
-		f.exclude( )
-		c.add_static_property( 'cache', fget = f )
+    for f in c.member_functions( "Cache", arg_types = [], allow_empty = True ):
+        f.exclude( )
+        c.add_static_property( 'cache', fget = f )
 
 #mb.class_( "FileIterator_t" ).opaque = True
 #mb.class_( "TextureInfo" ).opaque = True
@@ -148,18 +148,18 @@ mb.free_function( "ParseBigAngleVariable" ).add_transformation( ft.output( "var"
 
 l = ( 'Triangle', 'AABB', 'Sphere', 'Plane' )
 for s in l:
-	f = mb.namespace( "Primitives" ).free_function( name = "TestIntersection", arg_types = [ 'float &', None, ''.join( ( '::xfx::Primitives::', s, ' const &' ) ), None, None ] )
-	f.add_transformation( ft.output( "t" ), ft.output( "norm" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
+    f = mb.namespace( "Primitives" ).free_function( name = "TestIntersection", arg_types = [ 'float &', None, ''.join( ( '::xfx::Primitives::', s, ' const &' ) ), None, None ] )
+    f.add_transformation( ft.output( "t" ), ft.output( "norm" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
 
 l = ( 'Mat4', 'Vec4' )
 for s in l:
-	f = mb.class_( "ShaderParams" ).member_function( name = "GetValue", arg_types = [ None, ''.join( ( '::xfx::', s, ' &' ) ) ] )
-	f.add_transformation( ft.output( "value" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
+    f = mb.class_( "ShaderParams" ).member_function( name = "GetValue", arg_types = [ None, ''.join( ( '::xfx::', s, ' &' ) ) ] )
+    f.add_transformation( ft.output( "value" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
 
 l = ( 'int', 'float' )
 for s in l:
-	f = mb.class_( "ShaderParams" ).member_function( name = "GetValue", arg_types = [ None, ''.join( ( s, ' &' ) ) ] )
-	f.add_transformation( ft.output( "value" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
+    f = mb.class_( "ShaderParams" ).member_function( name = "GetValue", arg_types = [ None, ''.join( ( s, ' &' ) ) ] )
+    f.add_transformation( ft.output( "value" ), alias = ''.join( ( f.alias, '_', camel_convert( s ) ) ) )
 
 f = mb.class_( "ShaderParams" ).member_function( name = "GetValue", arg_types = [ None, '::boost::shared_ptr<xfx::ITexture const> &' ] )
 f.add_transformation( ft.output( "value" ), alias = ''.join( ( f.alias, '_texture' ) ) )

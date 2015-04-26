@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{91a022be-30ce-4e5b-acf6-184359d195e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Win32\xfx_timer_win32.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xfx.cpp" />
+    <ClCompile Include="..\..\xfx_application.cpp" />
+    <ClCompile Include="..\..\xfx_cmd.cpp" />
+    <ClCompile Include="..\..\xfx_engine.cpp" />
+    <ClCompile Include="..\..\xfx_engine_ver.cpp" />
+    <ClCompile Include="..\..\xfx_fs.cpp" />
+    <ClCompile Include="..\..\xfx_input.cpp" />
+    <ClCompile Include="..\..\xfx_main_cvars.cpp" />
+    <ClCompile Include="..\..\xfx_messagesbook.cpp" />
+    <ClCompile Include="..\..\xfx_pack.cpp" />
+    <ClCompile Include="..\..\xfx_timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\xfx.h" />
+    <ClInclude Include="..\..\xfx_application.h" />
+    <ClInclude Include="..\..\xfx_cmd.h" />
+    <ClInclude Include="..\..\xfx_console.h" />
+    <ClInclude Include="..\..\xfx_engine.h" />
+    <ClInclude Include="..\..\xfx_errorcodes.h" />
+    <ClInclude Include="..\..\xfx_fs.h" />
+    <ClInclude Include="..\..\xfx_input.h" />
+    <ClInclude Include="..\..\xfx_main_cvars.h" />
+    <ClInclude Include="..\..\xfx_main_include.h" />
+    <ClInclude Include="..\..\xfx_messagesbook.h" />
+    <ClInclude Include="..\..\xfx_pack.h" />
+    <ClInclude Include="..\..\xfx_timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\labeller.py" />
+  </ItemGroup>
+</Project>

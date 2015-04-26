@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ScriptingModules">
+      <UniqueIdentifier>{2e8088cc-fc45-441e-a6c7-315e6cdee6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptingModules\CEGUILua">
+      <UniqueIdentifier>{6756e32c-5736-45cc-8a5a-8acc0404adca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptingModules\CEGUILua\LuaScriptModule">
+      <UniqueIdentifier>{ec474472-e506-4f1d-bd97-d89e4e5cf50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptingModules\CEGUILua\LuaScriptModule\src">
+      <UniqueIdentifier>{3ee606f7-44c8-40d8-82e9-a73bf7453a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptingModules\CEGUILua\LuaScriptModule\include">
+      <UniqueIdentifier>{b319db8a-92b3-46bd-b55f-0cdddb040c80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\src\CEGUILua.cpp">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\src\CEGUILuaFunctor.cpp">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\src\lua_CEGUI.cpp">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\src\required.cpp">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\src\required.h">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\include\CEGUILua.h">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\ScriptingModules\CEGUILua\LuaScriptModule\include\CEGUILuaFunctor.h">
+      <Filter>ScriptingModules\CEGUILua\LuaScriptModule\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
