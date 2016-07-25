@@ -190,7 +190,7 @@ bool BaseParticleSystem::TestFrustumCulling( const Viewer * viewer, const Mat4& 
 Cache< ParticleSystem > ParticleSystem::msCache;
 
 ParticleSystem::ParticleSystem( ) : ScriptResource( "Particle system" ),
-	mSystems( new std::list< const ParticleSubSystem >( ) ),
+	mSystems( new std::list< ParticleSubSystem >( ) ),
 	mInvisibleTimer( 0 ),
 	mFramesToUpdate( 0 ),
 	mFlags( 0 ),

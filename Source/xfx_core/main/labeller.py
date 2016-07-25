@@ -14,7 +14,7 @@ def make_label():
     """ Returns tuple of label (Windows version format) and full version string of current build """
 
     # get revision from Git
-    full_ver = subprocess.check_output( ['git.cmd', 'describe', '--long', '--abbrev=10', '--tags', '--dirty=-dirty'] )
+    full_ver = subprocess.check_output( ['git', 'describe', '--long', '--abbrev=10', '--tags', '--dirty=-dirty'] )
     logging.debug( "Git describe: {0}".format( full_ver ) )
     match = re.match( r'^(?P<tag>[\w.]+)-(?P<rev>\d+)-g(?P<sha>\w+)(?P<dirty>-dirty)?', full_ver )
     ver_revision = match.group( 'rev' )

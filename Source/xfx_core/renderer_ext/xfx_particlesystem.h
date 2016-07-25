@@ -354,7 +354,7 @@ class ParticleSystem : public BaseParticleSystem, public ScriptResource
 	friend class boost::serialization::access;
 
 	// list here is more better than vector, since ParticleSubSystem is large and their count is small.
-	typedef std::list< const ParticleSubSystem >	SystemsType;
+	typedef std::list< ParticleSubSystem >			SystemsType;
 	boost::shared_ptr< SystemsType >				mSystems;			// they are same for all clones
 
 	typedef std::vector< Particle >					ParticlesType;

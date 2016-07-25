@@ -476,7 +476,7 @@ Py_NO_ENABLE_SHARED to find out.  Also support MS_NO_COREDLL for b/w compat */
 
 /* Define if you don't have tm_zone but do have the external array
    tzname.  */
-#define HAVE_TZNAME
+//#define HAVE_TZNAME
 
 /* Define to `int' if <sys/types.h> doesn't define.  */
 /* #undef mode_t */

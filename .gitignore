@@ -78,3 +78,7 @@
 /Source/third_party/boost_1_58_0/*.exe
 /Source/third_party/python-2.7/PCbuild/*.sdf
 /Source/third_party/python-2.7/PCbuild/*.suo
+/GDK/Lib/*.pdb
+/Build/VC90/*.db
+/Source/third_party/jpeg-6b/vc90/jpeg-6b/.vs/jpeg-6b/v14/*.suo
+/Source/third_party/boost_1_58_0/tools/build/src/engine/bootstrap/*.pdb
