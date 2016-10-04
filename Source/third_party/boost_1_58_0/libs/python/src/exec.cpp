@@ -92,8 +92,8 @@ object BOOST_PYTHON_DECL exec_file(str filename, object global, object local)
 #else
   PyObject *pyfile = PyFile_FromString(f, const_cast<char*>("r"));
   if (!pyfile) throw std::invalid_argument(std::string(f) + " : no such file");
-  python::handle<> file(pyfile);
-  FILE *fs = PyFile_AsFile(file.get());
+  //python::handle<> file(pyfile);
+  FILE *fs = PyFile_AsFile(pyfile);
 #endif
 
   int closeit = 1;  // Close file before PyRun returns
